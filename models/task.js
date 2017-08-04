@@ -13,6 +13,10 @@ var schema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	state:{
+		type: String,
+		required: true
+	},
 	create_date:{
 		type: Date,
 		default: Date.now
@@ -39,7 +43,8 @@ module.exports.addTask = function(task, callback){
 	var json = {
 		title: task.title,
         type: task.genre,
-        description: task.description,
+		description: task.description,
+		state: task.state,
 	}
 	Task.create(json, callback);
 }
@@ -49,7 +54,8 @@ module.exports.updateTask = function(id, task, options, callback){
 	var update = {
 		title: task.title,
         type: task.genre,
-        description: task.description,
+		description: task.description,
+		state: task.state,		
 	}
 	Task.findOneAndUpdate(query, update, options, callback);
 }
