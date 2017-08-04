@@ -37,12 +37,7 @@ app.get('/api/toDoList/:id', function(req, res){
 // add a new task
 app.post('/api/toDoList', function(req, res){
 	var task = req.body;
-    var x = "";
 
-    for (i in task.author) {
-        x += task.author[i];
-            console.log(x);
-    }
 	Task.addTask(task, function(err, task){
 		if(err){
 			throw(err);

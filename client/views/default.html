@@ -1,11 +1,29 @@
+<div class="col-md-12" ng-init="getAllTasks()">    
+    <div class="w3-card-4">
+        <div class="w3-container w3-green">
+            <h2>New task</h2>
+        </div>
 
-<div id="myDIV" class="header" ng-init="getAllTasks()">
-    <h2 style="margin:5px">My To Do List</h2>
-    <input type="text" id="myInput" placeholder="Title...">
-    <span onclick="newElement()" class="addBtn">Add</span>
+        <form class="w3-container">
+            <p>
+                <input class="w3-input" type="text">
+                <label>Title</label>
+            </p>
+            <p>     
+                <input class="w3-input" type="text">
+                <label>Description</label>
+            </p>
+            <p>     
+                <input class="w3-input" type="text">
+                <label>Type</label>
+            </p>
+        </form>
+    </div>
+    <div class="col-md-2 addBtn btn btn-success" onclick="newElement()">Add</div>
 </div>
 
-<ul id="myUL">
+<ul class="col-md-12" id="myUL">
+    
 <div ng-repeat="task in allTasks">
     <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
     <div class="dropdown-content" id="drop">
