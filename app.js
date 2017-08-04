@@ -6,44 +6,44 @@ var MongoClient = require('mongodb').MongoClient;
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
 
-Book = require('./models/book.js')
+Task = require('./models/task.js')
 
 mongoose.connect('mongodb://localhost/todolist');
 var db = mongoose.connection;
 
 var fs = require("fs");
 
-// display all books
-app.get('/api/todolist', function(req, res){
-	Book.getBooks(function(err, books){
+// display all tasks
+app.get('/api/toDoList', function(req, res){
+	Task.getAllTasks(function(err, allTasks){
 		if(err){
 			throw err;
 		}
-		res.json(books);
+		res.json(allTasks);
 	});
 })
 
-// display a book with a certain ID
-app.get('/api/todolist/:id', function(req, res){
-	Book.getBookById(req.params.id, 
-		function(err, book){
+// display a task with a certain ID
+app.get('/api/toDoList/:id', function(req, res){
+	Task.getTaskById(req.params.id, 
+		function(err, task){
 		if(err){
 			throw err;
 		}
-		res.json(book);
+		res.json(task);
 	});
 })
 
-// add a new book
-app.post('/api/todolist', function(req, res){
-	var book = req.body;
+// add a new task
+app.post('/api/toDoList', function(req, res){
+	var task = req.body;
     var x = "";
 
-    for (i in book.author) {
-        x += book.author[i];
+    for (i in task.author) {
+        x += task.author[i];
             console.log(x);
     }
-	Book.addBook(book, function(err, book){
+	Task.addTask(task, function(err, task){
 		if(err){
 			throw(err);
 			res.send({
@@ -51,19 +51,19 @@ app.post('/api/todolist', function(req, res){
             });
         } 
         else {
-		 	res.json(book);
+		 	res.json(task);
 		}
 	});
 })
 
-// update a book
-app.put('/api/todolist/:id', function(req, res){
+// update a task
+app.put('/api/toDoList/:id', function(req, res){
 	var id = req.params.id;
-	var book = req.body;
+	var task = req.body;
 
     console.log("ID = " + id);
-	Book.updateBook(id, book, {}, 
-		function(err, book){
+	Task.updateTask(id, task, {}, 
+		function(err, task){
 		if(err){
 			throw(err);
 			res.send({
@@ -71,17 +71,17 @@ app.put('/api/todolist/:id', function(req, res){
             });
         } 
         else {
-		 	res.json(book);
+		 	res.json(task);
 		}
 	});
 })
 
-// delete a book
-app.delete('/api/todolist/:id', function(req, res){
+// delete a task
+app.delete('/api/toDoList/:id', function(req, res){
 	var id = req.params.id;
 
-	Book.deleteBook(id, 
-		function(err, book){
+	Task.deleteTask(id, 
+		function(err, task){
 		if(err){
 			throw(err);
 			res.send({
@@ -89,14 +89,14 @@ app.delete('/api/todolist/:id', function(req, res){
             });
         } 
         else {
-		 	res.json(book);
+		 	res.json(task);
 		}
 	});
 })
 
-// get books from a file WIP
-app.get('/listBooks', function (req, res) {
-    fs.readFile( __dirname + "/" + "books.json", 'utf8',
+// get tasks from a file WIP
+app.get('/listTasks', function (req, res) {
+    fs.readFile( __dirname + "/" + " tasks.json", 'utf8',
     function (err, data) {
         console.log(data);
         res.end(data);

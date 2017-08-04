@@ -1,53 +1,21 @@
 
-<div id="myDIV" class="header">
+<div id="myDIV" class="header" ng-init="getAllTasks()">
     <h2 style="margin:5px">My To Do List</h2>
     <input type="text" id="myInput" placeholder="Title...">
     <span onclick="newElement()" class="addBtn">Add</span>
 </div>
 
 <ul id="myUL">
-
-    <li onclick="dropFunction(this)" class="default dropbtn2">Hit the gym
+<div ng-repeat="task in allTasks">
+    <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
     <div class="dropdown-content" id="drop">
-        <p>Some description</p>
-        <p>Date created</p>
+        <p>{{task.description}}</p>
+        <p>{{task.type}}</p>
+        <p>{{task.create_date}}</p>        
     </div>
     </li>
+</div>
 
-<li onclick="dropFunction(this)" class="default dropbtn2">Pay bill
-    <div class="dropdown-content" id="drop">
-        <p>dick description</p>
-        <p>Date created</p>
-    </div>
-    </li>
-
-    <li onclick="dropFunction(this)" class="default dropbtn2">Meet George
-    <div class="dropdown-content" id="drop">
-        <p>well description</p>
-        <p>Date created</p>
-    </div>
-    </li>
-
-    <li onclick="dropFunction(this)" class="default dropbtn2">Buy eggs
-    <div class="dropdown-content" id="drop">
-        <p>buy description</p>
-        <p>Date created</p>
-    </div>
-    </li>
-
-    <li onclick="dropFunction(this)" class="default dropbtn2">Read a book
-    <div class="dropdown-content" id="drop">
-        <p>read description</p>
-        <p>Date created</p>
-    </div>
-    </li>
-
-    <li onclick="dropFunction(this)" class="default dropbtn2">Organize office
-    <div class="dropdown-content" id="drop">
-        <p>office description</p>
-        <p>Date created</p>
-    </div>
-    </li>
 </ul>
 
 <script>
@@ -61,37 +29,45 @@ function dropFunction(element) {
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 6; i < myNodelist.length; i++) {
+    console.log(myNodelist);
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
+    span.setAttribute('onclick', 'removeTask()');
     span.appendChild(txt);
     myNodelist[i].appendChild(span);
     
     var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
+    span1.setAttribute('onclick', 'checkTask()');    
     span1.appendChild(txt1);
     myNodelist[i].appendChild(span1);
 }
 
 // Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-        var div = this.parentElement;
-        div.style.display = "none";
+function removeTask() {
+    var close = document.getElementsByClassName("close");
+    var i;
+    console.log(close);
+    for (i = 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
     }
 }
 
-var check = document.getElementsByClassName("check");
-var i;
-for (i = 0; i < check.length; i++) {
-    check[i].onclick = function() {
-        console.log(div);
-        
-        var div = this.parentElement;
-        div.classList.toggle('completed');
+function checkTask() {
+    var check = document.getElementsByClassName("check");
+    var i;
+    for (i = 0; i < check.length; i++) {
+        check[i].onclick = function() {
+            console.log(div);
+            
+            var div = this.parentElement;
+            div.classList.toggle('completed');
+        }
     }
 }
 

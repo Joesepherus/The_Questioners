@@ -1,0 +1,27 @@
+[
+	{
+    	"title" : "Pay bill",
+	  	"type" : "personal",
+	  	"description" : "dick description"
+   },
+   {
+    	"title" : "Meet George",
+	  	"type" : "personal",
+	  	"description" : "well description"
+   },
+   {
+    	"title" : "Buy eggs",
+	  	"type" : "work",
+	  	"description" : "buy description"
+   },
+   	{
+    	"title" : "Read a book",
+	  	"type" : "pesonal",
+	  	"description" : "read description"
+   },
+   	{
+    	"title" : "Organize office",
+	  	"type" : "work",
+	  	"description" : "office description"
+   }
+]

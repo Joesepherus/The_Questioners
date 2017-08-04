@@ -2,19 +2,19 @@ var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function($routeProvider){
 	$routeProvider.when("/", {
-		controller: "todoController",
+		controller: "toDoListController",
 		templateUrl: "views/default.html",
 	})
-	.when("/todo/completed", {
-		controller: "todoController",
+	.when("/toDoList/completed", {
+		controller: "toDoListController",
 		templateUrl: "views/completed.html",
 	})
-	.when("/todo/inprogress", {
-		controller: "todoController",
+	.when("/toDoList/inprogress", {
+		controller: "toDoListController",
 		templateUrl: "views/in_progress.html",
 	})
-	.when("/todo/about", {
-		controller: "todoController",
+	.when("/toDoList/about", {
+		controller: "toDoListController",
 		templateUrl: "views/about.html",
 	});
 });
