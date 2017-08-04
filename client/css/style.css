@@ -72,6 +72,7 @@ div.dropdown:click > .dropdown-menu {
     border: solid;
     border-color: green;
     margin-top: 13px;
+    padding: 5px 0px 0px 10px;
 }
 
 .dropdown-content2 {

@@ -2,26 +2,31 @@
 	{
     	"title" : "Pay bill",
 	  	"type" : "personal",
-	  	"description" : "dick description"
+		"description" : "dick description",
+		"state": "completed"
    },
    {
     	"title" : "Meet George",
 	  	"type" : "personal",
-	  	"description" : "well description"
+		"description" : "well description",
+		"state": "inprogress"	
    },
    {
     	"title" : "Buy eggs",
 	  	"type" : "work",
-	  	"description" : "buy description"
+		"description" : "buy description",
+		"state": "inprogress"	
    },
    	{
     	"title" : "Read a book",
 	  	"type" : "pesonal",
-	  	"description" : "read description"
+		"description" : "read description",
+		"state": "removed"	
    },
    	{
     	"title" : "Organize office",
 	  	"type" : "work",
-	  	"description" : "office description"
+		"description" : "office description",
+		"state": "inprogress"	
    }
 ]
