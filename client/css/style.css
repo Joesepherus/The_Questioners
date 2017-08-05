@@ -72,9 +72,8 @@ div.dropdown:click > .dropdown-menu {
     border: solid;
     border-color: #4CAF50;
     margin-top: 13px;
-    margin-right: 10px;
-    padding: 5px 0px 0px 10px;
-    border-bottom:1px solid black;
+    margin-right: 10px;    
+    padding: 5px 10px 0px 10px;
 }
 
 .dropdown-content2 {
@@ -220,7 +219,7 @@ input {
 }
 
 .w3-container{
-    padding:0.01em 16px
+    padding:0.01em 16px;
 }
 
 .w3-input {
@@ -230,4 +229,9 @@ input {
     border-bottom:1px solid #ccc;
     width:100%
 }
+
+.dropPara {
+    border-bottom:1px solid black;
+}
+
 

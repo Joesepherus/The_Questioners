@@ -8,18 +8,23 @@
             <p>
                 <input class="w3-input" id="inputTitle" type="text" ng-model="task.title">
                 <label>Title</label>
+            
             </p>
             <p>     
+                
                 <input class="w3-input" id="inputDescription" type="text" ng-model="task.description">
                 <label>Description</label>
+            
             </p>
             <p>     
                 <input class="w3-input" id="inputType" type="text" ng-model="task.type">
-                <label>Type</label>
+                <label>Type</label>                
+            
             </p>    
                     
         </form>
-            <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</div>
+            <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
+
     </div>
 
 </div>
@@ -29,11 +34,11 @@
 <div ng-repeat="task in allTasks">
     <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
         <div class="dropdown-content" id="drop">
-            <p>{{task.description}}</p>
-            <p>{{task.type}}</p>
-            <p>{{task.state}}</p>                
-            <p>{{task.create_date}}</p>  
-            <p>{{task._id}}</p>      
+            <p class="dropPara">{{task.description}}</p>
+            <p class="dropPara">{{task.type}}</p>
+            <p class="dropPara">{{task.state}}</p>                
+            <p class="dropPara">{{task.create_date}}</p>  
+            <p class="dropPara">{{task._id}}</p>      
         </div>
     </li>
 </div>
