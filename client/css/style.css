@@ -4,7 +4,7 @@ img {
 
 /* navbar */
 .navbar-default {
-    background-color: green;
+    background-color:   #048e16;
 }
 
 .navbar-default .navbar-nav > .active > a,
@@ -50,7 +50,7 @@ div.dropdown:click > .dropdown-menu {
     margin-top: 7px;	
   
     border: solid;
-    border-color: green;
+    border-color: #4CAF50;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -70,10 +70,11 @@ div.dropdown:click > .dropdown-menu {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border: solid;
-    border-color: green;
+    border-color: #4CAF50;
     margin-top: 13px;
     margin-right: 10px;
     padding: 5px 0px 0px 10px;
+    border-bottom:1px solid black;
 }
 
 .dropdown-content2 {
@@ -205,7 +206,7 @@ input {
 /* Style the "Add" button */
 .addBtn {
     
-    margin-top: 5px;
+    margin-top: 10px;
         margin-bottom: 5px;
     
 }

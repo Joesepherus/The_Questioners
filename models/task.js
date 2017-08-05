@@ -39,12 +39,12 @@ module.exports.getTaskById = function(taskId, callback){
 	Task.findById(taskId, callback);
 }
 
-module.exports.addTask = function(task, callback){
+module.exports.addTask = function(task, callback){	
 	var json = {
 		title: task.title,
-        type: task.genre,
+        type: task.type,
 		description: task.description,
-		state: task.state,
+		state: "inprogress",
 	}
 	Task.create(json, callback);
 }

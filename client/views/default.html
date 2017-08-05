@@ -4,22 +4,25 @@
             <h2>New task</h2>
         </div>
 
-        <form class="w3-container">
+        <form id="newTaskForm" class="w3-container" method="post" ng-submit="addTask()">
             <p>
-                <input class="w3-input" type="text">
+                <input class="w3-input" id="inputTitle" type="text" ng-model="task.title">
                 <label>Title</label>
             </p>
             <p>     
-                <input class="w3-input" type="text">
+                <input class="w3-input" id="inputDescription" type="text" ng-model="task.description">
                 <label>Description</label>
             </p>
             <p>     
-                <input class="w3-input" type="text">
+                <input class="w3-input" id="inputType" type="text" ng-model="task.type">
                 <label>Type</label>
-            </p>
+            </p>    
+                    
         </form>
+            <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</div>
+        
     </div>
-    <div class="col-md-2 addBtn btn btn-success" onclick="newElement()">Add</div>
+
 </div>
 
 <ul class="col-md-12" id="myUL">
@@ -48,11 +51,10 @@ function dropFunction(element) {
 var myNodelist = document.getElementsByTagName("LI");
 var i;
 for (i = 6; i < myNodelist.length; i++) {
-    console.log(myNodelist);
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
-    span.setAttribute('onclick', 'removeTask()');
+    span.setAttribute('onclick', 'removeTask(this)');
     span.appendChild(txt);
     myNodelist[i].appendChild(span);
     
@@ -65,16 +67,10 @@ for (i = 6; i < myNodelist.length; i++) {
 }
 
 // Click on a close button to hide the current list item
-function removeTask() {
-    var close = document.getElementsByClassName("close");
-    var i;
-    console.log(close);
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
+function removeTask(element) {
+    var div = element.parentElement;
+    div.style.display = "none";
+   
 }
 
 function checkTask() {
@@ -82,7 +78,6 @@ function checkTask() {
     var i;
     for (i = 0; i < check.length; i++) {
         check[i].onclick = function() {
-            console.log(div);
             
             var div = this.parentElement;
             div.classList.toggle('completed');
@@ -102,26 +97,49 @@ list.addEventListener('click', function(ev) {
 function newElement() {
     var li = document.createElement("li");
     li.className = "default dropbtn2";
-    var inputValue = document.getElementById("myInput").value;
-    var t = document.createTextNode(inputValue);
-    li.appendChild(t);
+    li.setAttribute('onclick', 'dropFunction(this)');    
+    
+    var inputValue = document.getElementById("inputTitle").value;
+    var title = document.createTextNode(inputValue);
+    li.appendChild(title);
+
     if (inputValue === '') {
         alert("You must write something!");
     } else {
         document.getElementById("myUL").appendChild(li);
     }
-    document.getElementById("myInput").value = "";
+    document.getElementById("inputTitle").value = "";
+
+    var div = document.createElement("div");
+    div.className = "dropdown-content hide";
+    li.appendChild(div);
+
+    var inputValue = document.getElementById("inputDescription").value;
+    var description = document.createElement("p");
+    description.innerHTML = inputValue;
+    div.appendChild(description);
+
+    var inputValue = document.getElementById("inputType").value;
+    var type = document.createElement("p");
+    type.innerHTML = inputValue;
+    div.appendChild(type);
+
+    var type = document.createElement("p");
+    type.innerHTML = "inprogress";
+    div.appendChild(type);
 
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
     span.appendChild(txt);
+    span.setAttribute('onclick', 'removeTask(this)');    
     li.appendChild(span);
 
     var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
     span1.appendChild(txt1);
+    span1.setAttribute('onclick', 'checkTask()');        
     li.appendChild(span1);
 
     
@@ -132,12 +150,15 @@ function newElement() {
             div.style.display = "none";
         }
     }
+    var check = document.getElementsByClassName("check");
+    
     for (i = 0; i < check.length; i++) {
         check[i].onclick = function() {          
             var div = this.parentElement;
             div.classList.toggle('completed');
         }
     }
+    
 }
 
 </script>
