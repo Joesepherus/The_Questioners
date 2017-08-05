@@ -60,6 +60,14 @@ module.exports.updateTask = function(id, task, options, callback){
 	Task.findOneAndUpdate(query, update, options, callback);
 }
 
+module.exports.completeTask = function(id, task, options, callback){
+	var query = {_id: id};
+	var update = {
+		state: "completed",		
+	}
+	Task.findOneAndUpdate(query, update, options, callback);
+}
+
 module.exports.deleteTask = function(id, callback){
 	var query = {_id: id};
 	Task.deleteOne(query, callback);

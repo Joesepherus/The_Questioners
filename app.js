@@ -56,7 +56,6 @@ app.put('/api/toDoList/:id', function(req, res){
 	var id = req.params.id;
 	var task = req.body;
 
-    console.log("ID = " + id);
 	Task.updateTask(id, task, {}, 
 		function(err, task){
 		if(err){
@@ -70,6 +69,25 @@ app.put('/api/toDoList/:id', function(req, res){
 		}
 	});
 })
+
+app.put('/api/toDoList/completed/:id', function(req, res){
+	var id = req.params.id;
+	var task = req.body;
+
+	Task.completeTask(id, task, {}, 
+		function(err, task){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(task);
+		}
+	});
+})
+
 
 // delete a task
 app.delete('/api/toDoList/:id', function(req, res){

@@ -20,7 +20,6 @@
                     
         </form>
             <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</div>
-        
     </div>
 
 </div>
@@ -29,12 +28,13 @@
     
 <div ng-repeat="task in allTasks">
     <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
-    <div class="dropdown-content" id="drop">
-        <p>{{task.description}}</p>
-        <p>{{task.type}}</p>
-        <p>{{task.state}}</p>                
-        <p>{{task.create_date}}</p>        
-    </div>
+        <div class="dropdown-content" id="drop">
+            <p>{{task.description}}</p>
+            <p>{{task.type}}</p>
+            <p>{{task.state}}</p>                
+            <p>{{task.create_date}}</p>  
+            <p>{{task._id}}</p>      
+        </div>
     </li>
 </div>
 
@@ -62,6 +62,8 @@ for (i = 6; i < myNodelist.length; i++) {
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
     span1.setAttribute('onclick', 'checkTask()');    
+    span1.setAttribute('ng-click', 'completeTask(task._id, task)');
+    
     span1.appendChild(txt1);
     myNodelist[i].appendChild(span1);
 }
@@ -81,6 +83,7 @@ function checkTask() {
             
             var div = this.parentElement;
             div.classList.toggle('completed');
+            task.state="completed";
         }
     }
 }

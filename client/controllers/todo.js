@@ -30,6 +30,12 @@ myApp.controller('toDoListController',
 		});
 	}
 
+	$scope.completeTask = function(id, task){
+		$http.put('api/toDoList/completed/' + task._id, task).then(function(response){
+			//window.location.href = '#!/toDoList';
+		});
+	}
+
 	$scope.removeTask = function(id){
 		$http.delete('api/toDoList/' + id).then(function(response){
 			window.location.href = '#!/toDoList';
