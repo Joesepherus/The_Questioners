@@ -11,7 +11,7 @@ myApp.config(function($routeProvider){
 	})
 	.when("/toDoList/inprogress", {
 		controller: "toDoListController",
-		templateUrl: "views/in_progress.html",
+		templateUrl: "views/inprogress.html",
 	})
 	.when("/toDoList/about", {
 		controller: "toDoListController",

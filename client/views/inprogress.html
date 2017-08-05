@@ -1,0 +1,18 @@
+<div class="col-md-12" ng-init="getAllInProgressTasks()">    
+
+<ul class="col-md-12" id="myUL">
+    
+<div ng-repeat="task in allTasks">
+    <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
+        <div class="dropdown-content" id="drop">
+            <p class="dropPara">{{task.description}}</p>
+            <p class="dropPara">{{task.type}}</p>
+            <p class="dropPara">{{task.state}}</p>                
+            <p class="dropPara">{{task.create_date}}</p>  
+            <p class="dropPara">{{task._id}}</p>      
+        </div>
+    </li>
+</div>
+
+</ul>
+</div>
