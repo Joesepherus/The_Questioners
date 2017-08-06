@@ -29,6 +29,18 @@
 
 </div>
 
+    <div  class="col-md-10">
+        <h2>Tasks</h2>
+    </div>
+    <div class="col-md-1 selector">
+        <select class="selector2">
+            <option value="all" on-click="">all</option>
+            <option value="completed" on-click="completedFunc()">completed</option>
+            <option value="inprogress" selected="selected">inprogress</option>
+            <option value="removed">removed</option>
+        </select>
+    </div>
+
 <ul class="col-md-12" id="myUL">
     
 <div ng-repeat="task in allTasks">
@@ -36,7 +48,7 @@
         <div class="dropdown-content" id="drop">
             <p class="dropPara">{{task.description}}</p>
             <p class="dropPara">{{task.type}}</p>
-            <p class="dropPara">{{task.state}}</p>                
+            <p class="dropPara" id="state">{{task.state}}</p>                
             <p class="dropPara">{{task.create_date}}</p>  
             <p class="dropPara">{{task._id}}</p>      
         </div>
@@ -45,7 +57,25 @@
 
 </ul>
 
+
+
 <script>
+
+
+
+$(".selector").change(function() {
+    var li = document.getElementsByTagName("LI");
+    var i;
+    for (i = 6; i < li.length; i++) {
+        console.log(li[i].children[0].children[2].innerHTML);
+        if(li[i].children[0].children[2].innerHTML == "completed"){
+            li[i].style.display = "block";
+        }
+        else{
+            li[i].style.display = "none";
+        }
+    }
+});
 
 function dropFunction(element) {
     element.children[0].classList.toggle("show");
