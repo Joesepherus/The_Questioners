@@ -63,16 +63,36 @@
 
 
 
-$(".selector").change(function() {
+$(".selector2").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
     for (i = 6; i < li.length; i++) {
-        console.log(li[i].children[0].children[2].innerHTML);
-        if(li[i].children[0].children[2].innerHTML == "completed"){
-            li[i].style.display = "block";
+        if (this.value == "completed"){
+            if (li[i].children[0].children[2].innerHTML == "completed") {
+                li[i].style.display = "block";
+            }
+            else {
+                li[i].style.display = "none";
+            }
         }
-        else{
-            li[i].style.display = "none";
+        else if (this.value == "inprogress") {
+            if (li[i].children[0].children[2].innerHTML == "inprogress") {
+                li[i].style.display = "block";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+        else if (this.value == "removed") {
+            if (li[i].children[0].children[2].innerHTML == "removed") {
+                li[i].style.display = "block";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+        else {
+            li[i].style.display = "block";
         }
     }
 });
