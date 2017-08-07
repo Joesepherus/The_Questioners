@@ -205,8 +205,8 @@ input {
 /* Style the "Add" button */
 .addBtn {
     
-    margin-top: 10px;
-        margin-bottom: 5px;
+    margin-top: 20px;
+    margin-bottom: 5px;
     
 }
 
@@ -240,18 +240,19 @@ input {
 }
 
 select {
-  border: 1px solid #111;
-  background: transparent;
-  width: 150px;
-  padding: 5px 35px 5px 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  height: 34px;
-  background: url(img/down-arrow-circle-hi.png) 96% / 15% no-repeat #eee;
+    border: 1px solid #111;
+    background: transparent;
+    width: 150px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+    background: url(img/down-arrow-circle-hi.png) 96% / 15% no-repeat #eee;
+	cursor: pointer;
   
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 /* CAUTION: IE hackery ahead */

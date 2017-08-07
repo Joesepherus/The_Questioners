@@ -88,12 +88,29 @@ app.put('/api/toDoList/completed/:id', function(req, res){
 	});
 })
 
+app.put('/api/toDoList/removed/:id', function(req, res){
+	var id = req.params.id;
+	var task = req.body;
+
+	Task.removeTask(id, task, {}, 
+		function(err, task){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(task);
+		}
+	});
+})
 
 // delete a task
-app.delete('/api/toDoList/:id', function(req, res){
+app.delete('/api/toDoList/deleted/:id', function(req, res){
 	var id = req.params.id;
-
-	Task.deleteTask(id, 
+	console.log("well"); 
+	Task.deletePermanentlyTask(id, 
 		function(err, task){
 		if(err){
 			throw(err);

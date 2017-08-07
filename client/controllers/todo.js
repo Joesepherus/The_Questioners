@@ -24,21 +24,27 @@ myApp.controller('toDoListController',
 	}
 
 	$scope.editTask = function(){
-		var id = $routeParams.id;
-		$http.put('api/toDoList/' + id, $scope.book).then(function(response){
-			window.location.href = '#!/toDoList';
+		$http.put('api/toDoList/' + task._id, $scope.task).then(function(response){
+			// window.location.href = '#!/toDoList';
 		});
 	}
 
 	$scope.completeTask = function(id, task){
 		$http.put('api/toDoList/completed/' + task._id, task).then(function(response){
-			//window.location.href = '#!/toDoList';
+			// window.location.href = '#!/toDoList';
 		});
 	}
 
-	$scope.removeTask = function(id){
-		$http.delete('api/toDoList/' + id).then(function(response){
-			window.location.href = '#!/toDoList';
+	$scope.removeTask = function(id, task){
+		$http.put('api/toDoList/removed/' + task._id, task).then(function(response){
+			// window.location.href = '#!/toDoList';
+		});
+	}
+
+	$scope.deletePermanentlyTask = function(id, task){
+		$http.delete('api/toDoList/deleted/' + id).then(function(response){
+			console.log("lol");
+			//window.location.href = '#!/toDoList';
 		});
 	}
 
