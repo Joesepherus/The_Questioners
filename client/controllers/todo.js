@@ -10,34 +10,6 @@ myApp.controller('toDoListController',
 		});
 	}
 
-	$scope.getAllCompletedTasks = function() {
-		$http.get('/api/toDoList').then(function(response) {
-			var help={};
-			for(var i = 0; i < response.data.length; i++) {
-				console.log(response.data[i].state);
-				if(response.data[i].state == "completed"){
-					help[i] = response.data[i];
-				}
-			}
-			console.log(help);
-			$scope.allTasks = help;
-		});
-	}
-
-	$scope.getAllInProgressTasks = function() {
-		$http.get('/api/toDoList').then(function(response) {
-			var help={};
-			for(var i = 0; i < response.data.length; i++) {
-				console.log(response.data[i].state);
-				if(response.data[i].state == "inprogress"){
-					help[i] = response.data[i];
-				}
-			}
-			console.log(help);
-			$scope.allTasks = help;
-		});
-	}
-
 	$scope.getTask = function(){
 		var id = $routeParams.id;
 		$http.get('api/toDoList/' + id).then(function(response){
