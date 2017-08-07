@@ -33,7 +33,7 @@
         <h2>Tasks</h2>
     </div>
     <div class="col-md-1 selector">
-        <select class="selector2">
+        <select >
             <option value="all" on-click="">all</option>
             <option value="completed" on-click="completedFunc()">completed</option>
             <option value="inprogress" selected="selected">inprogress</option>
@@ -58,12 +58,8 @@
 </ul>
 
 
-
 <script>
-
-
-
-$(".selector2").change(function() {
+$("select").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
     for (i = 6; i < li.length; i++) {
