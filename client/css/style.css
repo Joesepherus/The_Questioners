@@ -50,7 +50,7 @@ div.dropdown:click > .dropdown-menu {
     margin-top: 7px;	
   
     border: solid;
-    border-color: #4CAF50;
+    border-color: black;
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -65,12 +65,12 @@ div.dropdown:click > .dropdown-menu {
 .dropdown-content {
     display: none;
     position: relative;
-    background-color: #50b860 ;
+    background-color: #50b860;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     border: solid;
-    border-color: #4CAF50;
+    border-color: black;
     margin-top: 13px;
     margin-right: 10px;    
     padding: 5px 10px 0px 10px;
@@ -135,20 +135,44 @@ ul li.default {
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd).default {
+/*ul li:nth-child(odd).default {
     background-color: white ;
-}
+}*/
 
 /* Darker background-color on hover */
 ul li:hover.default {
-    background-color: #50b860 ;
+    opacity: 0.70;
+    border-color: black;
 }
 
 /* When clicked on, add a background color and strike out text */
 ul li.completed {
-    background: #888;
+    background-color: white;
     color: black;
     text-decoration: line-through;
+}
+
+ul li.removed {
+    background-color: #696a69;
+    color: black;
+}
+
+ul li.work {
+    background-color: blueviolet;
+    color: black;
+}
+
+ul li.personal {
+    background-color: orange;
+    color: black;
+}
+
+div.work-content {
+    background-color: #915aff;    
+}
+
+div.personal-content {
+    background-color: #eca230;
 }
 
 /* Style the close button */
@@ -232,6 +256,7 @@ input {
 
 .dropPara {
     border-bottom:1px solid black;
+    text-decoration: none;            
 }
 
 .selector {

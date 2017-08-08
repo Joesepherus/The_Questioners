@@ -43,19 +43,18 @@
 
 <ul class="col-md-12" id="myUL">
     
-<div ng-repeat="task in allTasks">
+<div ng-repeat="task in allTasks" ng-class="isLast($last)">
     <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
         <div class="dropdown-content" id="drop">
             <p class="dropPara">{{task.description}}</p>
             <p class="dropPara">{{task.type}}</p>
             <p class="dropPara" id="state">{{task.state}}</p>                
             <p class="dropPara">{{task.create_date}}</p>  
-            <p class="dropPara">{{task._id}}</p>   
             <a href="" ng-click="deletePermanentlyTask(task._id, task)">delete permanently</a>   
         </div>
     </li>
 </div>
-
+    
 </ul>
 
 
@@ -100,16 +99,16 @@ function dropFunction(element) {
 
 
 // Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
+var li = document.getElementsByTagName("LI");
 var i;
-for (i = 6; i < myNodelist.length; i++) {
+for (i = 6; i < li.length; i++) {
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
     span.setAttribute('onclick', 'removeTask(this)');
     span.setAttribute('ng-click', 'removeTask(task._id, task)');    
     span.appendChild(txt);
-    myNodelist[i].appendChild(span);
+    li[i].appendChild(span);
     
     var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
@@ -118,7 +117,7 @@ for (i = 6; i < myNodelist.length; i++) {
     span1.setAttribute('ng-click', 'completeTask(task._id, task)');
     
     span1.appendChild(txt1);
-    myNodelist[i].appendChild(span1);
+    li[i].appendChild(span1);
 }
 
 // Click on a close button to hide the current list item
