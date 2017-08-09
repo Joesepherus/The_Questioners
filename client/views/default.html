@@ -43,28 +43,81 @@
 
 <ul class="col-md-12" id="myUL">
     
-<div ng-repeat="task in allTasks" ng-class="isLast($last)">
-    <li onclick="dropFunction(this)" class="default dropbtn2">{{task.title}}
+<div ng-repeat="task in allTasks", ng-class="isLast($last)">
+    <li onclick="dropFunction(this)" class="default dropbtn2"><div>{{task.title}}</div>
         <div class="dropdown-content" id="drop">
             <p class="dropPara">{{task.description}}</p>
             <p class="dropPara">{{task.type}}</p>
             <p class="dropPara" id="state">{{task.state}}</p>                
             <p class="dropPara">{{task.create_date}}</p>  
             <a href="" ng-click="deletePermanentlyTask(task._id, task)">delete permanently</a>   
+            <div class="modal-button">
+                <button id="modalButton" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-class="editModalForm(task._id)">Edit task</button>
+            </div>
         </div>
     </li>
 </div>
     
 </ul>
 
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+    
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Task</h4>
+                </div>
+                <div class="modal-body">
+                <form id="editTaskForm" class="w3-container" method="post" ng-submit="">
+                    <p>
+                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title" placeholder={{task.title}}>
+                        <label>Title</label>
+                    </p>
+                    <p>    
+                        <input class="w3-input" name="editDescription" type="text" ng-model="task.description">
+                        <label>Description</label>
+                    </p>
+                    <p>     
+                        <input class="w3-input" name="editType" type="text" ng-model="task.type">
+                        <label>Type</label>                
+                    </p>   
+                </form>            
+                </div>
+                <div class="modal-footer">
+                    <button class="col-md-2 addBtn btn btn-success" form="editTaskForm" type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+</div>
+
 
 <script>
+
+function editModalForm(elem) {
+    var li = document.getElementsByTagName("LI");
+    var i;
+    //console.log(allTasks);
+    document.getElementsByName("editTitle")[0].placeholder = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editDescription")[0].placeholder = elem.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editType")[0].placeholder = elem.parentElement.parentElement.children[1].innerHTML;
+
+    
+}
+
 $("select").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
     for (i = 6; i < li.length; i++) {
         if (this.value == "completed"){
-            if (li[i].children[0].children[2].innerHTML == "completed") {
+            if (li[i].children[1].children[2].innerHTML == "completed") {
                 li[i].style.display = "block";
             }
             else {
@@ -72,7 +125,7 @@ $("select").change(function() {
             }
         }
         else if (this.value == "inprogress") {
-            if (li[i].children[0].children[2].innerHTML == "inprogress") {
+            if (li[i].children[1].children[2].innerHTML == "inprogress") {
                 li[i].style.display = "block";
             }
             else {
@@ -80,7 +133,7 @@ $("select").change(function() {
             }
         }
         else if (this.value == "removed") {
-            if (li[i].children[0].children[2].innerHTML == "removed") {
+            if (li[i].children[1].children[2].innerHTML == "removed") {
                 li[i].style.display = "block";
             }
             else {
@@ -94,7 +147,7 @@ $("select").change(function() {
 });
 
 function dropFunction(element) {
-    element.children[0].classList.toggle("show");
+    element.children[1].classList.toggle("show");
 }
 
 
@@ -102,6 +155,8 @@ function dropFunction(element) {
 var li = document.getElementsByTagName("LI");
 var i;
 for (i = 6; i < li.length; i++) {
+
+    // the close task button
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "close";
@@ -110,21 +165,29 @@ for (i = 6; i < li.length; i++) {
     span.appendChild(txt);
     li[i].appendChild(span);
     
+    // the check task button
     var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
     span1.setAttribute('onclick', 'checkTask()');    
     span1.setAttribute('ng-click', 'completeTask(task._id, task)');
-    
     span1.appendChild(txt1);
     li[i].appendChild(span1);
+
+    // the edit task button
+    /*var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u270E");
+    span.className = "edit";
+    span.setAttribute('onclick', 'editTask(this)');
+    span.setAttribute('ng-click', 'editTask(task._id, task)');    
+    span.appendChild(txt);
+    li[i].appendChild(span);*/
 }
 
 // Click on a close button to hide the current list item
 function removeTask(element) {
     var div = element.parentElement;
     div.style.display = "none";
-   
 }
 
 function checkTask() {

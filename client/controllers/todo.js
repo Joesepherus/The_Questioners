@@ -23,7 +23,8 @@ myApp.controller('toDoListController',
 			});
 		}
 
-		$scope.editTask = function(){
+		$scope.editTask = function(id, task){
+			window.alert("ayyyyyyyyyy editing");
 			$http.put('api/toDoList/' + task._id, $scope.task).then(function(response){
 				// window.location.href = '#!/toDoList';
 			});
@@ -53,7 +54,7 @@ myApp.controller('toDoListController',
 				var li = document.getElementsByTagName("LI");
 				var i;
 				for (i = 6; i < li.length; i++) {
-					switch(li[i].children[0].children[2].innerHTML){
+					switch(li[i].children[1].children[2].innerHTML){
 						case "completed":
 							li[i].classList.add("completed");  
 							break;
@@ -62,22 +63,42 @@ myApp.controller('toDoListController',
 							break;
 					}
 					
-					switch(li[i].children[0].children[1].innerHTML){
+					switch(li[i].children[1].children[1].innerHTML){
 						case "work":
 							li[i].classList.add("work");  
-							li[i].children[0].classList.add("work-content")
+							li[i].children[1].classList.add("work-content")
 							break;
 						case "personal":
 							li[i].classList.add("personal");  
-							li[i].children[0].classList.add("personal-content")
+							li[i].children[1].classList.add("personal-content")
 							break;
 					}
 
 
 				}
+
+    			for (i = 0; i < $scope.allTasks.length; i++) {
+				
+					document.getElementById("modalButton").id = "modalButton" + i;
+				}	
 			}
 		};
+
+		$scope.editModalForm = function(elem) {
+			var li = document.getElementsByTagName("LI");
+			var i;
+			console.log("dicks" + $scope.allTasks[0]._id + " id " + elem);
+    		for (i = 0; i < $scope.allTasks.length; i++) {
+				if($scope.allTasks[i]._id == elem) {
+					console.log("ohhhh");
+					document.getElementById("editTaskForm").setAttribute('ng-submit', 'editTask($scope.allTask[i]._id, $scope.allTask[i])');
+
+				}
+			}		
+		};
 	}]);
+
+
 
 // fix this pls, it's fking awful, does the same thing n times (n number of tasks)
 /*	myApp.directive('myRepeatDirective', function( $parse ) {

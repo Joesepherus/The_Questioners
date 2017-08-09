@@ -53,9 +53,8 @@ module.exports.updateTask = function(id, task, options, callback){
 	var query = {_id: id};
 	var update = {
 		title: task.title,
-        type: task.genre,
+        type: task.type,
 		description: task.description,
-		state: task.state,		
 	}
 	Task.findOneAndUpdate(query, update, options, callback);
 }
