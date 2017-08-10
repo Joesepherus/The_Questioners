@@ -23,8 +23,7 @@ myApp.controller('toDoListController',
 			});
 		}
 
-		$scope.editTask = function(id, task){
-			window.alert("ayyyyyyyyyy editing");
+		$scope.editTask = function(task){
 			$http.put('api/toDoList/' + task._id, $scope.task).then(function(response){
 				// window.location.href = '#!/toDoList';
 			});
@@ -73,56 +72,20 @@ myApp.controller('toDoListController',
 							li[i].children[1].classList.add("personal-content")
 							break;
 					}
-
-
 				}
-
-    			for (i = 0; i < $scope.allTasks.length; i++) {
-				
-					document.getElementById("modalButton").id = "modalButton" + i;
-				}	
 			}
 		};
 
-		$scope.editModalForm = function(elem) {
+		$scope.url = "/def";
+		
+		$scope.editModalForm = function(taskId) {
 			var li = document.getElementsByTagName("LI");
 			var i;
-			console.log("dicks" + $scope.allTasks[0]._id + " id " + elem);
     		for (i = 0; i < $scope.allTasks.length; i++) {
-				if($scope.allTasks[i]._id == elem) {
-					console.log("ohhhh");
-					document.getElementById("editTaskForm").setAttribute('ng-submit', 'editTask($scope.allTask[i]._id, $scope.allTask[i])');
-
+				if($scope.allTasks[i]._id == taskId) {
+						$scope.url = i;
 				}
 			}		
 		};
 	}]);
-
-
-
-// fix this pls, it's fking awful, does the same thing n times (n number of tasks)
-/*	myApp.directive('myRepeatDirective', function( $parse ) {
-   		return {
-       		restrict: 'A',
-       		link: function( $scope, elem, attrs ) {    
-				elem.ready(function(){
-					$scope.$apply(function(){
-						console.log("tits");
-						var li = document.getElementsByTagName("LI");
-						var i;
-						console.log("li" + li.length);
-
-						for (i = 6; i < li.length; i++) {
-							console.log(li[i].children[0]);
-							if (li[i].children[0].children[2].innerHTML == "completed") {
-							li[i].classList.toggle('completed');  
-							}
-						console.log(li[i].children[0].classList);
-				
-						}
-					})
-				})
-       		}
-		}
-	})*/
 

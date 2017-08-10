@@ -52,7 +52,7 @@
             <p class="dropPara">{{task.create_date}}</p>  
             <a href="" ng-click="deletePermanentlyTask(task._id, task)">delete permanently</a>   
             <div class="modal-button">
-                <button id="modalButton" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-class="editModalForm(task._id)">Edit task</button>
+                <button id="modalButton" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
             </div>
         </div>
     </li>
@@ -73,17 +73,17 @@
                 <h4 class="modal-title">Edit Task</h4>
                 </div>
                 <div class="modal-body">
-                <form id="editTaskForm" class="w3-container" method="post" ng-submit="">
+                <form ng-model="allTasks" id="editTaskForm" class="w3-container" method="post" ng-submit="editTask(allTasks[url])">
                     <p>
                         <input class="w3-input" name="editTitle" type="text" ng-model="task.title" placeholder={{task.title}}>
                         <label>Title</label>
                     </p>
                     <p>    
-                        <input class="w3-input" name="editDescription" type="text" ng-model="task.description">
+                        <input class="w3-input" name="editDescription" ng-model="task.description" type="text">
                         <label>Description</label>
                     </p>
                     <p>     
-                        <input class="w3-input" name="editType" type="text" ng-model="task.type">
+                        <input class="w3-input" name="editType" ng-model="task.type" type="text">
                         <label>Type</label>                
                     </p>   
                 </form>            
@@ -174,14 +174,6 @@ for (i = 6; i < li.length; i++) {
     span1.appendChild(txt1);
     li[i].appendChild(span1);
 
-    // the edit task button
-    /*var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u270E");
-    span.className = "edit";
-    span.setAttribute('onclick', 'editTask(this)');
-    span.setAttribute('ng-click', 'editTask(task._id, task)');    
-    span.appendChild(txt);
-    li[i].appendChild(span);*/
 }
 
 // Click on a close button to hide the current list item
