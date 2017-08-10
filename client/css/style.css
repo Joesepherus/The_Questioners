@@ -294,3 +294,6 @@ select::-ms-expand {
 }
 
 
+button.deleteBtn, button.editBtn {
+    margin-bottom: 10px;
+}

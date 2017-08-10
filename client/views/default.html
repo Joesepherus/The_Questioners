@@ -50,9 +50,11 @@
             <p class="dropPara">{{task.type}}</p>
             <p class="dropPara" id="state">{{task.state}}</p>                
             <p class="dropPara">{{task.create_date}}</p>  
-            <a href="" ng-click="deletePermanentlyTask(task._id, task)">delete permanently</a>   
             <div class="modal-button">
-                <button id="modalButton" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
+                <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
+            </div>
+            <div>
+                <button type="button" class="btn btn-danger btn-md deleteBtn"  ng-click="deletePermanentlyTask(task._id, task)">Delete permanently</button>                
             </div>
         </div>
     </li>
