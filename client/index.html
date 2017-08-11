@@ -3,6 +3,8 @@
 <head>
 	<title>To-do list</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -30,9 +32,9 @@
                                 <div class="hamburger"></div>
                                 <div class="hamburger"></div> 
                                 <div id="myDropdown" class="dropdown-content2">
-                                    <a href="#">Action</a>
-                                    <a href="#">Another action</a>
-                                    <a href="#">Something else here</a>
+                                    <div id="datepicker" class="calendar">
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +72,7 @@
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
     <script src="/app.js"></script>
     <script src="/controllers/todo.js"></script>
     
@@ -77,8 +80,12 @@
 </html>
 
 <script>
-$(document).ready(function () {
 
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+
+$(document).ready(function () {
      $('ul.nav > li').click(function (e) {
         $('ul.nav > li').removeClass('active');
 

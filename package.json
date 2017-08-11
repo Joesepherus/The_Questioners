@@ -9,7 +9,8 @@
   "dependencies":{
   	"express":"*",
   	"body-parser":"*",
-  	"mongoose":"*"
+    "mongoose":"*",
+    "bootstrap-year-calendar":"*"
   },
   "author": "Jozef Maloch",
   "license": "ISC"
