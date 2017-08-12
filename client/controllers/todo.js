@@ -32,10 +32,12 @@ myApp.controller('toDoListController',
 
 		$scope.completeTask = function(id, task){
 			if (task.state != "completed") {
+				task.state = "completed";
 				$http.put('api/toDoList/completed/' + task._id, task).then(function(response){
 				});
 			}
 			else {
+				task.state = "inprogress";				
 				$http.put('api/toDoList/inprogress/' + task._id, task).then(function(response){
 				});
 			}
@@ -43,10 +45,12 @@ myApp.controller('toDoListController',
 
 		$scope.removeTask = function(id, task){
 			if (task.state != "removed") {
+				task.state = "removed";
 				$http.put('api/toDoList/removed/' + task._id, task).then(function(response){
 				});
 			}
 			else {
+				task.state = "inprogress";				
 				$http.put('api/toDoList/inprogress/' + task._id, task).then(function(response){
 				});
 			}
@@ -68,7 +72,8 @@ myApp.controller('toDoListController',
 							li[i].classList.add("completed");  
 							break;
 						case "removed":
-							li[i].classList.add("removed");  
+							li[i].classList.add("removed"); 
+							li[i].children[1].classList.add("removed-content")
 							break;
 					}
 					

@@ -199,11 +199,12 @@ function removeTask(element) {
     if (li.children[1].children[2].innerHTML != "removed") {
         li.style.backgroundColor = "#696a69";
         li.children[1].children[2].innerHTML = "removed";
-
+        li.children[1].style.backgroundColor = "#a1a1a1";
     }
     else {
         li.style.backgroundColor = "white";        
         li.children[1].children[2].innerHTML = "inprogress";
+        li.children[1].style.backgroundColor = "#e2e1df";
 
     }
 }

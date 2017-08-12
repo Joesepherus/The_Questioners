@@ -48,7 +48,6 @@ div.dropdown:click > .dropdown-menu {
     border: none;
 	cursor: pointer;
     margin-top: 7px;	
-  
     border: solid;
     border-color: black;
 }
@@ -65,7 +64,7 @@ div.dropdown:click > .dropdown-menu {
 .dropdown-content {
     display: none;
     position: relative;
-    background-color: #50b860;
+    background-color: #e2e1df;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -174,6 +173,10 @@ div.work-content {
 
 div.personal-content {
     background-color: #eca230;
+}
+
+div.removed-content {
+    background-color: #a1a1a1;
 }
 
 /* Style the close button */
