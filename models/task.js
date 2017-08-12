@@ -75,6 +75,14 @@ module.exports.removeTask = function(id, task, options, callback){
 	Task.findOneAndUpdate(query, update, options, callback);
 }
 
+module.exports.inprogressTask = function(id, task, options, callback){
+	var query = {_id: id};
+	var update = {
+		state: "inprogress",		
+	}
+	Task.findOneAndUpdate(query, update, options, callback);
+}
+
 module.exports.deletePermanentlyTask = function(id, callback){
 	var query = {_id: id};
 	Task.deleteOne(query, callback);

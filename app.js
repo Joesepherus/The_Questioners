@@ -106,10 +106,27 @@ app.put('/api/toDoList/removed/:id', function(req, res){
 	});
 })
 
+app.put('/api/toDoList/inprogress/:id', function(req, res){
+	var id = req.params.id;
+	var task = req.body;
+
+	Task.inprogressTask(id, task, {}, 
+		function(err, task){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(task);
+		}
+	});
+})
+
 // delete a task
 app.delete('/api/toDoList/deleted/:id', function(req, res){
 	var id = req.params.id;
-	console.log("well"); 
 	Task.deletePermanentlyTask(id, 
 		function(err, task){
 		if(err){
@@ -128,7 +145,7 @@ app.delete('/api/toDoList/deleted/:id', function(req, res){
 app.get('/listTasks', function (req, res) {
     fs.readFile( __dirname + "/" + " tasks.json", 'utf8',
     function (err, data) {
-        console.log(data);
+        //console.log(data);
         res.end(data);
     });
 })

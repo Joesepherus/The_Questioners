@@ -19,32 +19,42 @@ myApp.controller('toDoListController',
 
 		$scope.addTask = function() {
 			$http.post('api/toDoList', $scope.task).then(function(response){
-				window.location.href = '#!/toDoList';
+				//window.location.href = '#!/';
+				window.location.reload();
 			});
 		}
 
 		$scope.editTask = function(task){
 			$http.put('api/toDoList/' + task._id, $scope.task).then(function(response){
-				// window.location.href = '#!/toDoList';
+				window.location.reload();								
 			});
 		}
 
 		$scope.completeTask = function(id, task){
-			$http.put('api/toDoList/completed/' + task._id, task).then(function(response){
-				// window.location.href = '#!/toDoList';
-			});
+			if (task.state != "completed") {
+				$http.put('api/toDoList/completed/' + task._id, task).then(function(response){
+				});
+			}
+			else {
+				$http.put('api/toDoList/inprogress/' + task._id, task).then(function(response){
+				});
+			}
 		}
 
 		$scope.removeTask = function(id, task){
-			$http.put('api/toDoList/removed/' + task._id, task).then(function(response){
-				// window.location.href = '#!/toDoList';
-			});
+			if (task.state != "removed") {
+				$http.put('api/toDoList/removed/' + task._id, task).then(function(response){
+				});
+			}
+			else {
+				$http.put('api/toDoList/inprogress/' + task._id, task).then(function(response){
+				});
+			}
 		}
 
 		$scope.deletePermanentlyTask = function(id, task){
 			$http.delete('api/toDoList/deleted/' + id).then(function(response){
-				console.log("lol");
-				//window.location.href = '#!/toDoList';
+				window.location.reload();				
 			});
 		}
 		

@@ -300,8 +300,8 @@ button.deleteBtn, button.editBtn {
 }
 
 .calendar {
-    width: 1200px;
-    height: 500px;
+    width: 800px;
+    height: 370px;
 }
 
 .event {
@@ -309,10 +309,10 @@ button.deleteBtn, button.editBtn {
     border: 2px solid blue;
 }
 .ui-datepicker {
-    width: 1200px; /*what ever width you want*/
-    height: 500px;
+    width: 800px; /*what ever width you want*/
+    height: 370px;
 }
 div.ui-datepicker
 {
-    font-size: 30px;
+    font-size: 25px;
 }

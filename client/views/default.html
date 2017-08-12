@@ -4,27 +4,22 @@
             <h2>New task</h2>
         </div>
 
-        <form id="newTaskForm" class="w3-container" method="post" ng-submit="addTask()">
+        <form name="newTaskForm" id="newTaskForm" class="w3-container" method="post" ng-submit="addTask()">
             <p>
-                <input class="w3-input" id="inputTitle" type="text" ng-model="task.title">
+                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
                 <label>Title</label>
-            
             </p>
             <p>     
                 
-                <input class="w3-input" id="inputDescription" type="text" ng-model="task.description">
+                <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="task.description" required>
                 <label>Description</label>
-            
             </p>
             <p>     
-                <input class="w3-input" id="inputType" type="text" ng-model="task.type">
+                <input class="w3-input" name="newTaskType" id="inputType" type="text" ng-model="task.type" required>
                 <label>Type</label>                
-            
             </p>    
-                    
         </form>
             <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
-
     </div>
 
 </div>
@@ -114,10 +109,9 @@ function editModalForm(elem) {
     document.getElementsByName("editTitle")[0].placeholder = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
     document.getElementsByName("editDescription")[0].placeholder = elem.parentElement.parentElement.children[0].innerHTML;
     document.getElementsByName("editType")[0].placeholder = elem.parentElement.parentElement.children[1].innerHTML;
-
-    
 }
 
+// switching between selected values
 $("select").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
@@ -191,7 +185,7 @@ for (i = 6; i < li.length; i++) {
     var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
-    span1.setAttribute('onclick', 'checkTask()');    
+    span1.setAttribute('onclick', 'checkTask(this)');    
     span1.setAttribute('ng-click', 'completeTask(task._id, task)');
     span1.appendChild(txt1);
     li[i].appendChild(span1);
@@ -200,20 +194,28 @@ for (i = 6; i < li.length; i++) {
 
 // Click on a close button to hide the current list item
 function removeTask(element) {
-    var div = element.parentElement;
-    div.style.display = "none";
+    var li = element.parentElement;
+    console.log(li.children[1].children[2].innerHTML);
+    if (li.children[1].children[2].innerHTML != "removed") {
+        li.style.backgroundColor = "#696a69";
+        li.children[1].children[2].innerHTML = "removed";
+
+    }
+    else {
+        li.style.backgroundColor = "white";        
+        li.children[1].children[2].innerHTML = "inprogress";
+
+    }
 }
 
-function checkTask() {
-    var check = document.getElementsByClassName("check");
-    var i;
-    for (i = 0; i < check.length; i++) {
-        check[i].onclick = function() {
-            
-            var div = this.parentElement;
-            div.classList.toggle('completed');
-            task.state="completed";
-        }
+function checkTask(element) {
+    var li = element.parentElement;
+    li.classList.toggle('completed');
+    if (li.children[1].children[2].innerHTML != "completed") {
+        li.children[1].children[2].innerHTML = "completed";
+    }
+    else {
+        li.children[1].children[2].innerHTML = "inprogress";       
     }
 }
 
@@ -227,55 +229,34 @@ list.addEventListener('click', function(ev) {
 
 // Create a new list item when clicking on the "Add" button
 function newElement() {
-    var li = document.createElement("li");
-    li.className = "default dropbtn2";
-    li.setAttribute('onclick', 'dropFunction(this)');    
-    
-    var inputValue = document.getElementById("inputTitle").value;
-    var title = document.createTextNode(inputValue);
-    li.appendChild(title);
 
-    if (inputValue === '') {
-        alert("You must write something!");
-    } else {
-        document.getElementById("myUL").appendChild(li);
-    }
-    document.getElementById("inputTitle").value = "";
+    // form validation if title, description and type have been entered
+    var title = document.forms["newTaskForm"]["newTaskTitle"].value;
+    var description = document.forms["newTaskForm"]["newTaskDescription"].value;
+    var type = document.forms["newTaskForm"]["newTaskType"].value;
 
-    var div = document.createElement("div");
-    div.className = "dropdown-content hide";
-    li.appendChild(div);
 
-    var inputValue = document.getElementById("inputDescription").value;
-    var description = document.createElement("p");
-    description.innerHTML = inputValue;
-    div.appendChild(description);
+    if (title === '') {
+        alert("Title missing!");
+        return false;        
+    } 
 
-    var inputValue = document.getElementById("inputType").value;
-    var type = document.createElement("p");
-    type.innerHTML = inputValue;
-    div.appendChild(type);
+    if (description === '') {
+        alert("Description missing!");
+        return false;        
+    } 
 
-    var type = document.createElement("p");
-    type.innerHTML = "inprogress";
-    div.appendChild(type);
+    if (type === '') {
+        alert("Type missing!");
+        return false;        
+    } 
 
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "close";
-    span.appendChild(txt);
-    span.setAttribute('onclick', 'removeTask(this)');    
-    li.appendChild(span);
-
-    var span1 = document.createElement("SPAN");
-    var txt1 = document.createTextNode("\u2713");
-    span1.className = "check";
-    span1.appendChild(txt1);
-    span1.setAttribute('onclick', 'checkTask()');        
-    li.appendChild(span1);
-
-    
-
+    /* 
+        TO DO:
+        these lines of code look weird, why is the checking if the
+        buttons have been clicked in a function that is creating new tasks? 
+        i am so confused by that rly, please change it :) 
+    */
     for (i = 0; i < close.length; i++) {
         close[i].onclick = function() {
             var div = this.parentElement;
