@@ -3,44 +3,45 @@
         <div class="w3-container w3-green">
             <h2>New task</h2>
         </div>
-
-        <form name="newTaskForm" id="newTaskForm" class="w3-container" method="post" ng-submit="addTask()">
+        <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
+                <label class="newTaskType">Title</label>  
                 <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
-                <label>Title</label>
             </p>
             <p>     
-                
+                <label class="newTaskType">Description</label>
                 <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="task.description" required>
-                <label>Description</label>
             </p>
-            <p>     
-                <input class="w3-input" name="newTaskType" id="inputType" type="text" ng-model="task.type" required>
-                <label>Type</label>                
-            </p>    
+            <div>
+                <label class="newTaskType">Type</label>        
+            </div>
+                    <select ng-model="task.type" required>
+                        <option value="work" selected="selected">work</option>
+                        <option value="personal">personal</option>
+                    </select>
         </form>
             <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
     </div>
 
 </div>
 
-    <div  class="col-md-10">
-        <h2>Tasks</h2>
-    </div>
-    <div class="col-md-1 selector">
-        <select >
-            <option value="all" on-click="">all</option>
-            <option value="completed" on-click="completedFunc()">completed</option>
-            <option value="inprogress" selected="selected">inprogress</option>
-            <option value="removed">removed</option>
-            <option value="work">work</option>
-            <option value="personal">personal</option>
-        </select>
-    </div>
+<div  class="col-md-10">
+    <h2>Tasks</h2>
+</div>
+<div class="col-md-1 selector">
+    <select id="selector">
+        <option value="all" selected="selected">all</option>
+        <option value="completed" on-click="completedFunc()">completed</option>
+        <option value="inprogress">inprogress</option>
+        <option value="removed">removed</option>
+        <option value="work">work</option>
+        <option value="personal">personal</option>
+    </select>
+</div>
 
 <ul class="col-md-12" id="myUL">
     
-<div ng-repeat="task in allTasks", ng-class="isLast($last)">
+<div ng-repeat="task in allTasks" ng-class="isLast($last)">
     <li onclick="dropFunction(this)" class="default dropbtn2"><div>{{task.title}}</div>
         <div class="dropdown-content" id="drop">
             <p class="dropPara">{{task.description}}</p>
@@ -101,6 +102,12 @@
 </div>
 
 <script>
+/*$(document).ready(function () {
+    var li = document.getElementsByTagName("LI");
+	var i;
+	for (i = 6; i < li.length; i++) {
+        
+});*/
 
 function editModalForm(elem) {
     var li = document.getElementsByTagName("LI");
@@ -112,7 +119,7 @@ function editModalForm(elem) {
 }
 
 // switching between selected values
-$("select").change(function() {
+$("#selector").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
     for (i = 6; i < li.length; i++) {
@@ -205,7 +212,6 @@ function removeTask(element) {
         li.style.backgroundColor = "white";        
         li.children[1].children[2].innerHTML = "inprogress";
         li.children[1].style.backgroundColor = "#e2e1df";
-
     }
 }
 

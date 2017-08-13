@@ -319,3 +319,11 @@ div.ui-datepicker
 {
     font-size: 25px;
 }
+
+.newTaskForm{
+    height: 250px;   
+}
+
+.newTaskType {
+    margin-top: 10px;
+}

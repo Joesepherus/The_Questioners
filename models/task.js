@@ -87,3 +87,4 @@ module.exports.deletePermanentlyTask = function(id, callback){
 	var query = {_id: id};
 	Task.deleteOne(query, callback);
 }
+
