@@ -5,20 +5,20 @@
         </div>
         <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
-                <label class="newTaskType">Title</label>  
+                <label class="newTaskType">Title:</label>  
                 <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
             </p>
             <p>     
-                <label class="newTaskType">Description</label>
+                <label class="newTaskType">Description:</label>
                 <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="task.description" required>
             </p>
             <div>
-                <label class="newTaskType">Type</label>        
+                <label class="newTaskType">Type:</label>        
             </div>
-                    <select ng-model="task.type" required>
-                        <option value="work" selected="selected">work</option>
-                        <option value="personal">personal</option>
-                    </select>
+            <select ng-model="task.type" required>
+                <option value="work" selected="selected">work</option>
+                <option value="personal">personal</option>
+            </select>
         </form>
             <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
     </div>
@@ -65,7 +65,6 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-    
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,21 +74,24 @@
                 <div class="modal-body">
                 <form ng-model="allTasks" id="editTaskForm" class="w3-container" method="post" ng-submit="editTask(allTasks[url])">
                     <p>
+                        <label class="newTaskType">Title:</label>
                         <input class="w3-input" name="editTitle" type="text" ng-model="task.title" placeholder={{task.title}}>
-                        <label>Title</label>
                     </p>
                     <p>    
+                        <label class="newTaskType">Description:</label>
                         <input class="w3-input" name="editDescription" ng-model="task.description" type="text">
-                        <label>Description</label>
                     </p>
-                    <p>     
-                        <input class="w3-input" name="editType" ng-model="task.type" type="text">
-                        <label>Type</label>                
-                    </p>   
+                    <div>
+                        <label class="newTaskType">Type</label>
+                    </div>
+                    <select ng-model="task.type" required>
+                        <option value="work" selected="selected">work</option>
+                        <option value="personal">personal</option>
+                    </select>  
                 </form>            
                 </div>
                 <div class="modal-footer">
-                    <button class="col-md-2 addBtn btn btn-success" form="editTaskForm" type="submit" >Submit</button>
+                    <button class="col-md-2 editBtn btn btn-success" form="editTaskForm" type="submit" >Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
