@@ -62,8 +62,10 @@ module.exports.updateTask = function(id, task, options, callback){
 module.exports.completeTask = function(id, task, options, callback){
 	var query = {_id: id};
 	var update = {
-		state: "completed",		
+		state: "completed",	
+		completed_date: new Date(),	
 	}
+	console.log(new Date());
 	Task.findOneAndUpdate(query, update, options, callback);
 }
 

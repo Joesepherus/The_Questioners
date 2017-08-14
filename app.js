@@ -70,6 +70,7 @@ app.put('/api/toDoList/:id', function(req, res){
 	});
 })
 
+// change tasks state to completed task
 app.put('/api/toDoList/completed/:id', function(req, res){
 	var id = req.params.id;
 	var task = req.body;
@@ -88,6 +89,7 @@ app.put('/api/toDoList/completed/:id', function(req, res){
 	});
 })
 
+// change tasks state to removed task
 app.put('/api/toDoList/removed/:id', function(req, res){
 	var id = req.params.id;
 	var task = req.body;
@@ -106,6 +108,7 @@ app.put('/api/toDoList/removed/:id', function(req, res){
 	});
 })
 
+// change tasks state to inprogress 
 app.put('/api/toDoList/inprogress/:id', function(req, res){
 	var id = req.params.id;
 	var task = req.body;
@@ -124,7 +127,7 @@ app.put('/api/toDoList/inprogress/:id', function(req, res){
 	});
 })
 
-// delete a task
+// change tasks state to deleted a task
 app.delete('/api/toDoList/deleted/:id', function(req, res){
 	var id = req.params.id;
 	Task.deletePermanentlyTask(id, 

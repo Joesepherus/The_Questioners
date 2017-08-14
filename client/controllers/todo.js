@@ -87,6 +87,9 @@ myApp.controller('toDoListController',
 							li[i].children[1].classList.add("personal-content")
 							break;
 					}
+					if(li[i].children[1].children[4].innerHTML == "") {
+						li[i].children[1].children[4].innerHTML = "not completed"
+					}
 				}
 			}
 		};

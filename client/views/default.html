@@ -41,22 +41,24 @@
 
 <ul class="col-md-12" id="myUL">
     
-<div ng-repeat="task in allTasks" ng-class="isLast($last)">
-    <li onclick="dropFunction(this)" class="default dropbtn2"><div>{{task.title}}</div>
-        <div class="dropdown-content" id="drop">
-            <p class="dropPara">{{task.description}}</p>
-            <p class="dropPara">{{task.type}}</p>
-            <p class="dropPara" id="state">{{task.state}}</p>                
-            <p class="dropPara">{{task.create_date}}</p>  
-            <div class="modal-button">
-                <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
+    <div ng-repeat="task in allTasks" ng-class="isLast($last)">
+        <li onclick="dropFunction(this)" class="default dropbtn2">
+            <div>{{task.title}}</div>
+            <div class="dropdown-content" id="drop">
+                <p class="dropPara">{{task.description}}</p>
+                <p class="dropPara">{{task.type}}</p>
+                <p class="dropPara" id="state">{{task.state}}</p>                
+                <p class="dropPara">{{task.create_date}}</p>  
+                <p class="dropPara">{{task.completed_date}}</p>
+                <div class="modal-button">
+                    <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger btn-md deleteBtn"  ng-click="deletePermanentlyTask(task._id, task)">Delete permanently</button>                
+                </div>
             </div>
-            <div>
-                <button type="button" class="btn btn-danger btn-md deleteBtn"  ng-click="deletePermanentlyTask(task._id, task)">Delete permanently</button>                
-            </div>
-        </div>
-    </li>
-</div>
+        </li>
+    </div>
     
 </ul>
 
@@ -193,8 +195,8 @@ $("#selector").change(function() {
     }
 });
 
-function dropFunction(element) {
-    element.children[1].classList.toggle("show");
+function dropFunction(element) {     
+        element.children[1].classList.toggle("show");
 }
 
 
