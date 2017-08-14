@@ -6,15 +6,13 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 
     <nav class="navbar navbar-default">
-        
         <div class="container">
-            
             <div class="navbar-header">
-                
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -23,7 +21,6 @@
                 </button>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                
                 <ul id="myTab" class="nav navbar-nav">
                     <li class="hamburger">
                         <div>
@@ -45,13 +42,13 @@
                     <li class="active" id="Home">
                         <a class="nav-item nav-link active" data-toggle="tab" href="#">Home</a>
                     </li>
-                    <li >
+                    <li>
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/toDoList/completed">Completed</a>
                     </li>
-                    <li  >
+                    <li>
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/toDoList/inprogress">In progress</a>
                     </li>
-                    <li  >
+                    <li>
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/toDoList/about">About</a>
                     </li>
                 </ul>
@@ -61,13 +58,34 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div >
                 <div ng-view>
                 
                 </div>
             </div>
         </div>
     </div><!-- /.container -->
+
+    <div class="footer-bottom">
+	    <div class="container">
+                    <div  class="copyright pull-left">
+                        © 2017, Created by Jozef Maloch
+                    </div>
+                    <div class="design pull-right">
+                        <div class="center-block">
+                            <a href="https://github.com/Joesepherus"><i id="social-gh" class="fa fa-github-square fa-3x social"></i></a>                            
+                            <a href="https://www.facebook.com/JoesMaloch"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a>
+                            <a href="https://twitter.com/TQs_Joesepherus"><i id="social-tw" class="fa fa-twitter-square fa-3x social"></i></a>
+                            <a href="https://plus.google.com/u/1/+Joesepherus"><i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i></a>
+                            <a href="mailto:jozefmaloch@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"></i></a>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    
+    
+  </div>
+
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
