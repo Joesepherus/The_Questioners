@@ -99,9 +99,26 @@
 
 <script>
 
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
+/*$( function() {
+    // An array of dates
+    var eventDates = {};
+    eventDates[ new Date( '08/07/2017' )] = new Date( '08/07/2017' );
+    eventDates[ new Date( '08/12/2017' )] = new Date( '08/12/2017' );
+    eventDates[ new Date( '08/18/2017' )] = new Date( '08/18/2017' );
+    eventDates[ new Date( '08/23/2017' )] = new Date( '08/23/2017' );
+    
+    // datepicker
+    $('#dt').datepicker({
+        beforeShowDay: function( date ) {
+            var highlight = eventDates[date];
+            if( highlight ) {
+                 return [true, "event", 'Tooltip text'];
+            } else {
+                 return [true, '', ''];
+            }
+        }
+    });
+});*/
 
 $(document).ready(function () {
      $('ul.nav > li').click(function (e) {

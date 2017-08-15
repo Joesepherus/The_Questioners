@@ -77,7 +77,7 @@
                 <form ng-model="allTasks" id="editTaskForm" class="w3-container" method="post" ng-submit="editTask(allTasks[url])">
                     <p>
                         <label class="newTaskType">Title:</label>
-                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title" placeholder={{task.title}}>
+                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title">
                     </p>
                     <p>    
                         <label class="newTaskType">Description:</label>
@@ -86,8 +86,8 @@
                     <div>
                         <label class="newTaskType">Type</label>
                     </div>
-                    <select ng-model="task.type" required>
-                        <option value="work" selected="selected">work</option>
+                    <select id="editSelect" ng-model="task.type" required>
+                        <option value="work">work</option>
                         <option value="personal">personal</option>
                     </select>  
                 </form>            
@@ -111,18 +111,26 @@
 function editModalForm(elem) {
     var li = document.getElementsByTagName("LI");
     var i;
-    document.getElementsByName("editTitle")[0].placeholder = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
-    document.getElementsByName("editDescription")[0].placeholder = elem.parentElement.parentElement.children[0].innerHTML;
-    document.getElementsByName("editType")[0].placeholder = elem.parentElement.parentElement.children[1].innerHTML;
+    document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[0].innerHTML;
+
+    var select = document.getElementById("editSelect");
+    switch (elem.parentElement.parentElement.children[1].innerHTML) {
+        case "work":
+            select.value = "work";
+            break;
+        case "personal":
+            select.value = "personal";
+    }
 }
 
 // on click function for showing only tasks from a certain date
-$("#dt").datepicker({
+/*$("#dt").datepicker({
     onSelect: function(dateText, inst) {
         var date = $(this).val();
         var time = $('#time').val();
         /*alert('on select triggered');
-        $("#start").val(date + time.toString(' HH:mm').toString());*/
+        $("#start").val(date + time.toString(' HH:mm').toString());
         var month = date.slice(0, 2);
         var day = date.slice(3, 5);
         var year = date.slice(6, 10);        
@@ -141,8 +149,8 @@ $("#dt").datepicker({
                 li[i].style.display = "none";                
             }
         }
-    }
-});
+    }    
+});*/
 
 // switching between selected values
 $("#selector").change(function() {
@@ -208,7 +216,7 @@ for (i = 6; i < li.length; i++) {
     // the close task button
     var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
-    span.className = "close";
+    span.className = "closeBtn";
     span.setAttribute('onclick', 'removeTask(this)');
     span.setAttribute('ng-click', 'removeTask(task._id, task)');    
     span.appendChild(txt);
