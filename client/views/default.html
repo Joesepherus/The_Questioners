@@ -6,7 +6,7 @@
         <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
                 <label class="newTaskType">Title:</label>  
-                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
+                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title"   >
             </p>
             <p>     
                 <label class="newTaskType">Description:</label>
@@ -16,7 +16,8 @@
                 <label class="newTaskType">Type:</label>        
             </div>
             <select ng-model="task.type" required>
-                <option value="work" selected="selected">work</option>
+                <option value=""></option>                
+                <option value="work">work</option>
                 <option value="personal">personal</option>
             </select>
         </form>
@@ -77,16 +78,17 @@
                 <form ng-model="allTasks" id="editTaskForm" class="w3-container" method="post" ng-submit="editTask(allTasks[url])">
                     <p>
                         <label class="newTaskType">Title:</label>
-                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title">
+                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title" required>
                     </p>
                     <p>    
                         <label class="newTaskType">Description:</label>
-                        <input class="w3-input" name="editDescription" ng-model="task.description" type="text">
+                        <input class="w3-input" name="editDescription" ng-model="task.description" type="text" required>
                     </p>
                     <div>
                         <label class="newTaskType">Type</label>
                     </div>
                     <select id="editSelect" ng-model="task.type" required>
+                        <option value=""></option>                        
                         <option value="work">work</option>
                         <option value="personal">personal</option>
                     </select>  
@@ -123,34 +125,6 @@ function editModalForm(elem) {
             select.value = "personal";
     }
 }
-
-// on click function for showing only tasks from a certain date
-/*$("#dt").datepicker({
-    onSelect: function(dateText, inst) {
-        var date = $(this).val();
-        var time = $('#time').val();
-        /*alert('on select triggered');
-        $("#start").val(date + time.toString(' HH:mm').toString());
-        var month = date.slice(0, 2);
-        var day = date.slice(3, 5);
-        var year = date.slice(6, 10);        
-        var li = document.getElementsByTagName("LI");
-        var i;
-
-        for (i = 6; i < li.length; i++) {
-            var taskDate = li[i].children[1].children[3].innerHTML;
-            taskDay = taskDate.slice(8, 10);
-            taskMonth = taskDate.slice(5, 7);
-            taskYear = taskDate.slice(0, 4);
-            if (day == taskDay && month == taskMonth && year == taskYear) {
-                li[i].style.display = "block";
-            }
-            else {
-                li[i].style.display = "none";                
-            }
-        }
-    }    
-});*/
 
 // switching between selected values
 $("#selector").change(function() {
@@ -206,7 +180,6 @@ $("#selector").change(function() {
 function dropFunction(element) {     
         element.children[1].classList.toggle("show");
 }
-
 
 // Create a "close" button and append it to each list item
 var li = document.getElementsByTagName("LI");
@@ -274,7 +247,6 @@ function newElement() {
     var title = document.forms["newTaskForm"]["newTaskTitle"].value;
     var description = document.forms["newTaskForm"]["newTaskDescription"].value;
     var type = document.forms["newTaskForm"]["newTaskType"].value;
-
 
     if (title === '') {
         alert("Title missing!");

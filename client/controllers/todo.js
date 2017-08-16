@@ -134,31 +134,34 @@ myApp.controller('toDoListController',
 						return [true, '', ''];
 					}
 				},
-				onSelect: function(dateText, inst) {
-        var date = $(this).val();
-        var time = $('#time').val();
-        /*alert('on select triggered');
-        $("#start").val(date + time.toString(' HH:mm').toString());*/
-        var month = date.slice(0, 2);
-        var day = date.slice(3, 5);
-        var year = date.slice(6, 10);        
-        var li = document.getElementsByTagName("LI");
-        var i;
 
-        for (i = 6; i < li.length; i++) {
-            var taskDate = li[i].children[1].children[3].innerHTML;
-            taskDay = taskDate.slice(8, 10);
-            taskMonth = taskDate.slice(5, 7);
-            taskYear = taskDate.slice(0, 4);
-            if (day == taskDay && month == taskMonth && year == taskYear) {
-                li[i].style.display = "block";
-            }
-            else {
-                li[i].style.display = "none";                
-            }
-        }
-    }    
+				onSelect: function(dateText, inst) {
+					var date = $(this).val();
+					var time = $('#time').val();
+					/*alert('on select triggered');
+					$("#start").val(date + time.toString(' HH:mm').toString());*/
+					var month = date.slice(0, 2);
+					var day = date.slice(3, 5);
+					var year = date.slice(6, 10);        
+					var li = document.getElementsByTagName("LI");
+					var i;
+
+					for (i = 6; i < li.length; i++) {
+						var taskDate = li[i].children[1].children[3].innerHTML;
+						taskDay = taskDate.slice(8, 10);
+						taskMonth = taskDate.slice(5, 7);
+						taskYear = taskDate.slice(0, 4);
+						if (day == taskDay && month == taskMonth && year == taskYear) {
+							li[i].style.display = "block";
+						}
+						else {
+							li[i].style.display = "none";                
+						}
+					}
+				}    
+
 			});
 		}
+		
 	}]);
 
