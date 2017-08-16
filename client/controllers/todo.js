@@ -104,6 +104,10 @@ myApp.controller('toDoListController',
 							li[i].classList.add("personal");  
 							li[i].children[1].classList.add("personal-content")
 							break;
+						case "school":
+							li[i].classList.add("school");  
+							li[i].children[1].classList.add("school-content")
+							break;
 					}
 					if(li[i].children[1].children[4].innerHTML == "") {
 						li[i].children[1].children[4].innerHTML = "not completed"
@@ -127,24 +131,23 @@ myApp.controller('toDoListController',
 		$scope.test = function(createdDates, completedDates) {
 			$("#dt").datepicker({
 				beforeShowDay: function( date ) {
-				var currentDate = date.getDate() + "" + date.getMonth() + "" + date.getFullYear();
-				var highlightCreatedDates = createdDates[currentDate];
-				var highlightCompletedDates = completedDates[currentDate]
+					var currentDate = date.getDate() + "" + date.getMonth() + "" + date.getFullYear();
+					var highlightCreatedDates = createdDates[currentDate];
+					var highlightCompletedDates = completedDates[currentDate]
 
-				if (highlightCreatedDates && highlightCompletedDates) {
-					
-					return [true, "createdDate completedDate", 'Tooltip text'];
-				} 
-				else if (highlightCreatedDates) {
-					return [true, "createdDate", 'Tooltip text'];
-					
-				}
-				else if (highlightCompletedDates) {
-					return [true, "completedDate", 'Tooltip text'];					
-				}
-				else {
-					return [true, '', ''];
-				}
+					if (highlightCreatedDates && highlightCompletedDates) {
+						return [true, "createdDate completedDate", 'Tooltip text'];
+					} 
+					else if (highlightCreatedDates) {
+						return [true, "createdDate", 'Tooltip text'];
+						
+					}
+					else if (highlightCompletedDates) {
+						return [true, "completedDate", 'Tooltip text'];					
+					}
+					else {
+						return [true, '', ''];
+					}
 				},
 
 				onSelect: function(dateText, inst) {
@@ -169,7 +172,6 @@ myApp.controller('toDoListController',
 						}
 					}
 				}    
-
 			});
 		}
 

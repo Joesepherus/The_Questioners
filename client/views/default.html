@@ -19,6 +19,7 @@
                 <option value=""></option>                
                 <option value="work">work</option>
                 <option value="personal">personal</option>
+                <option value="school">school</option>
             </select>
         </form>
             <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
@@ -37,6 +38,7 @@
         <option value="removed">removed</option>
         <option value="work">work</option>
         <option value="personal">personal</option>
+        <option value="school">school</option>        
     </select>
 </div>
 
@@ -91,6 +93,7 @@
                         <option value=""></option>                        
                         <option value="work">work</option>
                         <option value="personal">personal</option>
+                        <option value="school">school</option>                        
                     </select>  
                 </form>            
                 </div>
@@ -123,6 +126,8 @@ function editModalForm(elem) {
             break;
         case "personal":
             select.value = "personal";
+        case "school":
+            select.value = "school";
     }
 }
 
@@ -165,6 +170,14 @@ $("#selector").change(function() {
         }
         else if (this.value == "personal") {
             if (li[i].children[1].children[1].innerHTML == "personal") {
+                li[i].style.display = "block";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+        else if (this.value == "school") {
+            if (li[i].children[1].children[1].innerHTML == "school") {
                 li[i].style.display = "block";
             }
             else {

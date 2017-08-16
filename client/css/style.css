@@ -163,7 +163,12 @@ ul li.work {
 }
 
 ul li.personal {
-    background-color: orange;
+    background-color: #ffc900;
+    color: black;
+}
+
+ul li.school {
+    background-color: #048E16;
     color: black;
 }
 
@@ -172,8 +177,13 @@ div.work-content {
 }
 
 div.personal-content {
-    background-color: #eca230;
+    background-color: #ffd94b;
 }
+
+div.school-content {
+    background-color: #12b20d;
+}
+
 
 div.removed-content {
     background-color: #a1a1a1;
