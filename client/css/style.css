@@ -395,8 +395,11 @@ div.ui-datepicker
      color: #545454;
  }
 
- .event a{
-    background-color: #42B373 !important;
-    background-image :none !important;
-    color: #ffffff !important;
+ .createdDate a {
+    background-color: #4CAF50 !important;
+}
+
+.completedDate a {
+    border: solid 2px #f0f !important;
+
 }

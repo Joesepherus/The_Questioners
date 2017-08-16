@@ -7,15 +7,22 @@ myApp.controller('toDoListController',
 		$scope.getAllTasks = function() {
 			$http.get('/api/toDoList').then(function(response) {
 				$scope.allTasks = response.data;
-				var eventDates = {};				
+				var createdDates = {}, completedDates = {};				
 				for (i = 0; i < $scope.allTasks.length; i++) {
-					var taskDate = $scope.allTasks[i].create_date;
-					taskDay = taskDate.slice(8, 10);
-					taskMonth = taskDate.slice(5, 7) - 1;
-					taskYear = taskDate.slice(0, 4);
-					eventDates[ taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
+					var taskCreatedDate = $scope.allTasks[i].create_date;
+					taskDay = taskCreatedDate.slice(8, 10);
+					taskMonth = taskCreatedDate.slice(5, 7) - 1;
+					taskYear = taskCreatedDate.slice(0, 4);
+					createdDates[ taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
+					var taskCompletedDate = $scope.allTasks[i].completed_date;
+					if (taskCompletedDate) {
+						taskDay = taskCompletedDate.slice(8, 10);
+						taskMonth = taskCompletedDate.slice(5, 7) - 1;
+						taskYear = taskCompletedDate.slice(0, 4);
+						completedDates[taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
+					}
 				}
-			$scope.test(eventDates);
+			$scope.test(createdDates, completedDates);
 				
 			});
 			
@@ -117,29 +124,32 @@ myApp.controller('toDoListController',
 			}		
 		};
 
-		$scope.test = function(eventDates) {
+		$scope.test = function(createdDates, completedDates) {
 			$("#dt").datepicker({
 				beforeShowDay: function( date ) {
-				console.log(eventDates);
-				var tities = date.getDate() + "" + date.getMonth() + "" + date.getFullYear();
-				console.log("titie" + tities);
-				date[17] = "2";
-				var highlight = eventDates[tities];
-				console.log("date: " + date + "eventDates[date]: " + eventDates[date]);
+				var currentDate = date.getDate() + "" + date.getMonth() + "" + date.getFullYear();
+				var highlightCreatedDates = createdDates[currentDate];
+				var highlightCompletedDates = completedDates[currentDate]
 
-				if( highlight ) {
+				if (highlightCreatedDates && highlightCompletedDates) {
 					
-					return [true, "event", 'Tooltip text'];
-					} else {
-						return [true, '', ''];
-					}
+					return [true, "createdDate completedDate", 'Tooltip text'];
+				} 
+				else if (highlightCreatedDates) {
+					return [true, "createdDate", 'Tooltip text'];
+					
+				}
+				else if (highlightCompletedDates) {
+					return [true, "completedDate", 'Tooltip text'];					
+				}
+				else {
+					return [true, '', ''];
+				}
 				},
 
 				onSelect: function(dateText, inst) {
 					var date = $(this).val();
 					var time = $('#time').val();
-					/*alert('on select triggered');
-					$("#start").val(date + time.toString(' HH:mm').toString());*/
 					var month = date.slice(0, 2);
 					var day = date.slice(3, 5);
 					var year = date.slice(6, 10);        
@@ -162,6 +172,6 @@ myApp.controller('toDoListController',
 
 			});
 		}
-		
+
 	}]);
 
