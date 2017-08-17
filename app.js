@@ -6,21 +6,23 @@ var MongoClient = require('mongodb').MongoClient;
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/client'));
 
-Task = require('./models/task.js')
+Task = require('./models/task.js');
 
 mongoose.connect('mongodb://localhost/todolist');
 var db = mongoose.connection;
 
 var fs = require("fs");
+var collectionOne = "tasks";
+var collectionTwo = [];
 
 // display all tasks
 app.get('/api/toDoList', function(req, res){
-	Task.getAllTasks(function(err, allTasks){
-		if(err){
-			throw err;
-		}
-		res.json(allTasks);
-	});
+		Task.getAllTasks(function(err, allTasks){
+			if(err){
+				throw err;
+			}
+			res.json(allTasks);
+		});
 })
 
 // display a task with a certain ID
@@ -127,7 +129,7 @@ app.put('/api/toDoList/inprogress/:id', function(req, res){
 	});
 })
 
-// change tasks state to deleted a task
+// remove task permanently
 app.delete('/api/toDoList/deleted/:id', function(req, res){
 	var id = req.params.id;
 	Task.deletePermanentlyTask(id, 
@@ -151,6 +153,143 @@ app.get('/listTasks', function (req, res) {
         //console.log(data);
         res.end(data);
     });
+})
+
+/*
+	QaA
+*/
+
+QaA = require('./models/QaA.js');
+
+// display all QaA
+app.get('/api/QaA', function(req, res){
+	QaA.getAllQaA(function(err, allQaA){
+		if(err){
+			throw err;
+		}
+		res.json(allQaA);
+	});
+})
+
+// display a QaA with a certain ID
+app.get('/api/QaA/:id', function(req, res){
+	QaA.getQaAById(req.params.id, 
+		function(err, qaa){
+		if(err){
+			throw err;
+		}
+		res.json(qaa);
+	});
+})
+
+// add a new QaA
+app.post('/api/QaA', function(req, res){
+	var qaa = req.body;
+
+	QaA.addQaA(qaa, function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
+})
+
+// update a QaA
+app.put('/api/QaA/:id', function(req, res){
+	var id = req.params.id;
+	var qaa = req.body;
+
+	QaA.updateQaA(id, qaa, {}, 
+		function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
+})
+
+// change qaas state to completed qaa
+app.put('/api/QaA/passed/:id', function(req, res){
+	var id = req.params.id;
+	var qaa = req.body;
+
+	QaA.passedQaA(id, qaa, {}, 
+		function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
+})
+
+// change qaas state to removed qaa
+app.put('/api/QaA/failed/:id', function(req, res){
+	var id = req.params.id;
+	var qaa = req.body;
+
+	QaA.failedQaA(id, qaa, {}, 
+		function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
+})
+
+// change qaas state to inprogress 
+app.put('/api/QaA/inprogress/:id', function(req, res){
+	var id = req.params.id;
+	var qaa = req.body;
+
+	QaA.inprogressQaA(id, qaa, {}, 
+		function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
+})
+
+// remove QaA permanently
+app.delete('/api/QaA/deleted/:id', function(req, res){
+	var id = req.params.id;
+	QaA.deletePermanentlyQaA(id, 
+		function(err, qaa){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(qaa);
+		}
+	});
 })
 
 var server = app.listen(99, function () {

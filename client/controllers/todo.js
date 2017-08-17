@@ -22,10 +22,8 @@ myApp.controller('toDoListController',
 						completedDates[taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
 					}
 				}
-			$scope.test(createdDates, completedDates);
-				
+			$scope.calendarInit(createdDates, completedDates);
 			});
-			
 		}
 
 		$scope.getTask = function(){
@@ -84,7 +82,7 @@ myApp.controller('toDoListController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
-				for (i = 6; i < li.length; i++) {
+				for (i = 5; i < li.length; i++) {
 					switch(li[i].children[1].children[2].innerHTML){
 						case "completed":
 							li[i].classList.add("completed");  
@@ -128,7 +126,7 @@ myApp.controller('toDoListController',
 			}		
 		};
 
-		$scope.test = function(createdDates, completedDates) {
+		$scope.calendarInit = function(createdDates, completedDates) {
 			$("#dt").datepicker({
 				beforeShowDay: function( date ) {
 					var currentDate = date.getDate() + "" + date.getMonth() + "" + date.getFullYear();
@@ -159,7 +157,7 @@ myApp.controller('toDoListController',
 					var li = document.getElementsByTagName("LI");
 					var i;
 
-					for (i = 6; i < li.length; i++) {
+					for (i = 5; i < li.length; i++) {
 						var taskDate = li[i].children[1].children[3].innerHTML;
 						taskDay = taskDate.slice(8, 10);
 						taskMonth = taskDate.slice(5, 7);

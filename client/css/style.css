@@ -146,46 +146,46 @@ ul li:hover.default {
 }
 
 /* When clicked on, add a background color and strike out text */
-ul li.completed {
+ul li.completed,  ul li.passed{
     background-color: white;
     color: black;
     text-decoration: line-through;
 }
 
-ul li.removed {
+ul li.removed, ul li.failed {
     background-color: #696a69;
     color: black;
 }
 
-ul li.work {
+ul li.work, ul li.javascript  {
     background-color: blueviolet;
     color: black;
 }
 
-ul li.personal {
+ul li.personal, ul li.css {
     background-color: #ffc900;
     color: black;
 }
 
-ul li.school {
+ul li.school, ul li.html {
     background-color: #048E16;
     color: black;
 }
 
-div.work-content {
+div.work-content, div.javascript-content{
     background-color: #915aff;    
 }
 
-div.personal-content {
+div.personal-content, div.css-content {
     background-color: #ffd94b;
 }
 
-div.school-content {
+div.school-content, div.html-content {
     background-color: #12b20d;
 }
 
 
-div.removed-content {
+div.removed-content, div.failed-content {
     background-color: #a1a1a1;
 }
 
@@ -247,7 +247,7 @@ input {
     margin-bottom: 5px;
 }
 
-.w3-card-4,.w3-hover-shadow:hover {
+.w3-card-4, .w3-hover-shadow:hover {
     box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)
 }
 
@@ -410,6 +410,11 @@ div.ui-datepicker
 }
 
 .completedDate a {
-    border: solid 2px #f0f !important;
+    border: solid 3px #f0f !important;
+}
 
+.ui-state-highlight {
+    color: orange !important;
+    outline-color: yellow;
+    outline-style: solid;
 }

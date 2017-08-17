@@ -33,8 +33,8 @@
 <div class="col-md-1 selector">
     <select id="selector">
         <option value="all" selected="selected">all</option>
-        <option value="completed" on-click="completedFunc()">completed</option>
-        <option value="inprogress">inprogress</option>
+        <option value="inprogress">inprogress</option>        
+        <option value="completed">completed</option>
         <option value="removed">removed</option>
         <option value="work">work</option>
         <option value="personal">personal</option>
@@ -135,7 +135,7 @@ function editModalForm(elem) {
 $("#selector").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
-    for (i = 6; i < li.length; i++) {
+    for (i = 5; i < li.length; i++) {
         if (this.value == "completed"){
             if (li[i].children[1].children[2].innerHTML == "completed") {
                 li[i].style.display = "block";
@@ -197,7 +197,7 @@ function dropFunction(element) {
 // Create a "close" button and append it to each list item
 var li = document.getElementsByTagName("LI");
 var i;
-for (i = 6; i < li.length; i++) {
+for (i = 5; i < li.length; i++) {
 
     // the close task button
     var span = document.createElement("SPAN");

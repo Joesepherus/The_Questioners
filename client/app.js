@@ -1,19 +1,15 @@
 var myApp = angular.module('myApp', ['ngRoute']);
 
 myApp.config(function($routeProvider){
-	$routeProvider.when("/", {
+	$routeProvider.when("/todolist", {
 		controller: "toDoListController",
-		templateUrl: "views/default.html",
+		templateUrl: "views/todolist.html",
 	})
-	.when("/toDoList/completed", {
-		controller: "toDoListController",
-		templateUrl: "views/completed.html",
+	.when("/QaA", {
+		controller: "QaAController",
+		templateUrl: "views/QaA.html",
 	})
-	.when("/toDoList/inprogress", {
-		controller: "toDoListController",
-		templateUrl: "views/inprogress.html",
-	})
-	.when("/toDoList/about", {
+	.when("/about", {
 		controller: "toDoListController",
 		templateUrl: "views/about.html",
 	});
