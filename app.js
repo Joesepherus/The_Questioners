@@ -292,7 +292,7 @@ app.delete('/api/QaA/deleted/:id', function(req, res){
 	});
 })
 
-var server = app.listen(99, function () {
+var server = app.listen(98, function () {
     var host = server.address().address;
     var port = server.address().port;
     console.log("App listening at http://%s:%s", host, port);

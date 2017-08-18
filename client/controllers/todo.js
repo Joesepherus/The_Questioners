@@ -82,33 +82,35 @@ myApp.controller('toDoListController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
-				for (i = 5; i < li.length; i++) {
+				for (i = 5; i < li.length; i++) {		
+					switch(li[i].children[1].children[1].innerHTML){
+						case "work":
+							li[i].classList.add("work");  
+							li[i].children[1].classList.add("work-content");
+							break;
+						case "personal":
+							li[i].classList.add("personal");  
+							li[i].children[1].classList.add("personal-content");
+							break;
+						case "school":
+							li[i].classList.add("school");  
+							li[i].children[1].classList.add("school-content");
+							break;
+					}
+
 					switch(li[i].children[1].children[2].innerHTML){
 						case "completed":
 							li[i].classList.add("completed");  
 							break;
 						case "removed":
 							li[i].classList.add("removed"); 
-							li[i].children[1].classList.add("removed-content")
+							li[i].children[1].classList.add("removed-content");
+							console.log(li[i].children[0]);
 							break;
 					}
-					
-					switch(li[i].children[1].children[1].innerHTML){
-						case "work":
-							li[i].classList.add("work");  
-							li[i].children[1].classList.add("work-content")
-							break;
-						case "personal":
-							li[i].classList.add("personal");  
-							li[i].children[1].classList.add("personal-content")
-							break;
-						case "school":
-							li[i].classList.add("school");  
-							li[i].children[1].classList.add("school-content")
-							break;
-					}
+
 					if(li[i].children[1].children[4].innerHTML == "") {
-						li[i].children[1].children[4].innerHTML = "not completed"
+						li[i].children[1].children[4].innerHTML = "not completed";
 					}
 				}
 			}

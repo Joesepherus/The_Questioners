@@ -20,6 +20,10 @@ myApp.config(function($routeProvider){
 	.when("/about", {
 		controller: "toDoListController",
 		templateUrl: "views/about.html",
+	})
+	.when("/", {
+		controller: "toDoListController",
+		templateUrl: "views/about.html",
 	});
 });
 

@@ -67,32 +67,34 @@ myApp.controller('QaAController',
 				var li = document.getElementsByTagName("LI");
 				var i;
 				for (i = 5; i < li.length; i++) {
+					
+					switch(li[i].children[1].children[1].innerHTML){
+						case "Javascript":
+							li[i].classList.add("javascript");  
+							li[i].children[1].classList.add("javascript-content");
+							break;
+						case "HTML":
+							li[i].classList.add("html");  
+							li[i].children[1].classList.add("html-content");
+							break;
+						case "CSS":
+							li[i].classList.add("css");  
+							li[i].children[1].classList.add("css-content");
+							break;
+					}
+
 					switch(li[i].children[1].children[2].innerHTML){
 						case "passed":
 							li[i].classList.add("passed");  
 							break;
 						case "failed":
 							li[i].classList.add("failed"); 
-							li[i].children[1].classList.add("failed-content")
+							li[i].children[1].classList.add("failed-content");
 							break;
 					}
-					
-					switch(li[i].children[1].children[1].innerHTML){
-						case "Javascript":
-							li[i].classList.add("javascript");  
-							li[i].children[1].classList.add("javascript-content")
-							break;
-						case "HTML":
-							li[i].classList.add("html");  
-							li[i].children[1].classList.add("html-content")
-							break;
-						case "CSS":
-							li[i].classList.add("css");  
-							li[i].children[1].classList.add("css-content")
-							break;
-					}
+
 					if(li[i].children[1].children[4].innerHTML == "") {
-						li[i].children[1].children[4].innerHTML = "not completed"
+						li[i].children[1].children[4].innerHTML = "not completed";
 					}
 				}
 			}

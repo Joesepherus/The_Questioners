@@ -197,7 +197,7 @@ ul li.completed,  ul li.passed{
 }
 
 ul li.removed, ul li.failed {
-    background-color: #696a69;
+    background-color: #696a69 !important;
     color: black;
 }
 
