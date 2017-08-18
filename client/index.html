@@ -23,7 +23,7 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul id="myTab" class="nav navbar-nav">
                     <li class="hamburger">
-                        <div>
+                        <div class="testing">
                             <div onclick="myFunction()" class="dropbtn">
                                 <div class="hamburger"> </div>
                                 <div class="hamburger"></div>
@@ -37,8 +37,9 @@
                         </div>
                     </li>
                     <li id="To-do">
-                        <a class="navbar-brand" data-toggle="tab" href="#">TheQuestioners</a>
+                        <a class="navbar-brand TheQ" data-toggle="tab" href="#!/about"> <img alt="TheQ" src="/css/img/TheQ-transparent.png" class="TheQ hvr-bounce-in"></a>
                     </li>
+                    
                     <li class="active" id="Home">
                         <a class="nav-item nav-link active" data-toggle="tab" href="#!/todolist">To-do list</a>
                     </li>
@@ -46,21 +47,17 @@
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/QaA">QaA</a>
                     </li>
                     <li>
-                        <a class="nav-item nav-link" data-toggle="tab" href="#!/about">About</a>
+                        <a class="nav-item nav-link" data-toggle="tab" href="#!/blog">Blog</a>
                     </li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
 
-    <div class="container">
-        <div class="row">
-            <div >
+
                 <div ng-view>
                 
-                </div>
-            </div>
-        </div>
+
     </div><!-- /.container -->
 
     <div class="footer-bottom">
@@ -123,10 +120,7 @@ $(document).ready(function () {
      $('ul.nav > li').click(function (e) {
         $('ul.nav > li').removeClass('active');
 
-        if(this.id == "To-do"){
-            $('#Home').addClass('active');
-        }
-        else $(this).addClass('active');    
+        $(this).addClass('active');    
     });            
 });
 
