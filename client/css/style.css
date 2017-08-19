@@ -87,13 +87,19 @@ div.dropdown:click > .dropdown-menu {
 
 
 .dropbtn2 {
-
 	padding: 1px;
     border: none;
 	cursor: pointer;
     margin-top: 7px;	
     border: solid;
     border-color: black;
+}
+
+.aboutDropbtn2 {
+	padding: 1px;
+    border: none;
+	cursor: pointer;
+    margin-top: 7px;	
 }
 
 .dropbtn:hover, .dropbtn:focus {
@@ -119,6 +125,7 @@ div.dropdown:click > .dropdown-menu {
     padding: 5px 10px 0px 10px;
 }
 
+
 .dropdown-content2 {
     display: none;
     position: absolute;
@@ -140,6 +147,40 @@ div.dropdown:click > .dropdown-menu {
 .dropdown-content2 a:hover {
 	background-color: #f1f1f1
 }
+
+.aboutDropdown-content {
+    display: none;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+    margin-top: 35px;
+    margin-right: 0px;    
+    padding: 5px 10px 0px 10px;
+}
+
+
+.aboutDropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 500px;
+    overflow: auto;
+    z-index: 1;
+    color: black;
+}
+
+.aboutDropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.aboutDropdown-content2 a:hover {
+	background-color: #f1f1f1
+}
+
+
 
 .show {
 	display:block;
@@ -176,6 +217,31 @@ ul li.default {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+ul.aboutDefault {
+    margin: 0;
+    padding-right: 0;
+}
+
+/* Style the list items */
+ul li.aboutDefault {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 50px;
+    font-size: 18px;
+    transition: 0.2s;
+    list-style: none; 
+  /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-bottom: 50px;
+    border: 1px solid #2C3E50;
+    display: flex;
+    flex-direction: column;
+    background-color:  #6ce271 ;
 }
 
 /* Set all odd list items to a different color (zebra-stripes) */
@@ -292,7 +358,7 @@ input {
 }
 
 .w3-card-4, .w3-hover-shadow:hover {
-    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19)
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
 }
 
 .w3-green,.w3-hover-green:hover {
@@ -375,6 +441,11 @@ div.ui-datepicker
 
 .newTaskForm{
     height: 250px;  
+    background-color: #f1f0eb; 
+}
+
+.aboutNewTaskForm{
+    height: 350px;  
     background-color: #f1f0eb; 
 }
 
@@ -559,3 +630,11 @@ img.TheQAbout {
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }
 
+.aboutPara {
+    width: 100%;
+white-space: -moz-pre-wrap; /* Firefox */
+white-space: -pre-wrap; /* ancient Opera */
+white-space: -o-pre-wrap; /* newer Opera */
+white-space: pre-wrap; /* Chrome; W3C standard */
+word-wrap: break-word; /* IE */
+}

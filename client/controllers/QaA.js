@@ -68,7 +68,7 @@ myApp.controller('QaAController',
 				var i;
 				for (i = 5; i < li.length; i++) {
 					
-					switch(li[i].children[1].children[1].innerHTML){
+					switch(li[i].children[2].children[1].innerHTML){
 						case "Javascript":
 							li[i].classList.add("javascript");  
 							li[i].children[1].classList.add("javascript-content");
@@ -83,7 +83,7 @@ myApp.controller('QaAController',
 							break;
 					}
 
-					switch(li[i].children[1].children[2].innerHTML){
+					switch(li[i].children[2].children[2].innerHTML){
 						case "passed":
 							li[i].classList.add("passed");  
 							break;
@@ -93,9 +93,9 @@ myApp.controller('QaAController',
 							break;
 					}
 
-					if(li[i].children[1].children[4].innerHTML == "") {
-						li[i].children[1].children[4].innerHTML = "not completed";
-					}
+					/*if(li[i].children[2].children[4].innerHTML == "") {
+						li[i].children[2].children[4].innerHTML = "not completed";
+					}*/
 				}
 			}
 		};

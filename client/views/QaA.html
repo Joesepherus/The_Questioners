@@ -6,14 +6,14 @@
         <div class="w3-container w3-green">
             <h2>New QaA</h2>
         </div>
-        <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addQaA()">
+        <form name="newTaskForm" id="newTaskForm" class="w3-container aboutNewTaskForm" method="post" ng-submit="addQaA()">
             <p>
                 <label class="newTaskType">Title:</label>  
-                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="QaA.title"   >
+                <textarea class="w3-input" name="newTaskTitle" cols="40" rows="1" ng-model="QaA.title" required></textarea>                 
             </p>
-            <p>     
+            <p>    
                 <label class="newTaskType">Description:</label>
-                <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="QaA.description" required>
+                <textarea class="w3-input" name="newTaskDescription" cols="40" rows="3" ng-model="QaA.description" required></textarea> 
             </p>
             <div>
                 <label class="newTaskType">Type:</label>        
@@ -48,16 +48,17 @@
 </div>
 
 <ul class="col-md-12" id="myUL">
-    
     <div ng-repeat="qaa in allQaA" ng-class="isLast($last)">
-        <li onclick="dropFunction(this)" class="default dropbtn2">
-            <div>{{qaa.title}}</div>
-            <div class="dropdown-content" id="drop">
-                <p class="dropPara">{{qaa.description}}</p>
-                <p class="dropPara">{{qaa.type}}</p>    
-                <p class="dropPara" id="state">{{qaa.state}}</p>                
-                <p class="dropPara">{{qaa.create_date}}</p>  
-                <p class="dropPara">{{qaa.passed_date}}</p>
+        <li onclick="dropFunction(this)" class="aboutDefault aboutDropbtn2">
+            <div class="col-md-12 aboutPara">{{qaa.title}}</div> 
+            <div class="col-md-12">
+                <span class="label label-default">{{qaa.type}}</span>
+            </div>
+            <div class="aboutDropdown-content" id="drop">
+                <p class="dropPara aboutPara">{{qaa.description}}</p>
+                <div>
+                    <span class="badge">Posted {{qaa.create_date}}</span>
+                </div>
                 <div class="modal-button">
                     <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(qaa._id)">Edit QaA</button>
                 </div>
@@ -85,16 +86,16 @@
                 <form ng-model="allQaA" id="editTaskForm" class="w3-container" method="post" ng-submit="editQaA(allQaA[url])">
                     <p>
                         <label class="newTaskType">Title:</label>
-                        <input class="w3-input" name="editTitle" type="text" ng-model="qaa.title" required>
+                        <textarea class="w3-input" name="editTitle" cols="40" rows="1" ng-model="QaA.title" required></textarea>                 
                     </p>
                     <p>    
                         <label class="newTaskType">Description:</label>
-                        <input class="w3-input" name="editDescription" ng-model="qaa.description" type="text" required>
+                        <textarea class="w3-input" name="editDescription" cols="40" rows="1" ng-model="QaA.description" required></textarea> 
                     </p>
                     <div>
                         <label class="newTaskType">Type</label>
                     </div>
-                    <select id="editSelect" ng-model="qaa.type" required>
+                    <select id="editSelect" ng-model="QaA.type" required>
                         <option value=""></option>   
                         <option value="Javascript">Javascript</option>                                             
                         <option value="HTML">HTML</option>
@@ -112,7 +113,6 @@
         </div>
     </div>
 </div>
-
 
 </div>
 </div>
@@ -209,7 +209,7 @@ $("#selector").change(function() {
 });
 
 function dropFunction(element) {     
-        element.children[1].classList.toggle("show");
+        element.children[2].classList.toggle("show");
 }
 
 // Create a "close" button and append it to each list item
@@ -218,22 +218,22 @@ var i;
 for (i = 5; i < li.length; i++) {
 
     // the close task button
-    var span = document.createElement("SPAN");
+    /*var span = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     span.className = "closeBtn";
     span.setAttribute('onclick', 'failedQaA(this)');
     span.setAttribute('ng-click', 'failedQaA(qaa._id, qaa)');    
     span.appendChild(txt);
-    li[i].appendChild(span);
+    li[i].appendChild(span);*/
     
     // the check task button
-    var span1 = document.createElement("SPAN");
+    /*var span1 = document.createElement("SPAN");
     var txt1 = document.createTextNode("\u2713");
     span1.className = "check";
     span1.setAttribute('onclick', 'passedQaA(this)');    
     span1.setAttribute('ng-click', 'passedQaA(qaa._id, qaa)');
     span1.appendChild(txt1);
-    li[i].appendChild(span1);
+    li[i].appendChild(span1);*/
 
 }
 

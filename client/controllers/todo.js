@@ -82,6 +82,7 @@ myApp.controller('toDoListController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
+				$scope.numberOfTasks = li.length - 5;
 				for (i = 5; i < li.length; i++) {		
 					switch(li[i].children[1].children[1].innerHTML){
 						case "work":
@@ -105,7 +106,6 @@ myApp.controller('toDoListController',
 						case "removed":
 							li[i].classList.add("removed"); 
 							li[i].children[1].classList.add("removed-content");
-							console.log(li[i].children[0]);
 							break;
 					}
 
@@ -115,6 +115,27 @@ myApp.controller('toDoListController',
 				}
 			}
 		};
+
+		/*$scope.selector = function(a) {
+			  
+			var li = document.getElementsByTagName("LI");
+			var selected_option = $('#selector option:selected');
+			console.log(selected_option[0].value);
+			var numberOfTasks = 0;
+			for (i = 5; i < li.length; i++) {		
+				console.log(li[i].children[1].children[2].innerHTML + "=="+ selected_option[0].value);
+				if(li[i].children[1].children[2].innerHTML == selected_option[0].value) {
+					numberOfTasks++;
+					console.log("dicks");
+				}
+			}			
+			console.log(numberOfTasks);
+			setTimeout(function() {
+    			$scope.$apply(function() {
+					$scope.numberOfTasks = numberOfTasks;
+				})
+			  }, 1000);
+		};*/
 
 		$scope.url = "/def";
 		
