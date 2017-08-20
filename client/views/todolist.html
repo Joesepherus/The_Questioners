@@ -21,6 +21,7 @@
             <select ng-model="task.type" required>
                 <option value=""></option>                
                 <option value="work">work</option>
+                <option value="watch later">watch later</option>                
                 <option value="personal">personal</option>
                 <option value="school">school</option>
             </select>
@@ -40,6 +41,7 @@
         <option value="completed">completed</option>
         <option value="removed">removed</option>
         <option value="work">work</option>
+        <option value="watch later">watch later</option>                
         <option value="personal">personal</option>
         <option value="school">school</option>        
     </select>
@@ -95,7 +97,8 @@
                         <option value=""></option>                        
                         <option value="work">work</option>
                         <option value="personal">personal</option>
-                        <option value="school">school</option>                        
+                        <option value="school">school</option>  
+                        <option value="watchLater">watch later</option>                      
                     </select>  
                 </form>            
                 </div>
@@ -181,6 +184,14 @@ $("#selector").change(function() {
         }
         else if (this.value == "school") {
             if (li[i].children[1].children[1].innerHTML == "school") {
+                li[i].style.display = "block";
+            }
+            else {
+                li[i].style.display = "none";
+            }
+        }
+        else if (this.value == "watch later") {
+            if (li[i].children[1].children[1].innerHTML == "watch later") {
                 li[i].style.display = "block";
             }
             else {

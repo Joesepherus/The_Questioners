@@ -97,6 +97,13 @@ myApp.controller('toDoListController',
 							li[i].classList.add("school");  
 							li[i].children[1].classList.add("school-content");
 							break;
+						case "watch later":
+							li[i].classList.add("watchLater");  
+							li[i].children[1].classList.add("watchLater-content");
+							org_html = li[i].children[1].children[0].innerHTML;
+							new_html = "<a href=" + $scope.allTasks[i-5].description + ">" + $scope.allTasks[i-5].description  + "</a>";
+							li[i].children[1].children[0].innerHTML = new_html;
+							break;
 					}
 
 					switch(li[i].children[1].children[2].innerHTML){

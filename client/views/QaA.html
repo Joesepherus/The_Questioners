@@ -34,6 +34,7 @@
 <div  class="col-md-10">
     <h2>QaA</h2>
 </div>
+
 <div class="col-md-1 selector">
     <select id="selector">
         <option value="all" selected="selected">all</option>
@@ -47,6 +48,14 @@
     </select>
 </div>
 
+<div class="col-md-12">
+    <p ng-model="numberOfQaA">Number of QaA: {{numberOfQaA}}</p>
+</div>
+
+<div class="col-md-3">
+    <a onclick="scrollToTheEndOfPage()">Scroll to the bottom</a>
+</div>
+
 <ul class="col-md-12" id="myUL">
     <div ng-repeat="qaa in allQaA" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="aboutDefault aboutDropbtn2">
@@ -55,8 +64,10 @@
                 <span class="label label-default">{{qaa.type}}</span>
             </div>
             <div class="aboutDropdown-content" id="drop">
+                <div class="col-md-8">
                 <p class="dropPara aboutPara">{{qaa.description}}</p>
-                <div>
+                </div>
+                <div > 
                     <span class="badge">Posted {{qaa.create_date}}</span>
                 </div>
                 <div class="modal-button">
@@ -114,11 +125,23 @@
     </div>
 </div>
 
+<div class="col-md-3">
+    <a onclick="scrollToTheStartOfPage()">Scroll to the top</a>
+</div>
+
 </div>
 </div>
 
 
 <script>
+
+function scrollToTheEndOfPage() {
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function scrollToTheStartOfPage() {
+    window.scrollTo(0, 0);
+}
 
 // giving modal form placeholder values for each input txt
 function editModalForm(elem) {
