@@ -13,13 +13,13 @@ myApp.config(function($routeProvider){
 		controller: "aboutController",
 		templateUrl: "views/about.html",
 	})
-	.when("/Blog", {
+	.when("/blog", {
 		controller: "blogController",
 		templateUrl: "views/blog.html",
 	})
-	.when("/about", {
+	.when("/flashcards", {
 		controller: "toDoListController",
-		templateUrl: "views/about.html",
+		templateUrl: "views/flashcards.html",
 	})
 	.when("/", {
 		controller: "toDoListController",

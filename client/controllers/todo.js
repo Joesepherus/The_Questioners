@@ -82,8 +82,8 @@ myApp.controller('toDoListController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
-				$scope.numberOfTasks = li.length - 5;
-				for (i = 5; i < li.length; i++) {		
+
+				for (i = 6; i < li.length; i++) {		
 					switch(li[i].children[1].children[1].innerHTML){
 						case "work":
 							li[i].classList.add("work");  
@@ -101,7 +101,7 @@ myApp.controller('toDoListController',
 							li[i].classList.add("watchLater");  
 							li[i].children[1].classList.add("watchLater-content");
 							org_html = li[i].children[1].children[0].innerHTML;
-							new_html = "<a href=" + $scope.allTasks[i-5].description + ">" + $scope.allTasks[i-5].description  + "</a>";
+							new_html = "<a href=" + $scope.allTasks[i-6].description + ">" + $scope.allTasks[i-6].description  + "</a>";
 							li[i].children[1].children[0].innerHTML = new_html;
 							break;
 					}
@@ -121,6 +121,8 @@ myApp.controller('toDoListController',
 					}
 				}
 			}
+			// for pagination WIP
+			$scope.allTasksLength = Math.round($scope.allTasks.length / $scope.pageSize);
 		};
 
 		/*$scope.selector = function(a) {
@@ -187,7 +189,7 @@ myApp.controller('toDoListController',
 					var li = document.getElementsByTagName("LI");
 					var i;
 
-					for (i = 5; i < li.length; i++) {
+					for (i = 6; i < li.length; i++) {
 						var taskDate = li[i].children[1].children[3].innerHTML;
 						taskDay = taskDate.slice(8, 10);
 						taskMonth = taskDate.slice(5, 7);
@@ -203,4 +205,16 @@ myApp.controller('toDoListController',
 			});
 		}
 
+	// for pagination WIP
+	$scope.currentPage = 0;
+	$scope.pageSize = 10;
+
 	}]);
+
+// for pagination WIP
+myApp.filter('startFrom', function() {
+    return function(input, start) {
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});

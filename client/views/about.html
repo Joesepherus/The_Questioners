@@ -6,7 +6,7 @@
         <div class="intro-text">
             <span class="name aboutHeader">The Questioners</span>
             <hr>
-            <p class="skills">Is a simple WEB application used for storing/creating/editing and deleting tasks and many more.</p>
+            <p class="skills">Is a WEB application used for storing/creating/editing and deleting tasks and many more.</p>
             <p class="skills">Built on a RESTful API server using Express, MongoDB and AngularJS.</p>
             <p class="skills">It contains two main sections: To-do list and QaA(Questions and Answers).</p>
             <p class="skills">Actively in development is a new section called Blog.</p>            
@@ -20,9 +20,9 @@
         <h2 class="text-center aboutHeader2">About </h2>
         <hr>
         <div class="row">
-            <div class="col-lg-4 ml-auto">
+            <div class="col-lg-6 ml-auto">
                 <h3 class="aboutParagraphs">To-do list</h3>
-                <p>Contains adding, checking, removing and permanently 
+                <p class="aboutPara">Contains adding, checking, removing and permanently 
                     deleting tasks. Each task has a title, description and
                     type with it's own defined color. Currently there 
                     are available only 3 types: <b>work, personal and school
@@ -36,13 +36,35 @@
                     again.
                 </p>
             </div>
-            <div class="col-lg-4 mr-auto">
+            <div class="col-lg-6 mr-auto">
                 <h3 class="aboutParagraphs">QaA</h3>                
-                <p></p>
+                <p class="aboutPara">Questions and answers is what it sounds like, 
+                    a bunch of questions with answers to them. Additionaly every QaA has
+                    a type, to identify where it belongs to. In the present it
+                    serves as a learning tool, that works as follows: users 
+                    see the question and try to think of an answer, afterwards
+                    they can click on the question and an answer will pop up, so
+                    that they can verify if their answer was right.
+                    <br><br>
+                    Coming soon: checking by input if you have answered the question correctly
+                    or wrongly. Counter with how many times you have answered the question
+                    correctly. Ability to disable the question, so user won't see it anymore.
+                </p>
             </div>
-            <div class="col-lg-4 mr-auto">
+            <div class="col-lg-6 mr-auto">
+                <h3 class="aboutParagraphs">Flashcards</h3>                
+                <p class="aboutPara">Coming soon: Cards would be taken from the QaA. Every 
+                    card would have "priority", which would increase every time a user knows
+                    the answer to the card(question) and decreases when he doesn't know the 
+                    answer. The user would "randomly" get these cards shown to him one by one 
+                    and the priority decides how likely it is he will get the certain card.
+                    Also the user will have the ability to disable cards, so if he already knows 
+                    or dislikes the card(question) he won't get it in his learning anymore.
+                </p>
+            </div>
+            <div class="col-lg-6 mr-auto">
                 <h3 class="aboutParagraphs">Blog</h3>                
-                <p></p>
+                <p class="aboutPara">Coming soon...</p>
             </div>
         </div>
     </div>

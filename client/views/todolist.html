@@ -34,6 +34,8 @@
 <div class="col-md-10">
     <h2>Tasks</h2>
 </div>
+
+
 <div class="col-md-1 selector">
     <select id="selector">
         <option value="all" selected="selected">all</option>
@@ -47,8 +49,12 @@
     </select>
 </div>
 
+<div class="col-md-12">
+    <p ng-model="numberOfQaA">Number of tasks: {{allTasks.length}}</p>
+</div>
+
 <ul class="col-md-12" id="myUL">
-    <div ng-repeat="task in allTasks.slice().reverse()" ng-class="isLast($last)">
+    <div ng-repeat="task in allTasks.slice().reverse() | startFrom:currentPage*pageSize | limitTo:pageSize" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="default dropbtn2">
             <div>{{task.title}}</div>
             <div class="dropdown-content" id="drop">
@@ -68,6 +74,8 @@
     </div>
     
 </ul>
+
+
 
 <div class="container">
     <!-- Trigger the modal with a button -->
@@ -111,9 +119,21 @@
     </div>
 </div>
 
+<!-- for pagination WIP -->
+<div class="col-md-12">
+    <button class="btn btn-danger" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{allTasksLength}}
+    <button class="btn btn-primary" ng-disabled="currentPage >= allTasksLength - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+</div>
 
 </div>
 </div>
+<br>
+
 
 <script>
 
@@ -150,7 +170,7 @@ function editModalForm(elem) {
 $("#selector").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
-    for (i = 5; i < li.length; i++) {
+    for (i = 6; i < li.length; i++) {
         if (this.value == "completed"){
             if (li[i].children[1].children[2].innerHTML == "completed") {
                 li[i].style.display = "block";
@@ -220,7 +240,7 @@ function dropFunction(element) {
 // Create a "close" button and append it to each list item
 var li = document.getElementsByTagName("LI");
 var i;
-for (i = 5; i < li.length; i++) {
+for (i = 6; i < li.length; i++) {
 
     // the close task button
     var span = document.createElement("SPAN");
