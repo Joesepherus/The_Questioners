@@ -645,13 +645,13 @@ img.TheQAbout {
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }
 
-.aboutPara {
+.QaAPara {
     width: 100%;
-white-space: -moz-pre-wrap; /* Firefox */
-white-space: -pre-wrap; /* ancient Opera */
-white-space: -o-pre-wrap; /* newer Opera */
-white-space: pre-wrap; /* Chrome; W3C standard */
-word-wrap: break-word; /* IE */
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* ancient Opera */
+    white-space: -o-pre-wrap; /* newer Opera */
+    white-space: pre-wrap; /* Chrome; W3C standard */
+    word-wrap: break-word; /* IE */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -663,4 +663,11 @@ word-wrap: break-word; /* IE */
 
 .badge {
     margin-bottom: 10px;
+}
+
+.aboutPara {
+    width: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    	float: left;
 }

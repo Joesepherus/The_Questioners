@@ -59,13 +59,13 @@
 <ul class="col-md-12" id="myUL">
     <div ng-repeat="qaa in allQaA" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="aboutDefault aboutDropbtn2">
-            <div class="col-md-12 aboutPara">{{qaa.title}}</div> 
+            <div class="col-md-12 QaAPara">{{qaa.title}}</div> 
             <div class="col-md-12">
                 <span class="label label-default">{{qaa.type}}</span>
             </div>
             <div class="aboutDropdown-content" id="drop">
                 <div class="col-md-8">
-                <p class="dropPara aboutPara">{{qaa.description}}</p>
+                <p class="dropPara QaAPara">{{qaa.description}}</p>
                 </div>
                 <div > 
                     <span class="badge">Posted {{qaa.create_date}}</span>
@@ -106,7 +106,7 @@
                     <div>
                         <label class="newTaskType">Type</label>
                     </div>
-                    <select id="editSelect" ng-model="QaA.type" required>
+                    <select name="editType" id="editSelect" ng-model="QaA.type" required>
                         <option value=""></option>   
                         <option value="Javascript">Javascript</option>                                             
                         <option value="HTML">HTML</option>
@@ -147,21 +147,30 @@ function scrollToTheStartOfPage() {
 function editModalForm(elem) {
     var li = document.getElementsByTagName("LI");
     var i;
+    console.log(elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML);
     document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
-    document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[0].children[0].innerHTML;
 
     var select = document.getElementById("editSelect");
-    switch (elem.parentElement.parentElement.children[1].innerHTML) {
+    switch (elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML) {
         case "Javascript":
             select.value = "Javascript";
             break;
         case "HTML":
             select.value = "HTML";
+            break;
         case "CSS":
             select.value = "CSS";
+            break;
         case "Other":
             select.value = "Other";
+            break;
     }
+
+    // updating the angular QaA values
+    $('[name="editTitle"]').trigger('input'); 
+    $('[name="editDescription"]').trigger('input'); 
+    $('[name="editType"]').trigger('change');
 }
 
 // switching between selected values

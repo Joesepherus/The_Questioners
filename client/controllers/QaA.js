@@ -25,7 +25,7 @@ myApp.controller('QaAController',
 		}
 
 		$scope.editQaA = function(qaa){
-			$http.put('api/QaA/' + qaa._id, $scope.qaa).then(function(response){
+			$http.put('api/QaA/' + qaa._id, $scope.QaA).then(function(response){
 				window.location.reload();								
 			});
 		}

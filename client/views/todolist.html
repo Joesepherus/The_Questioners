@@ -9,7 +9,7 @@
         <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
                 <label class="newTaskType">Title:</label>  
-                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title"   >
+                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title">
             </p>
             <p>     
                 <label class="newTaskType">Description:</label>
@@ -84,7 +84,7 @@
                 <form ng-model="allTasks" id="editTaskForm" class="w3-container" method="post" ng-submit="editTask(allTasks[url])">
                     <p>
                         <label class="newTaskType">Title:</label>
-                        <input class="w3-input" name="editTitle" type="text" ng-model="task.title" required>
+                        <input id="test_input" class="w3-input" name="editTitle" type="text" ng-model="task.title" required>
                     </p>
                     <p>    
                         <label class="newTaskType">Description:</label>
@@ -93,12 +93,12 @@
                     <div>
                         <label class="newTaskType">Type</label>
                     </div>
-                    <select id="editSelect" ng-model="task.type" required>
+                    <select name="editType" id="editSelect" ng-model="task.type" required>
                         <option value=""></option>                        
                         <option value="work">work</option>
                         <option value="personal">personal</option>
                         <option value="school">school</option>  
-                        <option value="watchLater">watch later</option>                      
+                        <option value="watch later">watch later</option>                      
                     </select>  
                 </form>            
                 </div>
@@ -107,7 +107,6 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
-      
         </div>
     </div>
 </div>
@@ -132,9 +131,19 @@ function editModalForm(elem) {
             break;
         case "personal":
             select.value = "personal";
+            break;
         case "school":
             select.value = "school";
+            break;
+        case "watch later":
+            select.value = "watch later";
+            break;
     }
+
+    // updating the angular task values
+    $('[name="editTitle"]').trigger('input'); 
+    $('[name="editDescription"]').trigger('input'); 
+    $('[name="editType"]').trigger('change'); 
 }
 
 // switching between selected values
