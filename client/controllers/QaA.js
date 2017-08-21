@@ -82,6 +82,9 @@ myApp.controller('QaAController',
 							li[i].classList.add("css");  
 							li[i].children[1].classList.add("css-content");
 							break;
+						case "Data structures":
+							li[i].classList.add("DataStructures");  
+							li[i].children[1].classList.add("DataStructures-content");
 					}
 
 					switch(li[i].children[2].children[2].innerHTML){

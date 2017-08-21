@@ -289,7 +289,7 @@ ul li.school, ul li.html {
     color: black;
 }
 
-ul li.watchLater, ul li.javascript  {
+ul li.watchLater, ul li.DataStructures  {
     background-color: #900C3E;
     color: black;
 }
@@ -306,7 +306,7 @@ div.school-content, div.html-content {
     background-color: #12b20d;
 }
 
-div.watchLater-content, div.html-content {
+div.watchLater-content, div.DataStructures-content {
     background-color: #C70039;
 }
 

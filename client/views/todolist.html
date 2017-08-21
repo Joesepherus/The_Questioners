@@ -31,7 +31,7 @@
 
 </div>
 
-<div  class="col-md-10">
+<div class="col-md-10">
     <h2>Tasks</h2>
 </div>
 <div class="col-md-1 selector">
@@ -48,7 +48,7 @@
 </div>
 
 <ul class="col-md-12" id="myUL">
-    <div ng-repeat="task in allTasks" ng-class="isLast($last)">
+    <div ng-repeat="task in allTasks.slice().reverse()" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="default dropbtn2">
             <div>{{task.title}}</div>
             <div class="dropdown-content" id="drop">

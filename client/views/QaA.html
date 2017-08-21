@@ -23,6 +23,7 @@
                 <option value="Javascript">Javascript</option>
                 <option value="HTML">HTML</option>
                 <option value="CSS">CSS</option>
+                <option value="Data structures">Data structures</option>
                 <option value="Other">Other</option>
             </select>
         </form>
@@ -44,6 +45,7 @@
         <option value="Javascript">Javascript</option>
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
+        <option value="Data structures">Data structures</option>
         <option value="Other">Other</option>
     </select>
 </div>
@@ -57,7 +59,7 @@
 </div>
 
 <ul class="col-md-12" id="myUL">
-    <div ng-repeat="qaa in allQaA" ng-class="isLast($last)">
+    <div ng-repeat="qaa in allQaA.slice().reverse()" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="aboutDefault aboutDropbtn2">
             <div class="col-md-12 QaAPara">{{qaa.title}}</div> 
             <div class="col-md-12">
@@ -67,13 +69,11 @@
                 <div class="col-md-8">
                 <p class="dropPara QaAPara">{{qaa.description}}</p>
                 </div>
-                <div > 
+                <div class="pull-right col-md-4"> 
                     <span class="badge">Posted {{qaa.create_date}}</span>
-                </div>
-                <div class="modal-button">
-                    <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(qaa._id)">Edit QaA</button>
-                </div>
-                <div>
+                    <br>
+                    <button id="modalButton" type="button" class="modal-button btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(qaa._id)">Edit QaA</button>
+                    <br>
                     <button type="button" class="btn btn-danger btn-md deleteBtn"  ng-click="deletePermanentlyQaA(qaa._id, qaa)">Delete permanently</button>                
                 </div>
             </div>
@@ -111,6 +111,7 @@
                         <option value="Javascript">Javascript</option>                                             
                         <option value="HTML">HTML</option>
                         <option value="CSS">CSS</option>
+                        <option value="Data structures">Data structures</option>    
                         <option value="Other">Other</option>                        
                     </select>  
                 </form>            
@@ -161,6 +162,9 @@ function editModalForm(elem) {
             break;
         case "CSS":
             select.value = "CSS";
+            break;
+        case "Data structures":
+            select.value = "Data structures";
             break;
         case "Other":
             select.value = "Other";
