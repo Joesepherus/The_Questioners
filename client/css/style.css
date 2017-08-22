@@ -12,7 +12,10 @@ img {
 
 body {
     background-color: #18BC9C;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
 }
+
 
 .aboutParagraphs {
     background-color: #2C3E50;
@@ -20,22 +23,6 @@ body {
     vertical-align: middle;
     padding-top: 10px;
     padding-left: 10px;
-}
-
-.aboutHeader {
-    background-color: #2C3E50;
-    height: 100px !important; 
-}
-
-.aboutHeader2 {
-    background-color: #2C3E50;
-    padding-top: 20px;
-    height: 70px !important; 
-    text-align: center;
-    align-self: center;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 b {
@@ -566,7 +553,7 @@ header.masthead {
   padding-bottom: 50px;
   text-align: center;
   color: white;
-  background: #18BC9C; }
+}
   header.masthead img {
     display: block;
     margin: 0 auto 20px; }
@@ -579,7 +566,15 @@ header.masthead {
      }
   header.masthead .intro-text .skills {
     font-size: 1.25em;
-    font-weight: 300; }
+    font-weight: 300; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.background {
+    background-color: rgba(24, 188, 156, 0.7);
+    margin-top: 20px;
+}
 
 @media (min-width: 768px) {
   header.masthead {
@@ -592,8 +587,8 @@ header.masthead {
 
 section.success {
   color: white;
-  background: #18BC9C; 
-  margin-bottom: 100px;
+    padding-bottom: 20px;
+  
 }
 
 r.star-light,
@@ -677,4 +672,118 @@ img.TheQAbout {
 .calendarImg {
     width: 10%;
     height: 15%;
+}
+
+.img-thumbnail {
+    margin-left: 50px;
+    margin-top: 150px;
+}
+
+.skillsIT {
+    width: 130px!important;
+    height: 130px!important;
+    padding: 20px 0 20px 0;
+}
+
+.divSkillsIT {
+    width: 700px!important;
+}
+
+h2.name {
+    color: #2C3E50;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.aboutHeader2 {
+    background-color: #2C3E50;
+    text-align: center;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.aboutHeader {
+    background-color: #2C3E50;
+    height: 100px !important; 
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('/css/img/wallpaper.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax2 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper2.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax3 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper4.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax4 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper5.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1024px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+    .parallax2 {
+        background-attachment: scroll;
+    }
+    .parallax3 {
+        background-attachment: scroll;
+    }
+    .parallax4 {
+        background-attachment: scroll;
+    }
 }
