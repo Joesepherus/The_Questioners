@@ -82,7 +82,7 @@ myApp.controller('toDoListController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
-
+				if (typeof $scope.allTasks != undefined){
 				for (i = 6; i < li.length; i++) {		
 					switch(li[i].children[1].children[1].innerHTML){
 						case "work":
@@ -101,7 +101,7 @@ myApp.controller('toDoListController',
 							li[i].classList.add("watchLater");  
 							li[i].children[1].classList.add("watchLater-content");
 							org_html = li[i].children[1].children[0].innerHTML;
-							new_html = "<a href=" + $scope.allTasks[i-6].description + ">" + $scope.allTasks[i-6].description  + "</a>";
+							new_html = "<a href=" + $scope.allTasks[$scope.allTasks.length - i + 5].description + ">" + $scope.allTasks[$scope.allTasks.length - i + 5].description  + "</a>";
 							li[i].children[1].children[0].innerHTML = new_html;
 							break;
 					}
@@ -119,6 +119,7 @@ myApp.controller('toDoListController',
 					if(li[i].children[1].children[4].innerHTML == "") {
 						li[i].children[1].children[4].innerHTML = "not completed";
 					}
+				}
 				}
 			}
 			// for pagination WIP
