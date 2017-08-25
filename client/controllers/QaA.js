@@ -69,25 +69,25 @@ myApp.controller('QaAController',
 				$scope.numberOfQaA = li.length - 6;
 				for (i = 6; i < li.length; i++) {
 			
-					switch(li[i].children[2].children[1].innerHTML){
+					switch(li[i].children[1].children[0].innerHTML){
 						case "Javascript":
 							li[i].classList.add("javascript");  
-							li[i].children[1].classList.add("javascript-content");
+							li[i].children[2].classList.add("javascript-content");
 							break;
 						case "HTML":
 							li[i].classList.add("html");  
-							li[i].children[1].classList.add("html-content");
+							li[i].children[2].classList.add("html-content");
 							break;
 						case "CSS":
 							li[i].classList.add("css");  
-							li[i].children[1].classList.add("css-content");
+							li[i].children[2].classList.add("css-content");
 							break;
 						case "Data structures":
 							li[i].classList.add("DataStructures");  
-							li[i].children[1].classList.add("DataStructures-content");
+							li[i].children[2].classList.add("DataStructures-content");
 					}
 
-					switch(li[i].children[2].children[2].innerHTML){
+					/*switch(li[i].children[1].children[0].innerHTML){
 						case "passed":
 							li[i].classList.add("passed");  
 							break;
@@ -95,7 +95,7 @@ myApp.controller('QaAController',
 							li[i].classList.add("failed"); 
 							li[i].children[1].classList.add("failed-content");
 							break;
-					}
+					}*/
 
 					/*if(li[i].children[2].children[4].innerHTML == "") {
 						li[i].children[2].children[4].innerHTML = "not completed";
