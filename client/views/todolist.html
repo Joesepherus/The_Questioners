@@ -9,7 +9,7 @@
         <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
                 <label class="newTaskType">Title:</label>  
-                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title">
+                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
             </p>
             <p>     
                 <label class="newTaskType">Description:</label>
@@ -136,6 +136,10 @@
 
 
 <script>
+
+$(document).ready(function () {
+    $("#todolist").addClass('active');
+});
 
 // giving modal form placeholder values for each input txt
 function editModalForm(elem) {
@@ -287,59 +291,4 @@ function checkTask(element) {
         li.children[1].children[2].innerHTML = "inprogress";       
     }
 }
-
-// Add a "checked" symbol when clicking on a list item
-/*var list = document.getElementById('myUL');
-list.addEventListener('click', function(ev) {
-    if (ev.target.tagName === 'LI') {
-        ev.target.classList.toggle('completed');
-    }
-}, false);*/
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-
-    // form validation if title, description and type have been entered
-    var title = document.forms["newTaskForm"]["newTaskTitle"].value;
-    var description = document.forms["newTaskForm"]["newTaskDescription"].value;
-    var type = document.forms["newTaskForm"]["newTaskType"].value;
-
-    if (title === '') {
-        alert("Title missing!");
-        return false;        
-    } 
-
-    if (description === '') {
-        alert("Description missing!");
-        return false;        
-    } 
-
-    if (type === '') {
-        alert("Type missing!");
-        return false;        
-    } 
-
-    /* 
-        TO DO:
-        these lines of code look weird, why is the checking if the
-        buttons have been clicked in a function that is creating new tasks? 
-        i am so confused by that rly, please change it :) 
-    */
-    for (i = 0; i < close.length; i++) {
-        close[i].onclick = function() {
-            var div = this.parentElement;
-            div.style.display = "none";
-        }
-    }
-    var check = document.getElementsByClassName("check");
-    
-    for (i = 0; i < check.length; i++) {
-        check[i].onclick = function() {          
-            var div = this.parentElement;
-            div.classList.toggle('completed');
-        }
-    }
-    
-}
-
 </script>

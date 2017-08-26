@@ -147,7 +147,7 @@ div.dropdown:click > .dropdown-menu {
     position: relative;
     overflow: auto;
     z-index: 1;
-    margin-top: 35px;
+    margin-top: 10px;
     margin-right: 0px;    
     padding: 5px 10px 0px 10px;
 }

@@ -40,20 +40,19 @@
                             </div>
                         </div>
                     </li>
-                    <li id="To-do">
+                    <li id="about">
                         <a class="navbar-brand TheQ" data-toggle="tab" href="#!/about"> <img alt="TheQ" src="/css/img/TheQ-transparent.png" class="TheQ hvr-bounce-in"></a>
                     </li>
-                    
-                    <li class="active" id="Home">
-                        <a class="nav-item nav-link active" data-toggle="tab" href="#!/todolist">To-do list</a>
+                    <li id="todolist">
+                        <a class="nav-item nav-link" data-toggle="tab" href="#!/todolist">To-do list</a>
                     </li>
-                    <li>
+                    <li id="QaA">
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/QaA">QaA</a>
                     </li>
-                    <li>
+                    <li id="flashcards">
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/flashcards">Flashcards</a>
                     </li>
-                    <li>
+                    <li id="blog">
                         <a class="nav-item nav-link" data-toggle="tab" href="#!/blog">Blog</a>
                     </li>
                 </ul>
@@ -122,9 +121,8 @@
 });*/
 
 $(document).ready(function () {
-     $('ul.nav > li').click(function (e) {
+    $('ul.nav > li').click(function (e) {
         $('ul.nav > li').removeClass('active');
-
         $(this).addClass('active');    
     });            
 });
