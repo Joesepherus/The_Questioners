@@ -9,16 +9,16 @@
         <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addTask()">
             <p>
                 <label class="newTaskType">Title:</label>  
-                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="task.title" required>
+                <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text" ng-model="newTask.title" required>
             </p>
             <p>     
                 <label class="newTaskType">Description:</label>
-                <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="task.description" required>
+                <input class="w3-input" name="newTaskDescription" id="inputDescription" type="text" ng-model="newTask.description" required>
             </p>
             <div>
                 <label class="newTaskType">Type:</label>        
             </div>
-            <select ng-model="task.type" required>
+            <select ng-model="newTask.type" required>
                 <option value=""></option>                
                 <option value="work">work</option>
                 <option value="watch later">watch later</option>                
@@ -80,7 +80,7 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div id="editModalHeader" class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Edit Task</h4>
                 </div>
@@ -122,11 +122,11 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div id="detailsModalHeader" class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Tasks details</h4>
                 </div>
-                <div class="modal-body">
+                <div id="detailsModalBody" class="modal-body detailsModal">
                     <p>
                         <label class="newTaskType">Title:</label>
                         <input id="test_input" class="w3-input" name="detailsTitle" type="text" ng-model="task.title" required>
@@ -152,7 +152,7 @@
                         <input class="w3-input" name="detailsDateCompleted" ng-model="task.completed_date" type="text" required>
                     </p>
                 </div>
-                <div class="modal-footer">
+                <div id="detailsModalFooter" class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -209,6 +209,22 @@ function editModalForm(elem) {
     $('[name="editTitle"]').trigger('input'); 
     $('[name="editDescription"]').trigger('input'); 
     $('[name="editType"]').trigger('change'); 
+
+    // change the header color to the type of the task
+    switch (elem.parentElement.parentElement.children[1].innerHTML) {
+        case "work":
+            $("#editModalHeader").css('background', 'blueviolet');
+            break;
+        case "personal":
+            $("#editModalHeader").css('background', '#ffc900');
+            break;
+        case "school":
+            $("#editModalHeader").css('background', '#048E16');
+            break;
+        case "watch later":
+            $("#editModalHeader").css('background', '#900C3E');        
+            break;
+    }
 }
 
 // giving modal form placeholder values for each input txt
@@ -229,6 +245,22 @@ function detailsModalForm(elem) {
     $('[name="detailsState"]').trigger('input'); 
     $('[name="detailsDateAdded"]').trigger('input'); 
     //$('[name="detailsDateCompleted"]').trigger('input'); 
+
+    // change the header color to the type of the task
+        switch (elem.parentElement.parentElement.children[1].innerHTML) {
+        case "work":
+            $("#detailsModalHeader").css('background', 'blueviolet');
+            break;
+        case "personal":
+            $("#detailsModalHeader").css('background', '#ffc900');
+            break;
+        case "school":
+            $("#detailsModalHeader").css('background', '#048E16');
+            break;
+        case "watch later":
+            $("#detailsModalHeader").css('background', '#900C3E');        
+            break;
+    } 
 }
 
 // switching between selected values

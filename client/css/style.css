@@ -380,8 +380,10 @@ input {
 }
 
 .dropPara {
-    border-bottom:1px solid black;
-    text-decoration: none;            
+    border-bottom: 1px solid black;
+    text-decoration: none;       
+    margin-top: 10px;     
+    margin-bottom: 10px;     
 }
 
 .selector {
@@ -786,4 +788,12 @@ h3 {
     .parallax4 {
         background-attachment: scroll;
     }
+}
+
+.detailsModal {
+    min-height: 480px;
+}
+
+.modal-title {
+    color: white;
 }

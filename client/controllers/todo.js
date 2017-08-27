@@ -34,7 +34,7 @@ myApp.controller('toDoListController',
 		}
 
 		$scope.addTask = function() {
-			$http.post('api/toDoList', $scope.task).then(function(response){
+			$http.post('api/toDoList', $scope.newTask).then(function(response){
 				//window.location.href = '#!/';
 				window.location.reload();
 			});
