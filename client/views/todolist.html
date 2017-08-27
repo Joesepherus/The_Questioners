@@ -63,9 +63,8 @@
                 <p class="label label-default">{{task.state}}</p>
                 <p class="dropPara">{{task.description}}</p>
                 <div class="modal-button">
-                    <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
-                </div>
-                <div>
+                    <button type="button" class="btn btn-info btn-md detailsBtn" data-toggle="modal" data-target="#detailsModal" onclick="detailsModalForm(this)" ng-click="editModalForm(task._id)">Details</button>                
+                    <button id="modalButton" type="button" class="btn btn-success btn-md editBtn" data-toggle="modal" data-target="#editModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>                    
                     <button type="button" class="btn btn-danger btn-md deleteBtn"  ng-click="deletePermanentlyTask(task._id, task)">Delete permanently</button>                
                 </div>
             </div>
@@ -77,7 +76,7 @@
 <div class="container">
     <!-- Trigger the modal with a button -->
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="editModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
@@ -116,6 +115,51 @@
     </div>
 </div>
 
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="detailsModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tasks details</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <label class="newTaskType">Title:</label>
+                        <input id="test_input" class="w3-input" name="detailsTitle" type="text" ng-model="task.title" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">Description:</label>
+                        <input class="w3-input" name="detailsDescription" ng-model="task.description" type="text" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">Type:</label>
+                        <input class="w3-input" name="detailsType" ng-model="task.type" type="text" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">State:</label>
+                        <input class="w3-input" name="detailsState" ng-model="task.state" type="text" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">Date added:</label>
+                        <input class="w3-input" name="detailsDateAdded" ng-model="task.create_date" type="text" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">Date completed:</label>
+                        <input class="w3-input" name="detailsDateCompleted" ng-model="task.completed_date" type="text" required>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- for pagination WIP -->
 <div class="col-md-12">
     <button class="btn btn-danger" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
@@ -143,7 +187,7 @@ function editModalForm(elem) {
     var li = document.getElementsByTagName("LI");
     var i;
     document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
-    document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[3].innerHTML;
 
     var select = document.getElementById("editSelect");
     switch (elem.parentElement.parentElement.children[1].innerHTML) {
@@ -165,6 +209,26 @@ function editModalForm(elem) {
     $('[name="editTitle"]').trigger('input'); 
     $('[name="editDescription"]').trigger('input'); 
     $('[name="editType"]').trigger('change'); 
+}
+
+// giving modal form placeholder values for each input txt
+function detailsModalForm(elem) {
+    var li = document.getElementsByTagName("LI");
+    var i;
+    document.getElementsByName("detailsTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("detailsDescription")[0].value = elem.parentElement.parentElement.children[3].innerHTML;
+    document.getElementsByName("detailsType")[0].value = elem.parentElement.parentElement.children[1].innerHTML;
+    document.getElementsByName("detailsState")[0].value = elem.parentElement.parentElement.children[2].innerHTML;
+    document.getElementsByName("detailsDateAdded")[0].value = elem.parentElement.parentElement.children[0].innerHTML;
+    //document.getElementsByName("detailsDateCompleted")[0].value = elem.parentElement.parentElement.children[3].innerHTML;
+
+    // updating the angular task values
+    $('[name="detailsTitle"]').trigger('input'); 
+    $('[name="detailsDescription"]').trigger('input'); 
+    $('[name="detailsType"]').trigger('input'); 
+    $('[name="detailsState"]').trigger('input'); 
+    $('[name="detailsDateAdded"]').trigger('input'); 
+    //$('[name="detailsDateCompleted"]').trigger('input'); 
 }
 
 // switching between selected values
