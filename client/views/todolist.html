@@ -58,11 +58,10 @@
         <li onclick="dropFunction(this)" class="default dropbtn2">
             <div>{{task.title}}</div>
             <div class="dropdown-content" id="drop">
+                <p class="label label-default">{{task.create_date}}</p>                
+                <p class="label label-default">{{task.type}}</p>
+                <p class="label label-default">{{task.state}}</p>
                 <p class="dropPara">{{task.description}}</p>
-                <p class="dropPara">{{task.type}}</p>
-                <p class="dropPara" id="state">{{task.state}}</p>                
-                <p class="dropPara">{{task.create_date}}</p>  
-                <p class="dropPara">{{task.completed_date}}</p>
                 <div class="modal-button">
                     <button id="modalButton" type="button" class="btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal" onclick="editModalForm(this)" ng-click="editModalForm(task._id)">Edit task</button>
                 </div>
@@ -74,8 +73,6 @@
     </div>
     
 </ul>
-
-
 
 <div class="container">
     <!-- Trigger the modal with a button -->

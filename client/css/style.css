@@ -207,10 +207,10 @@ ul li.default {
     transition: 0.2s;
     list-style: none; 
   /* make the list items unselectable */
-    -webkit-user-select: none;
+    /*-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none;*/
 }
 
 ul.aboutDefault {
@@ -227,10 +227,10 @@ ul li.aboutDefault {
     transition: 0.2s;
     list-style: none; 
   /* make the list items unselectable */
-    -webkit-user-select: none;
+    /*-webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
+    user-select: none;*/
     margin-bottom: 50px;
     border: 1px solid #2C3E50;
     display: flex;
