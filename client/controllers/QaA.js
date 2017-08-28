@@ -6,7 +6,17 @@ myApp.controller('QaAController',
 		
 		$scope.getAllQaA = function() {
 			$http.get('/api/QaA').then(function(response) {
-				$scope.allQaA = response.data;		
+				$scope.allQaA = response.data;	
+				var createdDates = {};			
+				for (i = 0; i < $scope.allQaA.length; i++) {
+					var qaaCreatedDate = $scope.allQaA[i].create_date;
+					qaaDay = qaaCreatedDate.slice(8, 10);
+					qaaMonth = qaaCreatedDate.slice(5, 7) - 1;
+					qaaYear = qaaCreatedDate.slice(0, 4);
+					qaaHourAndMinuteAndSecond = qaaCreatedDate.slice(11, 19);
+					$scope.allQaA[i].create_date = qaaDay + "." + qaaMonth + "." + qaaYear + " " + qaaHourAndMinuteAndSecond;
+
+				}	
 			});
 		}
 

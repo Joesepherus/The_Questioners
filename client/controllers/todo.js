@@ -13,6 +13,8 @@ myApp.controller('toDoListController',
 					taskDay = taskCreatedDate.slice(8, 10);
 					taskMonth = taskCreatedDate.slice(5, 7) - 1;
 					taskYear = taskCreatedDate.slice(0, 4);
+					taskHourAndMinuteAndSecond = taskCreatedDate.slice(11, 19);
+
 					createdDates[ taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
 					var taskCompletedDate = $scope.allTasks[i].completed_date;
 					if (taskCompletedDate) {
@@ -21,6 +23,7 @@ myApp.controller('toDoListController',
 						taskYear = taskCompletedDate.slice(0, 4);
 						completedDates[taskDay + taskMonth + taskYear] = new Date(taskYear + "-" + taskMonth + "-" + taskDay );
 					}
+					$scope.allTasks[i].create_date = taskDay + "." + taskMonth + "." + taskYear + " " + taskHourAndMinuteAndSecond;
 				}
 			$scope.calendarInit(createdDates, completedDates);
 			});
