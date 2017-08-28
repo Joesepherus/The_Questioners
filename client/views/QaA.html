@@ -88,11 +88,11 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
+                <div id="editModalHeader" class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Edit QaA</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body editQaABody">
                 <form ng-model="allQaA" id="editTaskForm" class="w3-container" method="post" ng-submit="editQaA(allQaA[url])">
                     <p>
                         <label class="newTaskType">Title:</label>
@@ -100,7 +100,7 @@
                     </p>
                     <p>    
                         <label class="newTaskType">Description:</label>
-                        <textarea class="w3-input" name="editDescription" cols="40" rows="1" ng-model="QaA.description" required></textarea> 
+                        <textarea class="w3-input editQaADescription" name="editDescription" cols="40" rows="1" ng-model="QaA.description" required></textarea> 
                     </p>
                     <div>
                         <label class="newTaskType">Type</label>
@@ -178,6 +178,22 @@ function editModalForm(elem) {
     $('[name="editTitle"]').trigger('input'); 
     $('[name="editDescription"]').trigger('input'); 
     $('[name="editType"]').trigger('change');
+
+    // change the header color to the type of the task
+    switch (elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML) {
+        case "Javascript":
+            $("#editModalHeader").css('background', 'blueviolet');
+            break;
+        case "CSS":
+            $("#editModalHeader").css('background', '#ffc900');
+            break;
+        case "HTML":
+            $("#editModalHeader").css('background', '#048E16');
+            break;
+        case "Data structures":
+            $("#editModalHeader").css('background', '#900C3E');        
+            break;
+    }
 }
 
 // switching between selected values
