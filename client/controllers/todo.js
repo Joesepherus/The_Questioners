@@ -3,6 +3,42 @@ var myApp = angular.module('myApp');
 myApp.controller('toDoListController', 
 	['$scope', '$http', '$location', '$routeParams',
 	function($scope, $http, $location, $routeParams){
+				$scope.selectedScreen = null;
+		$scope.selectedScreenIndex = null;
+							var j = 0, w = 0;
+					$scope.views = [{
+						id: 0,
+						select: "completed",
+						tasks: [] 
+					}, {
+						id: 1,
+						select: "inprogress",
+						tasks: [] 
+					}, {
+						id: 2,
+						select: "removed",
+						tasks: []
+					}, {
+						id: 3,
+						select: "work",
+						tasks: [] 
+					}, {
+						id: 4,
+						select: "personal",
+						tasks: [] 
+					}, {
+						id: 5,
+						select: "school",
+						tasks: [] 
+					}, {
+						id: 6,
+						select: "watch later",
+						tasks: [] 
+					}, {
+						id: 7,
+						select: "all",
+						tasks: [] 
+					}];
 		
 		$scope.getAllTasks = function() {
 			$http.get('/api/toDoList').then(function(response) {
@@ -25,7 +61,56 @@ myApp.controller('toDoListController',
 					}
 					$scope.allTasks[i].create_date = taskDay + "." + taskMonth + "." + taskYear + " " + taskHourAndMinuteAndSecond;
 				}
-			$scope.calendarInit(createdDates, completedDates);
+				$scope.calendarInit(createdDates, completedDates);
+
+				for(i = $scope.allTasks.length - 1; i > 0; i--) {
+					if($scope.views[0].select == "completed") {
+						if($scope.allTasks[i].state == "completed") {
+							$scope.views[0].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[1].select == "inprogress") {
+						if($scope.allTasks[i].state == "inprogress") {
+							$scope.views[1].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[2].select == "removed") {
+						if($scope.allTasks[i].state == "removed") {
+							$scope.views[2].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[3].select == "work") {
+						if($scope.allTasks[i].type == "work") {
+							$scope.views[3].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[4].select == "personal") {
+						if($scope.allTasks[i].type == "personal") {
+							$scope.views[4].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[5].select == "school") {
+						if($scope.allTasks[i].type == "school") {
+							$scope.views[5].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[6].select == "watch later") {
+						if($scope.allTasks[i].type == "watch later") {
+							$scope.views[6].tasks.push($scope.allTasks[i]);
+						}
+					}
+					if($scope.views[7].select == "all") {
+						$scope.views[7].tasks.push($scope.allTasks[i]);
+					}
+				}
+				/*for(j = 0; j < view[0].tasks.length; j++) {
+					console.log(view[0].tasks[j].title);						
+				}*/
+				console.log("________");
+				var tits = $scope.views[7];
+				for(selected in tits.tasks){
+					console.log("kok" + $scope.views[7].tasks[selected].title);
+				}
 			});
 		}
 
@@ -86,48 +171,65 @@ myApp.controller('toDoListController',
 				var li = document.getElementsByTagName("LI");
 				var i;
 				if (typeof $scope.allTasks != undefined){
-				for (i = 6; i < li.length; i++) {		
-					switch(li[i].children[1].children[1].innerHTML){
-						case "work":
-							li[i].classList.add("work");  
-							li[i].children[1].classList.add("work-content");
-							break;
-						case "personal":
-							li[i].classList.add("personal");  
-							li[i].children[1].classList.add("personal-content");
-							break;
-						case "school":
-							li[i].classList.add("school");  
-							li[i].children[1].classList.add("school-content");
-							break;
-						case "watch later":
-							li[i].classList.add("watchLater");  
-							li[i].children[1].classList.add("watchLater-content");
-							org_html = li[i].children[1].children[0].innerHTML;
-							new_html = "<a href=" + $scope.allTasks[$scope.allTasks.length - i + 5].description + ">" + $scope.allTasks[$scope.allTasks.length - i + 5].description  + "</a>";
-							li[i].children[1].children[0].innerHTML = new_html;
-							break;
-					}
+					for (i = 6; i < li.length; i++) {		
+						switch(li[i].children[1].children[1].innerHTML){
+							case "work":
+								li[i].classList.add("work");  
+								li[i].children[1].classList.add("work-content");
+								break;
+							case "personal":
+								li[i].classList.add("personal");  
+								li[i].children[1].classList.add("personal-content");
+								break;
+							case "school":
+								li[i].classList.add("school");  
+								li[i].children[1].classList.add("school-content");
+								break;
+							case "watch later":
+								li[i].classList.add("watchLater");  
+								li[i].children[1].classList.add("watchLater-content");
+								org_html = li[i].children[1].children[0].innerHTML;
+								new_html = "<a href=" + $scope.allTasks[$scope.allTasks.length - i + 5].description + ">" + $scope.allTasks[$scope.allTasks.length - i + 5].description  + "</a>";
+								li[i].children[1].children[0].innerHTML = new_html;
+								break;
+						}
 
-					switch(li[i].children[1].children[2].innerHTML){
-						case "completed":
-							li[i].classList.add("completed");  
-							break;
-						case "removed":
-							li[i].classList.add("removed"); 
-							li[i].children[1].classList.add("removed-content");
-							break;
-					}
+						switch(li[i].children[1].children[2].innerHTML){
+							case "completed":
+								//li[i].classList.add("completed");  
+								li[i].children[0].children[0].style.display = "inline"; 
+								break;
+							case "removed":
+								// li[i].classList.add("removed"); 
+								// li[i].children[1].classList.add("removed-content");
+								li[i].children[0].children[1].style.display = "inline"; 							
+								break;
+						}
 
-					if(li[i].children[1].children[4].innerHTML == "") {
-						li[i].children[1].children[4].innerHTML = "not completed";
+						if(li[i].children[1].children[4].innerHTML == "") {
+							li[i].children[1].children[4].innerHTML = "not completed";
+						}
+						if (i >= 16) {
+							li[i].style.display = "none";                
+							
+						}
 					}
-				}
 				}
 			}
 			// for pagination WIP
 			$scope.allTasksLength = Math.round($scope.allTasks.length / $scope.pageSize);
 		};
+		//$scope.select = select;
+
+		$scope.select = function() {
+			$scope.views.forEach(function(item){
+				if(item.id == $scope.selectedScreenIndex){
+				$scope.selectedItem = item;
+				console.log(item);
+			}
+			});
+		}
+		
 
 		/*$scope.selector = function(a) {
 			  
@@ -209,9 +311,26 @@ myApp.controller('toDoListController',
 			});
 		}
 
+		/*$scope.selectorChange = function() {
+			var li = document.getElementsByTagName("LI");
+   	 		var j = 6;
+			for(i = $scope.allTasks.length - 1; i > 0; i--) {
+				if ($scope.item == "inprogress") {
+					if($scope.allTasks[i].state == "inprogress") {
+						console.log($scope.allTasks[i].title);
+						li[j++].children[0].children[2].innerHTML = $scope.allTasks[i].title;
+						li[j++].children[1].children[2].innerHTML = $scope.allTasks[i].title;
+						
+					}
+				}
+			}
+		}*/
+
 	// for pagination WIP
 	$scope.currentPage = 0;
 	$scope.pageSize = 10;
+
+
 
 	}]);
 

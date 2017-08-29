@@ -37,15 +37,10 @@
 
 
 <div class="col-md-1 selector">
-    <select id="selector">
-        <option value="all" selected="selected">all</option>
-        <option value="inprogress">inprogress</option>        
-        <option value="completed">completed</option>
-        <option value="removed">removed</option>
-        <option value="work">work</option>
-        <option value="watch later">watch later</option>                
-        <option value="personal">personal</option>
-        <option value="school">school</option>        
+    <select id="selector" ng-model="selectedScreenIndex" ng-change="select()">
+        <option value="{{view.id}}" ng-repeat="view in views">
+        {{view.id}}
+        </option>      
     </select>
 </div>
 
@@ -54,9 +49,13 @@
 </div>
 
 <ul class="col-md-12" id="myUL">
-    <div ng-repeat="task in allTasks.slice().reverse() | startFrom:currentPage*pageSize | limitTo:pageSize" ng-class="isLast($last)">
+    <div ng-repeat="task in selectedItem.tasks | startFrom:currentPage*pageSize | limitTo:pageSize" ng-class="isLast($last)">
         <li onclick="dropFunction(this)" class="default dropbtn2">
-            <div>{{task.title}}</div>
+            <div>
+                <img class="checkImg" src="css\img\check2.png">
+                <img class="checkImg" src="css\img\disable.png">                
+                <span>{{task.title}}</span> 
+            </div>
             <div class="dropdown-content" id="drop">
                 <p class="label label-default">Posted {{task.create_date}}</p>                
                 <p class="label label-default">{{task.type}}</p>
@@ -186,7 +185,7 @@ $(document).ready(function () {
 function editModalForm(elem) {
     var li = document.getElementsByTagName("LI");
     var i;
-    document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
+    document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].children[2].innerHTML;
     document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[3].innerHTML;
 
     var select = document.getElementById("editSelect");
@@ -247,7 +246,7 @@ function detailsModalForm(elem) {
     //$('[name="detailsDateCompleted"]').trigger('input'); 
 
     // change the header color to the type of the task
-        switch (elem.parentElement.parentElement.children[1].innerHTML) {
+    switch (elem.parentElement.parentElement.children[1].innerHTML) {
         case "work":
             $("#detailsModalHeader").css('background', 'blueviolet');
             break;
@@ -264,7 +263,7 @@ function detailsModalForm(elem) {
 }
 
 // switching between selected values
-$("#selector").change(function() {
+/*$("#selector").change(function() {
     var li = document.getElementsByTagName("LI");
     var i;
     for (i = 6; i < li.length; i++) {
@@ -328,7 +327,7 @@ $("#selector").change(function() {
             li[i].style.display = "block";
         }
     }
-});
+});*/
 
 function dropFunction(element) {     
         element.children[1].classList.toggle("show");
@@ -363,25 +362,29 @@ for (i = 6; i < li.length; i++) {
 function removeTask(element) {
     var li = element.parentElement;
     if (li.children[1].children[2].innerHTML != "removed") {
-        li.style.backgroundColor = "#696a69";
-        li.children[1].children[2].innerHTML = "removed";
-        li.children[1].style.backgroundColor = "#a1a1a1";
+        // li.style.backgroundColor = "#696a69";
+        // li.children[1].children[2].innerHTML = "removed";
+        // li.children[1].style.backgroundColor = "#a1a1a1";
+        li.children[0].children[1].style.display = "inline";          
     }
     else {
         li.style.backgroundColor = "white";        
         li.children[1].children[2].innerHTML = "inprogress";
         li.children[1].style.backgroundColor = "#e2e1df";
+        li.children[0].children[1].style.display = "none";          
     }
 }
 
 function checkTask(element) {
     var li = element.parentElement;
-    li.classList.toggle('completed');
+    // li.classList.toggle('completed');
     if (li.children[1].children[2].innerHTML != "completed") {
-        li.children[1].children[2].innerHTML = "completed";
+        // li.children[1].children[2].innerHTML = "completed";
+        li.children[0].children[0].style.display = "inline";  
     }
     else {
-        li.children[1].children[2].innerHTML = "inprogress";       
+        li.children[1].children[2].innerHTML = "inprogress";  
+        li.children[0].children[0].style.display = "none";               
     }
 }
 </script>

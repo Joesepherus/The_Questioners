@@ -809,3 +809,9 @@ h3 {
 textarea {
     resize: none;
 }
+
+.checkImg {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
