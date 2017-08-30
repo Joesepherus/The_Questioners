@@ -1,3 +1,4 @@
+<title>To-do list</title>
 <div class="container todolist">
     <div class="row"> 
 
@@ -37,16 +38,14 @@
 
 
 <div class="col-md-1 selector">
-    <select id="selector" ng-model="selectedScreenIndex" ng-change="select()">
-        <option selected value>none</option>
-        <option value="{{view.id}}" ng-repeat="view in views">
-        {{view.select}}
-        </option>      
+    <select id="selector" ng-model="selectedScreenIndex" ng-options="view.select for view in views" ng-change="select()">
+        <option value="">none</option>
+   
     </select>
 </div>
 
 <div class="col-md-12">
-    <p ng-model="numberOfQaA">Number of tasks: {{allTasks.length}}</p>
+    <p ng-model="numberOfQaA">Number of tasks: {{selectedItem.tasks.length}}</p>
 </div>
 
 <ul class="col-md-12" id="myUL">
@@ -166,8 +165,8 @@
     <button class="btn btn-danger" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
         Previous
     </button>
-    {{currentPage+1}}/{{allTasksLength}}
-    <button class="btn btn-primary" ng-disabled="currentPage >= allTasksLength - 1" ng-click="currentPage=currentPage+1">
+    {{currentPage+1}}/{{selectedTasksLength}}
+    <button class="btn btn-primary" ng-disabled="currentPage >= selectedTasksLength - 1" ng-click="currentPage=currentPage+1">
         Next
     </button>
 </div>
@@ -181,6 +180,7 @@
 
 $(document).ready(function () {
     $("#todolist").addClass('active');
+    document.title = "To-do list";
 });
 
 // giving modal form placeholder values for each input txt

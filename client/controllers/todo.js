@@ -6,35 +6,35 @@ myApp.controller('toDoListController',
 		$scope.selectedScreen = null;
 		$scope.selectedScreenIndex = null;
 		$scope.views = [{
-			id: 0,
+			id: 1,
 			select: "all",
 			tasks: [] 
 		}, {
-			id: 1,
+			id: 2,
 			select: "completed",
 			tasks: [] 
 		}, {
-			id: 2,
+			id: 3,
 			select: "inprogress",
 			tasks: [] 
 		}, {
-			id: 3,
+			id: 4,
 			select: "removed",
 			tasks: []
 		}, {
-			id: 4,
+			id: 5,
 			select: "work",
 			tasks: [] 
 		}, {
-			id: 5,
+			id: 6,
 			select: "personal",
 			tasks: [] 
 		}, {
-			id: 6,
+			id: 7,
 			select: "school",
 			tasks: [] 
 		}, {
-			id: 7,
+			id: 8,
 			select: "watch later",
 			tasks: [] 
 		}];
@@ -102,7 +102,19 @@ myApp.controller('toDoListController',
 						}
 					}
 				}
+				/*var selector = document.getElementById("selector");
+						selector.options[1].selected = "selected";
+						console.log(selector.options[1].selected);
+						console.log(selector.options[1].selected);
+					$scope.selectedScreenIndex = $scope.views[0].id;
+						$scope.select();*/
+					
+					$scope.selectedScreenIndex = $scope.views[0];
+						$scope.select();
+					
+						
 			});
+					
 		}
 
 		$scope.getTask = function(){
@@ -158,6 +170,8 @@ myApp.controller('toDoListController',
 		}
 		
 		$scope.isLast = function(check) {
+							console.log($scope.selectedScreenIndex);
+			
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
@@ -205,23 +219,31 @@ myApp.controller('toDoListController',
 						}
 						if (i >= 16) {
 							li[i].style.display = "none";                
-							
 						}
 					}
 				}
 			}
+
 			// for pagination WIP
-			$scope.allTasksLength = Math.round($scope.allTasks.length / $scope.pageSize);
+			$scope.selectedTasksLength = Math.ceil($scope.selectedItem.tasks.length / $scope.pageSize);
 		};
 
 		$scope.select = function() {
+			console.log($scope.selectedScreenIndex)
+			if ($scope.selectedScreenIndex == null) {
+				$scope.selectedItem = [];
+				$scope.currentPage = 0;
+				$scope.selectedTasksLength = 1;
+				return;
+			}
 			$scope.views.forEach(function(item){
-				if (item.id == $scope.selectedScreenIndex){
+				if (item.id == $scope.selectedScreenIndex.id){
 					$scope.selectedItem = item;
+					if ($scope.selectedItem.tasks.length == 0) {
+						$scope.selectedTasksLength = 1;
+					}
 				}
-				if ($scope.selectedScreenIndex == "") {
-					$scope.selectedItem.tasks = [];
-				}
+				$scope.currentPage = 0;
 			});
 		}
 		
@@ -325,14 +347,15 @@ myApp.controller('toDoListController',
 	$scope.currentPage = 0;
 	$scope.pageSize = 10;
 
-
-
 	}]);
 
 // for pagination WIP
 myApp.filter('startFrom', function() {
     return function(input, start) {
-        start = +start; //parse to int
+		start = +start; //parse to int
+		if (typeof input == "undefined") {
+			return;
+		}
         return input.slice(start);
     }
 });
