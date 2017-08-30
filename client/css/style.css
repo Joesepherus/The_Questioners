@@ -815,3 +815,7 @@ textarea {
     height: 20px;
     display: none;
 }
+
+.calendarText {
+    height: 200px;
+}

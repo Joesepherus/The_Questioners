@@ -38,8 +38,9 @@
 
 <div class="col-md-1 selector">
     <select id="selector" ng-model="selectedScreenIndex" ng-change="select()">
+        <option selected value>none</option>
         <option value="{{view.id}}" ng-repeat="view in views">
-        {{view.id}}
+        {{view.select}}
         </option>      
     </select>
 </div>
@@ -53,7 +54,8 @@
         <li onclick="dropFunction(this)" class="default dropbtn2">
             <div>
                 <img class="checkImg" src="css\img\check2.png">
-                <img class="checkImg" src="css\img\disable.png">                
+                <img class="checkImg" src="css\img\disable.png">    
+                <img class="checkImg" src="css\img\clock.png">                                            
                 <span>{{task.title}}</span> 
             </div>
             <div class="dropdown-content" id="drop">
@@ -362,16 +364,15 @@ for (i = 6; i < li.length; i++) {
 function removeTask(element) {
     var li = element.parentElement;
     if (li.children[1].children[2].innerHTML != "removed") {
-        // li.style.backgroundColor = "#696a69";
-        // li.children[1].children[2].innerHTML = "removed";
-        // li.children[1].style.backgroundColor = "#a1a1a1";
-        li.children[0].children[1].style.display = "inline";          
+        li.children[1].children[2].innerHTML = "removed";
+        li.children[0].children[1].style.display = "inline";  
+        li.children[0].children[2].style.display = "none";   
+        li.children[0].children[0].style.display = "none";                                                         
     }
     else {
-        li.style.backgroundColor = "white";        
         li.children[1].children[2].innerHTML = "inprogress";
-        li.children[1].style.backgroundColor = "#e2e1df";
-        li.children[0].children[1].style.display = "none";          
+        li.children[0].children[1].style.display = "none";      
+        li.children[0].children[2].style.display = "inline";                                              
     }
 }
 
@@ -379,12 +380,15 @@ function checkTask(element) {
     var li = element.parentElement;
     // li.classList.toggle('completed');
     if (li.children[1].children[2].innerHTML != "completed") {
-        // li.children[1].children[2].innerHTML = "completed";
+        li.children[1].children[2].innerHTML = "completed";
         li.children[0].children[0].style.display = "inline";  
+        li.children[0].children[1].style.display = "none";                  
+        li.children[0].children[2].style.display = "none";          
     }
     else {
         li.children[1].children[2].innerHTML = "inprogress";  
-        li.children[0].children[0].style.display = "none";               
+        li.children[0].children[0].style.display = "none";    
+        li.children[0].children[2].style.display = "inline";                                  
     }
 }
 </script>

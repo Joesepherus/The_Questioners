@@ -3,42 +3,41 @@ var myApp = angular.module('myApp');
 myApp.controller('toDoListController', 
 	['$scope', '$http', '$location', '$routeParams',
 	function($scope, $http, $location, $routeParams){
-				$scope.selectedScreen = null;
+		$scope.selectedScreen = null;
 		$scope.selectedScreenIndex = null;
-							var j = 0, w = 0;
-					$scope.views = [{
-						id: 0,
-						select: "completed",
-						tasks: [] 
-					}, {
-						id: 1,
-						select: "inprogress",
-						tasks: [] 
-					}, {
-						id: 2,
-						select: "removed",
-						tasks: []
-					}, {
-						id: 3,
-						select: "work",
-						tasks: [] 
-					}, {
-						id: 4,
-						select: "personal",
-						tasks: [] 
-					}, {
-						id: 5,
-						select: "school",
-						tasks: [] 
-					}, {
-						id: 6,
-						select: "watch later",
-						tasks: [] 
-					}, {
-						id: 7,
-						select: "all",
-						tasks: [] 
-					}];
+		$scope.views = [{
+			id: 0,
+			select: "all",
+			tasks: [] 
+		}, {
+			id: 1,
+			select: "completed",
+			tasks: [] 
+		}, {
+			id: 2,
+			select: "inprogress",
+			tasks: [] 
+		}, {
+			id: 3,
+			select: "removed",
+			tasks: []
+		}, {
+			id: 4,
+			select: "work",
+			tasks: [] 
+		}, {
+			id: 5,
+			select: "personal",
+			tasks: [] 
+		}, {
+			id: 6,
+			select: "school",
+			tasks: [] 
+		}, {
+			id: 7,
+			select: "watch later",
+			tasks: [] 
+		}];
 		
 		$scope.getAllTasks = function() {
 			$http.get('/api/toDoList').then(function(response) {
@@ -64,52 +63,44 @@ myApp.controller('toDoListController',
 				$scope.calendarInit(createdDates, completedDates);
 
 				for(i = $scope.allTasks.length - 1; i > 0; i--) {
-					if($scope.views[0].select == "completed") {
-						if($scope.allTasks[i].state == "completed") {
-							$scope.views[0].tasks.push($scope.allTasks[i]);
-						}
+					if($scope.views[0].select == "all") {
+						$scope.views[0].tasks.push($scope.allTasks[i]);
 					}
-					if($scope.views[1].select == "inprogress") {
-						if($scope.allTasks[i].state == "inprogress") {
+					if($scope.views[1].select == "completed") {
+						if($scope.allTasks[i].state == "completed") {
 							$scope.views[1].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[2].select == "removed") {
-						if($scope.allTasks[i].state == "removed") {
+					if($scope.views[2].select == "inprogress") {
+						if($scope.allTasks[i].state == "inprogress") {
 							$scope.views[2].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[3].select == "work") {
-						if($scope.allTasks[i].type == "work") {
+					if($scope.views[3].select == "removed") {
+						if($scope.allTasks[i].state == "removed") {
 							$scope.views[3].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[4].select == "personal") {
-						if($scope.allTasks[i].type == "personal") {
+					if($scope.views[4].select == "work") {
+						if($scope.allTasks[i].type == "work") {
 							$scope.views[4].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[5].select == "school") {
-						if($scope.allTasks[i].type == "school") {
+					if($scope.views[5].select == "personal") {
+						if($scope.allTasks[i].type == "personal") {
 							$scope.views[5].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[6].select == "watch later") {
-						if($scope.allTasks[i].type == "watch later") {
+					if($scope.views[6].select == "school") {
+						if($scope.allTasks[i].type == "school") {
 							$scope.views[6].tasks.push($scope.allTasks[i]);
 						}
 					}
-					if($scope.views[7].select == "all") {
-						$scope.views[7].tasks.push($scope.allTasks[i]);
+					if($scope.views[7].select == "watch later") {
+						if($scope.allTasks[i].type == "watch later") {
+							$scope.views[7].tasks.push($scope.allTasks[i]);
+						}
 					}
-				}
-				/*for(j = 0; j < view[0].tasks.length; j++) {
-					console.log(view[0].tasks[j].title);						
-				}*/
-				console.log("________");
-				var tits = $scope.views[7];
-				for(selected in tits.tasks){
-					console.log("kok" + $scope.views[7].tasks[selected].title);
 				}
 			});
 		}
@@ -204,6 +195,9 @@ myApp.controller('toDoListController',
 								// li[i].children[1].classList.add("removed-content");
 								li[i].children[0].children[1].style.display = "inline"; 							
 								break;
+							case "inprogress":
+								li[i].children[0].children[2].style.display = "inline"; 							
+								break;
 						}
 
 						if(li[i].children[1].children[4].innerHTML == "") {
@@ -219,14 +213,15 @@ myApp.controller('toDoListController',
 			// for pagination WIP
 			$scope.allTasksLength = Math.round($scope.allTasks.length / $scope.pageSize);
 		};
-		//$scope.select = select;
 
 		$scope.select = function() {
 			$scope.views.forEach(function(item){
-				if(item.id == $scope.selectedScreenIndex){
-				$scope.selectedItem = item;
-				console.log(item);
-			}
+				if (item.id == $scope.selectedScreenIndex){
+					$scope.selectedItem = item;
+				}
+				if ($scope.selectedScreenIndex == "") {
+					$scope.selectedItem.tasks = [];
+				}
 			});
 		}
 		
