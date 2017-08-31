@@ -176,7 +176,7 @@ myApp.controller('toDoListController',
 				var li = document.getElementsByTagName("LI");
 				var i;
 				if (typeof $scope.allTasks != undefined){
-					for (i = 6; i < li.length; i++) {		
+					for (i = 7; i < li.length; i++) {		
 						switch(li[i].children[1].children[1].innerHTML){
 							case "work":
 								li[i].classList.add("work");  
@@ -217,7 +217,7 @@ myApp.controller('toDoListController',
 						if(li[i].children[1].children[4].innerHTML == "") {
 							li[i].children[1].children[4].innerHTML = "not completed";
 						}
-						if (i >= 16) {
+						if (i >= 17) {
 							li[i].style.display = "none";                
 						}
 					}
@@ -312,7 +312,7 @@ myApp.controller('toDoListController',
 					var li = document.getElementsByTagName("LI");
 					var i;
 
-					for (i = 6; i < li.length; i++) {
+					for (i = 7; i < li.length; i++) {
 						var taskDate = li[i].children[1].children[3].innerHTML;
 						taskDay = taskDate.slice(8, 10);
 						taskMonth = taskDate.slice(5, 7);

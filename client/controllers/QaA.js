@@ -76,8 +76,8 @@ myApp.controller('QaAController',
 			if(check == true){
 				var li = document.getElementsByTagName("LI");
 				var i;
-				$scope.numberOfQaA = li.length - 6;
-				for (i = 6; i < li.length; i++) {
+				$scope.numberOfQaA = li.length - 7;
+				for (i = 7; i < li.length; i++) {
 			
 					switch(li[i].children[1].children[0].innerHTML){
 						case "Javascript":

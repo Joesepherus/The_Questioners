@@ -1,0 +1,192 @@
+<title>To-do list</title>
+<div class="container todolist">
+    <div class="row"> 
+
+<div class="col-md-12" ng-init="getAllDROs()">    
+    <div class="w3-card-4">
+        <div class="w3-container w3-green">
+            <h2>New DRO(<b>D</b>rop <b>R</b>ate <b>O</b>bservation)</h2>
+        </div>
+        <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm" method="post" ng-submit="addDRO()">
+            <div class="col-md-3"> 
+                <div>
+                    <label class="newTaskType">Item:</label>        
+                </div>
+                <select ng-model="newDRO.item" required>
+                    <option value=""></option>                
+                    <option value="The king's heart">The king's heart</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+
+            <div class="col-md-3"> 
+                <div>
+                    <label class="newTaskType">Cost:</label>        
+                </div>
+                <select ng-model="newDRO.itemCost" required>
+                    <option value=""></option>                
+                    <option value="44">44</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+
+            <div class="col-md-6"> 
+                <div>
+                    <label class="newTaskType">Currency type:</label>        
+                </div>
+                <select ng-model="newDRO.itemCurrencyType" required>
+                    <option value=""></option>                
+                    <option value="Chaos">Chaos</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+
+            <div class="col-md-3"> 
+                <div>
+                    <label class="newTaskType">Map:</label>        
+                </div>
+                <select ng-model="newDRO.map" required>
+                    <option value=""></option>                
+                    <option value="Abyss map">Abyss map</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+
+            <div class="col-md-3"> 
+                <div>
+                    <label class="newTaskType">Cost:</label>        
+                </div>
+                <select ng-model="newDRO.mapCost" required>
+                    <option value=""></option>                
+                    <option value="5">5</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+
+            <div class="col-md-6"> 
+                <div>
+                    <label class="newTaskType">Currency type:</label>        
+                </div>
+                <select ng-model="newDRO.mapCurrencyType" required>
+                    <option value=""></option>                
+                    <option value="Chaos">Chaos</option>
+                    <option value="watch later">watch later</option>                
+                    <option value="personal">personal</option>
+                    <option value="school">school</option>
+                </select>
+            </div>
+           
+        </form>
+            <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit">Submit</button>
+    </div>
+
+</div>
+
+<div class="col-md-10">
+    <h2>DROs</h2>
+</div>
+
+
+<div class="col-md-1 selector">
+    <select id="selector" ng-model="selectedScreenIndex" ng-options="view.select for view in views" ng-change="select()">
+        <option value="">none</option>
+   
+    </select>
+</div>
+
+<div class="col-md-12">
+    <p ng-model="numberOfQaA">Number of tasks: {{selectedItem.tasks.length}}</p>
+</div>
+
+<ul class="col-md-12" id="myUL">
+    <div ng-repeat="dro in allDROs | startFrom:currentPage*pageSize | limitTo:pageSize" ng-class="isLast($last)">
+        <li onclick="dropFunction(this)" class="default dropbtn2">
+            <div>
+                <img class="checkImg" src="css\img\check2.png">
+                <img class="checkImg" src="css\img\disable.png">    
+                <img class="checkImg" src="css\img\clock.png">                                            
+                <p>{{dro.item}}</p> 
+                <p>{{dro.map}}</p>
+            </div>
+        </li>
+    </div>
+</ul>
+
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div id="editModalHeader" class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit DRO</h4>
+                </div>
+                <div class="modal-body">
+                <form ng-model="allDROs" id="editTaskForm" class="w3-container" method="post" ng-submit="editDRO(allDROs[url])">
+                    <p>
+                        <label class="newTaskType">Title:</label>
+                        <input id="test_input" class="w3-input" name="editTitle" type="text" ng-model="task.title" required>
+                    </p>
+                    <p>    
+                        <label class="newTaskType">Description:</label>
+                        <input class="w3-input" name="editDescription" ng-model="task.description" type="text" required>
+                    </p>
+                    <div>
+                        <label class="newTaskType">Type</label>
+                    </div>
+                    <select name="editType" id="editSelect" ng-model="task.type" required>
+                        <option value=""></option>                        
+                        <option value="work">work</option>
+                        <option value="personal">personal</option>
+                        <option value="school">school</option>  
+                        <option value="watch later">watch later</option>                      
+                    </select>  
+                </form>            
+                </div>
+                <div class="modal-footer">
+                    <button class="col-md-2 editBtn btn btn-success" form="editTaskForm" type="submit" >Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- for pagination WIP -->
+<div class="col-md-12">
+    <button class="btn btn-danger" ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+        Previous
+    </button>
+    {{currentPage+1}}/{{selectedDROsLength}}
+    <button class="btn btn-primary" ng-disabled="currentPage >= selectedDROsLength - 1" ng-click="currentPage=currentPage+1">
+        Next
+    </button>
+</div>
+
+</div>
+</div>
+<br>
+
+
+<script>
+
+$(document).ready(function () {
+    $("#DRO").addClass('active');
+    document.title = "DRO";
+});
+
+</script>

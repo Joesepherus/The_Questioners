@@ -24,6 +24,10 @@ myApp.config(function($routeProvider){
 	.when("/", {
 		controller: "toDoListController",
 		templateUrl: "views/about.html",
+	})
+	.when("/DRO", {
+		controller: "DROController",
+		templateUrl: "views/DRO.html",
 	});
 });
 

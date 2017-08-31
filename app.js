@@ -12,8 +12,6 @@ mongoose.connect('mongodb://localhost/todolist');
 var db = mongoose.connection;
 
 var fs = require("fs");
-var collectionOne = "tasks";
-var collectionTwo = [];
 
 // display all tasks
 app.get('/api/toDoList', function(req, res){
@@ -288,6 +286,86 @@ app.delete('/api/QaA/deleted/:id', function(req, res){
         } 
         else {
 		 	res.json(qaa);
+		}
+	});
+})
+
+/*
+	DRO
+*/
+
+DRO = require('./models/DRO.js');
+
+// display all DRO
+app.get('/api/DRO', function(req, res){
+	DRO.getAllDROs(function(err, allDRO){
+		if(err){
+			throw err;
+		}
+		res.json(allDRO);
+	});
+})
+
+// display a DRO with a certain ID
+app.get('/api/DRO/:id', function(req, res){
+	DRO.getDROById(req.params.id, 
+		function(err, dro){
+		if(err){
+			throw err;
+		}
+		res.json(dro);
+	});
+})
+
+// add a new DRO
+app.post('/api/DRO', function(req, res){
+	var dro = req.body;
+
+	DRO.addDRO(dro, function(err, dro){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(dro);
+		}
+	});
+})
+
+// update a DRO
+app.put('/api/DRO/:id', function(req, res){
+	var id = req.params.id;
+	var dro = req.body;
+
+	DRO.updateDRO(id, dro, {}, 
+		function(err, dro){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(dro);
+		}
+	});
+})
+
+// remove DRO permanently
+app.delete('/api/DRO/deleted/:id', function(req, res){
+	var id = req.params.id;
+	DRO.deletePermanentlyDRO(id, 
+		function(err, dro){
+		if(err){
+			throw(err);
+			res.send({
+                message :'something went wrong'
+            });
+        } 
+        else {
+		 	res.json(dro);
 		}
 	});
 })
