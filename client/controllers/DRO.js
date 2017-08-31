@@ -25,7 +25,7 @@ myApp.controller('DROController',
 
 		$scope.editDRO = function(dro){
 			$http.put('api/DRO/' + dro._id, $scope.dro).then(function(response){
-				window.location.reload();								
+				//window.location.reload();								
 			});
 		}
 
@@ -69,6 +69,26 @@ myApp.controller('DROController',
 				}
 				$scope.currentPage = 0;
 			});
+		}
+
+		$scope.increaseItems = function(dro) {
+			dro.numberOfItemsDropped++;
+			$scope.editDRO(dro);
+		}
+
+		$scope.decreaseItems = function(dro) {
+			dro.numberOfItemsDropped--;
+			$scope.editDRO(dro);			
+		}
+
+		$scope.increaseMaps = function(dro) {
+			dro.numberOfUsedMaps++;
+			$scope.editDRO(dro);
+		}
+
+		$scope.decreaseMaps = function(dro) {
+			dro.numberOfUsedMaps--;
+			$scope.editDRO(dro);			
 		}
 		
 

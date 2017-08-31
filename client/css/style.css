@@ -310,6 +310,15 @@ div.removed-content, div.failed-content {
     height: 50px;
 }
 
+.closeBtnDRO {
+    position: relative;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 18px 16px;
+    cursor: pointer;
+    
+}
+
 /* Style the close button */
 .check {
     position: absolute;
@@ -318,12 +327,20 @@ div.removed-content, div.failed-content {
     padding: 12px 16px 12px 16px;
 }
 
-.closeBtn:hover {
+.addBtnDRO {
+    position: relative;
+    left: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+    cursor: pointer;
+}
+
+.closeBtn:hover, .closeBtnDRO:hover {
     background-color: red;
     color: white;
 }
 
-.check:hover {
+.check:hover, .addBtnDRO:hover {
     background-color: #1b55fb ;
     color: white;
 }
