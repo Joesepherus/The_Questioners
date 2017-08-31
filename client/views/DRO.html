@@ -1,4 +1,3 @@
-<title>To-do list</title>
 <div class="container todolist">
     <div class="row"> 
 
@@ -96,7 +95,6 @@
     <h2>DROs</h2>
 </div>
 
-
 <div class="col-md-1 selector">
     <select id="selector" ng-model="selectedScreenIndex" ng-options="view.select for view in views" ng-change="select()">
         <option value="">none</option>
@@ -105,66 +103,24 @@
 </div>
 
 <div class="col-md-12">
-    <p ng-model="numberOfQaA">Number of tasks: {{selectedItem.tasks.length}}</p>
+    <p ng-model="numberOfQaA">Number of DROs: {{selectedItem.DROs.length}}</p>
 </div>
 
 <ul class="col-md-12" id="myUL">
     <div ng-repeat="dro in allDROs | startFrom:currentPage*pageSize | limitTo:pageSize" ng-class="isLast($last)">
-        <li onclick="dropFunction(this)" class="default dropbtn2">
-            <div>
-                <img class="checkImg" src="css\img\check2.png">
-                <img class="checkImg" src="css\img\disable.png">    
-                <img class="checkImg" src="css\img\clock.png">                                            
-                <p>{{dro.item}}</p> 
-                <p>{{dro.map}}</p>
-            </div>
-        </li>
+        <a href="#!/DRO/details/{{dro._id}}">
+            <li onclick="dropFunction(this)" class="default dropbtn2">
+                <div>
+                    <img class="checkImg" src="css\img\check2.png">
+                    <img class="checkImg" src="css\img\disable.png">    
+                    <img class="checkImg" src="css\img\clock.png">                                            
+                    <p>{{dro.item}}</p> 
+                    <p>{{dro.map}}</p>
+                </div>
+            </li>
+        </a>
     </div>
 </ul>
-
-<div class="container">
-    <!-- Trigger the modal with a button -->
-    <!-- Modal -->
-    <div class="modal fade" id="editModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div id="editModalHeader" class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit DRO</h4>
-                </div>
-                <div class="modal-body">
-                <form ng-model="allDROs" id="editTaskForm" class="w3-container" method="post" ng-submit="editDRO(allDROs[url])">
-                    <p>
-                        <label class="newTaskType">Title:</label>
-                        <input id="test_input" class="w3-input" name="editTitle" type="text" ng-model="task.title" required>
-                    </p>
-                    <p>    
-                        <label class="newTaskType">Description:</label>
-                        <input class="w3-input" name="editDescription" ng-model="task.description" type="text" required>
-                    </p>
-                    <div>
-                        <label class="newTaskType">Type</label>
-                    </div>
-                    <select name="editType" id="editSelect" ng-model="task.type" required>
-                        <option value=""></option>                        
-                        <option value="work">work</option>
-                        <option value="personal">personal</option>
-                        <option value="school">school</option>  
-                        <option value="watch later">watch later</option>                      
-                    </select>  
-                </form>            
-                </div>
-                <div class="modal-footer">
-                    <button class="col-md-2 editBtn btn btn-success" form="editTaskForm" type="submit" >Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 
 <!-- for pagination WIP -->
 <div class="col-md-12">

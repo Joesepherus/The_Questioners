@@ -28,6 +28,10 @@ myApp.config(function($routeProvider){
 	.when("/DRO", {
 		controller: "DROController",
 		templateUrl: "views/DRO.html",
+	})
+	.when("/DRO/details/:id", {
+		controller: "DROController",
+		templateUrl: "views/DRO_details.html",
 	});
 });
 
