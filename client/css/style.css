@@ -12,10 +12,17 @@ img {
 
 body {
     background-color: #18BC9C;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px!important;
 }
 
+.btn {
+    font-size: 18px!important;
+}
+
+select {
+    font-size: 18px!important;
+}
 
 .aboutParagraphs {
     background-color: #2C3E50;
@@ -223,7 +230,7 @@ ul li.aboutDefault {
     cursor: pointer;
     position: relative;
     padding: 12px 8px 12px 10px;
-    font-size: 18px;
+    font-size: 22px;
     transition: 0.2s;
     list-style: none; 
   /* make the list items unselectable */
@@ -466,7 +473,7 @@ div.ui-datepicker
 }
 
 .aboutNewTaskForm{
-    height: 350px;  
+    height: 370px;  
     background-color: #f1f0eb; 
 }
 
@@ -492,7 +499,7 @@ div.ui-datepicker
 
 .copyright {
     color: #fff;
-    font-size: 15px;
+    font-size: 20px;
     vertical-align: middle;
 	padding-top: 10px;
 }
@@ -577,7 +584,7 @@ header.masthead {
     display: block;
     margin: 0 auto 20px; }
   header.masthead .intro-text .name {
-    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2em;
     font-weight: 500;
     display: block;
@@ -586,7 +593,7 @@ header.masthead {
   header.masthead .intro-text .skills {
     font-size: 1.25em;
     font-weight: 300; 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     
 }
 
@@ -666,7 +673,7 @@ img.TheQAbout {
     white-space: -o-pre-wrap; /* newer Opera */
     white-space: pre-wrap; /* Chrome; W3C standard */
     word-wrap: break-word; /* IE */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .newspaper {
@@ -681,7 +688,7 @@ img.TheQAbout {
 
 .aboutPara {
     width: 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 16px;
     float: left;
     padding: 0 10px 0 10px;
@@ -712,11 +719,11 @@ h2.name {
     color: #2C3E50;
     font-weight: bold;
     text-decoration: underline;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 h3 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .aboutHeader2 {
@@ -725,13 +732,13 @@ h3 {
     align-self: center;
     margin-left: auto;
     margin-right: auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .aboutHeader {
     background-color: #2C3E50;
     height: 100px !important; 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     
 }
 
