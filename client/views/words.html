@@ -1,0 +1,357 @@
+<div class="container QaA">
+    <div class="row">
+        <div class="col-md-12" ng-init="getAllWords()">
+            <div class="w3-card-4">
+                <div class="w3-container w3-green">
+                    <h2>New Word</h2>
+                </div>
+                <form name="newTaskForm" id="newTaskForm" class="w3-container aboutNewTaskForm" method="post" ng-submit="addWord()">
+                    <p>
+                        <label class="newTaskType">Word:</label>
+                        <textarea class="w3-input" name="newTaskTitle" cols="40" rows="1" ng-model="word.word" required></textarea>
+                    </p>
+                    <p>
+                        <label class="newTaskType">Description:</label>
+                        <textarea class="w3-input" name="newTaskDescription" cols="40" rows="3" ng-model="word.description" required></textarea>
+                    </p>
+                    <div>
+                        <label class="newTaskType">Translation:</label>
+                        <textarea class="w3-input" name="newTaskTitle" cols="40" rows="1" ng-model="word.translation" required></textarea>
+
+                    </div>
+                </form>
+                <button class="col-md-2 addBtn btn btn-success" form="newTaskForm" type="submit" onclick="newElement()">Submit</button>
+            </div>
+
+        </div>
+
+        <div class="col-md-10">
+            <h2>All Words</h2>
+        </div>
+
+        <div class="col-md-12">
+            <p ng-model="numberOfWords">Number of Words: {{numberOfWords}}</p>
+        </div>
+
+        <div class="col-md-3">
+            <a onclick="scrollToTheEndOfPage()">Scroll to the bottom</a>
+        </div>
+
+        <ul class="col-md-12" id="myUL">
+            <div ng-repeat="word in allWords.slice().reverse()" ng-class="isLast($last)">
+                <li onclick="dropFunction(this)" class="aboutDefault aboutDropbtn2">
+                    <div class="col-md-12 QaAPara">{{word.word}}</div>
+                    <div class="aboutDropdown-content" id="drop">
+                        <div class="col-md-8">
+                            <p class="dropPara QaAPara">{{word.description}}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <p class="dropPara QaAPara">{{word.translation}}</p>
+                        </div>
+                        <div class="pull-right col-md-4">
+                            <span class="badge">Posted {{word.create_date}}</span>
+                            <br>
+                            <button id="modalButton" type="button" class="modal-button btn btn-info btn-md editBtn" data-toggle="modal" data-target="#myModal"
+                                onclick="editModalForm(this)" ng-click="editModalForm(word._id)">Edit Word</button>
+                            <br>
+                            <button type="button" class="btn btn-danger btn-md deleteBtn" ng-click="deletePermanentlyWord(word._id, word)">Delete permanently</button>
+                        </div>
+                    </div>
+                </li>
+            </div>
+        </ul>
+
+        <div class="container">
+            <!-- Trigger the modal with a button -->
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div id="editModalHeader" class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit Word</h4>
+                        </div>
+                        <div class="modal-body editQaABody">
+                            <form ng-model="allWords" id="editTaskForm" class="w3-container" method="post" ng-submit="editWord(allWords[url])">
+                                <p>
+                                    <label class="newTaskType">Title:</label>
+                                    <textarea class="w3-input" name="editTitle" cols="40" rows="1" ng-model="word.word" required></textarea>
+                                </p>
+                                <p>
+                                    <label class="newTaskType">Description:</label>
+                                    <textarea class="w3-input editQaADescription" name="editDescription" cols="40" rows="1" ng-model="word.description" required></textarea>
+                                </p>
+                                <p>
+                                    <label class="newTaskType">Translation:</label>
+                                    <textarea class="w3-input editQaADescription" name="editDescription" cols="40" rows="1" ng-model="word.translation" required></textarea>
+                                </p>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="col-md-2 editBtn btn btn-success" form="editTaskForm" type="submit">Submit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <a onclick="scrollToTheStartOfPage()">Scroll to the top</a>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#QaA").addClass('active');
+        document.title = "QaA - Questions and Answers";
+    });
+
+    function scrollToTheEndOfPage() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function scrollToTheStartOfPage() {
+        window.scrollTo(0, 0);
+    }
+
+    // giving modal form placeholder values for each input txt
+    function editModalForm(elem) {
+        var li = document.getElementsByTagName("LI");
+        var i;
+        console.log(elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML);
+        document.getElementsByName("editTitle")[0].value = elem.parentElement.parentElement.parentElement.children[0].innerHTML;
+        document.getElementsByName("editDescription")[0].value = elem.parentElement.parentElement.children[0].children[0].innerHTML;
+
+        var select = document.getElementById("editSelect");
+        switch (elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML) {
+            case "Javascript":
+                select.value = "Javascript";
+                break;
+            case "HTML":
+                select.value = "HTML";
+                break;
+            case "CSS":
+                select.value = "CSS";
+                break;
+            case "Data structures":
+                select.value = "Data structures";
+                break;
+            case "Other":
+                select.value = "Other";
+                break;
+        }
+
+        // updating the angular QaA values
+        $('[name="editTitle"]').trigger('input');
+        $('[name="editDescription"]').trigger('input');
+        $('[name="editType"]').trigger('change');
+
+        // change the header color to the type of the task
+        switch (elem.parentElement.parentElement.parentElement.children[1].children[0].innerHTML) {
+            case "Javascript":
+                $("#editModalHeader").css('background', 'blueviolet');
+                break;
+            case "CSS":
+                $("#editModalHeader").css('background', '#ffc900');
+                break;
+            case "HTML":
+                $("#editModalHeader").css('background', '#048E16');
+                break;
+            case "Data structures":
+                $("#editModalHeader").css('background', '#900C3E');
+                break;
+        }
+    }
+
+    // switching between selected values
+    $("#selector").change(function () {
+        var li = document.getElementsByTagName("LI");
+        var i;
+        for (i = 7; i < li.length; i++) {
+            if (this.value == "passed") {
+                if (li[i].children[1].children[0].innerHTML == "passed") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "inprogress") {
+                if (li[i].children[1].children[0].innerHTML == "inprogress") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "failed") {
+                if (li[i].children[1].children[0].innerHTML == "failed") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            if (this.value == "Javascript") {
+                if (li[i].children[1].children[0].innerHTML == "Javascript") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "HTML") {
+                if (li[i].children[1].children[0].innerHTML == "HTML") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "CSS") {
+                if (li[i].children[1].children[0].innerHTML == "CSS") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "Data structures") {
+                if (li[i].children[1].children[0].innerHTML == "Data structures") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else if (this.value == "Other") {
+                if (li[i].children[1].children[0].innerHTML == "Other") {
+                    li[i].style.display = "flex";
+                }
+                else {
+                    li[i].style.display = "none";
+                }
+            }
+            else {
+                li[i].style.display = "flex";
+            }
+        }
+    });
+
+    function dropFunction(element) {
+        element.children[1].classList.toggle("show");
+    }
+
+    // Create a "close" button and append it to each list item
+    var li = document.getElementsByTagName("LI");
+    var i;
+    for (i = 7; i < li.length; i++) {
+
+        // the close task button
+        /*var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "closeBtn";
+        span.setAttribute('onclick', 'failedQaA(this)');
+        span.setAttribute('ng-click', 'failedQaA(qaa._id, qaa)');    
+        span.appendChild(txt);
+        li[i].appendChild(span);*/
+
+        // the check task button
+        /*var span1 = document.createElement("SPAN");
+        var txt1 = document.createTextNode("\u2713");
+        span1.className = "check";
+        span1.setAttribute('onclick', 'passedQaA(this)');    
+        span1.setAttribute('ng-click', 'passedQaA(qaa._id, qaa)');
+        span1.appendChild(txt1);
+        li[i].appendChild(span1);*/
+
+    }
+
+    // Click on a close button to hide the current list item
+    function failedQaA(element) {
+        var li = element.parentElement;
+        if (li.children[1].children[2].innerHTML != "failed") {
+            li.style.backgroundColor = "#696a69";
+            li.children[1].children[2].innerHTML = "failed";
+            li.children[1].style.backgroundColor = "#a1a1a1";
+        }
+        else {
+            li.style.backgroundColor = "white";
+            li.children[1].children[2].innerHTML = "passed";
+            li.children[1].style.backgroundColor = "#e2e1df";
+        }
+    }
+
+    function passedQaA(element) {
+        var li = element.parentElement;
+        li.classList.toggle('passed');
+        if (li.children[1].children[2].innerHTML != "passed") {
+            li.children[1].children[2].innerHTML = "passed";
+        }
+        else {
+            li.children[1].children[2].innerHTML = "failed";
+        }
+    }
+
+    // Add a "checked" symbol when clicking on a list item
+    /*var list = document.getElementById('myUL');
+    list.addEventListener('click', function(ev) {
+        if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('completed');
+        }
+    }, false);*/
+
+    // Create a new list item when clicking on the "Add" button
+    function newElement() {
+
+        // form validation if title, description and type have been entered
+        var title = document.forms["newTaskForm"]["newTaskTitle"].value;
+        var description = document.forms["newTaskForm"]["newTaskDescription"].value;
+        var type = document.forms["newTaskForm"]["newTaskType"].value;
+
+        if (title === '') {
+            alert("Title missing!");
+            return false;
+        }
+
+        if (description === '') {
+            alert("Description missing!");
+            return false;
+        }
+
+        if (type === '') {
+            alert("Type missing!");
+            return false;
+        }
+
+        /* 
+            TO DO:
+            these lines of code look weird, why is the checking if the
+            buttons have been clicked in a function that is creating new tasks? 
+            i am so confused by that rly, please change it :) 
+        */
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+        var passed = document.getElementsByClassName("passed");
+
+        for (i = 0; i < passed.length; i++) {
+            passed[i].onclick = function () {
+                var div = this.parentElement;
+                div.classList.toggle('passed');
+            }
+        }
+
+    }
+
+</script>

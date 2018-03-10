@@ -29,6 +29,10 @@ myApp.config(function($routeProvider){
 		controller: "DROController",
 		templateUrl: "views/DRO.html",
 	})
+	.when("/words", {
+		controller: "wordsController",
+		templateUrl: "views/words.html",
+	})
 	.when("/DRO/details/:id", {
 		controller: "DROController",
 		templateUrl: "views/DRO_details.html",

@@ -377,6 +377,85 @@ app.delete('/api/DRO/deleted/:id', function (req, res) {
 		});
 })
 
+/*
+	Words
+*/
+
+Word = require('./models/words.js');
+
+// display all words
+app.get('/api/words', function (req, res) {
+	Word.getAllWords(function (err, allWords) {
+		if (err) {
+			throw err;
+		}
+		res.json(allWords);
+	});
+})
+
+// display a word with a certain ID
+app.get('/api/word/:id', function (req, res) {
+	Word.getWordById(req.params.id,
+		function (err, word) {
+			if (err) {
+				throw err;
+			}
+			res.json(word);
+		});
+})
+
+// add a new word
+app.post('/api/word', function (req, res) {
+	var word = req.body;
+	Word.addWord(word, function (err, word) {
+		if (err) {
+			throw (err);
+			res.send({
+				message: 'something went wrong'
+			});
+		}
+		else {
+			res.json(word);
+		}
+	});
+})
+
+// update a word
+app.put('/api/word/:id', function (req, res) {
+	var id = req.params.id;
+	var word = req.body;
+
+	Word.updateWord(id, word, {},
+		function (err, word) {
+			if (err) {
+				throw (err);
+				res.send({
+					message: 'something went wrong'
+				});
+			}
+			else {
+				res.json(word);
+			}
+		});
+})
+
+// remove word permanently
+app.delete('/api/word/deleted/:id', function (req, res) {
+	var id = req.params.id;
+	Word.deletePermanentlyWord(id,
+		function (err, word) {
+			if (err) {
+				throw (err);
+				res.send({
+					message: 'something went wrong'
+				});
+			}
+			else {
+				res.json(word);
+			}
+		});
+})
+
 var server = app.listen(process.env.PORT || 100, function () {
 	var host = server.address().address;
 	var port = server.address().port;
