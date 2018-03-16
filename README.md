@@ -1,18 +1,18 @@
-# To-do list
+# The Questioners 
 Is a WEB application used for storing/creating/editing and deleting tasks and many more.  
 Built on a RESTful API server using Express, MongoDB and AngularJS.  
 It contains two main sections: To-do list and QaA(Questions and Answers).  
 Actively in development is a new section called Blog.  
 Created by Joesepherus.  
 
-![screen of the website](https://raw.githubusercontent.com/Joesepherus/To-do-list/master/client/css/img/toDoList-v1.1-24-8-2017.png)
+![screen of the website](https://raw.githubusercontent.com/Joesepherus/To-do-list/master/src/assets/img/toDoList-v1.1-24-8-2017.png)
 
 ## Technologies used ##  
 
 NodeJS - javascript on the server.  
 Express - web framework, that has a webserver to handle our requests.  
 MongoDB - for data storage.  
-AngularJS - client-side javascript framework for MVC.  
+Angular5 - client-side javascript framework for MVC.  
 Bootstrap - HTML, CSS and JS framework for responsive websites.
 
 ## How to start ##

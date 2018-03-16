@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var schema = mongoose.Schema({
+var schema = new mongoose.Schema({
 	title:{
 		type: String,
 		required: true
@@ -10,10 +10,6 @@ var schema = mongoose.Schema({
 		required: true
 	},
 	description:{
-		type: String,
-		required: true
-	},
-	state:{
 		type: String,
 		required: true
 	},
@@ -30,7 +26,7 @@ var schema = mongoose.Schema({
 });
 
 var QaA = module.exports = mongoose.model('QaA', schema);
-
+/*
 module.exports.getAllQaA = function(callback, limit){
 	QaA.find(callback).limit(limit);
 }
@@ -90,3 +86,4 @@ module.exports.deletePermanentlyQaA = function(id, callback){
 	QaA.deleteOne(query, callback);
 }
 
+*/

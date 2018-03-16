@@ -1,0 +1,17 @@
+.QaAPara {
+    width: 100%;
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* ancient Opera */
+    white-space: -o-pre-wrap; /* newer Opera */
+    white-space: pre-wrap; /* Chrome; W3C standard */
+    word-wrap: break-word; /* IE */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.editQaABody {
+    height: 350px;
+}
+
+.editQaADescription {
+    height: 100px;
+}

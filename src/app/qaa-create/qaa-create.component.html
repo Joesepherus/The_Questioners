@@ -1,0 +1,35 @@
+<div class="col-md-12">
+  <div class="w3-card-4">
+    <div class="w3-container w3-green">
+      <h2>New QaA</h2>
+    </div>
+    <form name="newTaskForm" id="newTaskForm" class="w3-container
+    aboutNewTaskForm" method="post" (ngSubmit)="addQaA()" #qaaForm="ngForm">
+      <p>
+        <label class="newTaskType">Title:</label>
+        <textarea class="w3-input" name="newTaskTitle" cols="40" rows="1"
+        [(ngModel)]="qaa.title" name="title" required></textarea>
+      </p>
+      <p>
+        <label class="newTaskType">Description:</label>
+        <textarea class="w3-input" name="newTaskDescription" cols="40"
+        rows="3" [(ngModel)]="qaa.description" name="description"
+        required></textarea>
+      </p>
+      <div>
+        <label class="newTaskType">Type:</label>
+      </div>
+      <select [(ngModel)]="qaa.type" name="type" required>
+        <option value=""></option>
+        <option value="Javascript">Javascript</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="Data structures">Data structures</option>
+        <option value="Other">Other</option>
+      </select>
+    </form>
+    <button class="col-md-2 addBtn btn btn-success" form="newTaskForm"
+    type="submit" [disabled]="!qaaForm.form.valid">Submit</button>
+  </div>
+
+</div>

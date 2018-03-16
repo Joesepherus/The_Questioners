@@ -1,0 +1,851 @@
+/* You can add global styles to this file, and also import other style files */
+img {
+	width: 100%;
+}
+
+.todolist, .QaA {
+    margin-top: 30px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+body {
+    background-color: #18BC9C;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 18px!important;
+}
+
+.btn {
+    font-size: 18px!important;
+}
+
+select {
+    font-size: 18px!important;
+}
+
+.aboutParagraphs {
+    background-color: #2C3E50;
+    height: 50px !important;
+    vertical-align: middle;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+b {
+    color: #2C3E50;
+}
+
+/* navbar */
+.navbar-default {
+    background-color: #2C3E50/*#048e16*/;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: lightblue;
+    background-color: #18BC9C;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: lightblue;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+div.hamburger {
+    width: 30px;
+    height: 3px;
+    background-color: black;
+	margin: 6px 15px;
+}
+
+.testing {
+    margin-right: 10px;
+}
+
+div.dropdown{
+	
+}
+
+div.dropdown:click > .dropdown-menu {
+    display: block;
+}
+
+.dropbtn {
+    background-color: #18BC9C;
+    color: white;
+	padding: 1px;
+    border: none;
+	cursor: pointer;
+	margin-top: 7px;	
+}
+
+
+.dropbtn2 {
+	padding: 1px;
+    border: none;
+	cursor: pointer;
+    margin-top: 7px;	
+    border: solid;
+    border-color: black;
+}
+
+.aboutDropbtn2 {
+	padding: 1px;
+    border: none;
+	cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #e2e1df;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border: solid;
+    border-color: black;
+    margin-top: 13px;
+    margin-right: 10px;    
+    padding: 5px 10px 0px 10px;
+}
+
+
+.dropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 500px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: black;
+}
+
+.dropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content2 a:hover {
+	background-color: #f1f1f1
+}
+
+.aboutDropdown-content {
+    display: none;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+    margin-top: 10px;
+    margin-right: 0px;    
+    padding: 5px 10px 0px 10px;
+}
+
+
+.aboutDropdown-content2 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 500px;
+    overflow: auto;
+    z-index: 1;
+    color: black;
+}
+
+.aboutDropdown-content2 a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.aboutDropdown-content2 a:hover {
+	background-color: #f1f1f1
+}
+
+
+
+.show {
+	display:block;
+}
+
+li.hamburger {
+	padding-right: 15px;
+}
+
+
+
+/* Include the padding and border in an element's total width and height */
+/** {
+    box-sizing: border-box;
+}*/
+
+/* Remove margins and padding from the list */
+ul.default {
+    margin: 0;
+    padding-right: 0;
+}
+
+/* Style the list items */
+ul li.default {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 50px;
+    background: #eee;
+    font-size: 18px;
+    transition: 0.2s;
+    list-style: none; 
+  /* make the list items unselectable */
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+}
+
+ul.aboutDefault {
+    margin: 0;
+    padding-right: 0;
+}
+
+/* Style the list items */
+ul li.aboutDefault {
+    cursor: pointer;
+    position: relative;
+    padding: 12px 8px 12px 10px;
+    font-size: 22px;
+    transition: 0.2s;
+    list-style: none; 
+  /* make the list items unselectable */
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;*/
+    margin-bottom: 50px;
+    border: 1px solid #2C3E50;
+    display: flex;
+    flex-direction: column;
+    background-color:  #6ce271 ;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+/*ul li:nth-child(odd).default {
+    background-color: white ;
+}*/
+
+/* Darker background-color on hover */
+ul li:hover.default {
+    opacity: 0.70;
+    border-color: black;
+}
+
+/* When clicked on, add a background color and strike out text */
+ul li.completed,  ul li.passed{
+    background-color: white;
+    color: black;
+    text-decoration: line-through;
+}
+
+ul li.removed, ul li.failed {
+    background-color: #696a69 !important;
+    color: black;
+}
+
+ul li.work, ul li.javascript  {
+    background-color: blueviolet;
+    color: black;
+}
+
+ul li.personal, ul li.css {
+    background-color: #ffc900;
+    color: black;
+}
+
+ul li.school, ul li.html {
+    background-color: #048E16;
+    color: black;
+}
+
+ul li.watchLater, ul li.DataStructures  {
+    background-color: #900C3E;
+    color: black;
+}
+
+div.work-content, div.javascript-content{
+    background-color: #915aff;    
+}
+
+div.personal-content, div.css-content {
+    background-color: #ffd94b;
+}
+
+div.school-content, div.html-content {
+    background-color: #12b20d;
+}
+
+div.watchLater-content, div.DataStructures-content {
+    background-color: #C70039;
+}
+
+div.removed-content, div.failed-content {
+    background-color: #a1a1a1;
+}
+
+/* Style the close button */
+.closeBtn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 18px 16px;
+    height: 50px;
+}
+
+.closeBtnDRO {
+    position: relative;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 18px 16px;
+    cursor: pointer;
+    
+}
+
+/* Style the close button */
+.check {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+}
+
+.addBtnDRO {
+    position: relative;
+    left: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+    cursor: pointer;
+}
+
+.closeBtn:hover, .closeBtnDRO:hover {
+    background-color: red;
+    color: white;
+}
+
+.check:hover, .addBtnDRO:hover {
+    background-color: #1b55fb ;
+    color: white;
+}
+
+/* Style the header */
+.header {
+    background-color: green;
+    padding: 30px 40px;
+    color: white;
+    text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Style the input */
+input {
+    border: none;
+    width: 75%;
+    padding: 10px;
+    float: left;
+    font-size: 16px;
+    color: black;
+}
+
+/* Style the "Add" button */
+.addBtn {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+    box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);
+}
+
+.w3-green,.w3-hover-green:hover {
+    color:#fff!important;background-color:#4CAF50!important
+}
+
+.w3-container{
+    padding:0.01em 16px;
+}
+
+.w3-input {
+    padding:8px;
+    display:block;
+    border:none;
+    border-bottom:1px solid #ccc;
+    width:100%
+}
+
+.dropPara {
+    border-bottom: 1px solid black;
+    text-decoration: none;       
+    margin-top: 10px;     
+    margin-bottom: 10px;     
+}
+
+.selector {
+    margin-top: 13px;
+    margin-left: 9px;
+}
+
+select {
+    border: 1px solid #111;
+    background: transparent;
+    width: 150px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+    background: url(assets/img/down-arrow-circle-hi.png) 96% / 15% no-repeat #eee;
+	cursor: pointer;
+  
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* CAUTION: IE hackery ahead */
+select::-ms-expand { 
+    display: none; /* remove default arrow on ie10 and ie11 */
+}
+
+/* target Internet Explorer 9 to undo the custom arrow */
+@media screen and (min-width:0\0) {
+    select {
+        background:none\9;
+        padding: 5px\9;
+    } 
+}
+
+
+button.deleteBtn, button.editBtn, button.detailsBtn {
+    margin-bottom: 10px;
+}
+
+.calendar {
+    width: 800px;
+    height: 370px;
+}
+
+.event {
+    color: blue;
+    border: 2px solid blue;
+}
+.ui-datepicker {
+    width: 800px; /*what ever width you want*/
+    height: 370px;
+}
+div.ui-datepicker
+{
+    font-size: 25px;
+}
+
+.newTaskForm{
+    height: 250px;  
+    background-color: #f1f0eb; 
+}
+
+.aboutNewTaskForm{
+    height: 370px;  
+    background-color: #f1f0eb; 
+}
+
+.newTaskType {
+    margin-top: 10px;
+}
+
+.close {
+    width: 50px;
+    height: 30px;
+}
+
+.modal-body {
+    height: 270px;
+}
+
+.footer-bottom {
+    background-color: #2C3E50 /*#048e16*/;
+    min-height: 20px;
+    width: 100%;
+    border-top: 2px solid #DDDDDD;
+}
+
+.copyright {
+    color: #fff;
+    font-size: 20px;
+    vertical-align: middle;
+	padding-top: 10px;
+}
+
+.design {
+    color: #fff;
+    text-align: right;
+}
+
+.design a {
+    color: #fff;
+}
+
+.social:hover {
+     -webkit-transform: scale(1.1);
+     -moz-transform: scale(1.1);
+     -o-transform: scale(1.1);
+ }
+ .social {
+     -webkit-transform: scale(0.8);
+     /* Browser Variations: */
+     
+     -moz-transform: scale(0.8);
+     -o-transform: scale(0.8);
+     -webkit-transition-duration: 0.5s;
+     -moz-transition-duration: 0.5s;
+     -o-transition-duration: 0.5s;
+ }
+
+/*
+    Multicoloured Hover Variations
+*/
+ 
+ #social-fb:hover {
+     color: #3B5998;
+ }
+ #social-tw:hover {
+     color: #4099FF;
+ }
+ #social-gp:hover {
+     color: #d34836;
+ }
+ #social-em:hover {
+     color: #f39c12;
+ }
+ #social-gh:hover {
+     color: #545454;
+ }
+
+ .createdDate a {
+    background-color: #4CAF50 !important;
+}
+
+.completedDate a {
+    border: solid 3px #f0f !important;
+}
+
+.ui-state-highlight {
+    color: orange !important;
+    outline-color: yellow;
+    outline-style: solid;
+}
+
+img.TheQ {
+    width: 100%;
+    height: 130%;
+}
+
+a.TheQ {
+    padding-top: 8px !important;
+}
+
+/* ===== ABOUT WEBSITE ===== */
+
+header.masthead {
+  padding-top: 50px !important;
+  padding-bottom: 50px;
+  text-align: center;
+  color: white;
+}
+  header.masthead img {
+    display: block;
+    margin: 0 auto 20px; }
+  header.masthead .intro-text .name {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 2em;
+    font-weight: 500;
+    display: block;
+    margin-top: 50px;
+     }
+  header.masthead .intro-text .skills {
+    font-size: 1.25em;
+    font-weight: 300; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.background {
+    background-color: rgba(24, 188, 156, 0.7);
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  header.masthead {
+    padding-top: 100px;
+    padding-bottom: 100px; }
+    header.masthead .intro-text .name {
+      font-size: 4.75em; }
+    header.masthead .intro-text .skills {
+      font-size: 1.75em; } }
+
+section.success {
+  color: white;
+    padding-bottom: 20px;
+  
+}
+
+r.star-light,
+hr.star-primary {
+  max-width: 250px;
+  margin: 25px auto 30px;
+  padding: 0;
+  text-align: center;
+  border: none;
+  border-top: solid 5px; }
+
+hr.star-light:after,
+hr.star-primary:after {
+  font-family: FontAwesome;
+  font-size: 2em;
+  position: relative;
+  top: -.8em;
+  display: inline-block;
+  padding: 0 0.25em;
+  content: '\f005'; }
+
+hr.star-light {
+  border-color: white; }
+
+hr.star-light:after {
+  color: white;
+  background-color: #18BC9C; }
+
+img.TheQAbout {
+    width: 20% !important;
+    height: 50% !important;
+
+}
+
+/* Bounce In */
+.hvr-bounce-in {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+.hvr-bounce-in:hover, .hvr-bounce-in:focus, .hvr-bounce-in:active {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+  transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
+}
+
+.QaAPara {
+    width: 100%;
+    white-space: -moz-pre-wrap; /* Firefox */
+    white-space: -pre-wrap; /* ancient Opera */
+    white-space: -o-pre-wrap; /* newer Opera */
+    white-space: pre-wrap; /* Chrome; W3C standard */
+    word-wrap: break-word; /* IE */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.newspaper {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
+}
+
+.badge {
+    margin-bottom: 10px;
+}
+
+.aboutPara {
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
+    float: left;
+    padding: 0 10px 0 10px;
+    text-align: justify;
+}
+
+.calendarImg {
+    width: 10%;
+    height: 15%;
+}
+
+.img-thumbnail {
+    margin-left: 50px;
+    margin-top: 150px;
+}
+
+.skillsIT {
+    width: 130px!important;
+    height: 130px!important;
+    padding: 20px 0 20px 0;
+}
+
+.divSkillsIT {
+    width: 700px!important;
+}
+
+h2.name {
+    color: #2C3E50;
+    font-weight: bold;
+    text-decoration: underline;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h3 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.aboutHeader2 {
+    background-color: #2C3E50;
+    text-align: center;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.aboutHeader {
+    background-color: #2C3E50;
+    height: 100px !important; 
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.parallax {
+    /* The image used */
+    background-image: url('/css/img/wallpaper.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax2 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper2.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax3 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper4.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax4 {
+    /* The image used */
+    background-image: url('/css/img/wallpaper5.jpg');
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Turn off parallax scrolling for tablets and phones. Increase the pixels if needed */
+@media only screen and (max-device-width: 1024px) {
+    .parallax {
+        background-attachment: scroll;
+    }
+    .parallax2 {
+        background-attachment: scroll;
+    }
+    .parallax3 {
+        background-attachment: scroll;
+    }
+    .parallax4 {
+        background-attachment: scroll;
+    }
+}
+
+.detailsModal {
+    min-height: 480px;
+}
+
+.modal-title {
+    color: white;
+}
+
+.editQaABody {
+    height: 350px;
+}
+
+.editQaADescription {
+    height: 100px;
+}
+
+textarea {
+    resize: none;
+}
+
+.checkImg {
+    width: 20px;
+    height: 20px;
+    display: none;
+}
+
+.calendarText {
+    height: 200px;
+}
+
+
+/* POST ANGULAR 5 */
+.navbar-default {
+  background-image: none;
+} 

@@ -1,0 +1,61 @@
+<div class="container QaA">
+  <div class="row">
+    <app-qaa-create [qaaAll]="qaaAll"></app-qaa-create>
+
+    <div class="col-md-10">
+      <h2>QaA</h2>
+    </div>
+
+    <div class="col-md-1 selector">
+      <select id="selector">
+        <option value="all" selected="selected">all</option>
+        <option value="inprogress">inprogress</option>
+        <option value="passed">passed</option>
+        <option value="failed">failed</option>
+        <option value="Javascript">Javascript</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="Data structures">Data structures</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="col-md-12">
+      <p ng-model="numberOfQaA">Number of QaA: {{ numberOfQaA }}</p>
+    </div>
+
+    <div class="col-md-3">
+      <a (click)="scrollToTheEndOfPage()">Scroll to the bottom</a>
+    </div>
+
+    <ul class="col-md-12" id="myUL">
+      <div *ngFor="let qaa of qaaAll.reverse(); let last = last; let i = index" [ngClass]="isLast(last)">
+        <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
+          <div class="col-md-12 QaAPara">{{ qaa.title }}</div>
+          <div class="col-md-12">
+            <span class="label label-default">{{ qaa.type }}</span>
+          </div>
+          <div class="aboutDropdown-content" id="drop">
+            <div class="col-md-8">
+              <p class="dropPara QaAPara">{{ qaa.description }}</p>
+            </div>
+            <div class="pull-right col-md-4">
+              <span class="badge">Posted {{ qaa.create_date }}</span>
+              <br>
+              <app-qaa-edit [qaaAll]="qaaAll" [testing]="qaaAll[i]" (updateTesting)="onNotify($event)"></app-qaa-edit>
+              <br>
+              <app-qaa-delete [qaaAll]="qaaAll" [qaa]="qaa"></app-qaa-delete>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+
+    <div class="col-md-3">
+      <a (click)="scrollToTheStartOfPage()">Scroll to the top</a>
+    </div>
+
+  </div>
+</div>
+
+<app-qaa-edit-modal [qaa]="test"></app-qaa-edit-modal>
