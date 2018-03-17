@@ -1,0 +1,48 @@
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <!-- Modal -->
+  <div class="modal fade" id="editModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div id="editModalHeader" class="modal-header">
+          <button type="button" class="close"
+          data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Task</h4>
+        </div>
+        <div class="modal-body">
+          <form *ngIf="todo" id="editTaskForm" class="w3-container"
+          method="post" (ngSubmit)="editTodo(id)">
+            <p>
+              <label class="newTaskType">Title:</label>
+              <input id="test_input" class="w3-input" name="title"
+              type="text" [(ngModel)]="todo.title" required>
+            </p>
+            <p>
+              <label class="newTaskType">Description:</label>
+              <input class="w3-input" name="description"
+              [(ngModel)]="todo.description" type="text" required>
+            </p>
+            <div>
+              <label class="newTaskType">Type</label>
+            </div>
+            <select name="type" id="editSelect" [(ngModel)]="tood.type"
+            required>
+              <option value=""></option>
+              <option value="work">work</option>
+              <option value="personal">personal</option>
+              <option value="school">school</option>
+              <option value="watch later">watch later</option>
+            </select>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="col-md-2 editBtn btn btn-success" form="editTaskForm"
+          type="submit">Submit</button>
+          <button type="button" class="btn btn-default"
+          data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

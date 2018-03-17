@@ -18,7 +18,6 @@ export class QaaComponent implements OnInit {
   readonly numberOfLi = 7;
   constructor(private http: HttpClient) {
     this.qaaAll = [];
-    this.qaas = this.qaa;
   }
 
   onNotify(val) {
@@ -27,7 +26,7 @@ export class QaaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('/qaa').subscribe(data => {
+    this.http.get('/api/qaa').subscribe(data => {
       this.qaaAll = data;
     });
 

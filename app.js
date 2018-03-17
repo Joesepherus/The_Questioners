@@ -3,7 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-var qaa = require('./routes/theQ');
+var routes = require('./routes/theQ');
 var app = express();
 
 var mongoose = require('mongoose');
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/qaas', express.static(path.join(__dirname, 'dist')));
 app.use('/todo', express.static(path.join(__dirname, 'dist')));
-app.use('/qaa', qaa);
+app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

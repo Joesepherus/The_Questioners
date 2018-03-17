@@ -10,6 +10,10 @@ import { QaaDeleteComponent } from './qaa-delete/qaa-delete.component';
 import { QaaEditComponent } from './qaa-edit/qaa-edit.component';
 import { QaaEditModalComponent } from './qaa-edit-modal/qaa-edit-modal.component';
 import { TodoComponent } from './todo/todo.component';
+import { TodoCreateComponent } from './todo-create/todo-create.component';
+import { TodoEditModalComponent } from './todo-edit-modal/todo-edit-modal.component';
+import { TodoEditComponent } from './todo-edit/todo-edit.component';
+import { TodoDeleteComponent } from './todo-delete/todo-delete.component';
 
 const appRoutes: Routes = [
   {
@@ -37,7 +41,11 @@ const appRoutes: Routes = [
     QaaDeleteComponent,
     QaaEditComponent,
     QaaEditModalComponent,
-    TodoComponent
+    TodoComponent,
+    TodoCreateComponent,
+    TodoEditModalComponent,
+    TodoEditComponent,
+    TodoDeleteComponent
   ],
   imports: [
     BrowserModule,

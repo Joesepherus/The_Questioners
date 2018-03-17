@@ -15,9 +15,8 @@ export class QaaCreateComponent implements OnInit {
   }
 
   addQaA() {
-    console.log(this.qaa);
     this.qaaAll.push(this.qaa);
-    this.http.post('/qaa', this.qaa)
+    this.http.post('/api/qaa', this.qaa)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

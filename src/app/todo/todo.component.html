@@ -1,3 +1,57 @@
-<p>
-  todo works!
-</p>
+<div class="container todolist">
+  <div class="row">
+
+    <app-todo-create [todoAll]="todoAll"></app-todo-create>
+
+    <div class="col-md-10">
+      <h2>Tasks</h2>
+    </div>
+
+
+    <div class="col-md-1 selector">
+      <select id="selector" ng-options="view.select for view in views"
+      ng-change="select()">
+        <option value="">none</option>
+
+      </select>
+    </div>
+
+    <div class="col-md-12">
+      <p ng-model="numberOfQaA">Number of todos: {{todoAll.length}}
+      </p>
+    </div>
+    <ul class="col-md-12" id="myUL">
+      <div *ngFor="let todo of todoAll.reverse(); let last = last"
+      [ngClass]="isLast(last)">
+        <li (click)="dropFunction($event)" class="default dropbtn2">
+          <div>
+            <img class="checkImg" src="..\..\assets\img\check2.png">
+            <img class="checkImg" src="..\..\assets\img\disable.png">
+            <img class="checkImg" src="..\..\assets\img\clock.png">
+            <span>{{todo.title}}</span>
+          </div>
+          <div class="dropdown-content" id="drop">
+            <p class="label label-default">Posted {{todo.create_date}}</p>
+            <p class="label label-default">{{todo.type}}</p>
+            <p class="label label-default">{{todo.state}}</p>
+            <p class="dropPara">{{todo.description}}</p>
+            <div class="modal-button">
+              <app-todo-edit [todoAll]="qaaAll" [testing]="todoAll[i]"
+              (updateTesting)="onNotify($event)"></app-todo-edit>
+
+              <app-todo-delete [todoAll]="todoAll" [todo]="todo"></app-todo-delete>
+            </div>
+          </div>
+          <span class="closeBtn" (click)="removeTask($event, todo)">&#215;</span>
+          <span class="check" (click)="checkTask($event, todo)">&#x2713;</span>
+        </li>
+      </div>
+
+    </ul>
+
+    <app-todo-edit-modal [todo]="test"></app-todo-edit-modal>
+
+
+  </div>
+</div>
+<br>

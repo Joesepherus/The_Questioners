@@ -1,0 +1,32 @@
+<div class="col-md-12" ng-init="getAllTasks()">
+  <div class="w3-card-4">
+    <div class="w3-container w3-green">
+      <h2>New task</h2>
+    </div>
+    <form name="newTaskForm" id="newTaskForm" class="w3-container newTaskForm"
+    method="post" (ngSubmit)="addTodo()" #todoForm="ngForm">
+      <p>
+        <label class="newTaskType">Title:</label>
+        <input class="w3-input" name="newTaskTitle" id="inputTitle" type="text"
+        [(ngModel)]="todo.title" name="title" required>
+      </p>
+      <p>
+        <label class="newTaskType">Description:</label>
+        <input class="w3-input" name="newTaskDescription" id="inputDescription"
+        type="text" [(ngModel)]="todo.description" name="description" required>
+      </p>
+      <div>
+        <label class="newTaskType">Type:</label>
+      </div>
+      <select [(ngModel)]="todo.type" name="type" required>
+        <option value=""></option>
+        <option value="work">work</option>
+        <option value="watch later">watch later</option>
+        <option value="personal">personal</option>
+        <option value="school">school</option>
+      </select>
+    </form>
+    <button class="col-md-2 addBtn btn btn-success" form="newTaskForm"
+    type="submit" [disabled]="!todoForm.form.valid">Submit</button>
+  </div>
+</div>

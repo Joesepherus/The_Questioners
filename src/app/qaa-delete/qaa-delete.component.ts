@@ -16,7 +16,7 @@ export class QaaDeleteComponent implements OnInit {
 
   deleteQaa(id) {
     this.qaaAll.splice(-1, 1);
-    this.http.delete('/qaa/' + id)
+    this.http.delete('/api/qaa/' + id)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

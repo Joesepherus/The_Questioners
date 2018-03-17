@@ -22,7 +22,7 @@ export class QaaEditComponent implements OnInit {
   }
 
   editQaa(id) {
-    this.http.put('/qaa/' + id, this.testing)
+    this.http.put('/api/qaa/' + id, this.testing)
       .subscribe(res => {
       }, (err) => {
         console.log(err);
@@ -42,7 +42,6 @@ export class QaaEditComponent implements OnInit {
     for (i = this.numberOfLi; i < this.qaaAll.length; i++) {
       if (this.qaaAll[i]._id == elem._id) {
         this.test = elem;
-
       }
     }
     this.elem = $event.target;
