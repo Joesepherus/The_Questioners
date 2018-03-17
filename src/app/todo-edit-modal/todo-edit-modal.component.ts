@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TodoEditModalComponent implements OnInit {
   @Input() todoAll: any;
   @Input() todo = {};
-  
+
   constructor() { }
 
   ngOnInit() {

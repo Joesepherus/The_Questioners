@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>The Questioners</title>
+  <base href="/">
+  <title>MeanAngular5</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/img/TheQ-transparent.png">
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+  <link rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+  integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+  crossorigin="anonymous">
+  <link rel="stylesheet"
+  href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+  <link
+  href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+  rel="stylesheet">
+  <link rel="stylesheet"
+  href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"> </span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul id="myTab" class="nav navbar-nav">
+          <li class="hamburger">
+            <div class="testing">
+              <div id="droppero" class="dropbtn">
+                <div class="hamburger"> </div>
+                <div class="hamburger"></div>
+                <div class="hamburger"></div>
+                <div id="myDropdown" class="dropdown-content2">
+                  <h3 class="aboutParagraphs">Calendar</h3>
+                  <div id="dt" class="calendar">
+                  </div>
+                  <div>
+                    <h3 class="aboutParagraphs">Notes</h3>
+                    <textarea class="w3-input calendarText" id="inputName"
+                    cols="40" rows="1"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li id="about">
+            <a class="navbar-brand TheQ" data-toggle="tab" href="#!/about">
+              <img alt="TheQ" src="assets/img/TheQ-transparent.png" class="TheQ
+              hvr-bounce-in">
+            </a>
+          </li>
+          <li id="todolist">
+            <a href="/todo">To-do list</a>
+          </li>
+          <li id="QaA">
+            <a href="/qaas">QaA</a>
+          </li>
+          <li id="flashcards">
+            <a class="nav-item nav-link" data-toggle="tab"
+            href="/flashcards">Flashcards</a>
+          </li>
+          <li id="words">
+            <a href="/words">Words</a>
+          </li>
+          <li id="DRO">
+            <a class="nav-item nav-link" data-toggle="tab" href="/DRO">DRO</a>
+          </li>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <app-root></app-root>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="copyright pull-left">
+        © 2017, Created by Jozef Maloch
+      </div>
+      <div class="design pull-right">
+        <div class="center-block">
+          <a href="https://github.com/Joesepherus">
+            <i id="social-gh" class="fa fa-github-square fa-3x social"></i>
+          </a>
+          <a href="https://www.facebook.com/JoesMaloch">
+            <i id="social-fb" class="fa fa-facebook-square fa-3x social"></i>
+          </a>
+          <a href="https://twitter.com/TQs_Joesepherus">
+            <i id="social-tw" class="fa fa-twitter-square fa-3x social"></i>
+          </a>
+          <a href="https://plus.google.com/u/1/+Joesepherus">
+            <i id="social-gp" class="fa fa-google-plus-square fa-3x social"></i>
+          </a>
+          <a href="mailto:jozefmaloch@gmail.com">
+            <i id="social-em" class="fa fa-envelope-square fa-3x social"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
+
+<script>
+
+  /*$( function() { // An array of dates var eventDates = {}; eventDates[ new
+      Date( '08/07/2017' )] = new Date( '08/07/2017' ); eventDates[ new Date(
+      '08/12/2017' )] = new Date( '08/12/2017' ); eventDates[ new Date(
+      '08/18/2017' )] = new Date( '08/18/2017' ); eventDates[ new Date(
+      '08/23/2017' )] = new Date( '08/23/2017' );
+
+      // datepicker $('#dt').datepicker({ beforeShowDay: function( date ) { var
+      highlight = eventDates[date]; if( highlight ) { return [true, "event",
+      'Tooltip text']; } else { return [true, '', ''];
+              }
+          }
+      });
+  });*/
+
+  $(document).ready(function () {
+    $('ul.nav > li').click(function (e) {
+      $('ul.nav > li').removeClass('active');
+      $(this).addClass('active');
+    });
+  });
+
+  $('#droppero').on('click', function (e) {
+    e.stopPropagation();
+    $('#myDropdown').slideToggle('fast');
+  });
+
+  /* Anything that gets to the document will hide the dropdown */
+  $(document).on('click', function (e) {
+    if ($(e.target).hasClass('dropdown') || $(e.target).attr('id') === 'myDropdown') {
+
+    }
+    else {
+      $('#myDropdown').hide();
+    }
+  });
+
+  /* Clicks within the dropdown won't make it past the dropdown itself */
+  $("#myDropdown").click(function (e) {
+    e.stopPropagation();
+  });
+
+  window.onload = function () {
+
+    // If sessionStorage is storing default values (ex. name), exit the function
+    // and do not restore data
+    if (sessionStorage.getItem('name') == "name") {
+      return;
+    }
+
+    // If values are not blank, restore them to the fields
+    var name = sessionStorage.getItem('name');
+    if (name !== null) $('#inputName').val(name);
+  }
+
+  window.onbeforeunload = function () {
+    sessionStorage.setItem("name", $('#inputName').val());
+  }
+
+</script>

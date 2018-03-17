@@ -21,8 +21,8 @@
       </p>
     </div>
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let todo of todoAll.reverse(); let last = last"
-      [ngClass]="isLast(last)">
+      <div *ngFor="let todo of todoAll.reverse(); let last = last; let i =
+      index" [ngClass]="isLast(last)">
         <li (click)="dropFunction($event)" class="default dropbtn2">
           <div>
             <img class="checkImg" src="..\..\assets\img\check2.png">
@@ -36,13 +36,15 @@
             <p class="label label-default">{{todo.state}}</p>
             <p class="dropPara">{{todo.description}}</p>
             <div class="modal-button">
-              <app-todo-edit [todoAll]="qaaAll" [testing]="todoAll[i]"
+              <app-todo-edit [todoAll]="todoAll" [testing]="todoAll[i]"
               (updateTesting)="onNotify($event)"></app-todo-edit>
 
-              <app-todo-delete [todoAll]="todoAll" [todo]="todo"></app-todo-delete>
+              <app-todo-delete [todoAll]="todoAll"
+              [todo]="todo"></app-todo-delete>
             </div>
           </div>
-          <span class="closeBtn" (click)="removeTask($event, todo)">&#215;</span>
+          <span class="closeBtn" (click)="removeTask($event,
+          todo)">&#215;</span>
           <span class="check" (click)="checkTask($event, todo)">&#x2713;</span>
         </li>
       </div>

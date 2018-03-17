@@ -29,7 +29,8 @@
     </div>
 
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let qaa of qaaAll.reverse(); let last = last; let i = index" [ngClass]="isLast(last)">
+      <div *ngFor="let qaa of qaaAll.reverse(); let last = last; let i = index"
+      [ngClass]="isLast(last)">
         <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
           <div class="col-md-12 QaAPara">{{ qaa.title }}</div>
           <div class="col-md-12">
@@ -42,7 +43,8 @@
             <div class="pull-right col-md-4">
               <span class="badge">Posted {{ qaa.create_date }}</span>
               <br>
-              <app-qaa-edit [qaaAll]="qaaAll" [testing]="qaaAll[i]" (updateTesting)="onNotify($event)"></app-qaa-edit>
+              <app-qaa-edit [qaaAll]="qaaAll" [testing]="qaaAll[i]"
+              (updateTesting)="onNotify($event)"></app-qaa-edit>
               <br>
               <app-qaa-delete [qaaAll]="qaaAll" [qaa]="qaa"></app-qaa-delete>
             </div>

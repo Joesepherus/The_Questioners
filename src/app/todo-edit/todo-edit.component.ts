@@ -47,7 +47,7 @@ export class TodoEditComponent implements OnInit {
     }
     this.elem = $event.target;
     // change the header color to the type of the task
-    switch ($(this.elem).closest("li")[0].children[1].children[0].innerHTML) {
+    switch (elem.type) {
       case "work":
         $("#editModalHeader").css('background', 'blueviolet');
         break;
@@ -68,7 +68,7 @@ export class TodoEditComponent implements OnInit {
     let liToChange = this.elem.closest("li");
     let modalElem = $event.target;
     let liClasses = $(liToChange).attr('class').split(' ');
-    if (liClasses.length > 2) {
+    if (liClasses.length > 1) {
       $(liToChange).removeClass(liClasses.pop());
     }
     let liContentClasses = $(liToChange.children[2]).attr('class').split(' ');
