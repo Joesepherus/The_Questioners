@@ -98,7 +98,7 @@ router.put('/todo/completed/:id', function (req, res, next) {
 
 // change tasks state to completed task
 router.put('/todo/removed/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, update, function (err, post) {
+  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -106,7 +106,7 @@ router.put('/todo/removed/:id', function (req, res, next) {
 
 // change tasks state to completed task
 router.put('/todo/inprogress/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, update, function (err, post) {
+  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
