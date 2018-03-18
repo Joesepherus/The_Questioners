@@ -1,0 +1,51 @@
+<div class="container QaA">
+  <div class="row">
+
+    <app-words-create [wordsAll]="wordsAll"></app-words-create>
+
+    <div class="col-md-10">
+      <h2>All Words</h2>
+    </div>
+
+    <div class="col-md-12">
+      <p>Number of Words: {{numberOfWords}}</p>
+    </div>
+
+    <div class="col-md-3">
+      <a (click)="scrollToTheEndOfPage()">Scroll to the bottom</a>
+    </div>
+
+    <ul class="col-md-12" id="myUL">
+      <div *ngFor="let words of wordsAll.reverse(); let last = last; let i =
+      index">
+        <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
+          <div class="col-md-12 QaAPara">{{words.word}}</div>
+          <div class="aboutDropdown-content" id="drop">
+            <div class="col-md-8">
+              <p class="dropPara QaAPara">{{words.description}}</p>
+            </div>
+            <div class="col-md-8">
+              <p class="dropPara QaAPara">{{words.translation}}</p>
+            </div>
+            <div class="pull-right col-md-4">
+              <span class="badge">Posted {{words.create_date}}</span>
+              <br>
+              <app-words-edit [wordsAll]="wordsAll" [testing]="wordsAll[i]"
+              (updateTesting)="onNotify($event)"></app-words-edit>
+              <br>
+              <app-words-delete [wordsAll]="wordsAll"
+              [words]="words"></app-words-delete>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+
+    <div class="col-md-3">
+      <a (click)="scrollToTheStartOfPage()">Scroll to the top</a>
+    </div>
+
+  </div>
+</div>
+
+<app-words-edit-modal [words]="test"></app-words-edit-modal>

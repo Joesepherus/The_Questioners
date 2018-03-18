@@ -83,12 +83,22 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__todo_edit_modal_todo_edit_modal_component__ = __webpack_require__("./src/app/todo-edit-modal/todo-edit-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__todo_edit_todo_edit_component__ = __webpack_require__("./src/app/todo-edit/todo-edit.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__todo_delete_todo_delete_component__ = __webpack_require__("./src/app/todo-delete/todo-delete.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__words_words_component__ = __webpack_require__("./src/app/words/words.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__words_create_words_create_component__ = __webpack_require__("./src/app/words-create/words-create.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__words_edit_words_edit_component__ = __webpack_require__("./src/app/words-edit/words-edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__words_edit_modal_words_edit_modal_component__ = __webpack_require__("./src/app/words-edit-modal/words-edit-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__ = __webpack_require__("./src/app/words-delete/words-delete.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
+
 
 
 
@@ -117,6 +127,11 @@ var appRoutes = [
         data: { title: 'To-do list' }
     },
     {
+        path: 'words',
+        component: __WEBPACK_IMPORTED_MODULE_16__words_words_component__["a" /* WordsComponent */],
+        data: { title: 'Words' }
+    },
+    {
         path: '',
         redirectTo: '/qaas',
         pathMatch: 'full'
@@ -138,7 +153,12 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__todo_create_todo_create_component__["a" /* TodoCreateComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__todo_edit_modal_todo_edit_modal_component__["a" /* TodoEditModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_14__todo_edit_todo_edit_component__["a" /* TodoEditComponent */],
-                __WEBPACK_IMPORTED_MODULE_15__todo_delete_todo_delete_component__["a" /* TodoDeleteComponent */]
+                __WEBPACK_IMPORTED_MODULE_15__todo_delete_todo_delete_component__["a" /* TodoDeleteComponent */],
+                __WEBPACK_IMPORTED_MODULE_16__words_words_component__["a" /* WordsComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__words_create_words_create_component__["a" /* WordsCreateComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__words_edit_words_edit_component__["a" /* WordsEditComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__words_edit_modal_words_edit_modal_component__["a" /* WordsEditModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__["a" /* WordsDeleteComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -168,7 +188,7 @@ module.exports = ""
 /***/ "./src/app/qaa-create/qaa-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\r\n  <div class=\"w3-card-4\">\r\n    <div class=\"w3-container w3-green\">\r\n      <h2>New QaA</h2>\r\n    </div>\r\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\r\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\r\n      <p>\r\n        <label class=\"newTaskType\">Title:</label>\r\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\r\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n      </p>\r\n      <p>\r\n        <label class=\"newTaskType\">Description:</label>\r\n        <textarea class=\"w3-input\" name=\"newTaskDescription\" cols=\"40\"\r\n        rows=\"3\" [(ngModel)]=\"qaa.description\" name=\"description\"\r\n        required></textarea>\r\n      </p>\r\n      <div>\r\n        <label class=\"newTaskType\">Type:</label>\r\n      </div>\r\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\r\n        <option value=\"\"></option>\r\n        <option value=\"Javascript\">Javascript</option>\r\n        <option value=\"HTML\">HTML</option>\r\n        <option value=\"CSS\">CSS</option>\r\n        <option value=\"Data structures\">Data structures</option>\r\n        <option value=\"Other\">Other</option>\r\n      </select>\r\n    </form>\r\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\r\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\r\n  </div>\r\n\r\n</div>"
+module.exports = "<div class=\"col-md-12\">\r\n  <div class=\"w3-card-4\">\r\n    <div class=\"w3-container w3-green\">\r\n      <h2>New QaA</h2>\r\n    </div>\r\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\r\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\r\n      <p>\r\n        <label class=\"newTaskType\">Title:</label>\r\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\r\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n      </p>\r\n      <p>\r\n        <label class=\"newTaskType\">Description:</label>\r\n        <textarea class=\"w3-input\" name=\"newTaskDescription\" cols=\"40\" rows=\"3\"\r\n        [(ngModel)]=\"qaa.description\" name=\"description\" required></textarea>\r\n      </p>\r\n      <div>\r\n        <label class=\"newTaskType\">Type:</label>\r\n      </div>\r\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\r\n        <option value=\"\"></option>\r\n        <option value=\"Javascript\">Javascript</option>\r\n        <option value=\"HTML\">HTML</option>\r\n        <option value=\"CSS\">CSS</option>\r\n        <option value=\"Data structures\">Data structures</option>\r\n        <option value=\"Other\">Other</option>\r\n      </select>\r\n    </form>\r\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\r\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\r\n  </div>\r\n\r\n</div>"
 
 /***/ }),
 
@@ -515,7 +535,7 @@ module.exports = ".QaAPara {\r\n    width: 100%;\r\n    white-space: -moz-pre-wr
 /***/ "./src/app/qaa/qaa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container QaA\">\r\n  <div class=\"row\">\r\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>QaA</h2>\r\n    </div>\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\">\r\n        <option value=\"all\" selected=\"selected\">all</option>\r\n        <option value=\"inprogress\">inprogress</option>\r\n        <option value=\"passed\">passed</option>\r\n        <option value=\"failed\">failed</option>\r\n        <option value=\"Javascript\">Javascript</option>\r\n        <option value=\"HTML\">HTML</option>\r\n        <option value=\"CSS\">CSS</option>\r\n        <option value=\"Data structures\">Data structures</option>\r\n        <option value=\"Other\">Other</option>\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p ng-model=\"numberOfQaA\">Number of QaA: {{ numberOfQaA }}</p>\r\n    </div>\r\n\r\n    <div class=\"col-md-3\">\r\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\r\n    </div>\r\n\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let qaa of qaaAll.reverse(); let last = last; let i = index\"\r\n      [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\r\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\r\n          <div class=\"col-md-12\">\r\n            <span class=\"label label-default\">{{ qaa.type }}</span>\r\n          </div>\r\n          <div class=\"aboutDropdown-content\" id=\"drop\">\r\n            <div class=\"col-md-8\">\r\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\r\n            </div>\r\n            <div class=\"pull-right col-md-4\">\r\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\r\n              <br>\r\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [testing]=\"qaaAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\r\n              <br>\r\n              <app-qaa-delete [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\r\n            </div>\r\n          </div>\r\n        </li>\r\n      </div>\r\n    </ul>\r\n\r\n    <div class=\"col-md-3\">\r\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n\r\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>\r\n"
+module.exports = "<div class=\"container QaA\">\r\n  <div class=\"row\">\r\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>QaA</h2>\r\n    </div>\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\">\r\n        <option value=\"all\" selected=\"selected\">all</option>\r\n        <option value=\"inprogress\">inprogress</option>\r\n        <option value=\"passed\">passed</option>\r\n        <option value=\"failed\">failed</option>\r\n        <option value=\"Javascript\">Javascript</option>\r\n        <option value=\"HTML\">HTML</option>\r\n        <option value=\"CSS\">CSS</option>\r\n        <option value=\"Data structures\">Data structures</option>\r\n        <option value=\"Other\">Other</option>\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p>Number of QaA: {{ numberOfQaA }}</p>\r\n    </div>\r\n\r\n    <div class=\"col-md-3\">\r\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\r\n    </div>\r\n\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let qaa of qaaAll.reverse(); let last = last; let i = index\"\r\n      [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\r\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\r\n          <div class=\"col-md-12\">\r\n            <span class=\"label label-default\">{{ qaa.type }}</span>\r\n          </div>\r\n          <div class=\"aboutDropdown-content\" id=\"drop\">\r\n            <div class=\"col-md-8\">\r\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\r\n            </div>\r\n            <div class=\"pull-right col-md-4\">\r\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\r\n              <br>\r\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [testing]=\"qaaAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\r\n              <br>\r\n              <app-qaa-delete [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\r\n            </div>\r\n          </div>\r\n        </li>\r\n      </div>\r\n    </ul>\r\n\r\n    <div class=\"col-md-3\">\r\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n\r\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>\r\n"
 
 /***/ }),
 
@@ -713,7 +733,7 @@ module.exports = ""
 /***/ "./src/app/todo-create/todo-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\" ng-init=\"getAllTasks()\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo()\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"watch later\">watch later</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo()\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"watch later\">watch later</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1242,6 +1262,384 @@ var TodoComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], TodoComponent);
     return TodoComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/words-create/words-create.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/words-create/words-create.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n      <div class=\"w3-container w3-green\">\n          <h2>New Word</h2>\n      </div>\n      <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\n      aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addWords()\"\n      #wordsForm=\"ngForm\">\n          <p>\n              <label class=\"newTaskType\">Word:</label>\n              <textarea class=\"w3-input\" name=\"word\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.word\" required></textarea>\n          </p>\n          <p>\n              <label class=\"newTaskType\">Description:</label>\n              <textarea class=\"w3-input\" name=\"description\" cols=\"40\" rows=\"3\"\n              [(ngModel)]=\"words.description\" required></textarea>\n          </p>\n          <div>\n              <label class=\"newTaskType\">Translation:</label>\n              <textarea class=\"w3-input\" name=\"translation\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.translation\" required></textarea>\n\n          </div>\n      </form>\n      <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n      type=\"submit\" [disabled]=\"!wordsForm.form.valid\">Submit</button>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/words-create/words-create.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordsCreateComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WordsCreateComponent = /** @class */ (function () {
+    function WordsCreateComponent(http) {
+        this.http = http;
+        this.words = {};
+    }
+    WordsCreateComponent.prototype.ngOnInit = function () {
+    };
+    WordsCreateComponent.prototype.addWords = function () {
+        this.wordsAll.push(this.words);
+        this.http.post('/api/words', this.words)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsCreateComponent.prototype, "wordsAll", void 0);
+    WordsCreateComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-words-create',
+            template: __webpack_require__("./src/app/words-create/words-create.component.html"),
+            styles: [__webpack_require__("./src/app/words-create/words-create.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], WordsCreateComponent);
+    return WordsCreateComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/words-delete/words-delete.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/words-delete/words-delete.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteWords(words._id, words)\">Delete</button>"
+
+/***/ }),
+
+/***/ "./src/app/words-delete/words-delete.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordsDeleteComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WordsDeleteComponent = /** @class */ (function () {
+    function WordsDeleteComponent(http) {
+        this.http = http;
+        this.words = {};
+    }
+    WordsDeleteComponent.prototype.ngOnInit = function () {
+    };
+    WordsDeleteComponent.prototype.deleteWords = function (id) {
+        this.wordsAll.splice(-1, 1);
+        this.http.delete('/api/words/' + id)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsDeleteComponent.prototype, "wordsAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsDeleteComponent.prototype, "words", void 0);
+    WordsDeleteComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-words-delete',
+            template: __webpack_require__("./src/app/words-delete/words-delete.component.html"),
+            styles: [__webpack_require__("./src/app/words-delete/words-delete.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], WordsDeleteComponent);
+    return WordsDeleteComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/words-edit-modal/words-edit-modal.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/words-edit-modal/words-edit-modal.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Word</h4>\n        </div>\n        <div class=\"modal-body editQaABody\">\n          <form *ngIf=\"words\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editWords(words._id)\">\n            <p>\n              <label class=\"newTaskType\">Word:</label>\n              <textarea class=\"w3-input\" name=\"word\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.word\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"description\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.description\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Translation:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"translation\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.translation\" required></textarea>\n            </p>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\"\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/words-edit-modal/words-edit-modal.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordsEditModalComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WordsEditModalComponent = /** @class */ (function () {
+    function WordsEditModalComponent(http) {
+        this.http = http;
+        this.words = {};
+    }
+    WordsEditModalComponent.prototype.ngOnInit = function () {
+    };
+    WordsEditModalComponent.prototype.editWords = function (id) {
+        this.http.put('/api/words/' + id, this.words)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsEditModalComponent.prototype, "wordsAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsEditModalComponent.prototype, "words", void 0);
+    WordsEditModalComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-words-edit-modal',
+            template: __webpack_require__("./src/app/words-edit-modal/words-edit-modal.component.html"),
+            styles: [__webpack_require__("./src/app/words-edit-modal/words-edit-modal.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], WordsEditModalComponent);
+    return WordsEditModalComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/words-edit/words-edit.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/words-edit/words-edit.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button id=\"modalButton\" type=\"button\" class=\"modal-button btn btn-info btn-md\neditBtn\" data-toggle=\"modal\" data-target=\"#myModal\"\n(click)=\"editModalForm($event, testing)\">Edit</button>"
+
+/***/ }),
+
+/***/ "./src/app/words-edit/words-edit.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordsEditComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var WordsEditComponent = /** @class */ (function () {
+    function WordsEditComponent(http) {
+        this.http = http;
+        this.testing = {};
+        this.test = {};
+        this.updateTesting = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.numberOfLi = 7;
+    }
+    WordsEditComponent.prototype.ngOnInit = function () {
+    };
+    // giving modal form placeholder values for each input txt
+    WordsEditComponent.prototype.editModalForm = function ($event, elem) {
+        var li = document.getElementsByTagName("LI");
+        var i;
+        console.log(elem);
+        console.log(this.testing);
+        this.test = elem;
+        this.updateTesting.emit(this.test);
+        for (i = this.numberOfLi; i < this.wordsAll.length; i++) {
+            if (this.wordsAll[i]._id == elem._id) {
+                this.test = elem;
+            }
+        }
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsEditComponent.prototype, "wordsAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsEditComponent.prototype, "testing", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], WordsEditComponent.prototype, "test", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
+        __metadata("design:type", Object)
+    ], WordsEditComponent.prototype, "updateTesting", void 0);
+    WordsEditComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-words-edit',
+            template: __webpack_require__("./src/app/words-edit/words-edit.component.html"),
+            styles: [__webpack_require__("./src/app/words-edit/words-edit.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], WordsEditComponent);
+    return WordsEditComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/words/words.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/words/words.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n\n    <app-words-create [wordsAll]=\"wordsAll\"></app-words-create>\n\n    <div class=\"col-md-10\">\n      <h2>All Words</h2>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of Words: {{numberOfWords}}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let words of wordsAll.reverse(); let last = last; let i =\n      index\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{words.word}}</div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{words.description}}</p>\n            </div>\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{words.translation}}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{words.create_date}}</span>\n              <br>\n              <app-words-edit [wordsAll]=\"wordsAll\" [testing]=\"wordsAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-words-edit>\n              <br>\n              <app-words-delete [wordsAll]=\"wordsAll\"\n              [words]=\"words\"></app-words-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-words-edit-modal [words]=\"test\"></app-words-edit-modal>\n"
+
+/***/ }),
+
+/***/ "./src/app/words/words.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WordsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var WordsComponent = /** @class */ (function () {
+    function WordsComponent(http) {
+        this.http = http;
+        this.word = {};
+        this.words = {};
+        this.numberOfLi = 7;
+        this.wordsAll = [];
+    }
+    WordsComponent.prototype.onNotify = function (val) {
+        console.log(val);
+        this.test = val;
+    };
+    WordsComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.http.get('/api/words').subscribe(function (data) {
+            _this.wordsAll = data;
+        });
+        __WEBPACK_IMPORTED_MODULE_2_jquery__(document).ready(function () {
+            __WEBPACK_IMPORTED_MODULE_2_jquery__("#Words").addClass('active');
+            document.title = "Words";
+        });
+    };
+    WordsComponent.prototype.scrollToTheEndOfPage = function () {
+        window.scrollTo(0, document.body.scrollHeight);
+    };
+    WordsComponent.prototype.scrollToTheStartOfPage = function () {
+        window.scrollTo(0, 0);
+    };
+    WordsComponent.prototype.dropFunction = function ($event) {
+        var elem = $event.target;
+        if (elem.tagName !== "LI") {
+            elem = __WEBPACK_IMPORTED_MODULE_2_jquery__(elem).closest("li")[0];
+        }
+        elem.children[1].classList.toggle("show");
+    };
+    WordsComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-words',
+            template: __webpack_require__("./src/app/words/words.component.html"),
+            styles: [__webpack_require__("./src/app/words/words.component.css")],
+            encapsulation: __WEBPACK_IMPORTED_MODULE_0__angular_core__["_10" /* ViewEncapsulation */].None
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], WordsComponent);
+    return WordsComponent;
 }());
 
 

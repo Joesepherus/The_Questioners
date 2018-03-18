@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="w3-card-4">
+      <div class="w3-container w3-green">
+          <h2>New Word</h2>
+      </div>
+      <form name="newTaskForm" id="newTaskForm" class="w3-container
+      aboutNewTaskForm" method="post" (ngSubmit)="addWords()"
+      #wordsForm="ngForm">
+          <p>
+              <label class="newTaskType">Word:</label>
+              <textarea class="w3-input" name="word" cols="40" rows="1"
+              [(ngModel)]="words.word" required></textarea>
+          </p>
+          <p>
+              <label class="newTaskType">Description:</label>
+              <textarea class="w3-input" name="description" cols="40" rows="3"
+              [(ngModel)]="words.description" required></textarea>
+          </p>
+          <div>
+              <label class="newTaskType">Translation:</label>
+              <textarea class="w3-input" name="translation" cols="40" rows="1"
+              [(ngModel)]="words.translation" required></textarea>
+
+          </div>
+      </form>
+      <button class="col-md-2 addBtn btn btn-success" form="newTaskForm"
+      type="submit" [disabled]="!wordsForm.form.valid">Submit</button>
+  </div>
+</div>

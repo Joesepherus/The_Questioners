@@ -3,6 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var qaa = require('../models/QaA.js');
 var todo = require('../models/todo.js');
+var words = require('../models/words.js');
 
 //                    ===== QaA =====
 
@@ -113,3 +114,46 @@ router.put('/todo/inprogress/:id', function (req, res, next) {
 });
 
 module.exports = router;
+
+//                    ===== Words =====
+
+/* GET ALL words */
+router.get('/words', function (req, res, next) {
+  words.find(function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
+/* GET SINGLE words BY ID */
+router.get('/words/:id', function (req, res, next) {
+  words.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* SAVE words */
+router.post('/words', function (req, res, next) {
+  words.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* UPDATE words */
+router.put('/words/:id', function (req, res, next) {
+  words.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* DELETE words */
+router.delete('/words/:id', function (req, res, next) {
+  words.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+

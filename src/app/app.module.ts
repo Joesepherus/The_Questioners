@@ -14,6 +14,11 @@ import { TodoCreateComponent } from './todo-create/todo-create.component';
 import { TodoEditModalComponent } from './todo-edit-modal/todo-edit-modal.component';
 import { TodoEditComponent } from './todo-edit/todo-edit.component';
 import { TodoDeleteComponent } from './todo-delete/todo-delete.component';
+import { WordsComponent } from './words/words.component';
+import { WordsCreateComponent } from './words-create/words-create.component';
+import { WordsEditComponent } from './words-edit/words-edit.component';
+import { WordsEditModalComponent } from './words-edit-modal/words-edit-modal.component';
+import { WordsDeleteComponent } from './words-delete/words-delete.component';
 
 const appRoutes: Routes = [
   {
@@ -25,6 +30,11 @@ const appRoutes: Routes = [
     path: 'todo',
     component: TodoComponent,
     data: { title: 'To-do list' }
+  },
+  {
+    path: 'words',
+    component: WordsComponent,
+    data: {title: 'Words' }
   },
   {
     path: '',
@@ -45,7 +55,12 @@ const appRoutes: Routes = [
     TodoCreateComponent,
     TodoEditModalComponent,
     TodoEditComponent,
-    TodoDeleteComponent
+    TodoDeleteComponent,
+    WordsComponent,
+    WordsCreateComponent,
+    WordsEditComponent,
+    WordsEditModalComponent,
+    WordsDeleteComponent
   ],
   imports: [
     BrowserModule,

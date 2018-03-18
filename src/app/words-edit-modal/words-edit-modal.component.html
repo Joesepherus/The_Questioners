@@ -1,0 +1,45 @@
+<div class="container">
+  <!-- Trigger the modal with a button -->
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div id="editModalHeader" class="modal-header">
+          <button type="button" class="close"
+          data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Word</h4>
+        </div>
+        <div class="modal-body editQaABody">
+          <form *ngIf="words" id="editTaskForm" class="w3-container"
+          method="post" (ngSubmit)="editWords(words._id)">
+            <p>
+              <label class="newTaskType">Word:</label>
+              <textarea class="w3-input" name="word" cols="40" rows="1"
+              [(ngModel)]="words.word" required></textarea>
+            </p>
+            <p>
+              <label class="newTaskType">Description:</label>
+              <textarea class="w3-input editQaADescription"
+              name="description" cols="40" rows="1"
+              [(ngModel)]="words.description" required></textarea>
+            </p>
+            <p>
+              <label class="newTaskType">Translation:</label>
+              <textarea class="w3-input editQaADescription"
+              name="translation" cols="40" rows="1"
+              [(ngModel)]="words.translation" required></textarea>
+            </p>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="col-md-2 editBtn btn btn-success"
+          form="editTaskForm" type="submit">Submit</button>
+          <button type="button" class="btn btn-default"
+          data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
