@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-edit-modal',
@@ -9,9 +10,18 @@ export class TodoEditModalComponent implements OnInit {
   @Input() todoAll: any;
   @Input() todo = {};
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+  }
+
+  editTodo(id) {
+    this.http.put('/api/todo/' + id, this.todo)
+      .subscribe(res => {
+      }, (err) => {
+        console.log(err);
+      }
+      );
   }
 
 }

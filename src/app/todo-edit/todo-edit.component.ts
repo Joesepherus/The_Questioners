@@ -21,15 +21,6 @@ export class TodoEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  editTodo(id) {
-    this.http.put('/api/todo/' + id, this.testing)
-      .subscribe(res => {
-      }, (err) => {
-        console.log(err);
-      }
-      );
-  }
-
   // giving modal form placeholder values for each input txt
   editModalForm($event, elem) {
     var li = document.getElementsByTagName("LI");

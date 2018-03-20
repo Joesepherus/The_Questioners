@@ -8,15 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoCreateComponent implements OnInit {
   @Input() todoAll: any;
-  todo = {};
+  todo = {
+    state: {}
+  };
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   addTodo() {
-    this.todoAll.push(this.todo);
-    this.http.post('/api/todo', this.todo)
+    let newTodo = this.todo;
+    newTodo.state = 'inprogress';
+    this.todo = { state: '' };
+    this.todoAll.push(newTodo);
+    this.http.post('/api/todo', newTodo)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

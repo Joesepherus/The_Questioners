@@ -67,6 +67,7 @@ router.get('/todo/:id', function (req, res, next) {
 
 /* SAVE todo */
 router.post('/todo', function (req, res, next) {
+  req.body.state = 'inprogress';
   todo.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -83,7 +84,8 @@ router.put('/todo/:id', function (req, res, next) {
 
 /* DELETE todo */
 router.delete('/todo/:id', function (req, res, next) {
-  todo.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  console.log(req.params);
+  todo.findOneAndRemove({ 'title': req.params.id }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -113,7 +115,6 @@ router.put('/todo/inprogress/:id', function (req, res, next) {
   });
 });
 
-module.exports = router;
 
 //                    ===== Words =====
 
@@ -156,4 +157,7 @@ router.delete('/words/:id', function (req, res, next) {
     res.json(post);
   });
 });
+
+module.exports = router;
+
 

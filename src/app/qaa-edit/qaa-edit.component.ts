@@ -21,15 +21,6 @@ export class QaaEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  editQaa(id) {
-    this.http.put('/api/qaa/' + id, this.testing)
-      .subscribe(res => {
-      }, (err) => {
-        console.log(err);
-      }
-      );
-  }
-
   // giving modal form placeholder values for each input txt
   editModalForm($event, elem) {
     var li = document.getElementsByTagName("LI");

@@ -324,7 +324,7 @@ module.exports = ""
 /***/ "./src/app/qaa-edit-modal/qaa-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <!-- Trigger the modal with a button -->\r\n  <!-- Modal -->\r\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n      <!-- Modal content-->\r\n      <div class=\"modal-content\">\r\n        <div id=\"editModalHeader\" class=\"modal-header\">\r\n          <button type=\"button\" class=\"close\"\r\n          data-dismiss=\"modal\">&times;</button>\r\n          <h4 class=\"modal-title\">Edit QaA</h4>\r\n        </div>\r\n        <div class=\"modal-body editQaABody\">\r\n          <form *ngIf=\"qaa\" id=\"editTaskForm\" class=\"w3-container\" method=\"post\"\r\n          (ngSubmit)=\"editQaa(id)\">\r\n            <p>\r\n              <label class=\"newTaskType\">Title:</label>\r\n              <textarea class=\"w3-input\" name=\"editTitle\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n            </p>\r\n            <p>\r\n              <label class=\"newTaskType\">Description:</label>\r\n              <textarea class=\"w3-input editQaADescription\"\r\n              name=\"editDescription\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.description\" name=\"description\"\r\n              required></textarea>\r\n            </p>\r\n            <div>\r\n              <label class=\"newTaskType\">Type</label>\r\n            </div>\r\n            <select name=\"editType\" id=\"editSelect\"\r\n            (change)=\"changeColor($event)\" [(ngModel)]=\"qaa.type\"\r\n            name=\"type\" required>\r\n              <option value=\"\"></option>\r\n              <option value=\"Javascript\">Javascript</option>\r\n              <option value=\"HTML\">HTML</option>\r\n              <option value=\"CSS\">CSS</option>\r\n              <option value=\"Data structures\">Data structures</option>\r\n              <option value=\"Other\">Other</option>\r\n            </select>\r\n          </form>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"col-md-2 editBtn btn btn-success\"\r\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\r\n          <button type=\"button\" class=\"btn btn-default\"\r\n          data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <!-- Trigger the modal with a button -->\r\n  <!-- Modal -->\r\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n      <!-- Modal content-->\r\n      <div class=\"modal-content\">\r\n        <div id=\"editModalHeader\" class=\"modal-header\">\r\n          <button type=\"button\" class=\"close\"\r\n          data-dismiss=\"modal\">&times;</button>\r\n          <h4 class=\"modal-title\">Edit QaA</h4>\r\n        </div>\r\n        <div class=\"modal-body editQaABody\">\r\n          <form *ngIf=\"qaa\" id=\"editTaskForm\" class=\"w3-container\" method=\"post\"\r\n          (ngSubmit)=\"editQaa(qaa._id)\">\r\n            <p>\r\n              <label class=\"newTaskType\">Title:</label>\r\n              <textarea class=\"w3-input\" name=\"editTitle\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n            </p>\r\n            <p>\r\n              <label class=\"newTaskType\">Description:</label>\r\n              <textarea class=\"w3-input editQaADescription\"\r\n              name=\"editDescription\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.description\" name=\"description\"\r\n              required></textarea>\r\n            </p>\r\n            <div>\r\n              <label class=\"newTaskType\">Type</label>\r\n            </div>\r\n            <select name=\"editType\" id=\"editSelect\"\r\n            (change)=\"changeColor($event)\" [(ngModel)]=\"qaa.type\"\r\n            name=\"type\" required>\r\n              <option value=\"\"></option>\r\n              <option value=\"Javascript\">Javascript</option>\r\n              <option value=\"HTML\">HTML</option>\r\n              <option value=\"CSS\">CSS</option>\r\n              <option value=\"Data structures\">Data structures</option>\r\n              <option value=\"Other\">Other</option>\r\n            </select>\r\n          </form>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"col-md-2 editBtn btn btn-success\"\r\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\r\n          <button type=\"button\" class=\"btn btn-default\"\r\n          data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -334,6 +334,7 @@ module.exports = "<div class=\"container\">\r\n  <!-- Trigger the modal with a b
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return QaaEditModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -344,11 +345,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var QaaEditModalComponent = /** @class */ (function () {
-    function QaaEditModalComponent() {
+    function QaaEditModalComponent(http) {
+        this.http = http;
         this.qaa = {};
     }
     QaaEditModalComponent.prototype.ngOnInit = function () {
+    };
+    QaaEditModalComponent.prototype.editQaa = function (id) {
+        this.http.put('/api/qaa/' + id, this.qaa)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -364,7 +374,7 @@ var QaaEditModalComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/qaa-edit-modal/qaa-edit-modal.component.html"),
             styles: [__webpack_require__("./src/app/qaa-edit-modal/qaa-edit-modal.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], QaaEditModalComponent);
     return QaaEditModalComponent;
 }());
@@ -417,13 +427,6 @@ var QaaEditComponent = /** @class */ (function () {
         this.numberOfLi = 7;
     }
     QaaEditComponent.prototype.ngOnInit = function () {
-    };
-    QaaEditComponent.prototype.editQaa = function (id) {
-        this.http.put('/api/qaa/' + id, this.testing)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
-        });
     };
     // giving modal form placeholder values for each input txt
     QaaEditComponent.prototype.editModalForm = function ($event, elem) {
@@ -733,7 +736,7 @@ module.exports = ""
 /***/ "./src/app/todo-create/todo-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo()\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"watch later\">watch later</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo(todo)\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"watch later\">watch later</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -758,13 +761,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TodoCreateComponent = /** @class */ (function () {
     function TodoCreateComponent(http) {
         this.http = http;
-        this.todo = {};
+        this.todo = {
+            state: {}
+        };
     }
     TodoCreateComponent.prototype.ngOnInit = function () {
     };
     TodoCreateComponent.prototype.addTodo = function () {
-        this.todoAll.push(this.todo);
-        this.http.post('/api/todo', this.todo)
+        var newTodo = this.todo;
+        newTodo.state = 'inprogress';
+        this.todo = { state: '' };
+        this.todoAll.push(newTodo);
+        this.http.post('/api/todo', newTodo)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -829,12 +837,13 @@ var TodoDeleteComponent = /** @class */ (function () {
     TodoDeleteComponent.prototype.ngOnInit = function () {
     };
     TodoDeleteComponent.prototype.deleteTodo = function (id) {
-        this.todoAll.splice(-1, 1);
-        this.http.delete('/api/todo/' + id)
+        var index = this.todoAll.map(function (e) { return e._id; }).indexOf(id);
+        this.http.delete('/api/todo/' + this.todoAll[index].title)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
+        this.todoAll.splice(index, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -869,7 +878,7 @@ module.exports = ""
 /***/ "./src/app/todo-edit-modal/todo-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(todo._id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -879,6 +888,7 @@ module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a but
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TodoEditModalComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -889,11 +899,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var TodoEditModalComponent = /** @class */ (function () {
-    function TodoEditModalComponent() {
+    function TodoEditModalComponent(http) {
+        this.http = http;
         this.todo = {};
     }
     TodoEditModalComponent.prototype.ngOnInit = function () {
+    };
+    TodoEditModalComponent.prototype.editTodo = function (id) {
+        this.http.put('/api/todo/' + id, this.todo)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -909,7 +928,7 @@ var TodoEditModalComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/todo-edit-modal/todo-edit-modal.component.html"),
             styles: [__webpack_require__("./src/app/todo-edit-modal/todo-edit-modal.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], TodoEditModalComponent);
     return TodoEditModalComponent;
 }());
@@ -962,13 +981,6 @@ var TodoEditComponent = /** @class */ (function () {
         this.numberOfLi = 7;
     }
     TodoEditComponent.prototype.ngOnInit = function () {
-    };
-    TodoEditComponent.prototype.editTodo = function (id) {
-        this.http.put('/api/todo/' + id, this.testing)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
-        });
     };
     // giving modal form placeholder values for each input txt
     TodoEditComponent.prototype.editModalForm = function ($event, elem) {

@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
           <form *ngIf="todo" id="editTaskForm" class="w3-container"
-          method="post" (ngSubmit)="editTodo(id)">
+          method="post" (ngSubmit)="editTodo(todo._id)">
             <p>
               <label class="newTaskType">Title:</label>
               <input id="test_input" class="w3-input" name="title"

@@ -14,7 +14,8 @@ var schema = mongoose.Schema({
 		required: true
   },
   state:{
-    type: String
+    type: String,
+    default: 'inprogress',
   },
 	create_date:{
 		type: Date,
