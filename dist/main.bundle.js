@@ -762,7 +762,8 @@ var TodoCreateComponent = /** @class */ (function () {
     function TodoCreateComponent(http) {
         this.http = http;
         this.todo = {
-            state: {}
+            state: {},
+            id: {},
         };
     }
     TodoCreateComponent.prototype.ngOnInit = function () {
@@ -770,7 +771,8 @@ var TodoCreateComponent = /** @class */ (function () {
     TodoCreateComponent.prototype.addTodo = function () {
         var newTodo = this.todo;
         newTodo.state = 'inprogress';
-        this.todo = { state: '' };
+        newTodo.id = this.todoAll.length;
+        this.todo = { state: '', id: '' };
         this.todoAll.push(newTodo);
         this.http.post('/api/todo', newTodo)
             .subscribe(function (res) {
@@ -878,7 +880,7 @@ module.exports = ""
 /***/ "./src/app/todo-edit-modal/todo-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(todo._id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(todo.id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1201,7 +1203,7 @@ var TodoComponent = /** @class */ (function () {
         if (todo.state != "removed") {
             todo.state = "removed";
             todo.completed_date = new Date();
-            this.http.put('api/todo/removed/' + todo._id, todo)
+            this.http.put('api/todo/removed/' + todo.id, todo)
                 .subscribe(function (res) {
             }, function (err) {
                 console.log(err);
@@ -1210,7 +1212,7 @@ var TodoComponent = /** @class */ (function () {
         else {
             todo.state = "inprogress";
             todo.completed_date = new Date();
-            this.http.put('api/todo/inprogress/' + todo._id, todo)
+            this.http.put('api/todo/inprogress/' + todo.id, todo)
                 .subscribe(function (res) {
             }, function (err) {
                 console.log(err);
@@ -1235,7 +1237,7 @@ var TodoComponent = /** @class */ (function () {
         if (todo.state != "completed") {
             todo.state = "completed";
             todo.completed_date = new Date();
-            this.http.put('/api/todo/completed/' + todo._id, todo)
+            this.http.put('/api/todo/completed/' + todo.id, todo)
                 .subscribe(function (res) {
             }, function (err) {
                 console.log(err);
@@ -1244,7 +1246,7 @@ var TodoComponent = /** @class */ (function () {
         else {
             todo.state = "inprogress";
             todo.completed_date = new Date();
-            this.http.put('/api/todo/inprogress/' + todo._id, todo)
+            this.http.put('/api/todo/inprogress/' + todo.id, todo)
                 .subscribe(function (res) {
             }, function (err) {
                 console.log(err);

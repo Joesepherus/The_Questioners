@@ -105,7 +105,7 @@ export class TodoComponent implements OnInit {
     if (todo.state != "removed") {
       todo.state = "removed";
       todo.completed_date = new Date();
-      this.http.put('api/todo/removed/' + todo._id, todo)
+      this.http.put('api/todo/removed/' + todo.id, todo)
         .subscribe(res => {
         }, (err) => {
           console.log(err);
@@ -115,7 +115,7 @@ export class TodoComponent implements OnInit {
     else {
       todo.state = "inprogress";
       todo.completed_date = new Date();
-      this.http.put('api/todo/inprogress/' + todo._id, todo)
+      this.http.put('api/todo/inprogress/' + todo.id, todo)
         .subscribe(res => {
         }, (err) => {
           console.log(err);
@@ -143,7 +143,7 @@ export class TodoComponent implements OnInit {
     if (todo.state != "completed") {
       todo.state = "completed";
       todo.completed_date = new Date();
-      this.http.put('/api/todo/completed/' + todo._id, todo)
+      this.http.put('/api/todo/completed/' + todo.id, todo)
         .subscribe(res => {
         }, (err) => {
           console.log(err);
@@ -153,7 +153,7 @@ export class TodoComponent implements OnInit {
     else {
       todo.state = "inprogress";
       todo.completed_date = new Date();
-      this.http.put('/api/todo/inprogress/' + todo._id, todo)
+      this.http.put('/api/todo/inprogress/' + todo.id, todo)
         .subscribe(res => {
         }, (err) => {
           console.log(err);

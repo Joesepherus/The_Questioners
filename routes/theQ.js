@@ -76,7 +76,7 @@ router.post('/todo', function (req, res, next) {
 
 /* UPDATE todo */
 router.put('/todo/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -85,7 +85,7 @@ router.put('/todo/:id', function (req, res, next) {
 /* DELETE todo */
 router.delete('/todo/:id', function (req, res, next) {
   console.log(req.params);
-  todo.findOneAndRemove({ 'title': req.params.id }, function (err, post) {
+  todo.findOneAndRemove({ 'id': req.params.id }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -93,23 +93,23 @@ router.delete('/todo/:id', function (req, res, next) {
 
 // change tasks state to completed task
 router.put('/todo/completed/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-// change tasks state to completed task
+// change tasks state to removed task
 router.put('/todo/removed/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-// change tasks state to completed task
+// change tasks state to inprogress task
 router.put('/todo/inprogress/:id', function (req, res, next) {
-  todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

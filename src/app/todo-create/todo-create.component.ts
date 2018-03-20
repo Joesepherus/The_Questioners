@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class TodoCreateComponent implements OnInit {
   @Input() todoAll: any;
   todo = {
-    state: {}
+    state: {},
+    id: {},
   };
   constructor(private http: HttpClient) { }
 
@@ -19,7 +20,8 @@ export class TodoCreateComponent implements OnInit {
   addTodo() {
     let newTodo = this.todo;
     newTodo.state = 'inprogress';
-    this.todo = { state: '' };
+    newTodo.id = this.todoAll.length;
+    this.todo = { state: '', id: '' };
     this.todoAll.push(newTodo);
     this.http.post('/api/todo', newTodo)
       .subscribe(res => {
