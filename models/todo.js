@@ -1,32 +1,36 @@
 var mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
-	title:{
-		type: String,
-		required: true
-	},
-	type:{
-		type: String,
-		required: true
-	},
-	description:{
-		type: String,
-		required: true
+  id: {
+    type: String,
+    required: true
   },
-  state:{
+  title: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  state: {
     type: String,
     default: 'inprogress',
   },
-	create_date:{
-		type: Date,
-		default: Date.now
-	},
-	completed_date:{
-		type: Date,
-	},
-	removed_date:{
-		type: Date,
-	}
+  create_date: {
+    type: Date,
+    default: Date.now
+  },
+  completed_date: {
+    type: Date,
+  },
+  removed_date: {
+    type: Date,
+  }
 });
 
 var Task = module.exports = mongoose.model('Task', schema);
