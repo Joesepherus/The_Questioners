@@ -947,7 +947,7 @@ module.exports = ""
 /***/ "./src/app/todo-edit/todo-edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button id=\"modalButton\" type=\"button\" class=\"modal-button btn btn-success\nbtn-md editBtn\" data-toggle=\"modal\" data-target=\"#editModal\"\n(click)=\"editModalForm($event, testing)\">Edit</button>"
+module.exports = "<button id=\"modalButton\" type=\"button\" class=\"modal-button btn btn-info btn-md\neditBtn\" data-toggle=\"modal\" data-target=\"#editModal\"\n(click)=\"editModalForm($event, testing)\">Edit</button>"
 
 /***/ }),
 
