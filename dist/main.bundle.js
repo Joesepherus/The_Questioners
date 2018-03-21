@@ -840,7 +840,7 @@ var TodoDeleteComponent = /** @class */ (function () {
     };
     TodoDeleteComponent.prototype.deleteTodo = function (id) {
         var index = this.todoAll.map(function (e) { return e._id; }).indexOf(id);
-        this.http.delete('/api/todo/' + this.todoAll[index].title)
+        this.http.delete('/api/todo/' + this.todoAll[index].id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -1091,7 +1091,7 @@ module.exports = ""
 /***/ "./src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\r\n  <div class=\"row\">\r\n\r\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>Tasks</h2>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\" ng-options=\"view.select for view in views\"\r\n      ng-change=\"select()\">\r\n        <option value=\"\">none</option>\r\n\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoAll.length}}\r\n      </p>\r\n    </div>\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let todo of todoAll.reverse(); let last = last; let i =\r\n      index\" [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\r\n          <div>\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\r\n            <span>{{todo.title}}</span>\r\n          </div>\r\n          <div class=\"dropdown-content\" id=\"drop\">\r\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\r\n            <p class=\"label label-default\">{{todo.type}}</p>\r\n            <p class=\"label label-default\">{{todo.state}}</p>\r\n            <p class=\"dropPara\">{{todo.description}}</p>\r\n            <div class=\"modal-button\">\r\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\r\n\r\n              <app-todo-delete [todoAll]=\"todoAll\"\r\n              [todo]=\"todo\"></app-todo-delete>\r\n            </div>\r\n          </div>\r\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\r\n          todo)\">&#215;</span>\r\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\r\n        </li>\r\n      </div>\r\n\r\n    </ul>\r\n\r\n    <app-todo-edit-modal [todo]=\"test\"></app-todo-edit-modal>\r\n\r\n\r\n  </div>\r\n</div>\r\n<br>"
+module.exports = "<div class=\"container todolist\">\r\n  <div class=\"row\">\r\n\r\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>Tasks</h2>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\" ng-options=\"view.select for view in views\"\r\n      (change)=\"select($event)\">\r\n        <option value=\"all\">all</option>\r\n        <option value=\"inprogress\">inprogress</option>\r\n        <option value=\"completed\">completed</option>\r\n        <option value=\"removed\">removed</option>\r\n        <option value=\"work\">work</option>\r\n        <option value=\"personal\">personal</option>\r\n        <option value=\"project\">project</option>\r\n        <option value=\"learn\">learn</option>\r\n        <option value=\"watch later\">watch later</option>\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoShow.length}}\r\n      </p>\r\n    </div>\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let todo of todoShow.reverse(); let last = last; let i =\r\n      index\" [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\r\n          <div>\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\r\n            <span>{{todo.title}}</span>\r\n          </div>\r\n          <div class=\"dropdown-content\" id=\"drop\">\r\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\r\n            <p class=\"label label-default\">{{todo.type}}</p>\r\n            <p class=\"label label-default\">{{todo.state}}</p>\r\n            <p class=\"dropPara\">{{todo.description}}</p>\r\n            <div class=\"modal-button\">\r\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\r\n\r\n              <app-todo-delete [todoAll]=\"todoAll\"\r\n              [todo]=\"todo\"></app-todo-delete>\r\n            </div>\r\n          </div>\r\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\r\n          todo)\">&#215;</span>\r\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\r\n        </li>\r\n      </div>\r\n\r\n    </ul>\r\n\r\n    <app-todo-edit-modal [todo]=\"test\"></app-todo-edit-modal>\r\n\r\n\r\n  </div>\r\n</div>\r\n<br>"
 
 /***/ }),
 
@@ -1170,6 +1170,7 @@ var TodoComponent = /** @class */ (function () {
             }
         };
         this.todoAll = [];
+        this.todoShow = [];
     }
     TodoComponent.prototype.onNotify = function (val) {
         console.log(val);
@@ -1179,6 +1180,7 @@ var TodoComponent = /** @class */ (function () {
         var _this = this;
         this.http.get('/api/todo').subscribe(function (data) {
             _this.todoAll = data;
+            _this.todoShow = _this.todoAll;
         });
         __WEBPACK_IMPORTED_MODULE_2_jquery__(document).ready(function () {
             __WEBPACK_IMPORTED_MODULE_2_jquery__("#todolist").addClass('active');
@@ -1266,6 +1268,21 @@ var TodoComponent = /** @class */ (function () {
             elem = __WEBPACK_IMPORTED_MODULE_2_jquery__(elem).closest("li")[0];
         }
         elem.children[1].classList.toggle("show");
+    };
+    TodoComponent.prototype.select = function ($event) {
+        var typeSelected = $event.target.value;
+        if (typeSelected === 'all') {
+            this.todoShow = this.todoAll;
+        }
+        else {
+            this.todoShow = [];
+            for (var i = 0; i < this.todoAll.length; i++) {
+                if (this.todoAll[i].type === typeSelected ||
+                    this.todoAll[i].state === typeSelected) {
+                    this.todoShow.push(this.todoAll[i]);
+                }
+            }
+        }
     };
     TodoComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({

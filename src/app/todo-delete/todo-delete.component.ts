@@ -17,7 +17,7 @@ export class TodoDeleteComponent implements OnInit {
 
   deleteTodo(id) {
     let index = this.todoAll.map(function(e) { return e._id; }).indexOf(id);
-    this.http.delete('/api/todo/' + this.todoAll[index].title)
+    this.http.delete('/api/todo/' + this.todoAll[index].id)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

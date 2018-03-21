@@ -13,9 +13,11 @@ export class TodoComponent implements OnInit {
   numberOfTodo: any;
   readonly numberOfLi = 7;
   test: any;
+  todoShow: any;
 
   constructor(private http: HttpClient) {
     this.todoAll = [];
+    this.todoShow = [];
   }
 
   onNotify(val) {
@@ -26,6 +28,7 @@ export class TodoComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/todo').subscribe(data => {
       this.todoAll = data;
+      this.todoShow = this.todoAll;
     });
 
     $(document).ready(function () {
@@ -178,5 +181,19 @@ export class TodoComponent implements OnInit {
     elem.children[1].classList.toggle("show");
   }
 
+  select($event) {
+    let typeSelected = $event.target.value;
+    if (typeSelected === 'all') {
+      this.todoShow = this.todoAll;
+    } else {
+      this.todoShow = [];
+      for (let i = 0; i < this.todoAll.length; i++) {
+        if (this.todoAll[i].type === typeSelected ||
+          this.todoAll[i].state === typeSelected) {
+          this.todoShow.push(this.todoAll[i]);
+        }
+      }
+    }
+  }
 }
 

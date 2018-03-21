@@ -10,18 +10,25 @@
 
     <div class="col-md-1 selector">
       <select id="selector" ng-options="view.select for view in views"
-      ng-change="select()">
-        <option value="">none</option>
-
+      (change)="select($event)">
+        <option value="all">all</option>
+        <option value="inprogress">inprogress</option>
+        <option value="completed">completed</option>
+        <option value="removed">removed</option>
+        <option value="work">work</option>
+        <option value="personal">personal</option>
+        <option value="project">project</option>
+        <option value="learn">learn</option>
+        <option value="watch later">watch later</option>
       </select>
     </div>
 
     <div class="col-md-12">
-      <p ng-model="numberOfQaA">Number of todos: {{todoAll.length}}
+      <p ng-model="numberOfQaA">Number of todos: {{todoShow.length}}
       </p>
     </div>
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let todo of todoAll.reverse(); let last = last; let i =
+      <div *ngFor="let todo of todoShow.reverse(); let last = last; let i =
       index" [ngClass]="isLast(last)">
         <li (click)="dropFunction($event)" class="default dropbtn2">
           <div>
