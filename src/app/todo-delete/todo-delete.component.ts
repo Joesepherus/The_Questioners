@@ -16,14 +16,13 @@ export class TodoDeleteComponent implements OnInit {
   }
 
   deleteTodo(id) {
-    let index = this.todoAll.map(function(e) { return e._id; }).indexOf(id);
-    this.http.delete('/api/todo/' + this.todoAll[index].id)
+    this.http.delete('/api/todo/' + id)
       .subscribe(res => {
       }, (err) => {
         console.log(err);
       }
       );
-    this.todoAll.splice(index, 1);
+    this.todoAll.splice(id, 1);
   }
 
 }

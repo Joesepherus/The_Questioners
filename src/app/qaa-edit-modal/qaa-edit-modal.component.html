@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body editQaABody">
           <form *ngIf="qaa" id="editTaskForm" class="w3-container" method="post"
-          (ngSubmit)="editQaa(qaa._id)">
+          (ngSubmit)="editQaa(qaa.id)">
             <p>
               <label class="newTaskType">Title:</label>
               <textarea class="w3-input" name="editTitle" cols="40" rows="1"

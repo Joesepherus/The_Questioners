@@ -15,12 +15,12 @@ export class WordsDeleteComponent implements OnInit {
   }
 
   deleteWords(id) {
-    this.wordsAll.splice(-1, 1);
     this.http.delete('/api/words/' + id)
       .subscribe(res => {
       }, (err) => {
         console.log(err);
       }
       );
+    this.wordsAll.splice(id, 1);
   }
 }

@@ -33,7 +33,7 @@ router.post('/qaa', function (req, res, next) {
 
 /* UPDATE qaa */
 router.put('/qaa/:id', function (req, res, next) {
-  qaa.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    qaa.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -41,7 +41,7 @@ router.put('/qaa/:id', function (req, res, next) {
 
 /* DELETE qaa */
 router.delete('/qaa/:id', function (req, res, next) {
-  qaa.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  qaa.findOneAndRemove({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -144,7 +144,7 @@ router.post('/words', function (req, res, next) {
 
 /* UPDATE words */
 router.put('/words/:id', function (req, res, next) {
-  words.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+  words.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -152,7 +152,7 @@ router.put('/words/:id', function (req, res, next) {
 
 /* DELETE words */
 router.delete('/words/:id', function (req, res, next) {
-  words.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+  words.findOneAndRemove({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

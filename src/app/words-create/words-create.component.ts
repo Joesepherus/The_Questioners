@@ -8,15 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WordsCreateComponent implements OnInit {
   @Input() wordsAll: any;
-  words = {};
+  words = { id: '' };
+  newWords = { id: '' };
+
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   addWords() {
-    this.wordsAll.push(this.words);
-    this.http.post('/api/words', this.words)
+    let newWords = this.words;
+    newWords.id = this.wordsAll.length;
+    this.words = {  id: '' };
+    this.wordsAll.push(newWords);
+    this.http.post('/api/words', newWords)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

@@ -213,13 +213,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var QaaCreateComponent = /** @class */ (function () {
     function QaaCreateComponent(http) {
         this.http = http;
-        this.qaa = {};
+        this.qaa = { id: '' };
     }
     QaaCreateComponent.prototype.ngOnInit = function () {
     };
     QaaCreateComponent.prototype.addQaA = function () {
-        this.qaaAll.push(this.qaa);
-        this.http.post('/api/qaa', this.qaa)
+        var newQaa = this.qaa;
+        newQaa.id = this.qaaAll.length;
+        this.qaa = { id: '' };
+        this.qaaAll.push(newQaa);
+        this.http.post('/api/qaa', newQaa)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -254,7 +257,7 @@ module.exports = ""
 /***/ "./src/app/qaa-delete/qaa-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\r\n(click)=\"deleteQaa(qaa._id, qaa)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\r\n(click)=\"deleteQaa(qaa.id, qaa)\">Delete</button>"
 
 /***/ }),
 
@@ -284,12 +287,12 @@ var QaaDeleteComponent = /** @class */ (function () {
     QaaDeleteComponent.prototype.ngOnInit = function () {
     };
     QaaDeleteComponent.prototype.deleteQaa = function (id) {
-        this.qaaAll.splice(-1, 1);
         this.http.delete('/api/qaa/' + id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
+        this.qaaAll.splice(id, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -324,7 +327,7 @@ module.exports = ""
 /***/ "./src/app/qaa-edit-modal/qaa-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <!-- Trigger the modal with a button -->\r\n  <!-- Modal -->\r\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n      <!-- Modal content-->\r\n      <div class=\"modal-content\">\r\n        <div id=\"editModalHeader\" class=\"modal-header\">\r\n          <button type=\"button\" class=\"close\"\r\n          data-dismiss=\"modal\">&times;</button>\r\n          <h4 class=\"modal-title\">Edit QaA</h4>\r\n        </div>\r\n        <div class=\"modal-body editQaABody\">\r\n          <form *ngIf=\"qaa\" id=\"editTaskForm\" class=\"w3-container\" method=\"post\"\r\n          (ngSubmit)=\"editQaa(qaa._id)\">\r\n            <p>\r\n              <label class=\"newTaskType\">Title:</label>\r\n              <textarea class=\"w3-input\" name=\"editTitle\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n            </p>\r\n            <p>\r\n              <label class=\"newTaskType\">Description:</label>\r\n              <textarea class=\"w3-input editQaADescription\"\r\n              name=\"editDescription\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.description\" name=\"description\"\r\n              required></textarea>\r\n            </p>\r\n            <div>\r\n              <label class=\"newTaskType\">Type</label>\r\n            </div>\r\n            <select name=\"editType\" id=\"editSelect\"\r\n            (change)=\"changeColor($event)\" [(ngModel)]=\"qaa.type\"\r\n            name=\"type\" required>\r\n              <option value=\"\"></option>\r\n              <option value=\"Javascript\">Javascript</option>\r\n              <option value=\"HTML\">HTML</option>\r\n              <option value=\"CSS\">CSS</option>\r\n              <option value=\"Data structures\">Data structures</option>\r\n              <option value=\"Other\">Other</option>\r\n            </select>\r\n          </form>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"col-md-2 editBtn btn btn-success\"\r\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\r\n          <button type=\"button\" class=\"btn btn-default\"\r\n          data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container\">\r\n  <!-- Trigger the modal with a button -->\r\n  <!-- Modal -->\r\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\r\n    <div class=\"modal-dialog\">\r\n      <!-- Modal content-->\r\n      <div class=\"modal-content\">\r\n        <div id=\"editModalHeader\" class=\"modal-header\">\r\n          <button type=\"button\" class=\"close\"\r\n          data-dismiss=\"modal\">&times;</button>\r\n          <h4 class=\"modal-title\">Edit QaA</h4>\r\n        </div>\r\n        <div class=\"modal-body editQaABody\">\r\n          <form *ngIf=\"qaa\" id=\"editTaskForm\" class=\"w3-container\" method=\"post\"\r\n          (ngSubmit)=\"editQaa(qaa.id)\">\r\n            <p>\r\n              <label class=\"newTaskType\">Title:</label>\r\n              <textarea class=\"w3-input\" name=\"editTitle\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\r\n            </p>\r\n            <p>\r\n              <label class=\"newTaskType\">Description:</label>\r\n              <textarea class=\"w3-input editQaADescription\"\r\n              name=\"editDescription\" cols=\"40\" rows=\"1\"\r\n              [(ngModel)]=\"qaa.description\" name=\"description\"\r\n              required></textarea>\r\n            </p>\r\n            <div>\r\n              <label class=\"newTaskType\">Type</label>\r\n            </div>\r\n            <select name=\"editType\" id=\"editSelect\"\r\n            (change)=\"changeColor($event)\" [(ngModel)]=\"qaa.type\"\r\n            name=\"type\" required>\r\n              <option value=\"\"></option>\r\n              <option value=\"Javascript\">Javascript</option>\r\n              <option value=\"HTML\">HTML</option>\r\n              <option value=\"CSS\">CSS</option>\r\n              <option value=\"Data structures\">Data structures</option>\r\n              <option value=\"Other\">Other</option>\r\n            </select>\r\n          </form>\r\n        </div>\r\n        <div class=\"modal-footer\">\r\n          <button class=\"col-md-2 editBtn btn btn-success\"\r\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\r\n          <button type=\"button\" class=\"btn btn-default\"\r\n          data-dismiss=\"modal\">Close</button>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -809,7 +812,7 @@ module.exports = ""
 /***/ "./src/app/todo-delete/todo-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteTodo(todo._id, todo)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteTodo(todo.id, todo)\">Delete</button>"
 
 /***/ }),
 
@@ -839,13 +842,12 @@ var TodoDeleteComponent = /** @class */ (function () {
     TodoDeleteComponent.prototype.ngOnInit = function () {
     };
     TodoDeleteComponent.prototype.deleteTodo = function (id) {
-        var index = this.todoAll.map(function (e) { return e._id; }).indexOf(id);
-        this.http.delete('/api/todo/' + this.todoAll[index].id)
+        this.http.delete('/api/todo/' + id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
-        this.todoAll.splice(index, 1);
+        this.todoAll.splice(id, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -1334,13 +1336,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WordsCreateComponent = /** @class */ (function () {
     function WordsCreateComponent(http) {
         this.http = http;
-        this.words = {};
+        this.words = { id: '' };
+        this.newWords = { id: '' };
     }
     WordsCreateComponent.prototype.ngOnInit = function () {
     };
     WordsCreateComponent.prototype.addWords = function () {
-        this.wordsAll.push(this.words);
-        this.http.post('/api/words', this.words)
+        var newWords = this.words;
+        newWords.id = this.wordsAll.length;
+        this.words = { id: '' };
+        this.wordsAll.push(newWords);
+        this.http.post('/api/words', newWords)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -1375,7 +1381,7 @@ module.exports = ""
 /***/ "./src/app/words-delete/words-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteWords(words._id, words)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteWords(words.id, words)\">Delete</button>"
 
 /***/ }),
 
@@ -1405,12 +1411,12 @@ var WordsDeleteComponent = /** @class */ (function () {
     WordsDeleteComponent.prototype.ngOnInit = function () {
     };
     WordsDeleteComponent.prototype.deleteWords = function (id) {
-        this.wordsAll.splice(-1, 1);
         this.http.delete('/api/words/' + id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
+        this.wordsAll.splice(id, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -1445,7 +1451,7 @@ module.exports = ""
 /***/ "./src/app/words-edit-modal/words-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Word</h4>\n        </div>\n        <div class=\"modal-body editQaABody\">\n          <form *ngIf=\"words\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editWords(words._id)\">\n            <p>\n              <label class=\"newTaskType\">Word:</label>\n              <textarea class=\"w3-input\" name=\"word\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.word\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"description\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.description\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Translation:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"translation\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.translation\" required></textarea>\n            </p>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\"\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Word</h4>\n        </div>\n        <div class=\"modal-body editQaABody\">\n          <form *ngIf=\"words\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editWords(words.id)\">\n            <p>\n              <label class=\"newTaskType\">Word:</label>\n              <textarea class=\"w3-input\" name=\"word\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.word\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"description\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.description\" required></textarea>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Translation:</label>\n              <textarea class=\"w3-input editQaADescription\"\n              name=\"translation\" cols=\"40\" rows=\"1\"\n              [(ngModel)]=\"words.translation\" required></textarea>\n            </p>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\"\n          form=\"editTaskForm\" type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
