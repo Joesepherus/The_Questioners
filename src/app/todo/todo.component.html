@@ -9,8 +9,7 @@
 
 
     <div class="col-md-1 selector">
-      <select id="selector" ng-options="view.select for view in views"
-      (change)="select($event)">
+      <select id="selector" (change)="select($event)">
         <option value="all">all</option>
         <option value="inprogress">inprogress</option>
         <option value="completed">completed</option>

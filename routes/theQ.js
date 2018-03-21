@@ -33,7 +33,7 @@ router.post('/qaa', function (req, res, next) {
 
 /* UPDATE qaa */
 router.put('/qaa/:id', function (req, res, next) {
-    qaa.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
+  qaa.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -74,7 +74,6 @@ router.post('/todo', function (req, res, next) {
   });
 });
 
-/* UPDATE todo */
 router.put('/todo/:id', function (req, res, next) {
   todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
     if (err) return next(err);
@@ -94,6 +93,7 @@ router.delete('/todo/:id', function (req, res, next) {
 // change tasks state to completed task
 router.put('/todo/completed/:id', function (req, res, next) {
   todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
+    console.log(post);
     if (err) return next(err);
     res.json(post);
   });

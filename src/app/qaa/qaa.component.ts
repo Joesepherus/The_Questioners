@@ -15,9 +15,11 @@ export class QaaComponent implements OnInit {
   qaas = {};
   numberOfQaA: any;
   test: any;
+  qaaShow: any;
   readonly numberOfLi = 7;
   constructor(private http: HttpClient) {
     this.qaaAll = [];
+    this.qaaShow = [];
   }
 
   onNotify(val) {
@@ -28,6 +30,7 @@ export class QaaComponent implements OnInit {
   ngOnInit() {
     this.http.get('/api/qaa').subscribe(data => {
       this.qaaAll = data;
+      this.qaaShow = this.qaaAll;
     });
 
     $(document).ready(function () {
@@ -167,6 +170,20 @@ export class QaaComponent implements OnInit {
       elem = $(elem).closest("li")[0];
     }
     elem.children[2].classList.toggle("show");
+  }
+
+  select($event) {
+    let typeSelected = $event.target.value;
+    if (typeSelected === 'all') {
+      this.qaaShow = this.qaaAll;
+    } else {
+      this.qaaShow = [];
+      for (let i = 0; i < this.qaaAll.length; i++) {
+        if (this.qaaAll[i].type === typeSelected) {
+          this.qaaShow.push(this.qaaAll[i]);
+        }
+      }
+    }
   }
 
 }
