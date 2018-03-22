@@ -287,7 +287,8 @@ var QaaDeleteComponent = /** @class */ (function () {
     QaaDeleteComponent.prototype.ngOnInit = function () {
     };
     QaaDeleteComponent.prototype.deleteQaa = function (id) {
-        this.http.delete('/api/qaa/' + id)
+        var index = this.qaaAll.map(function (e) { return e.id; }).indexOf(id);
+        this.http.delete('/api/qaa/' + this.qaaAll[index].id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -755,7 +756,7 @@ module.exports = ""
 /***/ "./src/app/todo-create/todo-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo(todo)\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"watch later\">watch later</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo(todo)\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n        <option value=\"project\">project</option>\n        <option value=\"learn\">learn</option>\n        <option value=\"watch later\">watch later</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -858,12 +859,13 @@ var TodoDeleteComponent = /** @class */ (function () {
     TodoDeleteComponent.prototype.ngOnInit = function () {
     };
     TodoDeleteComponent.prototype.deleteTodo = function (id) {
-        this.http.delete('/api/todo/' + id)
+        var index = this.todoAll.map(function (e) { return e.id; }).indexOf(id);
+        this.http.delete('/api/todo/' + this.todoAll[index].id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
         });
-        this.todoAll.splice(id, 1);
+        this.todoAll.splice(index, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -898,7 +900,7 @@ module.exports = ""
 /***/ "./src/app/todo-edit-modal/todo-edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(todo.id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<div class=\"container\">\n  <!-- Trigger the modal with a button -->\n  <!-- Modal -->\n  <div class=\"modal fade\" id=\"editModal\" role=\"dialog\">\n    <div class=\"modal-dialog\">\n      <!-- Modal content-->\n      <div class=\"modal-content\">\n        <div id=\"editModalHeader\" class=\"modal-header\">\n          <button type=\"button\" class=\"close\"\n          data-dismiss=\"modal\">&times;</button>\n          <h4 class=\"modal-title\">Edit Task</h4>\n        </div>\n        <div class=\"modal-body\">\n          <form *ngIf=\"todo\" id=\"editTaskForm\" class=\"w3-container\"\n          method=\"post\" (ngSubmit)=\"editTodo(todo.id)\">\n            <p>\n              <label class=\"newTaskType\">Title:</label>\n              <input id=\"test_input\" class=\"w3-input\" name=\"title\"\n              type=\"text\" [(ngModel)]=\"todo.title\" required>\n            </p>\n            <p>\n              <label class=\"newTaskType\">Description:</label>\n              <input class=\"w3-input\" name=\"description\"\n              [(ngModel)]=\"todo.description\" type=\"text\" required>\n            </p>\n            <div>\n              <label class=\"newTaskType\">Type</label>\n            </div>\n            <select name=\"type\" id=\"editSelect\" [(ngModel)]=\"todo.type\"\n            required>\n              <option value=\"\"></option>\n              <option value=\"work\">work</option>\n              <option value=\"personal\">personal</option>\n              <option value=\"school\">school</option>\n              <option value=\"project\">project</option>\n              <option value=\"learn\">learn</option>\n              <option value=\"watch later\">watch later</option>\n            </select>\n          </form>\n        </div>\n        <div class=\"modal-footer\">\n          <button class=\"col-md-2 editBtn btn btn-success\" form=\"editTaskForm\"\n          type=\"submit\">Submit</button>\n          <button type=\"button\" class=\"btn btn-default\"\n          data-dismiss=\"modal\">Close</button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -928,7 +930,8 @@ var TodoEditModalComponent = /** @class */ (function () {
     TodoEditModalComponent.prototype.ngOnInit = function () {
     };
     TodoEditModalComponent.prototype.editTodo = function (id) {
-        this.http.put('/api/todo/' + id, this.todo)
+        var index = this.todoAll.map(function (e) { return e.id; }).indexOf(id);
+        this.http.put('/api/todo/' + this.todoAll[index].id, this.todoAll[index])
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -1027,6 +1030,12 @@ var TodoEditComponent = /** @class */ (function () {
             case "school":
                 __WEBPACK_IMPORTED_MODULE_2_jquery__("#editModalHeader").css('background', '#048E16');
                 break;
+            case "project":
+                __WEBPACK_IMPORTED_MODULE_2_jquery__("#editModalHeader").css('background', '#533A71');
+                break;
+            case "learn":
+                __WEBPACK_IMPORTED_MODULE_2_jquery__("#editModalHeader").css('background', '#D1751F');
+                break;
             case "watch later":
                 __WEBPACK_IMPORTED_MODULE_2_jquery__("#editModalHeader").css('background', '#900C3E');
                 break;
@@ -1109,7 +1118,7 @@ module.exports = ""
 /***/ "./src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\r\n  <div class=\"row\">\r\n\r\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>Tasks</h2>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\" (change)=\"select($event)\">\r\n        <option value=\"all\">all</option>\r\n        <option value=\"inprogress\">inprogress</option>\r\n        <option value=\"completed\">completed</option>\r\n        <option value=\"removed\">removed</option>\r\n        <option value=\"work\">work</option>\r\n        <option value=\"personal\">personal</option>\r\n        <option value=\"project\">project</option>\r\n        <option value=\"learn\">learn</option>\r\n        <option value=\"watch later\">watch later</option>\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoShow.length}}\r\n      </p>\r\n    </div>\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let todo of todoShow.reverse(); let last = last; let i =\r\n      index\" [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\r\n          <div>\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\r\n            <span>{{todo.title}}</span>\r\n          </div>\r\n          <div class=\"dropdown-content\" id=\"drop\">\r\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\r\n            <p class=\"label label-default\">{{todo.type}}</p>\r\n            <p class=\"label label-default\">{{todo.state}}</p>\r\n            <p class=\"dropPara\">{{todo.description}}</p>\r\n            <div class=\"modal-button\">\r\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\r\n\r\n              <app-todo-delete [todoAll]=\"todoAll\"\r\n              [todo]=\"todo\"></app-todo-delete>\r\n            </div>\r\n          </div>\r\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\r\n          todo)\">&#215;</span>\r\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\r\n        </li>\r\n      </div>\r\n\r\n    </ul>\r\n\r\n    <app-todo-edit-modal [todo]=\"test\"></app-todo-edit-modal>\r\n\r\n\r\n  </div>\r\n</div>\r\n<br>"
+module.exports = "<div class=\"container todolist\">\r\n  <div class=\"row\">\r\n\r\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\r\n\r\n    <div class=\"col-md-10\">\r\n      <h2>Tasks</h2>\r\n    </div>\r\n\r\n\r\n    <div class=\"col-md-1 selector\">\r\n      <select id=\"selector\" (change)=\"select($event)\">\r\n        <option value=\"all\">all</option>\r\n        <option value=\"inprogress\">inprogress</option>\r\n        <option value=\"completed\">completed</option>\r\n        <option value=\"removed\">removed</option>\r\n        <option value=\"work\">work</option>\r\n        <option value=\"personal\">personal</option>\r\n        <option value=\"personal\">school</option>\r\n        <option value=\"project\">project</option>\r\n        <option value=\"learn\">learn</option>\r\n        <option value=\"watch later\">watch later</option>\r\n      </select>\r\n    </div>\r\n\r\n    <div class=\"col-md-12\">\r\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoShow.length}}\r\n      </p>\r\n    </div>\r\n    <ul class=\"col-md-12\" id=\"myUL\">\r\n      <div *ngFor=\"let todo of todoShow.reverse(); let last = last; let i =\r\n      index\" [ngClass]=\"isLast(last)\">\r\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\r\n          <div>\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\r\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\r\n            <span>{{todo.title}}</span>\r\n          </div>\r\n          <div class=\"dropdown-content\" id=\"drop\">\r\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\r\n            <p class=\"label label-default\">{{todo.type}}</p>\r\n            <p class=\"label label-default\">{{todo.state}}</p>\r\n            <p class=\"dropPara\">{{todo.description}}</p>\r\n            <div class=\"modal-button\">\r\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\r\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\r\n\r\n              <app-todo-delete [todoAll]=\"todoAll\"\r\n              [todo]=\"todo\"></app-todo-delete>\r\n            </div>\r\n          </div>\r\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\r\n          todo)\">&#215;</span>\r\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\r\n        </li>\r\n      </div>\r\n\r\n    </ul>\r\n\r\n    <app-todo-edit-modal [todo]=\"test\" [todoAll]=\"todoAll\"></app-todo-edit-modal>\r\n\r\n\r\n  </div>\r\n</div>\r\n<br>"
 
 /***/ }),
 
@@ -1156,6 +1165,14 @@ var TodoComponent = /** @class */ (function () {
                         case "school":
                             li[i].classList.add("school");
                             li[i].children[1].classList.add("school-content");
+                            break;
+                        case "project":
+                            li[i].classList.add("project");
+                            li[i].children[1].classList.add("project-content");
+                            break;
+                        case "learn":
+                            li[i].classList.add("learn");
+                            li[i].children[1].classList.add("learn-content");
                             break;
                         case "watch later":
                             li[i].classList.add("watchLater");
@@ -1427,7 +1444,8 @@ var WordsDeleteComponent = /** @class */ (function () {
     WordsDeleteComponent.prototype.ngOnInit = function () {
     };
     WordsDeleteComponent.prototype.deleteWords = function (id) {
-        this.http.delete('/api/words/' + id)
+        var index = this.wordsAll.map(function (e) { return e.id; }).indexOf(id);
+        this.http.delete('/api/words/' + this.wordsAll[index].id)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);

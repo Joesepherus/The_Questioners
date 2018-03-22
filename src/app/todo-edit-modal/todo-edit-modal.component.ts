@@ -16,7 +16,8 @@ export class TodoEditModalComponent implements OnInit {
   }
 
   editTodo(id) {
-    this.http.put('/api/todo/' + id, this.todo)
+    let index = this.todoAll.map(function(e) { return e.id; }).indexOf(id);
+    this.http.put('/api/todo/' + this.todoAll[index].id, this.todoAll[index])
       .subscribe(res => {
       }, (err) => {
         console.log(err);

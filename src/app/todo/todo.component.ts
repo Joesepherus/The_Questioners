@@ -56,6 +56,14 @@ export class TodoComponent implements OnInit {
             li[i].classList.add("school");
             li[i].children[1].classList.add("school-content");
             break;
+          case "project":
+            li[i].classList.add("project");
+            li[i].children[1].classList.add("project-content");
+            break;
+          case "learn":
+            li[i].classList.add("learn");
+            li[i].children[1].classList.add("learn-content");
+            break;
           case "watch later":
             li[i].classList.add("watchLater");
             li[i].children[1].classList.add("watchLater-content");

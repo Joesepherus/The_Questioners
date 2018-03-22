@@ -74,8 +74,10 @@ router.post('/todo', function (req, res, next) {
   });
 });
 
+/* UPDATE todo */
 router.put('/todo/:id', function (req, res, next) {
   todo.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
+    console.log(req.body, post);
     if (err) return next(err);
     res.json(post);
   });
@@ -83,9 +85,9 @@ router.put('/todo/:id', function (req, res, next) {
 
 /* DELETE todo */
 router.delete('/todo/:id', function (req, res, next) {
-  console.log(req.params);
+  console.log(req.params.id);
   todo.findOneAndRemove({ 'id': req.params.id }, function (err, post) {
-    if (err) return next(err);
+    if (err) return next(post);
     res.json(post);
   });
 });

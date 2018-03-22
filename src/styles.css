@@ -283,6 +283,16 @@ ul li.school, ul li.html {
     color: black;
 }
 
+ul li.project, ul li.html {
+  background-color: #533A71;
+  color: black;
+}
+
+ul li.learn, ul li.html {
+  background-color: #D1751F;
+  color: black;
+}
+
 ul li.watchLater, ul li.DataStructures  {
     background-color: #900C3E;
     color: black;
@@ -300,6 +310,14 @@ div.school-content, div.html-content {
     background-color: #12b20d;
 }
 
+div.project-content, div.html-content {
+  background-color: #7d5ca5;
+}
+
+div.learn-content, div.html-content {
+  background-color: #E88F22;
+}
+
 div.watchLater-content, div.DataStructures-content {
     background-color: #C70039;
 }
@@ -314,7 +332,7 @@ div.removed-content, div.failed-content {
     right: 0;
     top: 0;
     padding: 12px 16px 18px 16px;
-    height: 50px;
+    height: 49px;
 }
 
 .closeBtnDRO {

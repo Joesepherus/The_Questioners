@@ -48,9 +48,16 @@ export class TodoEditComponent implements OnInit {
       case "school":
         $("#editModalHeader").css('background', '#048E16');
         break;
+      case "project":
+        $("#editModalHeader").css('background', '#533A71');
+        break;
+      case "learn":
+        $("#editModalHeader").css('background', '#D1751F');
+        break;
       case "watch later":
         $("#editModalHeader").css('background', '#900C3E');
         break;
+
     }
   }
 
