@@ -97,6 +97,10 @@ div.dropdown:click > .dropdown-menu {
     border-color: black;
 }
 
+.aboutDiv {
+  overflow: auto;
+}
+
 .aboutDropbtn2 {
 	padding: 1px;
     border: none;
@@ -722,6 +726,21 @@ img.TheQAbout {
     margin-top: 150px;
 }
 
+@media only screen and (max-width: 1200px) {
+  .img-thumbnail {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    width: 50%;
+  }
+
+  .pull-right {
+    float: none!important;
+  }
+}
+
+
 .skillsIT {
     width: 130px!important;
     height: 130px!important;
@@ -761,7 +780,7 @@ h3 {
 
 .parallax {
     /* The image used */
-    background-image: url('/css/img/wallpaper.jpg');
+    background-image: url('/assets/img/wallpaper.jpg');
 
     /* Full height */
     height: 100%; 
@@ -775,7 +794,7 @@ h3 {
 
 .parallax2 {
     /* The image used */
-    background-image: url('/css/img/wallpaper2.jpg');
+    background-image: url('/assets/img/wallpaper2.jpg');
 
     /* Full height */
     height: 100%; 
@@ -789,7 +808,7 @@ h3 {
 
 .parallax3 {
     /* The image used */
-    background-image: url('/css/img/wallpaper4.jpg');
+    background-image: url('/assets/img/wallpaper4.jpg');
 
     /* Full height */
     height: 100%; 
@@ -803,7 +822,7 @@ h3 {
 
 .parallax4 {
     /* The image used */
-    background-image: url('/css/img/wallpaper5.jpg');
+    background-image: url('/assets/img/wallpaper5.jpg');
 
     /* Full height */
     height: 100%; 

@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 app.use('/qaas', express.static(path.join(__dirname, 'dist')));
 app.use('/todo', express.static(path.join(__dirname, 'dist')));
 app.use('/words', express.static(path.join(__dirname, 'dist')));
+app.use('/about', express.static(path.join(__dirname, 'dist')));
 app.use('/api', routes);
 
 // catch 404 and forward to error handler

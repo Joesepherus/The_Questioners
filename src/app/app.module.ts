@@ -19,6 +19,7 @@ import { WordsCreateComponent } from './words-create/words-create.component';
 import { WordsEditComponent } from './words-edit/words-edit.component';
 import { WordsEditModalComponent } from './words-edit-modal/words-edit-modal.component';
 import { WordsDeleteComponent } from './words-delete/words-delete.component';
+import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
   {
@@ -35,6 +36,11 @@ const appRoutes: Routes = [
     path: 'words',
     component: WordsComponent,
     data: {title: 'Words' }
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: { title: 'About' }
   },
   {
     path: '',
@@ -60,7 +66,8 @@ const appRoutes: Routes = [
     WordsCreateComponent,
     WordsEditComponent,
     WordsEditModalComponent,
-    WordsDeleteComponent
+    WordsDeleteComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
