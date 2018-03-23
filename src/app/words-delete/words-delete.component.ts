@@ -22,6 +22,6 @@ export class WordsDeleteComponent implements OnInit {
         console.log(err);
       }
       );
-    this.wordsAll.splice(id, 1);
+    this.wordsAll.splice(index, 1);
   }
 }

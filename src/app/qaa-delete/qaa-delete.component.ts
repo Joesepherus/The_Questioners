@@ -16,12 +16,13 @@ export class QaaDeleteComponent implements OnInit {
 
   deleteQaa(id) {
     let index = this.qaaAll.map(function(e) { return e.id; }).indexOf(id);
+    console.log(this.qaaAll[index]);
     this.http.delete('/api/qaa/' + this.qaaAll[index].id)
       .subscribe(res => {
       }, (err) => {
         console.log(err);
       }
       );
-    this.qaaAll.splice(id, 1);
+    this.qaaAll.splice(index, 1);
   }
 }

@@ -350,6 +350,7 @@ var QaaDeleteComponent = /** @class */ (function () {
     };
     QaaDeleteComponent.prototype.deleteQaa = function (id) {
         var index = this.qaaAll.map(function (e) { return e.id; }).indexOf(id);
+        console.log(this.qaaAll[index]);
         this.http.delete('/api/qaa/' + this.qaaAll[index].id)
             .subscribe(function (res) {
         }, function (err) {
