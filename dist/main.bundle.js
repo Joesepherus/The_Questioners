@@ -37,6 +37,8 @@ module.exports = "<!-- Header -->\n<header class=\"masthead parallax\">\n  <div 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AboutComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -47,12 +49,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
     }
     AboutComponent.prototype.ngOnInit = function () {
-        $(document).ready(function () {
-            $("#about").addClass('active');
+        __WEBPACK_IMPORTED_MODULE_1_jquery__(document).ready(function () {
+            __WEBPACK_IMPORTED_MODULE_1_jquery__("#about").addClass('active');
             document.title = "The Questioners";
         });
     };
@@ -250,7 +253,7 @@ module.exports = ""
 /***/ "./src/app/qaa-create/qaa-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New QaA</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <textarea class=\"w3-input\" name=\"newTaskDescription\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"qaa.description\" name=\"description\" required></textarea>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\n  </div>\n\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New QaA</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Question:</label>\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Answer:</label>\n        <textarea class=\"w3-input\" name=\"newTaskDescription\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"qaa.description\" name=\"description\" required></textarea>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -356,7 +359,7 @@ var QaaDeleteComponent = /** @class */ (function () {
         }, function (err) {
             console.log(err);
         });
-        this.qaaAll.splice(id, 1);
+        this.qaaAll.splice(index, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -645,8 +648,13 @@ var QaaComponent = /** @class */ (function () {
     };
     QaaComponent.prototype.ngOnInit = function () {
         var _this = this;
+        function compare(a, b) {
+            return a.id - b.id;
+        }
         this.http.get('/api/qaa').subscribe(function (data) {
+            console.log(data);
             _this.qaaAll = data;
+            _this.qaaAll.sort(compare);
             _this.qaaShow = _this.qaaAll;
         });
         __WEBPACK_IMPORTED_MODULE_2_jquery__(document).ready(function () {
@@ -1440,7 +1448,7 @@ var WordsDeleteComponent = /** @class */ (function () {
         }, function (err) {
             console.log(err);
         });
-        this.wordsAll.splice(id, 1);
+        this.wordsAll.splice(index, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),

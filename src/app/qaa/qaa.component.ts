@@ -27,9 +27,17 @@ export class QaaComponent implements OnInit {
     this.test = val;
   }
 
+
+
   ngOnInit() {
+    function compare(a, b) {
+      return a.id - b.id;
+    }
+
     this.http.get('/api/qaa').subscribe(data => {
+      console.log(data);
       this.qaaAll = data;
+      this.qaaAll.sort(compare);
       this.qaaShow = this.qaaAll;
     });
 

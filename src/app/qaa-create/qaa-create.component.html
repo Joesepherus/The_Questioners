@@ -6,12 +6,12 @@
     <form name="newTaskForm" id="newTaskForm" class="w3-container
     aboutNewTaskForm" method="post" (ngSubmit)="addQaA()" #qaaForm="ngForm">
       <p>
-        <label class="newTaskType">Title:</label>
+        <label class="newTaskType">Question:</label>
         <textarea class="w3-input" name="newTaskTitle" cols="40" rows="1"
         [(ngModel)]="qaa.title" name="title" required></textarea>
       </p>
       <p>
-        <label class="newTaskType">Description:</label>
+        <label class="newTaskType">Answer:</label>
         <textarea class="w3-input" name="newTaskDescription" cols="40" rows="3"
         [(ngModel)]="qaa.description" name="description" required></textarea>
       </p>
