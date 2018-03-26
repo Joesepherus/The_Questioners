@@ -899,10 +899,16 @@ textarea {
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out, margin 0.4s ease-in-out;
   transition: width 0.4s ease-in-out, margin 0.4s ease-in-out;
-  margin: 10px 0px 10px 220px;
+  margin: 10px 0px 10px 0px;
 }
 
 .search:focus {
   width: 100%;
   margin: 10px 0px 10px 0px;
+}
+
+.searchDiv {
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }
