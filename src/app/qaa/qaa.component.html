@@ -25,9 +25,14 @@
       <a (click)="scrollToTheEndOfPage()">Scroll to the bottom</a>
     </div>
 
+    <div class="col-md-12">
+      <input class="search" type="text" [(ngModel)]="queryString" id="search"
+      placeholder="Search by question">
+    </div>
+    
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let qaa of qaaShow.reverse(); let last = last; let i = index"
-      [ngClass]="isLast(last)">
+      <div *ngFor="let qaa of qaaShow.reverse() | FilterPipe: queryString; let
+      last = last; let i = index" [ngClass]="isLast(last)">
         <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
           <div class="col-md-12 QaAPara">{{ qaa.title }}</div>
           <div class="col-md-12">

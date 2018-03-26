@@ -20,6 +20,7 @@ import { WordsEditComponent } from './words-edit/words-edit.component';
 import { WordsEditModalComponent } from './words-edit-modal/words-edit-modal.component';
 import { WordsDeleteComponent } from './words-delete/words-delete.component';
 import { AboutComponent } from './about/about.component';
+import { FilterPipe } from './filter.pipe';
 
 const appRoutes: Routes = [
   {
@@ -67,7 +68,8 @@ const appRoutes: Routes = [
     WordsEditComponent,
     WordsEditModalComponent,
     WordsDeleteComponent,
-    AboutComponent
+    AboutComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

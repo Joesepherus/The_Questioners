@@ -146,12 +146,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__words_edit_modal_words_edit_modal_component__ = __webpack_require__("./src/app/words-edit-modal/words-edit-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__ = __webpack_require__("./src/app/words-delete/words-delete.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__about_about_component__ = __webpack_require__("./src/app/about/about.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__filter_pipe__ = __webpack_require__("./src/app/filter.pipe.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -223,7 +225,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_18__words_edit_words_edit_component__["a" /* WordsEditComponent */],
                 __WEBPACK_IMPORTED_MODULE_19__words_edit_modal_words_edit_modal_component__["a" /* WordsEditModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__["a" /* WordsDeleteComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__about_about_component__["a" /* AboutComponent */]
+                __WEBPACK_IMPORTED_MODULE_21__about_about_component__["a" /* AboutComponent */],
+                __WEBPACK_IMPORTED_MODULE_22__filter_pipe__["a" /* FilterPipe */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -237,6 +240,43 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/filter.pipe.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FilterPipe; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var FilterPipe = /** @class */ (function () {
+    function FilterPipe() {
+    }
+    FilterPipe.prototype.transform = function (value, input) {
+        if (input) {
+            input = input.toLowerCase();
+            return value.filter(function (el) {
+                return el.title.toLowerCase().indexOf(input) > -1;
+            });
+        }
+        return value;
+    };
+    FilterPipe = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["T" /* Pipe */])({
+            name: 'FilterPipe',
+        })
+    ], FilterPipe);
+    return FilterPipe;
 }());
 
 
@@ -608,7 +648,7 @@ module.exports = ".QaAPara {\n    width: 100%;\n    white-space: -moz-pre-wrap; 
 /***/ "./src/app/qaa/qaa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse(); let last = last; let i = index\"\n      [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [testing]=\"qaaAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>\n"
+module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <div class=\"col-md-12\">\n      <input class=\"search\" type=\"text\" [(ngModel)]=\"queryString\" id=\"search\"\n      placeholder=\"Search by question\">\n    </div>\n    \n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse() | FilterPipe: queryString; let\n      last = last; let i = index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [testing]=\"qaaAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>"
 
 /***/ }),
 
