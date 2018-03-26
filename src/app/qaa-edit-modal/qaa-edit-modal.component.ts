@@ -16,6 +16,7 @@ export class QaaEditModalComponent implements OnInit {
   }
 
   editQaa(id) {
+    console.log(id);
     this.http.put('/api/qaa/' + id, this.qaa)
       .subscribe(res => {
       }, (err) => {

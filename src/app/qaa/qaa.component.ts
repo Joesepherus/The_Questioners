@@ -16,6 +16,7 @@ export class QaaComponent implements OnInit {
   numberOfQaA: any;
   test: any;
   qaaShow: any;
+  queryString: any;
   readonly numberOfLi = 7;
   constructor(private http: HttpClient) {
     this.qaaAll = [];
@@ -118,6 +119,19 @@ export class QaaComponent implements OnInit {
           this.qaaShow.push(this.qaaAll[i]);
         }
       }
+    }
+  }
+
+  searchChange() {
+    if (this.queryString) {
+      let input = this.queryString.toLowerCase();
+      this.qaaShow = [];
+      this.qaaShow = this.qaaAll.filter(function (el: any) {
+        return el.title.toLowerCase().indexOf(input) > -1;
+      });
+    }
+    else {
+      this.qaaShow = this.qaaAll;
     }
   }
 

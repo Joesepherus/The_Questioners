@@ -393,6 +393,7 @@ var QaaDeleteComponent = /** @class */ (function () {
     };
     QaaDeleteComponent.prototype.deleteQaa = function (id) {
         var index = this.qaaAll.map(function (e) { return e.id; }).indexOf(id);
+        var index2 = this.qaaShow.map(function (e) { return e.id; }).indexOf(id);
         console.log(this.qaaAll[index]);
         this.http.delete('/api/qaa/' + this.qaaAll[index].id)
             .subscribe(function (res) {
@@ -400,11 +401,16 @@ var QaaDeleteComponent = /** @class */ (function () {
             console.log(err);
         });
         this.qaaAll.splice(index, 1);
+        this.qaaShow.splice(index2, 1);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
         __metadata("design:type", Object)
     ], QaaDeleteComponent.prototype, "qaaAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], QaaDeleteComponent.prototype, "qaaShow", void 0);
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
         __metadata("design:type", Object)
@@ -464,6 +470,7 @@ var QaaEditModalComponent = /** @class */ (function () {
     QaaEditModalComponent.prototype.ngOnInit = function () {
     };
     QaaEditModalComponent.prototype.editQaa = function (id) {
+        console.log(id);
         this.http.put('/api/qaa/' + id, this.qaa)
             .subscribe(function (res) {
         }, function (err) {
@@ -648,7 +655,7 @@ module.exports = ".QaAPara {\n    width: 100%;\n    white-space: -moz-pre-wrap; 
 /***/ "./src/app/qaa/qaa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <div class=\"col-md-12\">\n      <input class=\"search\" type=\"text\" [(ngModel)]=\"queryString\" id=\"search\"\n      placeholder=\"Search by question\">\n    </div>\n    \n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse() | FilterPipe: queryString; let\n      last = last; let i = index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [testing]=\"qaaAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>"
+module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <div class=\"col-md-12\">\n      <input class=\"search\" type=\"text\" [(ngModel)]=\"queryString\" id=\"search\"\n      placeholder=\"Search by question\"\n      (ngModelChange)=searchChange()>\n    </div>\n    \n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse(); let\n      last = last; let i = index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [(testing)]=\"qaaShow[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [(qaaShow)]=\"qaaShow\" [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>"
 
 /***/ }),
 
@@ -766,6 +773,18 @@ var QaaComponent = /** @class */ (function () {
                     this.qaaShow.push(this.qaaAll[i]);
                 }
             }
+        }
+    };
+    QaaComponent.prototype.searchChange = function () {
+        if (this.queryString) {
+            var input_1 = this.queryString.toLowerCase();
+            this.qaaShow = [];
+            this.qaaShow = this.qaaAll.filter(function (el) {
+                return el.title.toLowerCase().indexOf(input_1) > -1;
+            });
+        }
+        else {
+            this.qaaShow = this.qaaAll;
         }
     };
     QaaComponent = __decorate([

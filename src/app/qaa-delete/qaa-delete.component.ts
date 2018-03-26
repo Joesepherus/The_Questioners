@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class QaaDeleteComponent implements OnInit {
   @Input() qaaAll: any;
+  @Input() qaaShow: any;
   @Input() qaa = {};
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,7 @@ export class QaaDeleteComponent implements OnInit {
 
   deleteQaa(id) {
     let index = this.qaaAll.map(function(e) { return e.id; }).indexOf(id);
+    let index2 = this.qaaShow.map(function(e) { return e.id; }).indexOf(id);
     console.log(this.qaaAll[index]);
     this.http.delete('/api/qaa/' + this.qaaAll[index].id)
       .subscribe(res => {
@@ -24,5 +26,6 @@ export class QaaDeleteComponent implements OnInit {
       }
       );
     this.qaaAll.splice(index, 1);
+    this.qaaShow.splice(index2, 1);
   }
 }
