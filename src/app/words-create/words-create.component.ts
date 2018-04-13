@@ -8,24 +8,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WordsCreateComponent implements OnInit {
   @Input() wordsAll: any;
-  words = { id: '' };
-  newWords = { id: '' };
-
+  words = { id: '', create_date: (new Date).toISOString() };
+  newWords = { id: ''  };
+  latest;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   addWords() {
-    let newWords = this.words;
-    newWords.id = this.wordsAll.length;
-    this.words = {  id: '' };
-    this.wordsAll.push(newWords);
-    this.http.post('/api/words', newWords)
-      .subscribe(res => {
-      }, (err) => {
-        console.log(err);
-      }
-      );
+    this.http.get('/api/words-latest').subscribe(data => {
+      this.latest = data;
+      console.log(data);
+      let newWords = this.words;
+      newWords.id = (++this.latest.id).toString();
+      newWords.create_date = (new Date).toISOString();
+      this.words = { id: '', create_date: (new Date).toISOString() };
+      this.wordsAll.push(newWords);
+      this.http.post('/api/words', newWords)
+        .subscribe(res => {
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    });
   }
 }

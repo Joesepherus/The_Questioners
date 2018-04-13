@@ -16,7 +16,7 @@ export class WordsDeleteComponent implements OnInit {
 
   deleteWords(id) {
     let index = this.wordsAll.map(function(e) { return e.id; }).indexOf(id);
-    this.http.delete('/api/words/' + this.wordsAll[index].id)
+    this.http.delete('/api/words/' + this.wordsAll[index].create_date)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

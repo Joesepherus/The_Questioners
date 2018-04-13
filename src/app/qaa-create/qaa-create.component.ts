@@ -8,22 +8,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class QaaCreateComponent implements OnInit {
   @Input() qaaAll: any;
-  qaa = { id: '' };
+  qaa = { id: '', create_date: (new Date).toISOString() };
+  latest;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
 
   addQaA() {
-    let newQaa = this.qaa;
-    newQaa.id = this.qaaAll.length;
-    this.qaa = {  id: '' };
-    this.qaaAll.push(newQaa);
-    this.http.post('/api/qaa', newQaa)
-      .subscribe(res => {
-      }, (err) => {
-        console.log(err);
-      }
-      );
+    this.http.get('/api/qaa-latest').subscribe(data => {
+      this.latest = data;
+      console.log(data);
+      let newQaa = this.qaa;
+      newQaa.id = (++this.latest.id).toString();
+      newQaa.create_date = (new Date).toISOString();
+      console.log(newQaa);
+      this.qaa = { id: '', create_date: (new Date).toISOString() };
+      this.qaaAll.push(newQaa);
+      this.http.post('/api/qaa', newQaa)
+        .subscribe(res => {
+        }, (err) => {
+          console.log(err);
+        }
+        );
+    });
   }
 }

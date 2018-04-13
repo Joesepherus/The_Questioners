@@ -318,19 +318,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var QaaCreateComponent = /** @class */ (function () {
     function QaaCreateComponent(http) {
         this.http = http;
-        this.qaa = { id: '' };
+        this.qaa = { id: '', create_date: (new Date).toISOString() };
     }
     QaaCreateComponent.prototype.ngOnInit = function () {
     };
     QaaCreateComponent.prototype.addQaA = function () {
-        var newQaa = this.qaa;
-        newQaa.id = this.qaaAll.length;
-        this.qaa = { id: '' };
-        this.qaaAll.push(newQaa);
-        this.http.post('/api/qaa', newQaa)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
+        var _this = this;
+        this.http.get('/api/qaa-latest').subscribe(function (data) {
+            _this.latest = data;
+            console.log(data);
+            var newQaa = _this.qaa;
+            newQaa.id = (++_this.latest.id).toString();
+            newQaa.create_date = (new Date).toISOString();
+            console.log(newQaa);
+            _this.qaa = { id: '', create_date: (new Date).toISOString() };
+            _this.qaaAll.push(newQaa);
+            _this.http.post('/api/qaa', newQaa)
+                .subscribe(function (res) {
+            }, function (err) {
+                console.log(err);
+            });
         });
     };
     __decorate([
@@ -395,7 +402,7 @@ var QaaDeleteComponent = /** @class */ (function () {
         var index = this.qaaAll.map(function (e) { return e.id; }).indexOf(id);
         var index2 = this.qaaShow.map(function (e) { return e.id; }).indexOf(id);
         console.log(this.qaaAll[index]);
-        this.http.delete('/api/qaa/' + this.qaaAll[index].id)
+        this.http.delete('/api/qaa/' + this.qaaAll[index].create_date)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -841,20 +848,27 @@ var TodoCreateComponent = /** @class */ (function () {
         this.todo = {
             state: {},
             id: {},
+            create_date: (new Date).toISOString()
         };
     }
     TodoCreateComponent.prototype.ngOnInit = function () {
     };
     TodoCreateComponent.prototype.addTodo = function () {
-        var newTodo = this.todo;
-        newTodo.state = 'inprogress';
-        newTodo.id = this.todoAll.length;
-        this.todo = { state: '', id: '' };
-        this.todoAll.push(newTodo);
-        this.http.post('/api/todo', newTodo)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
+        var _this = this;
+        this.http.get('/api/todo-latest').subscribe(function (data) {
+            _this.latest = data;
+            console.log(data);
+            var newTodo = _this.todo;
+            newTodo.state = 'inprogress';
+            newTodo.id = (++_this.latest.id).toString();
+            newTodo.create_date = (new Date).toISOString();
+            _this.todo = { state: '', id: '', create_date: (new Date).toISOString() };
+            _this.todoAll.push(newTodo);
+            _this.http.post('/api/todo', newTodo)
+                .subscribe(function (res) {
+            }, function (err) {
+                console.log(err);
+            });
         });
     };
     __decorate([
@@ -917,7 +931,7 @@ var TodoDeleteComponent = /** @class */ (function () {
     };
     TodoDeleteComponent.prototype.deleteTodo = function (id) {
         var index = this.todoAll.map(function (e) { return e.id; }).indexOf(id);
-        this.http.delete('/api/todo/' + this.todoAll[index].id)
+        this.http.delete('/api/todo/' + this.todoAll[index].create_date)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);
@@ -1426,20 +1440,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WordsCreateComponent = /** @class */ (function () {
     function WordsCreateComponent(http) {
         this.http = http;
-        this.words = { id: '' };
+        this.words = { id: '', create_date: (new Date).toISOString() };
         this.newWords = { id: '' };
     }
     WordsCreateComponent.prototype.ngOnInit = function () {
     };
     WordsCreateComponent.prototype.addWords = function () {
-        var newWords = this.words;
-        newWords.id = this.wordsAll.length;
-        this.words = { id: '' };
-        this.wordsAll.push(newWords);
-        this.http.post('/api/words', newWords)
-            .subscribe(function (res) {
-        }, function (err) {
-            console.log(err);
+        var _this = this;
+        this.http.get('/api/words-latest').subscribe(function (data) {
+            _this.latest = data;
+            console.log(data);
+            var newWords = _this.words;
+            newWords.id = (++_this.latest.id).toString();
+            newWords.create_date = (new Date).toISOString();
+            _this.words = { id: '', create_date: (new Date).toISOString() };
+            _this.wordsAll.push(newWords);
+            _this.http.post('/api/words', newWords)
+                .subscribe(function (res) {
+            }, function (err) {
+                console.log(err);
+            });
         });
     };
     __decorate([
@@ -1502,7 +1522,7 @@ var WordsDeleteComponent = /** @class */ (function () {
     };
     WordsDeleteComponent.prototype.deleteWords = function (id) {
         var index = this.wordsAll.map(function (e) { return e.id; }).indexOf(id);
-        this.http.delete('/api/words/' + this.wordsAll[index].id)
+        this.http.delete('/api/words/' + this.wordsAll[index].create_date)
             .subscribe(function (res) {
         }, function (err) {
             console.log(err);

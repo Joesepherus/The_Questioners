@@ -19,7 +19,7 @@ export class QaaDeleteComponent implements OnInit {
     let index = this.qaaAll.map(function(e) { return e.id; }).indexOf(id);
     let index2 = this.qaaShow.map(function(e) { return e.id; }).indexOf(id);
     console.log(this.qaaAll[index]);
-    this.http.delete('/api/qaa/' + this.qaaAll[index].id)
+    this.http.delete('/api/qaa/' + this.qaaAll[index].create_date)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

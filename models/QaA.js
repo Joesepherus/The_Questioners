@@ -19,7 +19,6 @@ var schema = new mongoose.Schema({
 	},
 	create_date:{
 		type: Date,
-		default: Date.now
 	},
 	passed_date:{
 		type: Date,

@@ -23,6 +23,14 @@ router.get('/qaa/:id', function (req, res, next) {
   });
 });
 
+/* FIND latest qaa */
+router.get('/qaa-latest', function (req, res, next) {
+  qaa.findOne({}, {}, { sort: { 'create_date' : -1 } }, function(err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* SAVE qaa */
 router.post('/qaa', function (req, res, next) {
   qaa.create(req.body, function (err, post) {
@@ -40,8 +48,8 @@ router.put('/qaa/:id', function (req, res, next) {
 });
 
 /* DELETE qaa */
-router.delete('/qaa/:id', function (req, res, next) {
-  qaa.findOneAndRemove({ 'id': req.params.id }, req.body, function (err, post) {
+router.delete('/qaa/:create_date', function (req, res, next) {
+  qaa.findOneAndRemove({ 'create_date': req.params.create_date }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -65,6 +73,15 @@ router.get('/todo/:id', function (req, res, next) {
   });
 });
 
+/* FIND latest todo */
+router.get('/todo-latest', function (req, res, next) {
+  todo.findOne({}, {}, { sort: { 'create_date' : -1 } }, function(err, post) {
+    if (err) return next(err);
+    console.log(post);
+    res.json(post);
+  });
+});
+
 /* SAVE todo */
 router.post('/todo', function (req, res, next) {
   req.body.state = 'inprogress';
@@ -84,9 +101,9 @@ router.put('/todo/:id', function (req, res, next) {
 });
 
 /* DELETE todo */
-router.delete('/todo/:id', function (req, res, next) {
+router.delete('/todo/:create_date', function (req, res, next) {
   console.log(req.params.id);
-  todo.findOneAndRemove({ 'id': req.params.id }, function (err, post) {
+  todo.findOneAndRemove({ 'create_date': req.params.create_date }, function (err, post) {
     if (err) return next(post);
     res.json(post);
   });
@@ -136,6 +153,14 @@ router.get('/words/:id', function (req, res, next) {
   });
 });
 
+/* FIND latest word */
+router.get('/words-latest', function (req, res, next) {
+  words.findOne({}, {}, { sort: { 'create_date' : -1 } }, function(err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 /* SAVE words */
 router.post('/words', function (req, res, next) {
   words.create(req.body, function (err, post) {
@@ -153,8 +178,8 @@ router.put('/words/:id', function (req, res, next) {
 });
 
 /* DELETE words */
-router.delete('/words/:id', function (req, res, next) {
-  words.findOneAndRemove({ 'id': req.params.id }, req.body, function (err, post) {
+router.delete('/words/:create_date', function (req, res, next) {
+  words.findOneAndRemove({ 'create_date': req.params.create_date }, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
