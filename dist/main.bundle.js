@@ -147,12 +147,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__ = __webpack_require__("./src/app/words-delete/words-delete.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__about_about_component__ = __webpack_require__("./src/app/about/about.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__filter_pipe__ = __webpack_require__("./src/app/filter.pipe.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__turnip_turnip_component__ = __webpack_require__("./src/app/turnip/turnip.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -226,7 +228,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_19__words_edit_modal_words_edit_modal_component__["a" /* WordsEditModalComponent */],
                 __WEBPACK_IMPORTED_MODULE_20__words_delete_words_delete_component__["a" /* WordsDeleteComponent */],
                 __WEBPACK_IMPORTED_MODULE_21__about_about_component__["a" /* AboutComponent */],
-                __WEBPACK_IMPORTED_MODULE_22__filter_pipe__["a" /* FilterPipe */]
+                __WEBPACK_IMPORTED_MODULE_22__filter_pipe__["a" /* FilterPipe */],
+                __WEBPACK_IMPORTED_MODULE_23__turnip_turnip_component__["a" /* TurnipComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1189,7 +1192,7 @@ module.exports = ""
 /***/ "./src/app/todo/todo.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\n\n    <div class=\"col-md-10\">\n      <h2>Tasks</h2>\n    </div>\n\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\">all</option>\n        <option value=\"inprogress\">inprogress</option>\n        <option value=\"completed\">completed</option>\n        <option value=\"removed\">removed</option>\n        <option value=\"work\">work</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"personal\">school</option>\n        <option value=\"project\">project</option>\n        <option value=\"learn\">learn</option>\n        <option value=\"watch later\">watch later</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoShow.length}}\n      </p>\n    </div>\n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let todo of todoShow.reverse(); let last = last; let i =\n      index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\n          <div>\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\n            <span>{{todo.title}}</span>\n          </div>\n          <div class=\"dropdown-content\" id=\"drop\">\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\n            <p class=\"label label-default\">{{todo.type}}</p>\n            <p class=\"label label-default\">{{todo.state}}</p>\n            <p class=\"dropPara\">{{todo.description}}</p>\n            <div class=\"modal-button\">\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\n\n              <app-todo-delete [todoAll]=\"todoAll\"\n              [todo]=\"todo\"></app-todo-delete>\n            </div>\n          </div>\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\n          todo)\">&#215;</span>\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\n        </li>\n      </div>\n\n    </ul>\n\n    <app-todo-edit-modal [todo]=\"test\" [todoAll]=\"todoAll\"></app-todo-edit-modal>\n\n\n  </div>\n</div>\n<br>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <app-turnip ></app-turnip>\n\n    <app-todo-create [todoAll]=\"todoAll\"></app-todo-create>\n\n    <div class=\"col-md-10\">\n      <h2>Tasks</h2>\n    </div>\n\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\">all</option>\n        <option value=\"inprogress\">inprogress</option>\n        <option value=\"completed\">completed</option>\n        <option value=\"removed\">removed</option>\n        <option value=\"work\">work</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"personal\">school</option>\n        <option value=\"project\">project</option>\n        <option value=\"learn\">learn</option>\n        <option value=\"watch later\">watch later</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p ng-model=\"numberOfQaA\">Number of todos: {{todoShow.length}}\n      </p>\n    </div>\n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let todo of todoShow.reverse(); let last = last; let i =\n      index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"default dropbtn2\">\n          <div>\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\check2.png\">\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\disable.png\">\n            <img class=\"checkImg\" src=\"..\\..\\assets\\img\\clock.png\">\n            <span>{{todo.title}}</span>\n          </div>\n          <div class=\"dropdown-content\" id=\"drop\">\n            <p class=\"label label-default\">Posted {{todo.create_date}}</p>\n            <p class=\"label label-default\">{{todo.type}}</p>\n            <p class=\"label label-default\">{{todo.state}}</p>\n            <p class=\"dropPara\">{{todo.description}}</p>\n            <div class=\"modal-button\">\n              <app-todo-edit [todoAll]=\"todoAll\" [testing]=\"todoAll[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-todo-edit>\n\n              <app-todo-delete [todoAll]=\"todoAll\"\n              [todo]=\"todo\"></app-todo-delete>\n            </div>\n          </div>\n          <span class=\"closeBtn\" (click)=\"removeTask($event,\n          todo)\">&#215;</span>\n          <span class=\"check\" (click)=\"checkTask($event, todo)\">&#x2713;</span>\n        </li>\n      </div>\n\n    </ul>\n\n    <app-todo-edit-modal [todo]=\"test\" [todoAll]=\"todoAll\"></app-todo-edit-modal>\n\n\n  </div>\n</div>\n<br>"
 
 /***/ }),
 
@@ -1399,6 +1402,127 @@ var TodoComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], TodoComponent);
     return TodoComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/turnip/turnip.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/turnip/turnip.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<input class=\"w3-input\" name=\"title\" id=\"inputTitle\" type=\"text\"\n[(ngModel)]=\"newAction.title\" placeholder=\"action's title\" name=\"title\"\nrequired>\n<button id=\"start\" type=\"button\" class=\"modal-button btn btn-info btn-md\neditBtn\" (click)=\"start()\">Turnip</button>\n<span id=\"display-turnip\"></span>"
+
+/***/ }),
+
+/***/ "./src/app/turnip/turnip.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TurnipComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TurnipComponent = /** @class */ (function () {
+    function TurnipComponent(http) {
+        this.http = http;
+        this.newAction = {
+            id: {},
+            start: {},
+            end: '',
+        };
+    }
+    TurnipComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var start = document.getElementById("start");
+        var dis = document.getElementById("display-turnip");
+        var finishTime;
+        var timerLength = 0;
+        dis.innerHTML = "Time: " + timerLength;
+        localStorage.clear();
+        localStorage.setItem('myTime', '');
+        if (localStorage.getItem('myTime')) {
+            console.log("dickssssss");
+            if (this.Update) {
+                this.Update();
+            }
+        }
+        this.Update = function () {
+            console.log("PUSSIES");
+            finishTime = localStorage.getItem('myTime');
+            var timeLeft = (+new Date() - finishTime);
+            var minutes = Math.floor(timeLeft / 1000 / 60);
+            var seconds = Math.round(timeLeft / 1000 - minutes * 60);
+            dis.innerHTML = "Time: " + minutes + ":" + seconds;
+            _this.timeoutID = window.setTimeout(_this.Update, 100);
+        };
+    };
+    TurnipComponent.prototype.start = function () {
+        var _this = this;
+        var time = localStorage.getItem('myTime');
+        if (time === '') {
+            this.http.get('/api/action-latest').subscribe(function (data) {
+                _this.latest = data;
+                _this.newAction.start = new Date();
+                if (data == null) {
+                    _this.newAction.id = 0;
+                }
+                else {
+                    _this.newAction.id = (++_this.latest.id).toString();
+                }
+                _this.http.post('/api/action', _this.newAction)
+                    .subscribe(function (res) {
+                }, function (err) {
+                    console.log(err);
+                });
+            });
+            localStorage.setItem('myTime', (new Date()).getTime().toString());
+            if (this.Update) {
+                this.Update();
+            }
+        }
+        else {
+            localStorage.setItem('myTime', '');
+            this.http.get('/api/action-latest').subscribe(function (data) {
+                data["end"] = new Date();
+                _this.http.put('/api/action/' + data["id"], data)
+                    .subscribe(function (res) {
+                }, function (err) {
+                    console.log(err);
+                });
+            });
+            if (this.timeoutID != undefined) {
+                window.clearTimeout(this.timeoutID);
+            }
+        }
+    };
+    ;
+    TurnipComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-turnip',
+            template: __webpack_require__("./src/app/turnip/turnip.component.html"),
+            styles: [__webpack_require__("./src/app/turnip/turnip.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], TurnipComponent);
+    return TurnipComponent;
 }());
 
 

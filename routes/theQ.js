@@ -4,6 +4,8 @@ var mongoose = require('mongoose');
 var qaa = require('../models/QaA.js');
 var todo = require('../models/todo.js');
 var words = require('../models/words.js');
+var action = require('../models/action.js');
+
 
 //                    ===== QaA =====
 
@@ -181,6 +183,32 @@ router.put('/words/:id', function (req, res, next) {
 router.delete('/words/:create_date', function (req, res, next) {
   words.findOneAndRemove({ 'create_date': req.params.create_date }, req.body, function (err, post) {
     if (err) return next(err);
+    res.json(post);
+  });
+});
+
+//                    ===== Actions =====
+
+/* FIND latest action */
+router.get('/action-latest', function (req, res, next) {
+  action.findOne({}, {}, { sort: { 'start' : -1 } }, function(err, post) {
+    if (err) console.log(err);
+    res.json(post);
+  });
+});
+
+/* SAVE action */
+router.post('/action', function (req, res, next) {
+  action.create(req.body, function (err, post) {
+    if (err) console.log(err);
+    res.json(post);
+  });
+});
+
+/* UPDATE action */
+router.put('/action/:id', function (req, res, next) {
+  action.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
+    if (err) console.log(err);
     res.json(post);
   });
 });

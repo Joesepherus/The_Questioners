@@ -21,6 +21,7 @@ import { WordsEditModalComponent } from './words-edit-modal/words-edit-modal.com
 import { WordsDeleteComponent } from './words-delete/words-delete.component';
 import { AboutComponent } from './about/about.component';
 import { FilterPipe } from './filter.pipe';
+import { TurnipComponent } from './turnip/turnip.component';
 
 const appRoutes: Routes = [
   {
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
     WordsEditModalComponent,
     WordsDeleteComponent,
     AboutComponent,
-    FilterPipe
+    FilterPipe,
+    TurnipComponent
   ],
   imports: [
     BrowserModule,
