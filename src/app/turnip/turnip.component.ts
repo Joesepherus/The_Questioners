@@ -10,11 +10,14 @@ export class TurnipComponent implements OnInit {
   Update: any;
   timeoutID: any;
   latest;
+  isDivVisible: boolean = true;
   newAction = {
     id: {},
+    title: '',
     start: {},
     end: '',
   };
+  inputReadonly: boolean = false;
   constructor(private http: HttpClient) {
   }
 
@@ -24,24 +27,43 @@ export class TurnipComponent implements OnInit {
     var finishTime;
     var timerLength = 0;
     dis.innerHTML = "Time: " + timerLength;
-    localStorage.clear();
-    localStorage.setItem('myTime', '');
-
-    if (localStorage.getItem('myTime')) {
-      if (this.Update) {
-        this.Update();
-      }
-    }
 
     this.Update = () => {
       finishTime = localStorage.getItem('myTime');
       var timeLeft = (+new Date() - finishTime);
-      var minutes = Math.floor(timeLeft / 1000 / 60);
-      var seconds = Math.round(timeLeft / 1000 - minutes * 60);
-      dis.innerHTML = "Time: " + minutes + ":" + seconds;
-      this.timeoutID = window.setTimeout(this.Update, 100);
+      var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      if(days) {
+        dis.innerHTML = "Time: " + days + "d" + hours + "h" + ":" + minutes + "m" + ":" + seconds + "s" ;
+      }
+      dis.innerHTML = "Time: " + hours + "h" + ":" + minutes + "m" + ":" + seconds + "s" ;
+      this.timeoutID = window.setTimeout(this.Update, 500);
     };
 
+    let time = localStorage.getItem('myTime');
+    if (time !== undefined && time !== "" && time !== null && time !== '') {
+      this.newAction.title = localStorage.getItem('actionTitle');
+      this.inputReadonly = true;
+      if (this.Update) {
+        this.Update();
+      }
+    }
+    else {
+      localStorage.clear();
+      localStorage.setItem('myTime', '');
+    }
+
+  }
+
+  showDiv() {
+    if (this.isDivVisible == false) {
+      this.isDivVisible = true;
+    }
+    else {
+      this.isDivVisible = false;
+    }
   }
 
   start() {
@@ -64,6 +86,8 @@ export class TurnipComponent implements OnInit {
           );
       });
       localStorage.setItem('myTime', (new Date()).getTime().toString());
+      localStorage.setItem('actionTitle', this.newAction.title);
+      this.inputReadonly = true;
       if (this.Update) {
         this.Update();
       }

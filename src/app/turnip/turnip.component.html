@@ -1,6 +1,13 @@
-<input class="w3-input" name="title" id="inputTitle" type="text"
-[(ngModel)]="newAction.title" placeholder="action's title" name="title"
-required>
-<button id="start" type="button" class="modal-button btn btn-info btn-md
-editBtn" (click)="start()">Turnip</button>
-<span id="display-turnip"></span>
+<div class="popup">
+  <p class="popup-text" (click)="showDiv()">Turnip</p>
+  <div [ngStyle]="isDivVisible ? {'visibility':'visible'} : {'visibility':'hidden'}" class="popup-box">
+    <div class="turnip-align-input">
+    <input class="w3-input turnip-input" name="title" id="inputTitle" type="text" [(ngModel)]="newAction.title" placeholder="action's title"
+      name="title" [readonly]="inputReadonly" required>
+    </div>
+    <button id="start" type="button" class="modal-button btn btn-info btn-md
+      editBtn" (click)="start()">Turnip</button>
+    <span id="display-turnip"></span>
+  </div>
+</div>
+

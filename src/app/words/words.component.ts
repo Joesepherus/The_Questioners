@@ -15,7 +15,7 @@ export class WordsComponent implements OnInit {
   words = {};
   numberOfWords: any;
   test: any;
-  readonly numberOfLi = 7;
+  readonly numberOfLi = 8;
   constructor(private http: HttpClient) {
     this.wordsAll = [];
   }

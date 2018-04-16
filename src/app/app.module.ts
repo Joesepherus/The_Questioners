@@ -22,6 +22,8 @@ import { WordsDeleteComponent } from './words-delete/words-delete.component';
 import { AboutComponent } from './about/about.component';
 import { FilterPipe } from './filter.pipe';
 import { TurnipComponent } from './turnip/turnip.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
   {
@@ -51,6 +53,7 @@ const appRoutes: Routes = [
   },
 ];
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +74,9 @@ const appRoutes: Routes = [
     WordsDeleteComponent,
     AboutComponent,
     FilterPipe,
-    TurnipComponent
+    TurnipComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

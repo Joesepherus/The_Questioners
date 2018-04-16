@@ -17,7 +17,7 @@ export class QaaComponent implements OnInit {
   test: any;
   qaaShow: any;
   queryString: any;
-  readonly numberOfLi = 7;
+  readonly numberOfLi = 8;
   constructor(private http: HttpClient) {
     this.qaaAll = [];
     this.qaaShow = [];

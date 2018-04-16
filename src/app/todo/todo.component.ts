@@ -11,7 +11,7 @@ export class TodoComponent implements OnInit {
   todoAll: any;
   todo: any;
   numberOfTodo: any;
-  readonly numberOfLi = 7;
+  readonly numberOfLi = 8;
   test: any;
   todoShow: any;
 
