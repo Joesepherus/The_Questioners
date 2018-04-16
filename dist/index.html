@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+  <title>The Questioners</title>
+  <base href="/">
+  <title>MeanAngular5</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/img/TheQ-transparent.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+</head>
+
+<body>
+  <app-root></app-root>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="inline.bundle.js"></script><script type="text/javascript" src="polyfills.bundle.js"></script><script type="text/javascript" src="styles.bundle.js"></script><script type="text/javascript" src="scripts.bundle.js"></script><script type="text/javascript" src="vendor.bundle.js"></script><script type="text/javascript" src="main.bundle.js"></script></body>
+
+</html>
+
+<script>
+
+  /*$( function() { // An array of dates var eventDates = {}; eventDates[ new
+      Date( '08/07/2017' )] = new Date( '08/07/2017' ); eventDates[ new Date(
+      '08/12/2017' )] = new Date( '08/12/2017' ); eventDates[ new Date(
+      '08/18/2017' )] = new Date( '08/18/2017' ); eventDates[ new Date(
+      '08/23/2017' )] = new Date( '08/23/2017' );
+
+      // datepicker $('#dt').datepicker({ beforeShowDay: function( date ) { var
+      highlight = eventDates[date]; if( highlight ) { return [true, "event",
+      'Tooltip text']; } else { return [true, '', ''];
+              }
+          }
+      });
+  });*/
+
+  $('#droppero').on('click', function (e) {
+    e.stopPropagation();
+    $('#myDropdown').slideToggle('fast');
+  });
+
+  /* Anything that gets to the document will hide the dropdown */
+  $(document).on('click', function (e) {
+    if ($(e.target).hasClass('dropdown') || $(e.target).attr('id') === 'myDropdown') {
+
+    }
+    else {
+      $('#myDropdown').hide();
+    }
+  });
+
+  /* Clicks within the dropdown won't make it past the dropdown itself */
+  $("#myDropdown").click(function (e) {
+    e.stopPropagation();
+  });
+
+  window.onload = function () {
+
+    // If sessionStorage is storing default values (ex. name), exit the function
+    // and do not restore data
+    if (sessionStorage.getItem('name') == "name") {
+      return;
+    }
+
+    // If values are not blank, restore them to the fields
+    var name = sessionStorage.getItem('name');
+    if (name !== null) $('#inputName').val(name);
+  }
+
+  window.onbeforeunload = function () {
+    sessionStorage.setItem("name", $('#inputName').val());
+  }
+
+</script>
