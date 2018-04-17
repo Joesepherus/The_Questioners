@@ -33,6 +33,22 @@ router.get('/qaa-latest', function (req, res, next) {
   });
 });
 
+/* GET qaa by date */
+router.get('/qaa-date/:date', function (req, res, next) {
+  console.log("start");
+  let rangeStart = new Date(req.params.date);
+  let rangeEnd = rangeStart;
+  console.log(rangeStart);
+  
+  rangeEnd.setDate(rangeStart.getDate() - 10);
+  console.log(rangeEnd);
+  qaa.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+    if (err) console.log(err);
+    console.log(products);
+    res.json(products);
+  });
+});
+
 /* SAVE qaa */
 router.post('/qaa', function (req, res, next) {
   qaa.create(req.body, function (err, post) {

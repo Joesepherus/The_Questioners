@@ -1,0 +1,16 @@
+<div class="container todolist">
+  <div class="row">
+    <ul *ngIf="orderedList" class="col-md-12" id="myUL">
+      <div *ngFor="let list of orderedList; let i = index">
+        <li>
+          <strong>{{list.date}}</strong>
+        </li>
+        <div *ngFor="let item of list.items; let j = index">
+          <li>
+            {{item.title}}
+          </li>
+        </div>
+      </div>
+    </ul>
+  </div>
+</div>

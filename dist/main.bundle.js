@@ -150,6 +150,7 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__turnip_turnip_component__ = __webpack_require__("./src/app/turnip/turnip.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__header_header_component__ = __webpack_require__("./src/app/header/header.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__ = __webpack_require__("./src/app/footer/footer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__ = __webpack_require__("./src/app/blog/blog.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,9 +183,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     {
-        path: 'qaas',
+        path: 'qaa',
         component: __WEBPACK_IMPORTED_MODULE_5__qaa_qaa_component__["a" /* QaaComponent */],
         data: { title: 'QaA' }
     },
@@ -204,8 +206,13 @@ var appRoutes = [
         data: { title: 'About' }
     },
     {
+        path: 'blog',
+        component: __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__["a" /* BlogComponent */],
+        data: { title: 'Blog' }
+    },
+    {
         path: '',
-        redirectTo: '/qaas',
+        redirectTo: '/about',
         pathMatch: 'full'
     },
 ];
@@ -235,7 +242,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_22__filter_pipe__["a" /* FilterPipe */],
                 __WEBPACK_IMPORTED_MODULE_23__turnip_turnip_component__["a" /* TurnipComponent */],
                 __WEBPACK_IMPORTED_MODULE_24__header_header_component__["a" /* HeaderComponent */],
-                __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__["a" /* FooterComponent */]
+                __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__["a" /* FooterComponent */],
+                __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__["a" /* BlogComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -249,6 +257,97 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/blog/blog.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/blog/blog.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <ul *ngIf=\"orderedList\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList; let i = index\">\n        <li>\n          <strong>{{list.date}}</strong>\n        </li>\n        <div *ngFor=\"let item of list.items; let j = index\">\n          <li>\n            {{item.title}}\n          </li>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/blog/blog.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlogComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BlogComponent = /** @class */ (function () {
+    function BlogComponent(http) {
+        this.http = http;
+        this.groups = [[[[]]]];
+        this.orderedList = [{}];
+        this.qaaAll = [];
+    }
+    BlogComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        function compare(a, b) {
+            return a.id - b.id;
+        }
+        var date = new Date();
+        var dateISO = date.toISOString();
+        this.http.get('/api/qaa-date/' + dateISO).subscribe(function (data) {
+            _this.qaaAll = data;
+            _this.qaaAll.sort(compare);
+            _this.orderedList = groupingItemsByDate(_this.qaaAll);
+            console.log(_this.orderedList);
+        });
+        function groupingItemsByDate(items) {
+            var today = new Date();
+            var itemsOfDay = [];
+            var orderedList = [{}];
+            for (var i = 0; i < 10; i++) {
+                var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+                var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
+                console.log(items.length);
+                for (var j = 0; j < items.length; j++) {
+                    var items_date = new Date(items[j].create_date);
+                    if (items_date > start && items_date < end) {
+                        itemsOfDay.push(items[j]);
+                    }
+                }
+                if (itemsOfDay.length != 0) {
+                    console.log(itemsOfDay);
+                    orderedList.push({ date: start, items: itemsOfDay });
+                    itemsOfDay = [];
+                }
+            }
+            console.log(orderedList);
+            return orderedList;
+        }
+    };
+    BlogComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-blog',
+            template: __webpack_require__("./src/app/blog/blog.component.html"),
+            styles: [__webpack_require__("./src/app/blog/blog.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], BlogComponent);
+    return BlogComponent;
 }());
 
 
@@ -352,7 +451,7 @@ module.exports = ""
 /***/ "./src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\n        aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"> </span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul id=\"myTab\" class=\"nav navbar-nav\">\n        <li class=\"hamburger\">\n          <div class=\"testing\">\n            <div id=\"droppero\" class=\"dropbtn\">\n              <div class=\"hamburger\"> </div>\n              <div class=\"hamburger\"></div>\n              <div class=\"hamburger\"></div>\n              <div id=\"myDropdown\" class=\"dropdown-content2\">\n                <h3 class=\"aboutParagraphs\">Calendar</h3>\n                <div id=\"dt\" class=\"calendar\">\n                </div>\n                <div>\n                  <h3 class=\"aboutParagraphs\">Notes</h3>\n                  <textarea class=\"w3-input calendarText\" id=\"inputName\" cols=\"40\" rows=\"1\"></textarea>\n                </div>\n              </div>\n            </div>\n          </div>\n        </li>\n        <li id=\"about\">\n          <a class=\"navbar-brand TheQ\" href=\"/about\">\n            <img alt=\"TheQ\" src=\"assets/img/TheQ-transparent.png\" class=\"TheQ\n                hvr-bounce-in\">\n          </a>\n        </li>\n        <li id=\"todolist\">\n          <a href=\"/todo\">To-do list</a>\n        </li>\n        <li id=\"QaA\">\n          <a href=\"/qaas\">QaA</a>\n        </li>\n        <li id=\"flashcards\">\n          <a class=\"nav-item nav-link\" data-toggle=\"tab\" href=\"/flashcards\">Flashcards</a>\n        </li>\n        <li id=\"words\">\n          <a href=\"/words\">Words</a>\n        </li>\n        <li id=\"DRO\">\n          <a class=\"nav-item nav-link\" data-toggle=\"tab\" href=\"/DRO\">DRO</a>\n        </li>\n        <app-turnip></app-turnip>\n      </ul>\n    </div>\n    <!--/.nav-collapse -->\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"container\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\"\n        aria-controls=\"navbar\">\n        <span class=\"sr-only\">Toggle navigation</span>\n        <span class=\"icon-bar\"> </span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n    </div>\n    <div id=\"navbar\" class=\"collapse navbar-collapse\">\n      <ul id=\"myTab\" class=\"nav navbar-nav\">\n        <li class=\"hamburger\">\n          <div class=\"testing\">\n            <div id=\"droppero\" class=\"dropbtn\">\n              <div class=\"hamburger\"> </div>\n              <div class=\"hamburger\"></div>\n              <div class=\"hamburger\"></div>\n              <div id=\"myDropdown\" class=\"dropdown-content2\">\n                <h3 class=\"aboutParagraphs\">Calendar</h3>\n                <div id=\"dt\" class=\"calendar\">\n                </div>\n                <div>\n                  <h3 class=\"aboutParagraphs\">Notes</h3>\n                  <textarea class=\"w3-input calendarText\" id=\"inputName\" cols=\"40\" rows=\"1\"></textarea>\n                </div>\n              </div>\n            </div>\n          </div>\n        </li>\n        <li id=\"about\">\n          <a class=\"navbar-brand TheQ\" href=\"/about\">\n            <img alt=\"TheQ\" src=\"assets/img/TheQ-transparent.png\" class=\"TheQ\n                hvr-bounce-in\">\n          </a>\n        </li>\n        <li id=\"todolist\">\n          <a href=\"/todo\">To-do list</a>\n        </li>\n        <li id=\"QaA\">\n          <a href=\"/qaa\">QaA</a>\n        </li>\n        <li id=\"flashcards\">\n          <a class=\"nav-item nav-link\" data-toggle=\"tab\" href=\"/flashcards\">Flashcards</a>\n        </li>\n        <li id=\"words\">\n          <a href=\"/words\">Words</a>\n        </li>\n        <li id=\"DRO\">\n          <a class=\"nav-item nav-link\" data-toggle=\"tab\" href=\"/DRO\">DRO</a>\n        </li>\n        <li id=\"Blog\">\n          <a href=\"/blog\">Blog</a>\n        </li>\n        <app-turnip></app-turnip>\n      </ul>\n    </div>\n    <!--/.nav-collapse -->\n  </div>\n</nav>"
 
 /***/ }),
 

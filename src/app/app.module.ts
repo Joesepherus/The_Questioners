@@ -24,10 +24,11 @@ import { FilterPipe } from './filter.pipe';
 import { TurnipComponent } from './turnip/turnip.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { BlogComponent } from './blog/blog.component';
 
 const appRoutes: Routes = [
   {
-    path: 'qaas',
+    path: 'qaa',
     component: QaaComponent,
     data: { title: 'QaA' }
   },
@@ -47,8 +48,13 @@ const appRoutes: Routes = [
     data: { title: 'About' }
   },
   {
+    path: 'blog',
+    component: BlogComponent,
+    data: { title: 'Blog' }
+  },
+  {
     path: '',
-    redirectTo: '/qaas',
+    redirectTo: '/about',
     pathMatch: 'full'
   },
 ];
@@ -76,7 +82,8 @@ const appRoutes: Routes = [
     FilterPipe,
     TurnipComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    BlogComponent,
   ],
   imports: [
     BrowserModule,
