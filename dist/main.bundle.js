@@ -273,7 +273,7 @@ module.exports = ""
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <ul *ngIf=\"orderedList.length > 1\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <li>\n          <strong>{{list.date}}</strong>\n        </li>\n        <p>QaAs:</p>\n        <div *ngIf=\"list.qaa\">\n          <li *ngFor=\"let qaa of list.qaa\">\n            {{qaa.title}}\n          </li>\n        </div>\n        <p>Todos:</p>\n        <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <ul *ngIf=\"orderedList.length > 1\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <li>\n          <strong>{{list.date}}</strong>\n        </li>\n        <em>QaAs:</em>\n        <div *ngIf=\"list.qaa\">\n          <li *ngFor=\"let qaa of list.qaa\">\n            {{qaa.title}}\n          </li>\n        </div>\n        <em>Todos:</em>\n        <div *ngIf=\"list.todo\">\n          <li *ngFor=\"let todo of list.todo\">\n            {{todo.title}}\n          </li>\n        </div>\n        <em>Words:</em>\n        <div *ngIf=\"list.words\">\n          <li *ngFor=\"let word of list.words\">\n            {{word.word}}\n          </li>\n        </div>\n        <hr>\n      </div>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -320,11 +320,16 @@ var BlogComponent = /** @class */ (function () {
             _this.groupingItemsByDate(_this.todoAll, "todo");
             console.log(_this.orderedList);
         });
+        this.http.get('/api/words-date/' + dateISO).subscribe(function (todo) {
+            _this.wordsAll = todo;
+            _this.wordsAll.sort(compare);
+            _this.groupingItemsByDate(_this.wordsAll, "words");
+            console.log(_this.orderedList);
+        });
     };
     BlogComponent.prototype.groupingItemsByDate = function (items, type) {
         var today = new Date();
         var itemsOfDay = [];
-        var k = 0;
         for (var i = 0; i < 10; i++) {
             var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
             var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
@@ -335,21 +340,25 @@ var BlogComponent = /** @class */ (function () {
                     itemsOfDay.push(items[j]);
                 }
             }
+            if (this.orderedList[i] === undefined) {
+                console.log(i);
+                this.orderedList[i] = ({ date: start, todo: [{ title: "none" }], qaa: [{ title: "none" }], words: [{ word: "none" }] });
+            }
+            else {
+                this.orderedList[i].date = start;
+            }
             if (itemsOfDay.length != 0) {
                 console.log(itemsOfDay);
-                if (this.orderedList[k] === undefined) {
-                    this.orderedList[k] = ({ date: start, todo: [], qaa: [] });
-                }
-                else {
-                    this.orderedList[k].date = start;
-                }
                 console.log(this.orderedList[i]);
                 console.log(i);
                 if (type == "todo") {
-                    this.orderedList[k++].todo = (itemsOfDay);
+                    this.orderedList[i++].todo = (itemsOfDay);
                 }
                 if (type == "qaa") {
-                    this.orderedList[k++].qaa = (itemsOfDay);
+                    this.orderedList[i++].qaa = (itemsOfDay);
+                }
+                if (type == "words") {
+                    this.orderedList[i++].words = (itemsOfDay);
                 }
                 itemsOfDay = [];
                 console.log(this.orderedList);

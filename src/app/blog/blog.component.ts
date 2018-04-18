@@ -13,6 +13,7 @@ export class BlogComponent implements OnInit {
   prev: any;
   todoAll: any;
   orderedList: any;
+  wordsAll: any;
 
   constructor(private http: HttpClient) {
     this.qaaAll = [];
@@ -40,12 +41,18 @@ export class BlogComponent implements OnInit {
       console.log(this.orderedList);
     });
 
+    this.http.get('/api/words-date/' + dateISO).subscribe(todo => {
+      this.wordsAll = todo;
+      this.wordsAll.sort(compare);
+      this.groupingItemsByDate(this.wordsAll, "words");
+      console.log(this.orderedList);
+    });
+
   }
 
   groupingItemsByDate(items, type) {
     let today = new Date();
     let itemsOfDay = [];
-    let k = 0;
     for (let i = 0; i < 10; i++) {
       let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
       let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
@@ -56,21 +63,26 @@ export class BlogComponent implements OnInit {
           itemsOfDay.push(items[j]);
         }
       }
+      if (this.orderedList[i] === undefined) {
+        console.log(i);
+        this.orderedList[i] = ({ date: start, todo: [{title: "none"}], qaa: [{title: "none"}], words: [{word: "none"}] });
+      }
+      else {
+        this.orderedList[i].date = start;
+      }
+
       if (itemsOfDay.length != 0) {
         console.log(itemsOfDay);
-        if (this.orderedList[k] === undefined) {
-          this.orderedList[k] = ({ date: start, todo: [], qaa: [] });
-        }
-        else {
-          this.orderedList[k].date = start;
-        }
         console.log(this.orderedList[i]);
         console.log(i);
         if (type == "todo") {
-          this.orderedList[k++].todo = (itemsOfDay);
+          this.orderedList[i++].todo = (itemsOfDay);
         }
         if (type == "qaa") {
-          this.orderedList[k++].qaa = (itemsOfDay);
+          this.orderedList[i++].qaa = (itemsOfDay);
+        }
+        if (type == "words") {
+          this.orderedList[i++].words = (itemsOfDay);
         }
         itemsOfDay = [];
         console.log(this.orderedList);

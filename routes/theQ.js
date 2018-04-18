@@ -195,6 +195,22 @@ router.get('/words-latest', function (req, res, next) {
   });
 });
 
+/* GET words by date */
+router.get('/words-date/:date', function (req, res, next) {
+  console.log("start");
+  let rangeStart = new Date(req.params.date);
+  let rangeEnd = rangeStart;
+  console.log(rangeStart);
+  
+  rangeEnd.setDate(rangeStart.getDate() - 10);
+  console.log(rangeEnd);
+  words.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+    if (err) console.log(err);
+    console.log(products);
+    res.json(products);
+  });
+});
+
 /* SAVE words */
 router.post('/words', function (req, res, next) {
   words.create(req.body, function (err, post) {
