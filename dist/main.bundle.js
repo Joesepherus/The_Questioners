@@ -273,7 +273,7 @@ module.exports = ""
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <ul *ngIf=\"orderedList\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList; let i = index\">\n        <li>\n          <strong>{{list.date}}</strong>\n        </li>\n        <div *ngFor=\"let item of list.items; let j = index\">\n          <li>\n            {{item.title}}\n          </li>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <ul *ngIf=\"orderedList.length > 1\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <li>\n          <strong>{{list.date}}</strong>\n        </li>\n        <p>QaAs:</p>\n        <div *ngIf=\"list.qaa\">\n          <li *ngFor=\"let qaa of list.qaa\">\n            {{qaa.title}}\n          </li>\n        </div>\n        <p>Todos:</p>\n        <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n      </div>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -298,9 +298,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var BlogComponent = /** @class */ (function () {
     function BlogComponent(http) {
         this.http = http;
-        this.groups = [[[[]]]];
-        this.orderedList = [{}];
         this.qaaAll = [];
+        this.orderedList = [];
     }
     BlogComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -312,31 +311,49 @@ var BlogComponent = /** @class */ (function () {
         this.http.get('/api/qaa-date/' + dateISO).subscribe(function (data) {
             _this.qaaAll = data;
             _this.qaaAll.sort(compare);
-            _this.orderedList = groupingItemsByDate(_this.qaaAll);
+            _this.groupingItemsByDate(_this.qaaAll, "qaa");
             console.log(_this.orderedList);
         });
-        function groupingItemsByDate(items) {
-            var today = new Date();
-            var itemsOfDay = [];
-            var orderedList = [{}];
-            for (var i = 0; i < 10; i++) {
-                var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-                var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
-                console.log(items.length);
-                for (var j = 0; j < items.length; j++) {
-                    var items_date = new Date(items[j].create_date);
-                    if (items_date > start && items_date < end) {
-                        itemsOfDay.push(items[j]);
-                    }
-                }
-                if (itemsOfDay.length != 0) {
-                    console.log(itemsOfDay);
-                    orderedList.push({ date: start, items: itemsOfDay });
-                    itemsOfDay = [];
+        this.http.get('/api/todo-date/' + dateISO).subscribe(function (todo) {
+            _this.todoAll = todo;
+            _this.todoAll.sort(compare);
+            _this.groupingItemsByDate(_this.todoAll, "todo");
+            console.log(_this.orderedList);
+        });
+    };
+    BlogComponent.prototype.groupingItemsByDate = function (items, type) {
+        var today = new Date();
+        var itemsOfDay = [];
+        var k = 0;
+        for (var i = 0; i < 10; i++) {
+            var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+            var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
+            console.log(items.length);
+            for (var j = 0; j < items.length; j++) {
+                var items_date = new Date(items[j].create_date);
+                if (items_date > start && items_date < end) {
+                    itemsOfDay.push(items[j]);
                 }
             }
-            console.log(orderedList);
-            return orderedList;
+            if (itemsOfDay.length != 0) {
+                console.log(itemsOfDay);
+                if (this.orderedList[k] === undefined) {
+                    this.orderedList[k] = ({ date: start, todo: [], qaa: [] });
+                }
+                else {
+                    this.orderedList[k].date = start;
+                }
+                console.log(this.orderedList[i]);
+                console.log(i);
+                if (type == "todo") {
+                    this.orderedList[k++].todo = (itemsOfDay);
+                }
+                if (type == "qaa") {
+                    this.orderedList[k++].qaa = (itemsOfDay);
+                }
+                itemsOfDay = [];
+                console.log(this.orderedList);
+            }
         }
     };
     BlogComponent = __decorate([

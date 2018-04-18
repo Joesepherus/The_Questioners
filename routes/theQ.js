@@ -100,6 +100,22 @@ router.get('/todo-latest', function (req, res, next) {
   });
 });
 
+/* GET todo by date */
+router.get('/todo-date/:date', function (req, res, next) {
+  console.log("start");
+  let rangeStart = new Date(req.params.date);
+  let rangeEnd = rangeStart;
+  console.log(rangeStart);
+  
+  rangeEnd.setDate(rangeStart.getDate() - 10);
+  console.log(rangeEnd);
+  todo.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+    if (err) console.log(err);
+    console.log(products);
+    res.json(products);
+  });
+});
+
 /* SAVE todo */
 router.post('/todo', function (req, res, next) {
   req.body.state = 'inprogress';

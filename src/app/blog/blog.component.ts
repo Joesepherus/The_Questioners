@@ -11,11 +11,12 @@ export class BlogComponent implements OnInit {
   qaaAll: any;
   curr: any;
   prev: any;
-  groups = [[[[]]]];
-  orderedList = [{}];
+  todoAll: any;
+  orderedList: any;
 
   constructor(private http: HttpClient) {
     this.qaaAll = [];
+    this.orderedList = [];
   }
 
   ngOnInit() {
@@ -28,33 +29,52 @@ export class BlogComponent implements OnInit {
     this.http.get('/api/qaa-date/' + dateISO).subscribe(data => {
       this.qaaAll = data;
       this.qaaAll.sort(compare);
-      this.orderedList = groupingItemsByDate(this.qaaAll);
+      this.groupingItemsByDate(this.qaaAll, "qaa");
       console.log(this.orderedList);
     });
 
+    this.http.get('/api/todo-date/' + dateISO).subscribe(todo => {
+      this.todoAll = todo;
+      this.todoAll.sort(compare);
+      this.groupingItemsByDate(this.todoAll, "todo");
+      console.log(this.orderedList);
+    });
 
-    function groupingItemsByDate(items) {
-      let today = new Date();
-      let itemsOfDay = [];
-      let orderedList = [{}];
-      for (let i = 0; i < 10; i++) {
-        let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-        let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
-        console.log(items.length);
-        for (let j = 0; j < items.length; j++) {
-          let items_date = new Date(items[j].create_date);
-          if (items_date > start && items_date < end) {
-            itemsOfDay.push(items[j]);
-          }
-        }
-        if (itemsOfDay.length != 0) {
-          console.log(itemsOfDay);
-          orderedList.push({ date: start, items: itemsOfDay });
-          itemsOfDay = [];
+  }
+
+  groupingItemsByDate(items, type) {
+    let today = new Date();
+    let itemsOfDay = [];
+    let k = 0;
+    for (let i = 0; i < 10; i++) {
+      let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+      let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
+      console.log(items.length);
+      for (let j = 0; j < items.length; j++) {
+        let items_date = new Date(items[j].create_date);
+        if (items_date > start && items_date < end) {
+          itemsOfDay.push(items[j]);
         }
       }
-      console.log(orderedList);
-      return orderedList;
+      if (itemsOfDay.length != 0) {
+        console.log(itemsOfDay);
+        if (this.orderedList[k] === undefined) {
+          this.orderedList[k] = ({ date: start, todo: [], qaa: [] });
+        }
+        else {
+          this.orderedList[k].date = start;
+        }
+        console.log(this.orderedList[i]);
+        console.log(i);
+        if (type == "todo") {
+          this.orderedList[k++].todo = (itemsOfDay);
+        }
+        if (type == "qaa") {
+          this.orderedList[k++].qaa = (itemsOfDay);
+        }
+        itemsOfDay = [];
+        console.log(this.orderedList);
+      }
     }
   }
 }
