@@ -1,29 +1,48 @@
 <div class="container todolist">
   <div class="row">
-    <ul *ngIf="orderedList.length > 1" class="col-md-12" id="myUL">
+    <button type="button" class="btn btn-info btn-md
+      editBtn" (click)="changeView()">change view</button>
+    <ul *ngIf="orderedList.length > 99 && view == 'category'" class="col-md-12" id="myUL">
       <div *ngFor="let list of orderedList">
-        <li>
-          <strong>{{list.date}}</strong>
-        </li>
-        <em>QaAs:</em>
-        <div *ngIf="list.qaa">
-          <li *ngFor="let qaa of list.qaa">
-            {{qaa.title}}
+        <div *ngIf="list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0">
+          <li>
+            <strong>{{list.date}}</strong>
           </li>
+          <em>QaAs:</em>
+          <div *ngIf="list.qaa">
+            <li *ngFor="let qaa of list.qaa">
+              {{qaa.title}}
+            </li>
+          </div>
+          <em>Todos:</em>
+          <div *ngIf="list.todo">
+            <li *ngFor="let todo of list.todo">
+              {{todo.title}}
+            </li>
+          </div>
+          <em>Words:</em>
+          <div *ngIf="list.words">
+            <li *ngFor="let word of list.words">
+              {{word.word}}
+            </li>
+          </div>
+          <hr>
         </div>
-        <em>Todos:</em>
-        <div *ngIf="list.todo">
-          <li *ngFor="let todo of list.todo">
-            {{todo.title}}
+      </div>
+    </ul>
+    <ul *ngIf="orderedList2.length > 99 && view == 'date'" class="col-md-12" id="myUL">
+      <div *ngFor="let list of orderedList2">
+        <div *ngIf="list.items.length > 1">
+          <li>
+            <strong>{{list.date}}</strong>
           </li>
+          <div *ngIf="list.items">
+            <li *ngFor="let item of list.items">
+              {{item.create_date}}: {{item.title}}
+            </li>
+          </div>
+          <hr>
         </div>
-        <em>Words:</em>
-        <div *ngIf="list.words">
-          <li *ngFor="let word of list.words">
-            {{word.word}}
-          </li>
-        </div>
-        <hr>
       </div>
     </ul>
   </div>

@@ -40,7 +40,7 @@ router.get('/qaa-date/:date', function (req, res, next) {
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
-  rangeEnd.setDate(rangeStart.getDate() - 10);
+  rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
   qaa.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
@@ -107,7 +107,7 @@ router.get('/todo-date/:date', function (req, res, next) {
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
-  rangeEnd.setDate(rangeStart.getDate() - 10);
+  rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
   todo.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
@@ -202,7 +202,7 @@ router.get('/words-date/:date', function (req, res, next) {
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
-  rangeEnd.setDate(rangeStart.getDate() - 10);
+  rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
   words.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
