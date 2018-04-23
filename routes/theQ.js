@@ -5,7 +5,7 @@ var qaa = require('../models/QaA.js');
 var todo = require('../models/todo.js');
 var words = require('../models/words.js');
 var action = require('../models/action.js');
-
+var blog = require('../models/blog.js');
 
 //                    ===== QaA =====
 
@@ -261,6 +261,70 @@ router.put('/action/:id', function (req, res, next) {
   });
 });
 
+//                    ===== Blog =====
+
+/* GET ALL blogs */
+router.get('/blog', function (req, res, next) {
+  blog.find(function (err, products) {
+    if (err) return next(err);
+    res.json(products);
+  });
+});
+
+/* GET SINGLE blog BY ID */
+router.get('/blog/:id', function (req, res, next) {
+  blog.findById(req.params.id, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* FIND latest blog */
+router.get('/blog-latest', function (req, res, next) {
+  blog.findOne({}, {}, { sort: { 'create_date' : -1 } }, function(err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* GET blog by date */
+router.get('/blog-date/:date', function (req, res, next) {
+  console.log("start");
+  let rangeStart = new Date(req.params.date);
+  let rangeEnd = rangeStart;
+  console.log(rangeStart);
+  
+  rangeEnd.setDate(rangeStart.getDate() - 365);
+  console.log(rangeEnd);
+  blog.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+    if (err) console.log(err);
+    console.log(products);
+    res.json(products);
+  });
+});
+
+/* SAVE blog */
+router.post('/blog', function (req, res, next) {
+  blog.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* UPDATE blog */
+router.put('/blog/:id', function (req, res, next) {
+  blog.findOneAndUpdate({ 'id': req.params.id }, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* DELETE blog */
+router.delete('/blog/:create_date', function (req, res, next) {
+  blog.findOneAndRemove({ 'create_date': req.params.create_date }, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
 module.exports = router;
-
-

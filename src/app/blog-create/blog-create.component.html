@@ -1,0 +1,17 @@
+<div class="col-md-12">
+  <div class="w3-card-4">
+    <div class="w3-container w3-green">
+      <h2>New Blog</h2>
+    </div>
+    <form name="newBlogForm" id="newTaskForm" class="w3-container
+    aboutNewTaskForm" method="post" (ngSubmit)="addBlog(list.date)" #blogForm="ngForm">
+      <p>
+        <label class="newTaskType">Text:</label>
+        <textarea class="w3-input" name="newBlogText" cols="40" rows="3"
+        [(ngModel)]="blog.text" name="text" required></textarea>
+      </p>
+    </form>
+    <button class="col-md-2 addBtn btn btn-success" form="newTaskForm"
+    type="submit" [disabled]="!blogForm.form.valid">Submit</button>
+  </div>
+</div>

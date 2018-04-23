@@ -151,12 +151,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__header_header_component__ = __webpack_require__("./src/app/header/header.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__ = __webpack_require__("./src/app/footer/footer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__ = __webpack_require__("./src/app/blog/blog.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__ = __webpack_require__("./src/app/blog-create/blog-create.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -244,6 +246,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_24__header_header_component__["a" /* HeaderComponent */],
                 __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__["a" /* FooterComponent */],
                 __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__["a" /* BlogComponent */],
+                __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__["a" /* BlogCreateComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -263,17 +266,103 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/blog/blog.component.css":
+/***/ "./src/app/blog-create/blog-create.component.css":
 /***/ (function(module, exports) {
 
 module.exports = ""
 
 /***/ }),
 
+/***/ "./src/app/blog-create/blog-create.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New Blog</h2>\n    </div>\n    <form name=\"newBlogForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addBlog(list.date)\" #blogForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Text:</label>\n        <textarea class=\"w3-input\" name=\"newBlogText\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"blog.text\" name=\"text\" required></textarea>\n      </p>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!blogForm.form.valid\">Submit</button>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/blog-create/blog-create.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlogCreateComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BlogCreateComponent = /** @class */ (function () {
+    function BlogCreateComponent(http) {
+        this.http = http;
+        this.blog = { id: '', text: '', create_date: (new Date).toISOString(), given_date: (new Date).toISOString() };
+    }
+    BlogCreateComponent.prototype.ngOnInit = function () {
+    };
+    BlogCreateComponent.prototype.addBlog = function (date) {
+        var _this = this;
+        this.http.get('/api/blog-latest').subscribe(function (data) {
+            _this.latest = data;
+            console.log(data);
+            var newBlog = _this.blog;
+            if (_this.latest == null) {
+                newBlog.id = '0';
+            }
+            else {
+                newBlog.id = (++_this.latest.id).toString();
+            }
+            newBlog.create_date = (new Date).toISOString();
+            _this.blog = { id: '', text: '', create_date: (new Date).toISOString(), given_date: (new Date).toISOString() };
+            newBlog.given_date = (new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 2)).toISOString();
+            console.log(newBlog);
+            _this.blogAll.push(newBlog);
+            _this.http.post('/api/blog', newBlog)
+                .subscribe(function (res) {
+            }, function (err) {
+                console.log(err);
+            });
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogCreateComponent.prototype, "blogAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogCreateComponent.prototype, "list", void 0);
+    BlogCreateComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-blog-create',
+            template: __webpack_require__("./src/app/blog-create/blog-create.component.html"),
+            styles: [__webpack_require__("./src/app/blog-create/blog-create.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], BlogCreateComponent);
+    return BlogCreateComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/blog/blog.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".blogCreate {\r\n  display: none;\r\n}"
+
+/***/ }),
+
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 99 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2\">\n        <div *ngIf=\"list.items.length > 1\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <div *ngIf=\"list.items\">\n            <li *ngFor=\"let item of list.items\">\n              {{item.create_date}}: {{item.title}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 99 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <div *ngIf=\"list.items.length > 1\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <div *ngIf=\"list.items\">\n            <li *ngFor=\"let item of list.items; let j = index\">\n              {{item.create_date}}: {{item.title}}\n            </li>\n            <div *ngIf=\"!list.blog\">\n              <a (click)=\"blogCreateShow($event)\">create blog</a>\n              <app-blog-create class=\"blogCreate\" [list]=\"list\" [blogAll]=\"blogAll\"></app-blog-create>\n            </div>\n            <div *ngIf=\"list.blog\">\n              <p>Blog:</p>\n              <p>{{list.blog.text}}</p>\n            </div>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -308,12 +397,25 @@ var BlogComponent = /** @class */ (function () {
         function compare(a, b) {
             return a.id - b.id;
         }
+        var today = new Date();
+        this.start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
         for (var i = 0; i < 365; i++) {
-            var today = new Date();
-            var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
+            var today_1 = new Date();
+            var start = new Date(today_1.getFullYear(), today_1.getMonth(), today_1.getDate() - i);
             this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [] });
-            this.orderedList2[i] = ({ date: start, items: [] });
+            this.orderedList2[i] = ({ date: start, items: [], blog: false });
         }
+        this.http.get('/api/blog').subscribe(function (data) {
+            console.log(data);
+            _this.blogAll = data;
+            _this.blogAll.sort(compare);
+            for (var i = 0; i < _this.blogAll.length; i++) {
+                var proper_date = void 0;
+                var date_1 = new Date(_this.blogAll[i].given_date);
+                proper_date = new Date(date_1.getFullYear(), date_1.getMonth(), date_1.getDate());
+                _this.orderedList2[_this.start - proper_date].blog = _this.blogAll[i];
+            }
+        });
         var date = new Date();
         var dateISO = date.toISOString();
         this.http.get('/api/qaa-date/' + dateISO).subscribe(function (data) {
@@ -335,6 +437,12 @@ var BlogComponent = /** @class */ (function () {
             _this.wordsAll.sort(compare);
             _this.groupingItemsByDate(_this.wordsAll, "words");
             _this.groupingItemsByDate2(_this.wordsAll, "words");
+        });
+        this.http.get('/api/blog-date/' + dateISO).subscribe(function (todo) {
+            _this.blogAll = todo;
+            _this.blogAll.sort(compare);
+            _this.groupingItemsByDate(_this.blogAll, "blog");
+            _this.groupingItemsByDate2(_this.blogAll, "blog");
         });
     };
     BlogComponent.prototype.groupingItemsByDate = function (items, type) {
@@ -390,10 +498,30 @@ var BlogComponent = /** @class */ (function () {
             for (var j = 0; j < items.length; j++) {
                 var items_date = new Date(items[j].create_date);
                 if (items_date > start && items_date < end) {
-                    this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+                    if (type === 'blog') {
+                        this.orderedList2[i].items.push({
+                            create_date: items[j].create_date, title: "Added a new " + type +
+                                " with given_date: " + items[j].given_date
+                        });
+                    }
+                    else {
+                        this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+                    }
                 }
             }
             this.orderedList2[i].items.sort(this.compareByDate);
+        }
+    };
+    BlogComponent.prototype.blogCreateShow = function (event) {
+        var target = event.target;
+        var parent = target.parentElement;
+        var blogCreateElem = parent.getElementsByTagName('app-blog-create');
+        console.log(blogCreateElem[0]);
+        if (blogCreateElem[0].style.display == 'block') {
+            blogCreateElem[0].style.display = 'none';
+        }
+        else {
+            blogCreateElem[0].style.display = 'block';
         }
     };
     BlogComponent = __decorate([

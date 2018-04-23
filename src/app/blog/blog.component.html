@@ -31,15 +31,23 @@
       </div>
     </ul>
     <ul *ngIf="orderedList2.length > 99 && view == 'date'" class="col-md-12" id="myUL">
-      <div *ngFor="let list of orderedList2">
+      <div *ngFor="let list of orderedList2; let i = index">
         <div *ngIf="list.items.length > 1">
           <li>
             <strong>{{list.date}}</strong>
           </li>
           <div *ngIf="list.items">
-            <li *ngFor="let item of list.items">
+            <li *ngFor="let item of list.items; let j = index">
               {{item.create_date}}: {{item.title}}
             </li>
+            <div *ngIf="!list.blog">
+              <a (click)="blogCreateShow($event)">create blog</a>
+              <app-blog-create class="blogCreate" [list]="list" [blogAll]="blogAll"></app-blog-create>
+            </div>
+            <div *ngIf="list.blog">
+              <p>Blog:</p>
+              <p>{{list.blog.text}}</p>
+            </div>
           </div>
           <hr>
         </div>

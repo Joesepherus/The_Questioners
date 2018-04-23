@@ -25,6 +25,7 @@ import { TurnipComponent } from './turnip/turnip.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BlogComponent } from './blog/blog.component';
+import { BlogCreateComponent } from './blog-create/blog-create.component';
 
 const appRoutes: Routes = [
   {
@@ -84,6 +85,7 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     BlogComponent,
+    BlogCreateComponent,
   ],
   imports: [
     BrowserModule,

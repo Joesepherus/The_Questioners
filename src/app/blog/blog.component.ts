@@ -16,6 +16,8 @@ export class BlogComponent implements OnInit {
   orderedList2: any;
   wordsAll: any;
   view: any;
+  blogAll: any;
+  start: any;
 
   constructor(private http: HttpClient) {
     this.qaaAll = [];
@@ -29,12 +31,27 @@ export class BlogComponent implements OnInit {
       return a.id - b.id;
     }
 
+    let today = new Date();
+    this.start = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
     for (let i = 0; i < 365; i++) {
       let today = new Date();
       let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
       this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [] });
-      this.orderedList2[i] = ({ date: start, items: [] });
+      this.orderedList2[i] = ({ date: start, items: [], blog: false });
     }
+
+    this.http.get('/api/blog').subscribe(data => {
+      console.log(data);
+      this.blogAll = data;
+      this.blogAll.sort(compare);
+      for (let i = 0; i < this.blogAll.length; i++) {
+        let proper_date: any;
+        let date = new Date(this.blogAll[i].given_date);
+        proper_date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        this.orderedList2[this.start - proper_date].blog = this.blogAll[i];
+      }
+    });
 
     let date = new Date();
     let dateISO = date.toISOString();
@@ -59,6 +76,13 @@ export class BlogComponent implements OnInit {
       this.wordsAll.sort(compare);
       this.groupingItemsByDate(this.wordsAll, "words");
       this.groupingItemsByDate2(this.wordsAll, "words");
+    });
+
+    this.http.get('/api/blog-date/' + dateISO).subscribe(todo => {
+      this.blogAll = todo;
+      this.blogAll.sort(compare);
+      this.groupingItemsByDate(this.blogAll, "blog");
+      this.groupingItemsByDate2(this.blogAll, "blog");
     });
 
   }
@@ -121,11 +145,34 @@ export class BlogComponent implements OnInit {
       let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
       for (let j = 0; j < items.length; j++) {
         let items_date = new Date(items[j].create_date);
+
         if (items_date > start && items_date < end) {
-          this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+          if (type === 'blog') {
+            this.orderedList2[i].items.push({
+              create_date: items[j].create_date, title: "Added a new " + type +
+                " with given_date: " + items[j].given_date
+            });
+          }
+          else {
+            this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+          }
         }
       }
       this.orderedList2[i].items.sort(this.compareByDate);
     }
   }
+
+  blogCreateShow(event) {
+    let target = event.target;
+    let parent = target.parentElement;
+    let blogCreateElem = parent.getElementsByTagName('app-blog-create');
+    console.log(blogCreateElem[0]);
+    if (blogCreateElem[0].style.display == 'block') {
+      blogCreateElem[0].style.display = 'none';
+    }
+    else {
+      blogCreateElem[0].style.display = 'block';
+    }
+  }
+
 }
