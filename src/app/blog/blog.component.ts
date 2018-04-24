@@ -49,7 +49,9 @@ export class BlogComponent implements OnInit {
         let proper_date: any;
         let date = new Date(this.blogAll[i].given_date);
         proper_date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        let dayDiff = Math.abs(this.start.getDate() - proper_date.getDate());
+        let timeDiff = Math.abs(this.start.getTime() - proper_date.getTime());
+        let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        console.log(dayDiff);
         this.orderedList2[dayDiff].blog = this.blogAll[i];
       }
     });

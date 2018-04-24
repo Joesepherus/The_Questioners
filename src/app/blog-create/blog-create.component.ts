@@ -14,17 +14,11 @@ export class BlogCreateComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    console.log(this.list.date);
   }
 
-  addBlog(something) {
-    console.log(something);
-    console.log(this.list);
-    
-
+  addBlog(date) {
     this.http.get('/api/blog-latest').subscribe(data => {
       this.latest = data;
-      console.log(data);
       let newBlog = this.blog;
       if (this.latest == null) {
         newBlog.id = '0';
@@ -34,10 +28,7 @@ export class BlogCreateComponent implements OnInit {
       }
       newBlog.create_date = (new Date).toISOString();
       this.blog = { id: '', text: '', create_date: (new Date).toISOString(), given_date: (new Date).toISOString() };
-      console.log(something);
-      let date = something.date;
       newBlog.given_date = (new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 2)).toISOString();
-      console.log(newBlog);
       this.blogAll.push(newBlog);
       this.http.post('/api/blog', newBlog)
         .subscribe(res => {
@@ -48,8 +39,8 @@ export class BlogCreateComponent implements OnInit {
     });
   }
 
-  log(something): void {
+  submit(something): void {
     console.log(something.date);
-    this.addBlog(something);
+    this.addBlog(something.date);
   }
 }

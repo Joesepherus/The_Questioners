@@ -36,15 +36,14 @@
           <li (click)="log(list.date)">
             <strong>{{list.date}}</strong>
           </li>
-          <app-blog-create [blogAll]="blogAll" [list]="list"></app-blog-create>
-          
-          
+
+
           <li *ngFor="let item of list.items; let j = index">
             {{item.create_date}}: {{item.title}}
           </li>
           <div *ngIf="!list.blog">
             <a (click)="blogCreateShow($event)">create blog</a>
-            <app-blog-create class="blogCreate" [blogAll]="blogAll"></app-blog-create>
+            <app-blog-create class="blogCreate" [blogAll]="blogAll" [list]="list"></app-blog-create>
           </div>
           <div *ngIf="list.blog">
             <p>Blog:</p>
