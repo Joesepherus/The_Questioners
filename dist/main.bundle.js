@@ -404,7 +404,7 @@ var BlogComponent = /** @class */ (function () {
         for (var i = 0; i < 365; i++) {
             var today_1 = new Date();
             var start = new Date(today_1.getFullYear(), today_1.getMonth(), today_1.getDate() - i);
-            this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [] });
+            this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [], actions: [] });
             this.orderedList2[i] = ({ date: start, items: [], blog: false });
         }
         this.http.get('/api/blog').subscribe(function (data) {
@@ -431,33 +431,45 @@ var BlogComponent = /** @class */ (function () {
             console.log(_this.orderedList);
             console.log(_this.orderedList2);
         });
-        this.http.get('/api/todo-date/' + dateISO).subscribe(function (todo) {
-            _this.todoAll = todo;
+        this.http.get('/api/todo-date/' + dateISO).subscribe(function (items) {
+            _this.todoAll = items;
             _this.todoAll.sort(compare);
             _this.groupingItemsByDate(_this.todoAll, "todo");
             _this.groupingItemsByDate2(_this.todoAll, "todo");
         });
-        this.http.get('/api/words-date/' + dateISO).subscribe(function (todo) {
-            _this.wordsAll = todo;
+        this.http.get('/api/words-date/' + dateISO).subscribe(function (items) {
+            _this.wordsAll = items;
             _this.wordsAll.sort(compare);
             _this.groupingItemsByDate(_this.wordsAll, "words");
             _this.groupingItemsByDate2(_this.wordsAll, "words");
         });
-        this.http.get('/api/blog-date/' + dateISO).subscribe(function (todo) {
-            _this.blogAll = todo;
+        this.http.get('/api/blog-date/' + dateISO).subscribe(function (items) {
+            _this.blogAll = items;
             _this.blogAll.sort(compare);
             _this.groupingItemsByDate(_this.blogAll, "blog");
             _this.groupingItemsByDate2(_this.blogAll, "blog");
+        });
+        this.http.get('/api/action-date/' + dateISO).subscribe(function (items) {
+            _this.actionAll = items;
+            _this.actionAll.sort(compare);
+            _this.groupingItemsByDate(_this.actionAll, "action");
+            _this.groupingItemsByDate2(_this.actionAll, "action");
         });
     };
     BlogComponent.prototype.groupingItemsByDate = function (items, type) {
         var today = new Date();
         var itemsOfDay = [];
+        var items_date;
         for (var i = 0; i < 365; i++) {
             var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
             var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
             for (var j = 0; j < items.length; j++) {
-                var items_date = new Date(items[j].create_date);
+                if (type == 'action') {
+                    items_date = new Date(items[j].start);
+                }
+                else {
+                    items_date = new Date(items[j].create_date);
+                }
                 if (items_date > start && items_date < end) {
                     itemsOfDay.push(items[j]);
                 }
@@ -471,6 +483,9 @@ var BlogComponent = /** @class */ (function () {
                 }
                 if (type == "words") {
                     this.orderedList[i].words = (itemsOfDay);
+                }
+                if (type == "actions") {
+                    this.orderedList[i].actions = (itemsOfDay);
                 }
                 itemsOfDay = [];
             }
@@ -497,16 +512,33 @@ var BlogComponent = /** @class */ (function () {
     BlogComponent.prototype.groupingItemsByDate2 = function (items, type) {
         var today = new Date();
         var itemsOfDay = [];
+        var items_date;
         for (var i = 0; i < 365; i++) {
             var start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
             var end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
             for (var j = 0; j < items.length; j++) {
-                var items_date = new Date(items[j].create_date);
+                if (type == 'action') {
+                    items_date = new Date(items[j].start);
+                }
+                else {
+                    items_date = new Date(items[j].create_date);
+                }
                 if (items_date > start && items_date < end) {
                     if (type === 'blog') {
                         this.orderedList2[i].items.push({
                             create_date: items[j].create_date, title: "Added a new " + type +
                                 " with given_date: " + items[j].given_date
+                        });
+                    }
+                    else if (type === 'action') {
+                        var timeLeft = (+new Date(items[j].end)) - (+new Date(items[j].start));
+                        var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                        this.orderedList2[i].items.push({
+                            create_date: items[j].start, title: 'Added a new ' + type +
+                                ' with title' + items[j].title + ' & duration: ' + days + 'd:' + hours + 'h:' + minutes + 'm:' + seconds + 's'
                         });
                     }
                     else {

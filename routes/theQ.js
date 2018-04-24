@@ -245,6 +245,22 @@ router.get('/action-latest', function (req, res, next) {
   });
 });
 
+/* GET actions by date */
+router.get('/action-date/:date', function (req, res, next) {
+  console.log("start");
+  let rangeStart = new Date(req.params.date);
+  let rangeEnd = rangeStart;
+  console.log(rangeStart);
+  
+  rangeEnd.setDate(rangeStart.getDate() - 365);
+  console.log(rangeEnd);
+  action.find({"start": {"$gt": rangeEnd}}, function(err, products){
+    if (err) console.log(err);
+    console.log(products);
+    res.json(products);
+  });
+});
+
 /* SAVE action */
 router.post('/action', function (req, res, next) {
   action.create(req.body, function (err, post) {

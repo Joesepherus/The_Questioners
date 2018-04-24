@@ -18,6 +18,7 @@ export class BlogComponent implements OnInit {
   view: any;
   blogAll: any;
   start: any;
+  actionAll: any;
 
   constructor(private http: HttpClient) {
     this.qaaAll = [];
@@ -37,7 +38,7 @@ export class BlogComponent implements OnInit {
     for (let i = 0; i < 365; i++) {
       let today = new Date();
       let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
-      this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [] });
+      this.orderedList[i] = ({ date: start, todo: [], qaa: [], words: [], actions: [] });
       this.orderedList2[i] = ({ date: start, items: [], blog: false });
     }
 
@@ -67,25 +68,32 @@ export class BlogComponent implements OnInit {
       console.log(this.orderedList2);
     });
 
-    this.http.get('/api/todo-date/' + dateISO).subscribe(todo => {
-      this.todoAll = todo;
+    this.http.get('/api/todo-date/' + dateISO).subscribe(items => {
+      this.todoAll = items;
       this.todoAll.sort(compare);
       this.groupingItemsByDate(this.todoAll, "todo");
       this.groupingItemsByDate2(this.todoAll, "todo");
     });
 
-    this.http.get('/api/words-date/' + dateISO).subscribe(todo => {
-      this.wordsAll = todo;
+    this.http.get('/api/words-date/' + dateISO).subscribe(items => {
+      this.wordsAll = items;
       this.wordsAll.sort(compare);
       this.groupingItemsByDate(this.wordsAll, "words");
       this.groupingItemsByDate2(this.wordsAll, "words");
     });
 
-    this.http.get('/api/blog-date/' + dateISO).subscribe(todo => {
-      this.blogAll = todo;
+    this.http.get('/api/blog-date/' + dateISO).subscribe(items => {
+      this.blogAll = items;
       this.blogAll.sort(compare);
       this.groupingItemsByDate(this.blogAll, "blog");
       this.groupingItemsByDate2(this.blogAll, "blog");
+    });
+
+    this.http.get('/api/action-date/' + dateISO).subscribe(items => {
+      this.actionAll = items;
+      this.actionAll.sort(compare);
+      this.groupingItemsByDate(this.actionAll, "action");
+      this.groupingItemsByDate2(this.actionAll, "action");
     });
 
   }
@@ -93,11 +101,17 @@ export class BlogComponent implements OnInit {
   groupingItemsByDate(items, type) {
     let today = new Date();
     let itemsOfDay = [];
+    let items_date;
     for (let i = 0; i < 365; i++) {
       let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
       let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
       for (let j = 0; j < items.length; j++) {
-        let items_date = new Date(items[j].create_date);
+        if (type == 'action') {
+          items_date = new Date(items[j].start);
+        }
+        else {
+          items_date = new Date(items[j].create_date);
+        }
         if (items_date > start && items_date < end) {
           itemsOfDay.push(items[j]);
         }
@@ -112,6 +126,9 @@ export class BlogComponent implements OnInit {
         }
         if (type == "words") {
           this.orderedList[i].words = (itemsOfDay);
+        }
+        if (type == "actions") {
+          this.orderedList[i].actions = (itemsOfDay);
         }
         itemsOfDay = [];
       }
@@ -143,17 +160,33 @@ export class BlogComponent implements OnInit {
   groupingItemsByDate2(items, type) {
     let today = new Date();
     let itemsOfDay = [];
+    let items_date;
     for (let i = 0; i < 365; i++) {
       let start = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i);
       let end = new Date(today.getFullYear(), today.getMonth(), today.getDate() - i + 1);
       for (let j = 0; j < items.length; j++) {
-        let items_date = new Date(items[j].create_date);
-
+        if (type == 'action') {
+          items_date = new Date(items[j].start);
+        }
+        else {
+          items_date = new Date(items[j].create_date);
+        }
         if (items_date > start && items_date < end) {
           if (type === 'blog') {
             this.orderedList2[i].items.push({
               create_date: items[j].create_date, title: "Added a new " + type +
                 " with given_date: " + items[j].given_date
+            });
+          }
+          else if (type === 'action') {
+            let timeLeft = (+new Date(items[j].end)) - (+new Date(items[j].start));
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            this.orderedList2[i].items.push({
+              create_date: items[j].start, title: 'Added a new ' + type +
+                ' with title: ' + items[j].title + ' & duration: ' + days + 'd:' + hours + 'h:' + minutes + 'm:' + seconds + 's'
             });
           }
           else {
