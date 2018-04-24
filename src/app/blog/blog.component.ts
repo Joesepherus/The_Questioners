@@ -49,7 +49,8 @@ export class BlogComponent implements OnInit {
         let proper_date: any;
         let date = new Date(this.blogAll[i].given_date);
         proper_date = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        this.orderedList2[this.start - proper_date].blog = this.blogAll[i];
+        let dayDiff = Math.abs(this.start.getDate() - proper_date.getDate());
+        this.orderedList2[dayDiff].blog = this.blogAll[i];
       }
     });
 
@@ -173,6 +174,10 @@ export class BlogComponent implements OnInit {
     else {
       blogCreateElem[0].style.display = 'block';
     }
+  }
+
+  log(something): void {
+    console.log(something);
   }
 
 }

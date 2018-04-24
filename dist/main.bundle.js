@@ -276,7 +276,7 @@ module.exports = ""
 /***/ "./src/app/blog-create/blog-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New Blog</h2>\n    </div>\n    <form name=\"newBlogForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addBlog(list.date)\" #blogForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Text:</label>\n        <textarea class=\"w3-input\" name=\"newBlogText\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"blog.text\" name=\"text\" required></textarea>\n      </p>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!blogForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New Blog</h2>\n    </div>\n    <form name=\"newBlogForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm \" method=\"post\" #blogForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Text:</label>\n        <textarea class=\"w3-input\" name=\"newBlogText\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"blog.text\" name=\"text\" required></textarea>\n      </p>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    (click)=\"log(list)\" [disabled]=\"!blogForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -304,9 +304,12 @@ var BlogCreateComponent = /** @class */ (function () {
         this.blog = { id: '', text: '', create_date: (new Date).toISOString(), given_date: (new Date).toISOString() };
     }
     BlogCreateComponent.prototype.ngOnInit = function () {
+        console.log(this.list.date);
     };
-    BlogCreateComponent.prototype.addBlog = function (date) {
+    BlogCreateComponent.prototype.addBlog = function (something) {
         var _this = this;
+        console.log(something);
+        console.log(this.list);
         this.http.get('/api/blog-latest').subscribe(function (data) {
             _this.latest = data;
             console.log(data);
@@ -319,6 +322,8 @@ var BlogCreateComponent = /** @class */ (function () {
             }
             newBlog.create_date = (new Date).toISOString();
             _this.blog = { id: '', text: '', create_date: (new Date).toISOString(), given_date: (new Date).toISOString() };
+            console.log(something);
+            var date = something.date;
             newBlog.given_date = (new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 2)).toISOString();
             console.log(newBlog);
             _this.blogAll.push(newBlog);
@@ -328,6 +333,10 @@ var BlogCreateComponent = /** @class */ (function () {
                 console.log(err);
             });
         });
+    };
+    BlogCreateComponent.prototype.log = function (something) {
+        console.log(something.date);
+        this.addBlog(something);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -362,7 +371,7 @@ module.exports = ".blogCreate {\r\n  display: none;\r\n}"
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 99 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <div *ngIf=\"list.items.length > 1\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <div *ngIf=\"list.items\">\n            <li *ngFor=\"let item of list.items; let j = index\">\n              {{item.create_date}}: {{item.title}}\n            </li>\n            <div *ngIf=\"!list.blog\">\n              <a (click)=\"blogCreateShow($event)\">create blog</a>\n              <app-blog-create class=\"blogCreate\" [list]=\"list\" [blogAll]=\"blogAll\"></app-blog-create>\n            </div>\n            <div *ngIf=\"list.blog\">\n              <p>Blog:</p>\n              <p>{{list.blog.text}}</p>\n            </div>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <div *ngIf=\"list.items.length > 1\">\n          <li (click)=\"log(list.date)\">\n            <strong>{{list.date}}</strong>\n          </li>\n          <app-blog-create [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n          \n          \n          <li *ngFor=\"let item of list.items; let j = index\">\n            {{item.create_date}}: {{item.title}}\n          </li>\n          <div *ngIf=\"!list.blog\">\n            <a (click)=\"blogCreateShow($event)\">create blog</a>\n            <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\"></app-blog-create>\n          </div>\n          <div *ngIf=\"list.blog\">\n            <p>Blog:</p>\n            <p>{{list.blog.text}}</p>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -413,7 +422,8 @@ var BlogComponent = /** @class */ (function () {
                 var proper_date = void 0;
                 var date_1 = new Date(_this.blogAll[i].given_date);
                 proper_date = new Date(date_1.getFullYear(), date_1.getMonth(), date_1.getDate());
-                _this.orderedList2[_this.start - proper_date].blog = _this.blogAll[i];
+                var dayDiff = Math.abs(_this.start.getDate() - proper_date.getDate());
+                _this.orderedList2[dayDiff].blog = _this.blogAll[i];
             }
         });
         var date = new Date();
@@ -523,6 +533,9 @@ var BlogComponent = /** @class */ (function () {
         else {
             blogCreateElem[0].style.display = 'block';
         }
+    };
+    BlogComponent.prototype.log = function (something) {
+        console.log(something);
     };
     BlogComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
