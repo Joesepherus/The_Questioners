@@ -78,8 +78,8 @@ export class BlogComponent implements OnInit {
     this.http.get('/api/words-date/' + dateISO).subscribe(items => {
       this.wordsAll = items;
       this.wordsAll.sort(compare);
-      this.groupingItemsByDate(this.wordsAll, "words");
-      this.groupingItemsByDate2(this.wordsAll, "words");
+      this.groupingItemsByDate(this.wordsAll, "word");
+      this.groupingItemsByDate2(this.wordsAll, "word");
     });
 
     this.http.get('/api/blog-date/' + dateISO).subscribe(items => {
@@ -176,6 +176,11 @@ export class BlogComponent implements OnInit {
             this.orderedList2[i].items.push({
               create_date: items[j].create_date, title: "Added a new " + type +
                 " with given_date: " + items[j].given_date
+            });
+          }
+          else if (type === 'word') {
+            this.orderedList2[i].items.push({
+              create_date: items[j].create_date, title: 'Added a new word: ' + items[j].word
             });
           }
           else if (type === 'action') {

@@ -440,8 +440,8 @@ var BlogComponent = /** @class */ (function () {
         this.http.get('/api/words-date/' + dateISO).subscribe(function (items) {
             _this.wordsAll = items;
             _this.wordsAll.sort(compare);
-            _this.groupingItemsByDate(_this.wordsAll, "words");
-            _this.groupingItemsByDate2(_this.wordsAll, "words");
+            _this.groupingItemsByDate(_this.wordsAll, "word");
+            _this.groupingItemsByDate2(_this.wordsAll, "word");
         });
         this.http.get('/api/blog-date/' + dateISO).subscribe(function (items) {
             _this.blogAll = items;
@@ -528,6 +528,11 @@ var BlogComponent = /** @class */ (function () {
                         this.orderedList2[i].items.push({
                             create_date: items[j].create_date, title: "Added a new " + type +
                                 " with given_date: " + items[j].given_date
+                        });
+                    }
+                    else if (type === 'word') {
+                        this.orderedList2[i].items.push({
+                            create_date: items[j].create_date, title: 'Added a new word: ' + items[j].word
                         });
                     }
                     else if (type === 'action') {
