@@ -32,7 +32,7 @@
     </ul>
     <ul *ngIf="orderedList2.length > 364 && view == 'date'" class="col-md-12" id="myUL">
       <div *ngFor="let list of orderedList2; let i = index">
-        <div *ngIf="list.items.length > 1">
+        <div *ngIf="list.items.length > 0">
           <li (click)="log(list.date)">
             <strong>{{list.date}}</strong>
           </li>

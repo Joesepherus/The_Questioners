@@ -364,7 +364,7 @@ module.exports = ".blogCreate {\r\n  display: none;\r\n}"
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <div *ngIf=\"list.items.length > 1\">\n          <li (click)=\"log(list.date)\">\n            <strong>{{list.date}}</strong>\n          </li>\n\n\n          <li *ngFor=\"let item of list.items; let j = index\">\n            {{item.create_date}}: {{item.title}}\n          </li>\n          <div *ngIf=\"!list.blog\">\n            <a (click)=\"blogCreateShow($event)\">create blog</a>\n            <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n          </div>\n          <div *ngIf=\"list.blog\">\n            <p>Blog:</p>\n            <p>{{list.blog.text}}</p>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <div *ngIf=\"list.items.length > 0\">\n          <li (click)=\"log(list.date)\">\n            <strong>{{list.date}}</strong>\n          </li>\n\n\n          <li *ngFor=\"let item of list.items; let j = index\">\n            {{item.create_date}}: {{item.title}}\n          </li>\n          <div *ngIf=\"!list.blog\">\n            <a (click)=\"blogCreateShow($event)\">create blog</a>\n            <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n          </div>\n          <div *ngIf=\"list.blog\">\n            <p>Blog:</p>\n            <p>{{list.blog.text}}</p>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -481,10 +481,10 @@ var BlogComponent = /** @class */ (function () {
                 if (type == "qaa") {
                     this.orderedList[i].qaa = (itemsOfDay);
                 }
-                if (type == "words") {
+                if (type == "word") {
                     this.orderedList[i].words = (itemsOfDay);
                 }
-                if (type == "actions") {
+                if (type == "action") {
                     this.orderedList[i].actions = (itemsOfDay);
                 }
                 itemsOfDay = [];
@@ -538,11 +538,20 @@ var BlogComponent = /** @class */ (function () {
                         var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
                         this.orderedList2[i].items.push({
                             create_date: items[j].start, title: 'Added a new ' + type +
-                                ' with title' + items[j].title + ' & duration: ' + days + 'd:' + hours + 'h:' + minutes + 'm:' + seconds + 's'
+                                ' with title: ' + items[j].title + ' & duration: ' + days + 'd:' + hours + 'h:' + minutes + 'm:' + seconds + 's'
                         });
                     }
                     else {
                         this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+                    }
+                }
+                if (type === 'todo' && items[j].state === 'completed') {
+                    var completed_date = new Date(items[j].completed_date);
+                    if (completed_date > start && completed_date < end) {
+                        this.orderedList2[i].items.push({
+                            create_date: items[j].completed_date,
+                            title: "Completed a " + type + ": " + items[j].title
+                        });
                     }
                 }
             }

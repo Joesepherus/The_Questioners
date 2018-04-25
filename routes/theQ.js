@@ -73,7 +73,7 @@ router.delete('/qaa/:create_date', function (req, res, next) {
   });
 });
 
-//                    ===== TODO =====
+//                    ===== To-do =====
 
 /* GET ALL todos */
 router.get('/todo', function (req, res, next) {

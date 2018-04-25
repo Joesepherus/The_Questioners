@@ -124,10 +124,10 @@ export class BlogComponent implements OnInit {
         if (type == "qaa") {
           this.orderedList[i].qaa = (itemsOfDay);
         }
-        if (type == "words") {
+        if (type == "word") {
           this.orderedList[i].words = (itemsOfDay);
         }
-        if (type == "actions") {
+        if (type == "action") {
           this.orderedList[i].actions = (itemsOfDay);
         }
         itemsOfDay = [];
@@ -191,6 +191,15 @@ export class BlogComponent implements OnInit {
           }
           else {
             this.orderedList2[i].items.push({ create_date: items[j].create_date, title: "Added a new " + type + ": " + items[j].title });
+          }
+        }
+        if (type === 'todo' && items[j].state === 'completed') {
+          let completed_date = new Date(items[j].completed_date);
+          if (completed_date > start && completed_date < end) {
+            this.orderedList2[i].items.push({
+              create_date: items[j].completed_date,
+              title: "Completed a " + type + ": " + items[j].title
+            });
           }
         }
       }
