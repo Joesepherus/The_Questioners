@@ -32,25 +32,22 @@
     </ul>
     <ul *ngIf="orderedList2.length > 364 && view == 'date'" class="col-md-12" id="myUL">
       <div *ngFor="let list of orderedList2; let i = index">
-        <div *ngIf="list.items.length > 0">
-          <li (click)="log(list.date)">
-            <strong>{{list.date}}</strong>
-          </li>
+        <li (click)="log(list.date)">
+          <strong>{{list.date}}</strong>
+        </li>
 
-
-          <li *ngFor="let item of list.items; let j = index">
-            {{item.create_date}}: {{item.title}}
-          </li>
-          <div *ngIf="!list.blog">
-            <a (click)="blogCreateShow($event)">create blog</a>
-            <app-blog-create class="blogCreate" [blogAll]="blogAll" [list]="list"></app-blog-create>
-          </div>
-          <div *ngIf="list.blog">
-            <p>Blog:</p>
-            <p>{{list.blog.text}}</p>
-          </div>
-          <hr>
+        <li *ngFor="let item of list.items; let j = index">
+          {{item.create_date}}: {{item.title}}
+        </li>
+        <div *ngIf="!list.blog">
+          <a (click)="blogCreateShow($event)">create blog</a>
+          <app-blog-create class="blogCreate" [blogAll]="blogAll" [list]="list"></app-blog-create>
         </div>
+        <div *ngIf="list.blog">
+          <p>Blog:</p>
+          <p>{{list.blog.text}}</p>
+        </div>
+        <hr>
       </div>
     </ul>
   </div>
