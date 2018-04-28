@@ -1,0 +1,12 @@
+.newBlogForm {
+  height: auto;
+}
+
+.newBlogCardOuter {
+  width: 100%;
+  float: left;
+}
+
+.newBlogCard {
+  width: 50%;
+}

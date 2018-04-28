@@ -269,14 +269,14 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/blog-create/blog-create.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".newBlogForm {\r\n  height: auto;\r\n}\r\n\r\n.newBlogCardOuter {\r\n  width: 100%;\r\n  float: left;\r\n}\r\n\r\n.newBlogCard {\r\n  width: 50%;\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/blog-create/blog-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New Blog</h2>\n    </div>\n    <form name=\"newBlogForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm \" method=\"post\" #blogForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Text:</label>\n        <textarea class=\"w3-input\" name=\"newBlogText\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"blog.text\" name=\"text\" required></textarea>\n      </p>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    (click)=\"submit(list)\" [disabled]=\"!blogForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"newBlogCardOuter\">\n  <div class=\"w3-card-4 newBlogCard\">\n    <div class=\"w3-container w3-green\">\n      <h2>New Blog</h2>\n    </div>\n    <form name=\"newBlogForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm newBlogForm\" method=\"post\" #blogForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Text:</label>\n        <textarea class=\"w3-input\" name=\"newBlogText\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"blog.text\" name=\"text\" required></textarea>\n      </p>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    (click)=\"submit(list)\" [disabled]=\"!blogForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
