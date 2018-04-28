@@ -733,14 +733,14 @@ var HeaderComponent = /** @class */ (function () {
 /***/ "./src/app/qaa-create/qaa-create.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".newQaaAnswer {\r\n  height: 150px;\r\n}\r\n\r\n.newQaa {\r\n  height: auto;\r\n  padding-bottom: 20px;\r\n}"
 
 /***/ }),
 
 /***/ "./src/app/qaa-create/qaa-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New QaA</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Question:</label>\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Answer:</label>\n        <textarea class=\"w3-input\" name=\"newTaskDescription\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"qaa.description\" name=\"description\" required></textarea>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\n  </div>\n\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New QaA</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container\n    aboutNewTaskForm newQaa\" method=\"post\" (ngSubmit)=\"addQaA()\" #qaaForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Question:</label>\n        <textarea class=\"w3-input\" name=\"newTaskTitle\" cols=\"40\" rows=\"1\"\n        [(ngModel)]=\"qaa.title\" name=\"title\" required></textarea>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Answer:</label>\n        <textarea class=\"w3-input newQaaAnswer\" name=\"newTaskDescription\" cols=\"40\" rows=\"3\"\n        [(ngModel)]=\"qaa.description\" name=\"description\" required></textarea>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"qaa.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!qaaForm.form.valid\">Submit</button>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -887,7 +887,7 @@ var QaaDeleteComponent = /** @class */ (function () {
 /***/ "./src/app/qaa-edit-modal/qaa-edit-modal.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".modal-footer {\r\n  padding-right: 31px;\r\n  padding-left: 31px;\r\n  text-align: center;\r\n}"
 
 /***/ }),
 
@@ -1102,7 +1102,7 @@ var QaaEditComponent = /** @class */ (function () {
 /***/ "./src/app/qaa/qaa.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".QaAPara {\n    width: 100%;\n    white-space: -moz-pre-wrap; /* Firefox */\n    white-space: -pre-wrap; /* ancient Opera */\n    white-space: -o-pre-wrap; /* newer Opera */\n    white-space: pre-wrap; /* Chrome; W3C standard */\n    word-wrap: break-word; /* IE */\n    font-family: Georgia, 'Times New Roman', Times, serif;\n}\n\n.editQaABody {\n    height: 350px;\n}\n\n.editQaADescription {\n    height: 100px;\n}\n"
+module.exports = ".QaAPara {\n    width: 100%;\n    white-space: -moz-pre-wrap; /* Firefox */\n    white-space: -pre-wrap; /* ancient Opera */\n    white-space: -o-pre-wrap; /* newer Opera */\n    white-space: pre-wrap; /* Chrome; W3C standard */\n    word-wrap: break-word; /* IE */\n    font-family: Georgia, 'Times New Roman', Times, serif;\n}\n"
 
 /***/ }),
 

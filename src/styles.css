@@ -859,11 +859,11 @@ h3 {
 }
 
 .editQaABody {
-    height: 350px;
+    height: auto;
 }
 
 .editQaADescription {
-    height: 100px;
+    height: 200px;
 }
 
 textarea {

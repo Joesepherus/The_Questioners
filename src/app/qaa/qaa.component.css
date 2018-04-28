@@ -7,11 +7,3 @@
     word-wrap: break-word; /* IE */
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
-.editQaABody {
-    height: 350px;
-}
-
-.editQaADescription {
-    height: 100px;
-}
