@@ -69,9 +69,9 @@ export class TodoComponent implements OnInit {
             li[i].children[1].classList.add("watchLater-content");
             let org_html = li[i].children[1].children[0].innerHTML;
             let new_html = "<a href=" +
-              this.todoAll[this.todoAll.length - i + 5].description + ">"
-              + this.todoAll[this.todoAll.length - i + 5].description + "</a>";
-            li[i].children[1].children[0].innerHTML = new_html;
+              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + ">"
+              + this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + "</a>";
+            li[i].children[1].children[3].innerHTML = new_html;
             break;
         }
 

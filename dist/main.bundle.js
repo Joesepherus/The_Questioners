@@ -1697,9 +1697,9 @@ var TodoComponent = /** @class */ (function () {
                             li[i].children[1].classList.add("watchLater-content");
                             var org_html = li[i].children[1].children[0].innerHTML;
                             var new_html = "<a href=" +
-                                this.todoAll[this.todoAll.length - i + 5].description + ">"
-                                + this.todoAll[this.todoAll.length - i + 5].description + "</a>";
-                            li[i].children[1].children[0].innerHTML = new_html;
+                                this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + ">"
+                                + this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + "</a>";
+                            li[i].children[1].children[3].innerHTML = new_html;
                             break;
                     }
                     switch (li[i].children[1].children[2].innerHTML) {
