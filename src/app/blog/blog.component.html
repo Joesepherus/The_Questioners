@@ -47,6 +47,7 @@
           <p>Blog:</p>
           <p>{{list.blog.text}}</p>
           <app-blog-edit [blogAll]="blogAll" [(blog)]="list.blog" (updateTesting)="onNotify($event)"></app-blog-edit>
+          <app-blog-delete [blogAll]="blogAll" [blog]="list.blog"></app-blog-delete>
         </div>
         <hr>
       </div>

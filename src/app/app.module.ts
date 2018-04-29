@@ -28,6 +28,7 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { BlogEditModalComponent } from './blog-edit-modal/blog-edit-modal.component';
+import { BlogDeleteComponent } from './blog-delete/blog-delete.component';
 
 const appRoutes: Routes = [
   {
@@ -90,6 +91,7 @@ const appRoutes: Routes = [
     BlogCreateComponent,
     BlogEditComponent,
     BlogEditModalComponent,
+    BlogDeleteComponent,
   ],
   imports: [
     BrowserModule,

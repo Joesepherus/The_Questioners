@@ -154,12 +154,14 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__ = __webpack_require__("./src/app/blog-create/blog-create.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__blog_edit_blog_edit_component__ = __webpack_require__("./src/app/blog-edit/blog-edit.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__blog_edit_modal_blog_edit_modal_component__ = __webpack_require__("./src/app/blog-edit-modal/blog-edit-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__blog_delete_blog_delete_component__ = __webpack_require__("./src/app/blog-delete/blog-delete.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -253,6 +255,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__["a" /* BlogCreateComponent */],
                 __WEBPACK_IMPORTED_MODULE_28__blog_edit_blog_edit_component__["a" /* BlogEditComponent */],
                 __WEBPACK_IMPORTED_MODULE_29__blog_edit_modal_blog_edit_modal_component__["a" /* BlogEditModalComponent */],
+                __WEBPACK_IMPORTED_MODULE_30__blog_delete_blog_delete_component__["a" /* BlogDeleteComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -354,6 +357,78 @@ var BlogCreateComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
     ], BlogCreateComponent);
     return BlogCreateComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/blog-delete/blog-delete.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/blog-delete/blog-delete.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteBlog(blog.id, blog)\">Delete</button>"
+
+/***/ }),
+
+/***/ "./src/app/blog-delete/blog-delete.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlogDeleteComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BlogDeleteComponent = /** @class */ (function () {
+    function BlogDeleteComponent(http) {
+        this.http = http;
+        this.blog = {};
+    }
+    BlogDeleteComponent.prototype.ngOnInit = function () {
+    };
+    BlogDeleteComponent.prototype.deleteBlog = function (id) {
+        var index = this.blogAll.map(function (e) { return e.id; }).indexOf(id);
+        console.log(this.blogAll[index]);
+        this.http.delete('/api/blog/' + this.blogAll[index].create_date)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
+        this.blogAll.splice(index, 1);
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogDeleteComponent.prototype, "blogAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogDeleteComponent.prototype, "blog", void 0);
+    BlogDeleteComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-blog-delete',
+            template: __webpack_require__("./src/app/blog-delete/blog-delete.component.html"),
+            styles: [__webpack_require__("./src/app/blog-delete/blog-delete.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], BlogDeleteComponent);
+    return BlogDeleteComponent;
 }());
 
 
@@ -527,7 +602,7 @@ module.exports = ".blogCreate {\r\n  display: none;\r\n}"
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <li (click)=\"log(list.date)\">\n          <strong>{{list.date}}</strong>\n        </li>\n\n        <li *ngFor=\"let item of list.items; let j = index\">\n          {{item.create_date}}: {{item.title}}\n        </li>\n        <div *ngIf=\"!list.blog\">\n          <a (click)=\"blogCreateShow($event)\">create blog</a>\n          <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n        </div>\n        <div *ngIf=\"list.blog\">\n          <p>Blog:</p>\n          <p>{{list.blog.text}}</p>\n          <app-blog-edit [blogAll]=\"blogAll\" [(blog)]=\"list.blog\" (updateTesting)=\"onNotify($event)\"></app-blog-edit>\n        </div>\n        <hr>\n      </div>\n    </ul>\n  </div>\n</div>\n\n<app-blog-edit-modal [blog]=\"test\"></app-blog-edit-modal>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <li (click)=\"log(list.date)\">\n          <strong>{{list.date}}</strong>\n        </li>\n\n        <li *ngFor=\"let item of list.items; let j = index\">\n          {{item.create_date}}: {{item.title}}\n        </li>\n        <div *ngIf=\"!list.blog\">\n          <a (click)=\"blogCreateShow($event)\">create blog</a>\n          <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n        </div>\n        <div *ngIf=\"list.blog\">\n          <p>Blog:</p>\n          <p>{{list.blog.text}}</p>\n          <app-blog-edit [blogAll]=\"blogAll\" [(blog)]=\"list.blog\" (updateTesting)=\"onNotify($event)\"></app-blog-edit>\n          <app-blog-delete [blogAll]=\"blogAll\" [blog]=\"list.blog\"></app-blog-delete>\n        </div>\n        <hr>\n      </div>\n    </ul>\n  </div>\n</div>\n\n<app-blog-edit-modal [blog]=\"test\"></app-blog-edit-modal>"
 
 /***/ }),
 
