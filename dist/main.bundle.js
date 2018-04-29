@@ -152,12 +152,16 @@ var AppComponent = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__ = __webpack_require__("./src/app/footer/footer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__ = __webpack_require__("./src/app/blog/blog.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__ = __webpack_require__("./src/app/blog-create/blog-create.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__blog_edit_blog_edit_component__ = __webpack_require__("./src/app/blog-edit/blog-edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__blog_edit_modal_blog_edit_modal_component__ = __webpack_require__("./src/app/blog-edit-modal/blog-edit-modal.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -247,6 +251,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_25__footer_footer_component__["a" /* FooterComponent */],
                 __WEBPACK_IMPORTED_MODULE_26__blog_blog_component__["a" /* BlogComponent */],
                 __WEBPACK_IMPORTED_MODULE_27__blog_create_blog_create_component__["a" /* BlogCreateComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__blog_edit_blog_edit_component__["a" /* BlogEditComponent */],
+                __WEBPACK_IMPORTED_MODULE_29__blog_edit_modal_blog_edit_modal_component__["a" /* BlogEditModalComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -354,6 +360,163 @@ var BlogCreateComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/blog-edit-modal/blog-edit-modal.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/blog-edit-modal/blog-edit-modal.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n    <!-- Trigger the modal with a button -->\n    <!-- Modal -->\n    <div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\n      <div class=\"modal-dialog\">\n        <!-- Modal content-->\n        <div class=\"modal-content\">\n          <div id=\"editModalHeader\" class=\"modal-header\">\n            <button type=\"button\" class=\"close\"\n            data-dismiss=\"modal\">&times;</button>\n            <h4 class=\"modal-title\">Edit Blog</h4>\n          </div>\n          <div class=\"modal-body editQaABody\">\n            <form *ngIf=\"blog\" id=\"editTaskForm\" class=\"w3-container\" method=\"post\"\n            (ngSubmit)=\"editBlog(blog.id)\">\n              <p>\n                <label class=\"newTaskType\">Description:</label>\n                <textarea class=\"w3-input editQaADescription\"\n                name=\"editDescription\" cols=\"40\" rows=\"1\"\n                [(ngModel)]=\"blog.text\" name=\"description\"\n                required></textarea>\n              </p>\n              </form>\n          </div>\n          <div class=\"modal-footer\">\n            <button class=\"col-md-2 editBtn btn btn-success\"\n            form=\"editTaskForm\" type=\"submit\">Submit</button>\n            <button type=\"button\" class=\"btn btn-default\"\n            data-dismiss=\"modal\">Close</button>\n          </div>\n        </div>\n  \n      </div>\n    </div>\n  </div>"
+
+/***/ }),
+
+/***/ "./src/app/blog-edit-modal/blog-edit-modal.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlogEditModalComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BlogEditModalComponent = /** @class */ (function () {
+    function BlogEditModalComponent(http) {
+        this.http = http;
+        this.blog = {};
+    }
+    BlogEditModalComponent.prototype.ngOnInit = function () {
+    };
+    BlogEditModalComponent.prototype.editBlog = function (id) {
+        console.log(id);
+        this.http.put('/api/blog/' + id, this.blog)
+            .subscribe(function (res) {
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogEditModalComponent.prototype, "blogAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogEditModalComponent.prototype, "blog", void 0);
+    BlogEditModalComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-blog-edit-modal',
+            template: __webpack_require__("./src/app/blog-edit-modal/blog-edit-modal.component.html"),
+            styles: [__webpack_require__("./src/app/blog-edit-modal/blog-edit-modal.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], BlogEditModalComponent);
+    return BlogEditModalComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/blog-edit/blog-edit.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/blog-edit/blog-edit.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button id=\"modalButton\" type=\"button\" class=\"modal-button btn btn-info btn-md\neditBtn\" data-toggle=\"modal\" data-target=\"#myModal\"\n(click)=\"editModalForm($event, blog)\">Edit</button>"
+
+/***/ }),
+
+/***/ "./src/app/blog-edit/blog-edit.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BlogEditComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var BlogEditComponent = /** @class */ (function () {
+    function BlogEditComponent(http) {
+        this.http = http;
+        this.testing = {};
+        this.updateTesting = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* EventEmitter */]();
+        this.numberOfLi = 7;
+    }
+    BlogEditComponent.prototype.ngOnInit = function () {
+    };
+    // giving modal form placeholder values for each input txt
+    BlogEditComponent.prototype.editModalForm = function ($event, elem) {
+        var li = document.getElementsByTagName("LI");
+        var i;
+        console.log(elem);
+        console.log(this.testing);
+        this.blog = elem;
+        this.updateTesting.emit(this.blog);
+        for (i = this.numberOfLi; i < this.blogAll.length; i++) {
+            if (this.blogAll[i]._id == elem._id) {
+                this.blog = elem;
+            }
+        }
+        this.elem = $event.target;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogEditComponent.prototype, "blogAll", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogEditComponent.prototype, "blog", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
+        __metadata("design:type", Object)
+    ], BlogEditComponent.prototype, "testing", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["P" /* Output */])(),
+        __metadata("design:type", Object)
+    ], BlogEditComponent.prototype, "updateTesting", void 0);
+    BlogEditComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-blog-edit',
+            template: __webpack_require__("./src/app/blog-edit/blog-edit.component.html"),
+            styles: [__webpack_require__("./src/app/blog-edit/blog-edit.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], BlogEditComponent);
+    return BlogEditComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/blog/blog.component.css":
 /***/ (function(module, exports) {
 
@@ -364,7 +527,7 @@ module.exports = ".blogCreate {\r\n  display: none;\r\n}"
 /***/ "./src/app/blog/blog.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <li (click)=\"log(list.date)\">\n          <strong>{{list.date}}</strong>\n        </li>\n\n        <li *ngFor=\"let item of list.items; let j = index\">\n          {{item.create_date}}: {{item.title}}\n        </li>\n        <div *ngIf=\"!list.blog\">\n          <a (click)=\"blogCreateShow($event)\">create blog</a>\n          <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n        </div>\n        <div *ngIf=\"list.blog\">\n          <p>Blog:</p>\n          <p>{{list.blog.text}}</p>\n        </div>\n        <hr>\n      </div>\n    </ul>\n  </div>\n</div>"
+module.exports = "<div class=\"container todolist\">\n  <div class=\"row\">\n    <button type=\"button\" class=\"btn btn-info btn-md\n      editBtn\" (click)=\"changeView()\">change view</button>\n    <ul *ngIf=\"orderedList.length > 99 && view == 'category'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList\">\n        <div *ngIf=\"list.qaa.length > 0 || list.todo.length > 0  || list.words.length > 0\">\n          <li>\n            <strong>{{list.date}}</strong>\n          </li>\n          <em>QaAs:</em>\n          <div *ngIf=\"list.qaa\">\n            <li *ngFor=\"let qaa of list.qaa\">\n              {{qaa.title}}\n            </li>\n          </div>\n          <em>Todos:</em>\n          <div *ngIf=\"list.todo\">\n            <li *ngFor=\"let todo of list.todo\">\n              {{todo.title}}\n            </li>\n          </div>\n          <em>Words:</em>\n          <div *ngIf=\"list.words\">\n            <li *ngFor=\"let word of list.words\">\n              {{word.word}}\n            </li>\n          </div>\n          <hr>\n        </div>\n      </div>\n    </ul>\n    <ul *ngIf=\"orderedList2.length > 364 && view == 'date'\" class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let list of orderedList2; let i = index\">\n        <li (click)=\"log(list.date)\">\n          <strong>{{list.date}}</strong>\n        </li>\n\n        <li *ngFor=\"let item of list.items; let j = index\">\n          {{item.create_date}}: {{item.title}}\n        </li>\n        <div *ngIf=\"!list.blog\">\n          <a (click)=\"blogCreateShow($event)\">create blog</a>\n          <app-blog-create class=\"blogCreate\" [blogAll]=\"blogAll\" [list]=\"list\"></app-blog-create>\n        </div>\n        <div *ngIf=\"list.blog\">\n          <p>Blog:</p>\n          <p>{{list.blog.text}}</p>\n          <app-blog-edit [blogAll]=\"blogAll\" [(blog)]=\"list.blog\" (updateTesting)=\"onNotify($event)\"></app-blog-edit>\n        </div>\n        <hr>\n      </div>\n    </ul>\n  </div>\n</div>\n\n<app-blog-edit-modal [blog]=\"test\"></app-blog-edit-modal>"
 
 /***/ }),
 
@@ -394,6 +557,10 @@ var BlogComponent = /** @class */ (function () {
         this.orderedList2 = [];
         this.view = 'date';
     }
+    BlogComponent.prototype.onNotify = function (val) {
+        console.log(val);
+        this.test = val;
+    };
     BlogComponent.prototype.ngOnInit = function () {
         var _this = this;
         function compare(a, b) {
@@ -1109,7 +1276,7 @@ module.exports = ".QaAPara {\n    width: 100%;\n    white-space: -moz-pre-wrap; 
 /***/ "./src/app/qaa/qaa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-1 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <div class=\"col-md-12 searchDiv\">\n      <input class=\"search\" type=\"text\" [(ngModel)]=\"queryString\" id=\"search\"\n      placeholder=\"Search by question\"\n      (ngModelChange)=searchChange()>\n    </div>\n    \n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse(); let\n      last = last; let i = index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [(testing)]=\"qaaShow[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [(qaaShow)]=\"qaaShow\" [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>"
+module.exports = "<div class=\"container QaA\">\n  <div class=\"row\">\n    <app-qaa-create [qaaAll]=\"qaaAll\"></app-qaa-create>\n\n    <div class=\"col-md-10\">\n      <h2>QaA</h2>\n    </div>\n\n    <div class=\"col-md-2 selector\">\n      <select id=\"selector\" (change)=\"select($event)\">\n        <option value=\"all\" selected=\"selected\">all</option>\n        <option value=\"HTML\">HTML</option>\n        <option value=\"CSS\">CSS</option>\n        <option value=\"Javascript\">Javascript</option>\n        <option value=\"Data structures\">Data structures</option>\n        <option value=\"Other\">Other</option>\n      </select>\n    </div>\n\n    <div class=\"col-md-12\">\n      <p>Number of QaA: {{ qaaShow.length }}</p>\n    </div>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheEndOfPage()\">Scroll to the bottom</a>\n    </div>\n\n    <div class=\"col-md-12 searchDiv\">\n      <input class=\"search\" type=\"text\" [(ngModel)]=\"queryString\" id=\"search\"\n      placeholder=\"Search by question\"\n      (ngModelChange)=searchChange()>\n    </div>\n    \n    <ul class=\"col-md-12\" id=\"myUL\">\n      <div *ngFor=\"let qaa of qaaShow.reverse(); let\n      last = last; let i = index\" [ngClass]=\"isLast(last)\">\n        <li (click)=\"dropFunction($event)\" class=\"aboutDefault aboutDropbtn2\">\n          <div class=\"col-md-12 QaAPara\">{{ qaa.title }}</div>\n          <div class=\"col-md-12\">\n            <span class=\"label label-default\">{{ qaa.type }}</span>\n          </div>\n          <div class=\"aboutDropdown-content\" id=\"drop\">\n            <div class=\"col-md-8\">\n              <p class=\"dropPara QaAPara\">{{ qaa.description }}</p>\n            </div>\n            <div class=\"pull-right col-md-4\">\n              <span class=\"badge\">Posted {{ qaa.create_date }}</span>\n              <br>\n              <app-qaa-edit [qaaAll]=\"qaaAll\" [(testing)]=\"qaaShow[i]\"\n              (updateTesting)=\"onNotify($event)\"></app-qaa-edit>\n              <br>\n              <app-qaa-delete [(qaaShow)]=\"qaaShow\" [qaaAll]=\"qaaAll\" [qaa]=\"qaa\"></app-qaa-delete>\n            </div>\n          </div>\n        </li>\n      </div>\n    </ul>\n\n    <div class=\"col-md-3\">\n      <a (click)=\"scrollToTheStartOfPage()\">Scroll to the top</a>\n    </div>\n\n  </div>\n</div>\n\n<app-qaa-edit-modal [qaa]=\"test\"></app-qaa-edit-modal>"
 
 /***/ }),
 

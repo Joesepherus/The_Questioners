@@ -11,6 +11,7 @@ export class BlogComponent implements OnInit {
   qaaAll: any;
   curr: any;
   prev: any;
+  test: any;
   todoAll: any;
   orderedList: any;
   orderedList2: any;
@@ -25,6 +26,11 @@ export class BlogComponent implements OnInit {
     this.orderedList = [];
     this.orderedList2 = [];
     this.view = 'date';
+  }
+
+  onNotify(val) {
+    console.log(val);
+    this.test = val;
   }
 
   ngOnInit() {

@@ -26,6 +26,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogCreateComponent } from './blog-create/blog-create.component';
+import { BlogEditComponent } from './blog-edit/blog-edit.component';
+import { BlogEditModalComponent } from './blog-edit-modal/blog-edit-modal.component';
 
 const appRoutes: Routes = [
   {
@@ -86,6 +88,8 @@ const appRoutes: Routes = [
     FooterComponent,
     BlogComponent,
     BlogCreateComponent,
+    BlogEditComponent,
+    BlogEditModalComponent,
   ],
   imports: [
     BrowserModule,

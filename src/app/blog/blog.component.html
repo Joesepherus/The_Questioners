@@ -46,9 +46,12 @@
         <div *ngIf="list.blog">
           <p>Blog:</p>
           <p>{{list.blog.text}}</p>
+          <app-blog-edit [blogAll]="blogAll" [(blog)]="list.blog" (updateTesting)="onNotify($event)"></app-blog-edit>
         </div>
         <hr>
       </div>
     </ul>
   </div>
 </div>
+
+<app-blog-edit-modal [blog]="test"></app-blog-edit-modal>
