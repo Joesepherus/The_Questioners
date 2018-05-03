@@ -45,7 +45,7 @@
         </div>
         <div *ngIf="list.blog">
           <p>Blog:</p>
-          <p>{{list.blog.text}}</p>
+          <p class="QaAPara">{{list.blog.text}}</p>
           <app-blog-edit [blogAll]="blogAll" [(blog)]="list.blog" (updateTesting)="onNotify($event)"></app-blog-edit>
           <app-blog-delete [blogAll]="blogAll" [blog]="list.blog"></app-blog-delete>
         </div>
