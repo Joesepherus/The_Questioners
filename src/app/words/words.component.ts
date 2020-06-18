@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
-
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-words',
@@ -16,7 +16,7 @@ export class WordsComponent implements OnInit {
   numberOfWords: any;
   test: any;
   readonly numberOfLi = 8;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalsService: GlobalsService) {
     this.wordsAll = [];
   }
 
@@ -26,7 +26,8 @@ export class WordsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('/api/words').subscribe(data => {
+    const adminId = this.globalsService.getAdminId()
+    this.http.get('/api/words/admin/' + adminId).subscribe(data => {
       this.wordsAll = data;
     });
 

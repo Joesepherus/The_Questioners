@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private globalsService: GlobalsService) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    localStorage.clear()
+    this.globalsService.setAdminId(null)
+    this.router.navigate(['/login'])
   }
 
 }

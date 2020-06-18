@@ -1,0 +1,19 @@
+<div class="container login">
+    <section>
+        <div>
+            <h3>Login</h3>
+        </div>
+        <div class="inputContainer">
+            <label>email</label>
+            <input [(ngModel)]="email">
+            <label>password</label>
+            <input [(ngModel)]="password" type="password">
+        </div>
+        <div>
+            <button (click)="login()">Login</button>
+            <div>
+                <a [routerLink]="" (click)="redirect()">Register</a>
+            </div>
+        </div>
+    </section>
+</div>

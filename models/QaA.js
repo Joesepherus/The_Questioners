@@ -5,6 +5,10 @@ var schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  adminId: {
+	  type: String,
+	  required: true
+  },
 	title:{
 		type: String,
 		required: true

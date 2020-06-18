@@ -51,7 +51,7 @@ export class TurnipComponent implements OnInit {
       }
     }
     else {
-      localStorage.clear();
+      // localStorage.clear();
       localStorage.setItem('myTime', '');
     }
 

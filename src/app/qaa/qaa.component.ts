@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
-
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-qaa',
@@ -18,7 +18,7 @@ export class QaaComponent implements OnInit {
   qaaShow: any;
   queryString: any;
   readonly numberOfLi = 8;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalsService: GlobalsService) {
     this.qaaAll = [];
     this.qaaShow = [];
   }
@@ -34,8 +34,9 @@ export class QaaComponent implements OnInit {
     function compare(a, b) {
       return a.id - b.id;
     }
+    const adminId = this.globalsService.getAdminId()
 
-    this.http.get('/api/qaa').subscribe(data => {
+    this.http.get('/api/qaa/admin/' + adminId).subscribe(data => {
       console.log(data);
       this.qaaAll = data;
       this.qaaAll.sort(compare);

@@ -4,7 +4,14 @@ img {
 }
 
 .todolist, .QaA {
-    margin-top: 30px;
+    padding-top: 20px;
+    min-height: calc(100vh - 108px);
+    /* height: calc(100vh - 52px); */
+}
+
+.login {
+    padding-top: 20px;
+    min-height: calc(100vh - 52px);
 }
 
 .navbar {

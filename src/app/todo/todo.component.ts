@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-todo',
@@ -15,7 +16,7 @@ export class TodoComponent implements OnInit {
   test: any;
   todoShow: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalsService: GlobalsService) {
     this.todoAll = [];
     this.todoShow = [];
   }
@@ -26,7 +27,8 @@ export class TodoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('/api/todo').subscribe(data => {
+    const adminId = this.globalsService.getAdminId()
+    this.http.get('/api/todo/admin/' + adminId).subscribe(data => {
       this.todoAll = data;
       this.todoShow = this.todoAll;
     });

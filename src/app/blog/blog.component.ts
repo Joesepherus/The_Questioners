@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-blog',
@@ -21,7 +21,7 @@ export class BlogComponent implements OnInit {
   start: any;
   actionAll: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalsService: GlobalsService) {
     this.qaaAll = [];
     this.orderedList = [];
     this.orderedList2 = [];
@@ -48,7 +48,8 @@ export class BlogComponent implements OnInit {
       this.orderedList2[i] = ({ date: start, items: [], blog: false });
     }
 
-    this.http.get('/api/blog').subscribe(data => {
+    const adminId = this.globalsService.getAdminId()
+    this.http.get('/api/blog/admin/' + adminId).subscribe(data => {
       console.log(data);
       this.blogAll = data;
       this.blogAll.sort(compare);
@@ -65,7 +66,7 @@ export class BlogComponent implements OnInit {
 
     let date = new Date();
     let dateISO = date.toISOString();
-    this.http.get('/api/qaa-date/' + dateISO).subscribe(data => {
+    this.http.post('/api/qaa-date/' + dateISO, { adminId }).subscribe(data => {
       this.qaaAll = data;
       this.qaaAll.sort(compare);
       this.groupingItemsByDate(this.qaaAll, "qaa");
@@ -74,28 +75,28 @@ export class BlogComponent implements OnInit {
       console.log(this.orderedList2);
     });
 
-    this.http.get('/api/todo-date/' + dateISO).subscribe(items => {
+    this.http.post('/api/todo-date/' + dateISO, { adminId }).subscribe(items => {
       this.todoAll = items;
       this.todoAll.sort(compare);
       this.groupingItemsByDate(this.todoAll, "todo");
       this.groupingItemsByDate2(this.todoAll, "todo");
     });
 
-    this.http.get('/api/words-date/' + dateISO).subscribe(items => {
+    this.http.post('/api/words-date/' + dateISO, { adminId }).subscribe(items => {
       this.wordsAll = items;
       this.wordsAll.sort(compare);
       this.groupingItemsByDate(this.wordsAll, "word");
       this.groupingItemsByDate2(this.wordsAll, "word");
     });
 
-    this.http.get('/api/blog-date/' + dateISO).subscribe(items => {
+    this.http.post('/api/blog-date/' + dateISO, { adminId }).subscribe(items => {
       this.blogAll = items;
       this.blogAll.sort(compare);
       this.groupingItemsByDate(this.blogAll, "blog");
       this.groupingItemsByDate2(this.blogAll, "blog");
     });
 
-    this.http.get('/api/action-date/' + dateISO).subscribe(items => {
+    this.http.post('/api/action-date/' + dateISO, { adminId }).subscribe(items => {
       this.actionAll = items;
       this.actionAll.sort(compare);
       this.groupingItemsByDate(this.actionAll, "action");

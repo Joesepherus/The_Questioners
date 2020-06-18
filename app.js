@@ -8,6 +8,8 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
+const dotenv = require('dotenv')
+dotenv.config()
 
 // DB SETUP
 MONGOLAB_URI = process.env.MONGOLAB_URI_THEQ;
@@ -25,6 +27,8 @@ app.use('/todo', express.static(path.join(__dirname, 'dist')));
 app.use('/words', express.static(path.join(__dirname, 'dist')));
 app.use('/about', express.static(path.join(__dirname, 'dist')));
 app.use('/blog', express.static(path.join(__dirname, 'dist')));
+app.use('/login', express.static(path.join(__dirname, 'dist')));
+app.use('/register', express.static(path.join(__dirname, 'dist')));
 app.use('/api', routes);
 
 // catch 404 and forward to error handler

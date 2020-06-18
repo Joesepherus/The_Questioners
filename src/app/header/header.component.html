@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default">
-  <div class="container">
+  <div class="container myContainer">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
         aria-controls="navbar">
@@ -30,31 +30,31 @@
           </div>
         </li>
         <li id="about">
-          <a class="navbar-brand TheQ" href="/about">
+          <a class="navbar-brand TheQ" routerLink="/about" routerLinkActive="active">
             <img alt="TheQ" src="assets/img/TheQ-transparent.png" class="TheQ
                 hvr-bounce-in">
           </a>
         </li>
         <li id="todolist">
-          <a href="/todo">To-do list</a>
+          <a [routerLink]="['/todo']" routerLinkActive="active">To-do list</a>
         </li>
         <li id="QaA">
-          <a href="/qaa">QaA</a>
+          <a [routerLink]="['/qaa']" routerLinkActive="active">QaA</a>
         </li>
         <li id="flashcards">
-          <a class="nav-item nav-link" data-toggle="tab" href="/flashcards">Flashcards</a>
+          <a class="nav-item nav-link" data-toggle="tab" routerLink="/flashcards" routerLinkActive="active">Flashcards</a>
         </li>
         <li id="words">
-          <a href="/words">Words</a>
+          <a routerLink="/words" routerLinkActive="active">Words</a>
         </li>
         <li id="DRO">
-          <a class="nav-item nav-link" data-toggle="tab" href="/DRO">DRO</a>
+          <a class="nav-item nav-link" data-toggle="tab" routerLink="/DRO" routerLinkActive="active">DRO</a>
         </li>
         <li id="Blog">
-          <a href="/blog">Blog</a>
+          <a routerLink="/blog" routerLinkActive="active">Blog</a>
         </li>
-        <app-turnip></app-turnip>
       </ul>
+      <div class="logoutContainer"><button (click)="logout()">logout</button></div>
     </div>
     <!--/.nav-collapse -->
   </div>

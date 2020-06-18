@@ -1,25 +1,20 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var qaa = require('../models/QaA.js');
-var todo = require('../models/todo.js');
-var words = require('../models/words.js');
-var action = require('../models/action.js');
-var blog = require('../models/blog.js');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const qaa = require('../models/QaA.js');
+const todo = require('../models/todo.js');
+const words = require('../models/words.js');
+const action = require('../models/action.js');
+const blog = require('../models/blog.js');
+const Admin = require('../models/admin.js')
+
 
 //                    ===== QaA =====
 
-/* GET ALL qaas */
-router.get('/qaa', function (req, res, next) {
-  qaa.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
-});
-
-/* GET SINGLE qaa BY ID */
-router.get('/qaa/:id', function (req, res, next) {
-  qaa.findById(req.params.id, function (err, post) {
+/* GET ALL todo BY ADMIN ID */
+router.get('/qaa/admin/:id', function (req, res, next) {
+  const adminId = req.params.id
+  qaa.find({ adminId }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -34,23 +29,24 @@ router.get('/qaa-latest', function (req, res, next) {
 });
 
 /* GET qaa by date */
-router.get('/qaa-date/:date', function (req, res, next) {
+router.post('/qaa-date/:date', function (req, res, next) {
   console.log("start");
+  const { adminId } = req.body
   let rangeStart = new Date(req.params.date);
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
   rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
-  qaa.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+  qaa.find({ adminId, "create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
-    console.log(products);
     res.json(products);
   });
 });
 
 /* SAVE qaa */
 router.post('/qaa', function (req, res, next) {
+    console.log('req.body: ', req.body);
   qaa.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
@@ -75,17 +71,10 @@ router.delete('/qaa/:create_date', function (req, res, next) {
 
 //                    ===== To-do =====
 
-/* GET ALL todos */
-router.get('/todo', function (req, res, next) {
-  todo.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
-});
-
-/* GET SINGLE todo BY ID */
-router.get('/todo/:id', function (req, res, next) {
-  todo.findById(req.params.id, function (err, post) {
+/* GET ALL todo BY ADMIN ID */
+router.get('/todo/admin/:id', function (req, res, next) {
+  const adminId = req.params.id
+  todo.find({ adminId }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -101,17 +90,18 @@ router.get('/todo-latest', function (req, res, next) {
 });
 
 /* GET todo by date */
-router.get('/todo-date/:date', function (req, res, next) {
+router.post('/todo-date/:date', function (req, res, next) {
   console.log("start");
+  const { adminId } = req.body
+  console.log('adminId: ', adminId);
   let rangeStart = new Date(req.params.date);
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
   rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
-  todo.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+  todo.find({adminId, "create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
-    console.log(products);
     res.json(products);
   });
 });
@@ -171,17 +161,10 @@ router.put('/todo/inprogress/:id', function (req, res, next) {
 
 //                    ===== Words =====
 
-/* GET ALL words */
-router.get('/words', function (req, res, next) {
-  words.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
-});
-
-/* GET SINGLE words BY ID */
-router.get('/words/:id', function (req, res, next) {
-  words.findById(req.params.id, function (err, post) {
+/* GET ALL words BY ADMIN ID */
+router.get('/words/admin/:id', function (req, res, next) {
+  const adminId = req.params.id
+  words.find({ adminId }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -196,17 +179,16 @@ router.get('/words-latest', function (req, res, next) {
 });
 
 /* GET words by date */
-router.get('/words-date/:date', function (req, res, next) {
+router.post('/words-date/:date', function (req, res, next) {
   console.log("start");
+  const { adminId } = req.body
   let rangeStart = new Date(req.params.date);
   let rangeEnd = rangeStart;
   console.log(rangeStart);
-  
   rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
-  words.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+  words.find({ adminId, "create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
-    console.log(products);
     res.json(products);
   });
 });
@@ -246,17 +228,18 @@ router.get('/action-latest', function (req, res, next) {
 });
 
 /* GET actions by date */
-router.get('/action-date/:date', function (req, res, next) {
+router.post('/action-date/:date', function (req, res, next) {
   console.log("start");
+  const { adminId } = req.body
+
   let rangeStart = new Date(req.params.date);
   let rangeEnd = rangeStart;
   console.log(rangeStart);
   
   rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
-  action.find({"start": {"$gt": rangeEnd}}, function(err, products){
+  action.find({ adminId, "start": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
-    console.log(products);
     res.json(products);
   });
 });
@@ -279,17 +262,10 @@ router.put('/action/:id', function (req, res, next) {
 
 //                    ===== Blog =====
 
-/* GET ALL blogs */
-router.get('/blog', function (req, res, next) {
-  blog.find(function (err, products) {
-    if (err) return next(err);
-    res.json(products);
-  });
-});
-
-/* GET SINGLE blog BY ID */
-router.get('/blog/:id', function (req, res, next) {
-  blog.findById(req.params.id, function (err, post) {
+/* GET ALL blogs BY ADMIN ID */
+router.get('/blog/admin/:id', function (req, res, next) {
+  const adminId = req.params.id
+  blog.find({ adminId }, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
@@ -304,7 +280,8 @@ router.get('/blog-latest', function (req, res, next) {
 });
 
 /* GET blog by date */
-router.get('/blog-date/:date', function (req, res, next) {
+router.post('/blog-date/:date', function (req, res, next) {
+  const { adminId } = req.body
   console.log("start");
   let rangeStart = new Date(req.params.date);
   let rangeEnd = rangeStart;
@@ -312,9 +289,8 @@ router.get('/blog-date/:date', function (req, res, next) {
   
   rangeEnd.setDate(rangeStart.getDate() - 365);
   console.log(rangeEnd);
-  blog.find({"create_date": {"$gt": rangeEnd}}, function(err, products){
+  blog.find({ adminId, "create_date": {"$gt": rangeEnd}}, function(err, products){
     if (err) console.log(err);
-    console.log(products);
     res.json(products);
   });
 });
@@ -342,5 +318,104 @@ router.delete('/blog/:create_date', function (req, res, next) {
     res.json(post);
   });
 });
+
+// ===== ADMIN =====
+
+// add a new admin
+router.post('/admin', function (req, res) {
+  var admin = req.body.admin
+  console.log(admin)
+  Admin.addAdmin(admin, function (err) {
+    if (err) {
+      res.send({
+        message: 'Admin s emailom ' + admin.email + ' už existuje.',
+        status: 404
+      })
+    } else {
+      res.send({ message: 'Úspešne si sa zaregistroval.', status: 200 })
+    }
+  })
+})
+
+// login admin
+router.post('/admin/login', function (req, res) {
+  var admin = req.body.admin
+  console.log(admin)
+  Admin.loginAdmin(admin, function (err, admin_db) {
+    if (err) {
+      res.send({
+        message: 'Zadali ste nesprávne prihlasovacie údaje.',
+        status: 404
+      })
+    } else {
+      res.send({
+        admin_id: admin_db._id,
+        admin: admin_db,
+        message: 'Prihlásenie prebehlo úspešne.',
+        status: 200
+      })
+    }
+  })
+})
+
+// update a admin
+router.put('/admin/:id', function (req, res) {
+  var id = req.params.id
+  var admin = req.body.admin
+  console.log(id)
+  console.log(admin)
+  Admin.updateAdmin(id, admin, { new: true }, function (err, admin) {
+    console.log('admin: ', admin)
+    if (err) {
+      res.send({ message: 'Error', status: 200 })
+    } else {
+      res.send({
+        message: 'Dáta admina ' + admin.name + ' boli zmenené',
+        status: 200,
+        admin: admin
+      })
+    }
+  })
+})
+
+// change password of a admin
+router.put('/admin/changePassword/:id', function (req, res) {
+  var id = req.params.id
+  var admin = req.body.admin
+  console.log(id)
+  console.log(admin)
+  Admin.changePassword(id, admin, {}, function (err, db_admin) {
+    console.log('admin: ', db_admin)
+    if (err) {
+      res.send({ message: 'Error nesprávne prihlasovacie údaje.', status: 200 })
+    } else {
+      res.send({
+        message: 'Heslo admina ' + db_admin.name + ' bolo úspešne zmenené.',
+        status: 200
+      })
+    }
+  })
+})
+
+// remove admin permanently
+router.delete('/admin/:id', function (req, res) {
+  var id = req.params.id
+  Admin.deletePermanentlyAdmin(id, function (err, admin) {
+    if (err) {
+      res.send({
+        message: 'Nastala chyba pri vymávaní admina.'
+      })
+      throw err
+    } else {
+      res.json({
+        message: 'Váš účet bol úspešne vymazaný.',
+        status: 200
+      })
+    }
+  })
+})
+
+// --------------------------------------------------------------------------------------------
+
 
 module.exports = router;
