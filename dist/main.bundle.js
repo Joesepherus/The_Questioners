@@ -39,7 +39,7 @@ var LoginContainer = /** @class */ (function () {
     }
     LoginContainer = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-            selector: 'login',
+            selector: 'login-container',
             template: __webpack_require__("./src/app/loginContainer.component.html")
         }),
         __metadata("design:paramtypes", [])
