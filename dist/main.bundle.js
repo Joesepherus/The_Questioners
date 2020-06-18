@@ -36,29 +36,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var LoginContainer = /** @class */ (function () {
     function LoginContainer() {
         this.title = 'app';
-        this.loggedIn = localStorage.getItem('adminId');
-        if (window.addEventListener) {
-            console.log('?wtf');
-            window.addEventListener("storage", this.listener);
-            window.onstorage = function () {
-                console.log('local storage changed');
-            };
-        }
     }
-    LoginContainer.prototype.listener = function () {
-        console.log('local storage changed');
-        this.loggedIn = localStorage.getItem('adminId');
-    };
-    LoginContainer.prototype.ngOnInit = function () {
-        console.log('window: ', window.addEventListener);
-    };
     LoginContainer = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'login',
-            template: __webpack_require__("./src/app/loginContainer.component.html"),
-            host: {
-                '(document:storage)': 'onStorageChange($event)'
-            }
+            template: __webpack_require__("./src/app/loginContainer.component.html")
         }),
         __metadata("design:paramtypes", [])
     ], LoginContainer);
@@ -104,7 +86,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AboutComponent = /** @class */ (function () {
     function AboutComponent() {
-        console.log('about my ass');
     }
     AboutComponent.prototype.ngOnInit = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__(document).ready(function () {
@@ -153,39 +134,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 
 var AppComponent = /** @class */ (function () {
     function AppComponent() {
         this.title = 'app';
-        this.loggedIn = localStorage.getItem('adminId');
-        if (window.addEventListener) {
-            console.log('?wtf');
-            window.addEventListener("storage", this.listener);
-            window.onstorage = function () {
-                console.log('local storage changed');
-            };
-        }
     }
-    AppComponent.prototype.listener = function () {
-        console.log('local storage changed');
-        this.loggedIn = localStorage.getItem('adminId');
-    };
-    AppComponent.prototype.ngOnInit = function () {
-        console.log('window: ', window.addEventListener);
-    };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'app-root',
             template: __webpack_require__("./src/app/app.component.html"),
-            styles: [__webpack_require__("./src/app/app.component.css")],
-            host: {
-                '(document:storage)': 'onStorageChange($event)'
-            }
-        }),
-        __metadata("design:paramtypes", [])
+            styles: [__webpack_require__("./src/app/app.component.css")]
+        })
     ], AppComponent);
     return AppComponent;
 }());
@@ -980,6 +939,7 @@ module.exports = "<nav class=\"navbar navbar-default\">\n  <div class=\"containe
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HeaderComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("./node_modules/@angular/router/esm5/router.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__globals_service__ = __webpack_require__("./src/app/globals.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -991,14 +951,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(router) {
+    function HeaderComponent(router, globalsService) {
         this.router = router;
+        this.globalsService = globalsService;
     }
     HeaderComponent.prototype.ngOnInit = function () {
     };
     HeaderComponent.prototype.logout = function () {
         localStorage.clear();
+        this.globalsService.setAdminId(null);
         this.router.navigate(['/login']);
     };
     HeaderComponent = __decorate([
@@ -1007,7 +970,7 @@ var HeaderComponent = /** @class */ (function () {
             template: __webpack_require__("./src/app/header/header.component.html"),
             styles: [__webpack_require__("./src/app/header/header.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */], __WEBPACK_IMPORTED_MODULE_2__globals_service__["a" /* GlobalsService */]])
     ], HeaderComponent);
     return HeaderComponent;
 }());
@@ -1042,29 +1005,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var LoggedInContainer = /** @class */ (function () {
     function LoggedInContainer() {
         this.title = 'app';
-        this.loggedIn = localStorage.getItem('adminId');
-        if (window.addEventListener) {
-            console.log('?wtf');
-            window.addEventListener("storage", this.listener);
-            window.onstorage = function () {
-                console.log('local storage changed');
-            };
-        }
     }
-    LoggedInContainer.prototype.listener = function () {
-        console.log('local storage changed');
-        this.loggedIn = localStorage.getItem('adminId');
-    };
-    LoggedInContainer.prototype.ngOnInit = function () {
-        console.log('window: ', window.addEventListener);
-    };
     LoggedInContainer = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
             selector: 'logged-in',
-            template: __webpack_require__("./src/app/loggedIn.component.html"),
-            host: {
-                '(document:storage)': 'onStorageChange($event)'
-            }
+            template: __webpack_require__("./src/app/loggedIn.component.html")
         }),
         __metadata("design:paramtypes", [])
     ], LoggedInContainer);
@@ -1455,15 +1400,12 @@ var QaaCreateComponent = /** @class */ (function () {
         var adminId = this.globalsService.getAdminId();
         this.http.get('/api/qaa-latest').subscribe(function (data) {
             _this.latest = data;
-            console.log(data);
             var newQaa = _this.qaa;
             newQaa.id = (++_this.latest.id).toString();
             newQaa.create_date = (new Date).toISOString();
             newQaa.adminId = adminId;
-            console.log(newQaa);
             _this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '' };
             _this.qaaAll.push(newQaa);
-            console.log('newQaa: ', newQaa);
             _this.http.post('/api/qaa', newQaa)
                 .subscribe(function (res) {
             }, function (err) {
@@ -1989,7 +1931,6 @@ var RegisterComponent = /** @class */ (function () {
     }
     RegisterComponent.prototype.ngOnInit = function () { };
     RegisterComponent.prototype.register = function () {
-        console.log('name, email, password: ', this.name, this.email, this.password);
         var admin = { name: this.name, email: this.email, password: this.password };
         this.http.post('/api/admin', { admin: admin })
             .subscribe(function (res) {
@@ -2039,7 +1980,6 @@ var AuthGuard = /** @class */ (function () {
         this.router = router;
     }
     AuthGuard.prototype.canActivate = function () {
-        console.log('localStorage: ', localStorage);
         if (!localStorage.getItem('adminId')) {
             this.router.navigate(['login']);
             return false;
@@ -2194,7 +2134,6 @@ var TodoCreateComponent = /** @class */ (function () {
         var adminId = this.globalsService.getAdminId();
         this.http.get('/api/todo-latest').subscribe(function (data) {
             _this.latest = data;
-            console.log(data);
             var newTodo = _this.todo;
             newTodo.state = 'inprogress';
             newTodo.id = (++_this.latest.id).toString();
