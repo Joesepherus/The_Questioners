@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BlogDeleteComponent implements OnInit {
   @Input() blogAll: any;
-  @Input() blog = {};
+  @Input() blog = { id: '' };
   constructor(private http: HttpClient) { }
 
   ngOnInit() {

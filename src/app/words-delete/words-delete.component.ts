@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class WordsDeleteComponent implements OnInit {
   @Input() wordsAll: any;
-  @Input() words = {};
+  @Input() words = { id: '' };
   constructor(private http: HttpClient) { }
 
   ngOnInit() {

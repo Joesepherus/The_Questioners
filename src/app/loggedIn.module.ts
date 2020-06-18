@@ -26,6 +26,7 @@ import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { BlogEditModalComponent } from './blog-edit-modal/blog-edit-modal.component';
 import { BlogDeleteComponent } from './blog-delete/blog-delete.component';
+import { TurnipComponent } from './turnip/turnip.component';
 import { SharedModule } from './shared.module'
 import { AuthGuard } from './services/auth-guard.service'
 
@@ -95,7 +96,8 @@ const appRoutes: Routes = [
     BlogCreateComponent,
     BlogEditComponent,
     BlogEditModalComponent,
-    BlogDeleteComponent
+    BlogDeleteComponent,
+    TurnipComponent
   ],
   imports: [
     BrowserModule,

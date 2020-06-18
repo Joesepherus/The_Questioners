@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class QaaDeleteComponent implements OnInit {
   @Input() qaaAll: any;
   @Input() qaaShow: any;
-  @Input() qaa = {};
+  @Input() qaa = { id: '' };
   constructor(private http: HttpClient) { }
 
   ngOnInit() {

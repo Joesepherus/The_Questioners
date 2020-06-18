@@ -13,7 +13,10 @@ export class TodoCreateComponent implements OnInit {
     state: {},
     id: {},
     create_date: (new Date).toISOString(),
-    adminId: ''
+    adminId: '',
+    title: '',
+    description: '',
+    type: ''
   };
   latest;
   constructor(private http: HttpClient, private globalsService: GlobalsService) { }
@@ -31,7 +34,7 @@ export class TodoCreateComponent implements OnInit {
       newTodo.id = (++this.latest.id).toString();
       newTodo.create_date = (new Date).toISOString();
       newTodo.adminId = adminId
-      this.todo = { state: '', id: '', create_date: (new Date).toISOString(), adminId: '' };
+      this.todo = { state: '', id: '', create_date: (new Date).toISOString(), adminId: '', title: '', description: '', type: '' };
       this.todoAll.push(newTodo);
       this.http.post('/api/todo', newTodo)
         .subscribe(res => {

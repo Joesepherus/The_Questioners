@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoDeleteComponent implements OnInit {
   @Input() todoAll: any;
-  @Input() todo = {};
+  @Input() todo = { id: ' '};
   constructor(private http: HttpClient) { }
 
 

@@ -328,7 +328,7 @@ module.exports = ""
 /***/ "./src/app/blog-delete/blog-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteBlog(blog.id, blog)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteBlog(blog.id)\">Delete</button>"
 
 /***/ }),
 
@@ -353,7 +353,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var BlogDeleteComponent = /** @class */ (function () {
     function BlogDeleteComponent(http) {
         this.http = http;
-        this.blog = {};
+        this.blog = { id: '' };
     }
     BlogDeleteComponent.prototype.ngOnInit = function () {
     };
@@ -1053,8 +1053,9 @@ var LoggedInContainer = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__blog_edit_blog_edit_component__ = __webpack_require__("./src/app/blog-edit/blog-edit.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__blog_edit_modal_blog_edit_modal_component__ = __webpack_require__("./src/app/blog-edit-modal/blog-edit-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__blog_delete_blog_delete_component__ = __webpack_require__("./src/app/blog-delete/blog-delete.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__shared_module__ = __webpack_require__("./src/app/shared.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__ = __webpack_require__("./src/app/services/auth-guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__turnip_turnip_component__ = __webpack_require__("./src/app/turnip/turnip.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__shared_module__ = __webpack_require__("./src/app/shared.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__ = __webpack_require__("./src/app/services/auth-guard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1091,43 +1092,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var appRoutes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_4__loggedIn_component__["a" /* LoggedInContainer */], children: [
             {
                 path: 'qaa',
                 component: __WEBPACK_IMPORTED_MODULE_5__qaa_qaa_component__["a" /* QaaComponent */],
                 data: { title: 'QaA' },
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             },
             {
                 path: 'todo',
                 component: __WEBPACK_IMPORTED_MODULE_11__todo_todo_component__["a" /* TodoComponent */],
                 data: { title: 'To-do list' },
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             },
             {
                 path: 'words',
                 component: __WEBPACK_IMPORTED_MODULE_16__words_words_component__["a" /* WordsComponent */],
                 data: { title: 'Words' },
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             },
             {
                 path: 'about',
                 component: __WEBPACK_IMPORTED_MODULE_21__about_about_component__["a" /* AboutComponent */],
                 data: { title: 'About' },
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             },
             {
                 path: 'blog',
                 component: __WEBPACK_IMPORTED_MODULE_23__blog_blog_component__["a" /* BlogComponent */],
                 data: { title: 'Blog' },
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             },
             {
                 path: '',
                 redirectTo: '/about',
                 pathMatch: 'full',
-                canActivate: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]]
+                canActivate: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]]
             }
         ]
     }
@@ -1160,17 +1162,18 @@ var LoggedInModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_24__blog_create_blog_create_component__["a" /* BlogCreateComponent */],
                 __WEBPACK_IMPORTED_MODULE_25__blog_edit_blog_edit_component__["a" /* BlogEditComponent */],
                 __WEBPACK_IMPORTED_MODULE_26__blog_edit_modal_blog_edit_modal_component__["a" /* BlogEditModalComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__blog_delete_blog_delete_component__["a" /* BlogDeleteComponent */]
+                __WEBPACK_IMPORTED_MODULE_27__blog_delete_blog_delete_component__["a" /* BlogDeleteComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__turnip_turnip_component__["a" /* TurnipComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_common_http__["b" /* HttpClientModule */],
-                __WEBPACK_IMPORTED_MODULE_28__shared_module__["a" /* SharedModule */],
+                __WEBPACK_IMPORTED_MODULE_29__shared_module__["a" /* SharedModule */],
                 __WEBPACK_IMPORTED_MODULE_6__angular_router__["b" /* RouterModule */].forRoot(appRoutes, { enableTracing: true } // <-- debugging purposes only
                 )
             ],
-            providers: [__WEBPACK_IMPORTED_MODULE_29__services_auth_guard_service__["a" /* AuthGuard */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_30__services_auth_guard_service__["a" /* AuthGuard */]],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_4__loggedIn_component__["a" /* LoggedInContainer */]]
         })
     ], LoggedInModule);
@@ -1390,7 +1393,10 @@ var QaaCreateComponent = /** @class */ (function () {
         this.qaa = {
             id: '',
             create_date: (new Date).toISOString(),
-            adminId: ''
+            adminId: '',
+            description: '',
+            title: '',
+            type: ''
         };
     }
     QaaCreateComponent.prototype.ngOnInit = function () {
@@ -1404,7 +1410,7 @@ var QaaCreateComponent = /** @class */ (function () {
             newQaa.id = (++_this.latest.id).toString();
             newQaa.create_date = (new Date).toISOString();
             newQaa.adminId = adminId;
-            _this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '' };
+            _this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '', description: '', title: '', type: '' };
             _this.qaaAll.push(newQaa);
             _this.http.post('/api/qaa', newQaa)
                 .subscribe(function (res) {
@@ -1442,7 +1448,7 @@ module.exports = ""
 /***/ "./src/app/qaa-delete/qaa-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteQaa(qaa.id, qaa)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteQaa(qaa.id)\">Delete</button>"
 
 /***/ }),
 
@@ -1467,7 +1473,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var QaaDeleteComponent = /** @class */ (function () {
     function QaaDeleteComponent(http) {
         this.http = http;
-        this.qaa = {};
+        this.qaa = { id: '' };
     }
     QaaDeleteComponent.prototype.ngOnInit = function () {
     };
@@ -2092,7 +2098,7 @@ module.exports = ""
 /***/ "./src/app/todo-create/todo-create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo(todo)\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n        <option value=\"project\">project</option>\n        <option value=\"learn\">learn</option>\n        <option value=\"watch later\">watch later</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
+module.exports = "<div class=\"col-md-12\">\n  <div class=\"w3-card-4\">\n    <div class=\"w3-container w3-green\">\n      <h2>New task</h2>\n    </div>\n    <form name=\"newTaskForm\" id=\"newTaskForm\" class=\"w3-container newTaskForm\"\n    method=\"post\" (ngSubmit)=\"addTodo()\" #todoForm=\"ngForm\">\n      <p>\n        <label class=\"newTaskType\">Title:</label>\n        <input class=\"w3-input\" name=\"newTaskTitle\" id=\"inputTitle\" type=\"text\"\n        [(ngModel)]=\"todo.title\" name=\"title\" required>\n      </p>\n      <p>\n        <label class=\"newTaskType\">Description:</label>\n        <input class=\"w3-input\" name=\"newTaskDescription\" id=\"inputDescription\"\n        type=\"text\" [(ngModel)]=\"todo.description\" name=\"description\" required>\n      </p>\n      <div>\n        <label class=\"newTaskType\">Type:</label>\n      </div>\n      <select [(ngModel)]=\"todo.type\" name=\"type\" required>\n        <option value=\"\"></option>\n        <option value=\"work\">work</option>\n        <option value=\"personal\">personal</option>\n        <option value=\"school\">school</option>\n        <option value=\"project\">project</option>\n        <option value=\"learn\">learn</option>\n        <option value=\"watch later\">watch later</option>\n      </select>\n    </form>\n    <button class=\"col-md-2 addBtn btn btn-success\" form=\"newTaskForm\"\n    type=\"submit\" [disabled]=\"!todoForm.form.valid\">Submit</button>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2124,7 +2130,10 @@ var TodoCreateComponent = /** @class */ (function () {
             state: {},
             id: {},
             create_date: (new Date).toISOString(),
-            adminId: ''
+            adminId: '',
+            title: '',
+            description: '',
+            type: ''
         };
     }
     TodoCreateComponent.prototype.ngOnInit = function () {
@@ -2139,7 +2148,7 @@ var TodoCreateComponent = /** @class */ (function () {
             newTodo.id = (++_this.latest.id).toString();
             newTodo.create_date = (new Date).toISOString();
             newTodo.adminId = adminId;
-            _this.todo = { state: '', id: '', create_date: (new Date).toISOString(), adminId: '' };
+            _this.todo = { state: '', id: '', create_date: (new Date).toISOString(), adminId: '', title: '', description: '', type: '' };
             _this.todoAll.push(newTodo);
             _this.http.post('/api/todo', newTodo)
                 .subscribe(function (res) {
@@ -2177,7 +2186,7 @@ module.exports = ""
 /***/ "./src/app/todo-delete/todo-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteTodo(todo.id, todo)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteTodo(todo.id)\">Delete</button>"
 
 /***/ }),
 
@@ -2202,7 +2211,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var TodoDeleteComponent = /** @class */ (function () {
     function TodoDeleteComponent(http) {
         this.http = http;
-        this.todo = {};
+        this.todo = { id: ' ' };
     }
     TodoDeleteComponent.prototype.ngOnInit = function () {
     };
@@ -2686,6 +2695,148 @@ var TodoComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/turnip/turnip.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ".popup {\n  position: relative;\n  display: inline-block;\n  border-bottom: 1px dotted black;\n  height: 50px;\n}\n\n.popup .popup-box {\n  visibility: hidden;\n  width: 120px;\n  background-color: black;\n  color: #fff;\n  text-align: center;\n  border-radius: 6px;\n  padding: 5px 0;\n  position: absolute;\n  z-index: 1;\n  left: 50%;\n  margin-left: -60px;\n}\n\n.popup .popup-box::after {\n  content: \"\";\n  position: absolute;\n  bottom: 100%;\n  left: 50%;\n  margin-left: -5px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  border-width: 5px;\n  border-style: solid;\n  border-color: transparent transparent #2C3E50 transparent;\n}\n\n.popup-text {\n  padding: 12px 15px 15px 15px;\n  height: 50px;\n  color: white;\n}\n\n.turnip-input {\n  width: 80%;\n  margin: 10px;\n}\n\n.turnip-align-input {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: column wrap;\n          flex-flow: column wrap;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}"
+
+/***/ }),
+
+/***/ "./src/app/turnip/turnip.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"popup\">\n  <p class=\"popup-text\" (click)=\"showDiv()\">Turnip</p>\n  <div [ngStyle]=\"isDivVisible ? {'visibility':'visible'} : {'visibility':'hidden'}\" class=\"popup-box\">\n    <div class=\"turnip-align-input\">\n    <input class=\"w3-input turnip-input\" name=\"title\" id=\"inputTitle\" type=\"text\" [(ngModel)]=\"newAction.title\" placeholder=\"action's title\"\n      name=\"title\" [readonly]=\"inputReadonly\" required>\n    </div>\n    <button id=\"start\" type=\"button\" class=\"modal-button btn btn-info btn-md\n      editBtn\" (click)=\"start()\">Turnip</button>\n    <span id=\"display-turnip\"></span>\n  </div>\n</div>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/turnip/turnip.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TurnipComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm5/http.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var TurnipComponent = /** @class */ (function () {
+    function TurnipComponent(http) {
+        this.http = http;
+        this.isDivVisible = true;
+        this.newAction = {
+            id: {},
+            title: '',
+            start: {},
+            end: '',
+        };
+        this.inputReadonly = false;
+    }
+    TurnipComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var start = document.getElementById("start");
+        var dis = document.getElementById("display-turnip");
+        var finishTime;
+        var timerLength = 0;
+        dis.innerHTML = "Time: " + timerLength;
+        this.Update = function () {
+            finishTime = localStorage.getItem('myTime');
+            var timeLeft = (+new Date() - finishTime);
+            var days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            if (days) {
+                dis.innerHTML = "Time: " + days + "d" + hours + "h" + ":" + minutes + "m" + ":" + seconds + "s";
+            }
+            dis.innerHTML = "Time: " + hours + "h" + ":" + minutes + "m" + ":" + seconds + "s";
+            _this.timeoutID = window.setTimeout(_this.Update, 500);
+        };
+        var time = localStorage.getItem('myTime');
+        if (time !== undefined && time !== "" && time !== null && time !== '') {
+            this.newAction.title = localStorage.getItem('actionTitle');
+            this.inputReadonly = true;
+            if (this.Update) {
+                this.Update();
+            }
+        }
+        else {
+            // localStorage.clear();
+            localStorage.setItem('myTime', '');
+        }
+    };
+    TurnipComponent.prototype.showDiv = function () {
+        if (this.isDivVisible == false) {
+            this.isDivVisible = true;
+        }
+        else {
+            this.isDivVisible = false;
+        }
+    };
+    TurnipComponent.prototype.start = function () {
+        var _this = this;
+        var time = localStorage.getItem('myTime');
+        if (time === '') {
+            this.http.get('/api/action-latest').subscribe(function (data) {
+                _this.latest = data;
+                _this.newAction.start = new Date();
+                if (data == null) {
+                    _this.newAction.id = 0;
+                }
+                else {
+                    _this.newAction.id = (++_this.latest.id).toString();
+                }
+                _this.http.post('/api/action', _this.newAction)
+                    .subscribe(function (res) {
+                }, function (err) {
+                    console.log(err);
+                });
+            });
+            localStorage.setItem('myTime', (new Date()).getTime().toString());
+            localStorage.setItem('actionTitle', this.newAction.title);
+            this.inputReadonly = true;
+            if (this.Update) {
+                this.Update();
+            }
+        }
+        else {
+            localStorage.setItem('myTime', '');
+            this.http.get('/api/action-latest').subscribe(function (data) {
+                data["end"] = new Date();
+                _this.http.put('/api/action/' + data["id"], data)
+                    .subscribe(function (res) {
+                }, function (err) {
+                    console.log(err);
+                });
+            });
+            if (this.timeoutID != undefined) {
+                window.clearTimeout(this.timeoutID);
+            }
+        }
+    };
+    ;
+    TurnipComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'app-turnip',
+            template: __webpack_require__("./src/app/turnip/turnip.component.html"),
+            styles: [__webpack_require__("./src/app/turnip/turnip.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */]])
+    ], TurnipComponent);
+    return TurnipComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/words-create/words-create.component.css":
 /***/ (function(module, exports) {
 
@@ -2727,7 +2878,10 @@ var WordsCreateComponent = /** @class */ (function () {
         this.words = {
             id: '',
             create_date: (new Date).toISOString(),
-            adminId: ''
+            adminId: '',
+            word: '',
+            description: '',
+            translation: ''
         };
         this.newWords = { id: '' };
     }
@@ -2743,7 +2897,7 @@ var WordsCreateComponent = /** @class */ (function () {
             newWords.id = (++_this.latest.id).toString();
             newWords.create_date = (new Date).toISOString();
             newWords.adminId = adminId;
-            _this.words = { id: '', create_date: (new Date).toISOString(), adminId: '' };
+            _this.words = { id: '', create_date: (new Date).toISOString(), adminId: '', word: '', description: '', translation: '' };
             _this.wordsAll.push(newWords);
             _this.http.post('/api/words', newWords)
                 .subscribe(function (res) {
@@ -2781,7 +2935,7 @@ module.exports = ""
 /***/ "./src/app/words-delete/words-delete.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteWords(words.id, words)\">Delete</button>"
+module.exports = "<button type=\"button\" class=\"btn btn-danger btn-md deleteBtn\"\n(click)=\"deleteWords(words.id)\">Delete</button>"
 
 /***/ }),
 
@@ -2806,7 +2960,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var WordsDeleteComponent = /** @class */ (function () {
     function WordsDeleteComponent(http) {
         this.http = http;
-        this.words = {};
+        this.words = { id: '' };
     }
     WordsDeleteComponent.prototype.ngOnInit = function () {
     };

@@ -12,7 +12,10 @@ export class QaaCreateComponent implements OnInit {
   qaa = { 
     id: '', 
     create_date: (new Date).toISOString(), 
-    adminId: ''
+    adminId: '',
+    description: '',
+    title: '',
+    type: ''
   };
   latest;
   constructor(private http: HttpClient, private globalsService: GlobalsService) { }
@@ -29,7 +32,7 @@ export class QaaCreateComponent implements OnInit {
       newQaa.id = (++this.latest.id).toString();
       newQaa.create_date = (new Date).toISOString();
       newQaa.adminId = adminId
-      this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '' };
+      this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '', description: '', title: '', type: '' };
       this.qaaAll.push(newQaa);
       this.http.post('/api/qaa', newQaa)
         .subscribe(res => {

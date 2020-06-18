@@ -12,7 +12,10 @@ export class WordsCreateComponent implements OnInit {
   words = { 
     id: '', 
     create_date: (new Date).toISOString(),
-    adminId: ''
+    adminId: '',
+    word: '', 
+    description: '', 
+    translation: ''
    };
   newWords = { id: ''  };
   latest;
@@ -31,7 +34,7 @@ export class WordsCreateComponent implements OnInit {
       newWords.id = (++this.latest.id).toString();
       newWords.create_date = (new Date).toISOString();
       newWords.adminId = adminId
-      this.words = { id: '', create_date: (new Date).toISOString(), adminId: '' };
+      this.words = { id: '', create_date: (new Date).toISOString(), adminId: '', word: '', description: '', translation: '' };
       this.wordsAll.push(newWords);
       this.http.post('/api/words', newWords)
         .subscribe(res => {
