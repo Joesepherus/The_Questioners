@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-2 selector">
-      <select id="selector" [(ngModel)]="selectedType" (change)="select($event)">
+      <select id="selector" [(ngModel)]="selectedType" (change)="select()">
         <option value="all" selected="selected">all</option>
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
@@ -26,14 +26,21 @@
     </div>
 
     <div class="col-md-12 searchDiv">
-      <input class="search" type="text" [(ngModel)]="queryString" id="search"
-      placeholder="Search by question"
-      (ngModelChange)=searchChange()>
+      <input
+        class="search"
+        type="text"
+        [(ngModel)]="queryString"
+        id="search"
+        placeholder="Search by question"
+        (ngModelChange)="searchChange()"
+      />
     </div>
-    
+
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let qaa of qaaAll; let
-      last = last; let i = index" [ngClass]="isLast(last)">
+      <div
+        *ngFor="let qaa of qaaAll; let last = last; let i = index"
+        [ngClass]="isLast(last)"
+      >
         <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
           <div class="col-md-12 QaAPara">{{ qaa.title }}</div>
           <div class="col-md-12">
@@ -45,11 +52,18 @@
             </div>
             <div class="pull-right col-md-4">
               <span class="badge">Posted {{ qaa.create_date }}</span>
-              <br>
-              <app-qaa-edit [qaaAll]="qaaAll" [(testing)]="qaaAll[i]"
-              (updateTesting)="onNotify($event)"></app-qaa-edit>
-              <br>
-              <app-qaa-delete [(qaaAll)]="qaaAll" [qaaAll]="qaaAll" [qaa]="qaa"></app-qaa-delete>
+              <br />
+              <app-qaa-edit
+                [qaaAll]="qaaAll"
+                [(testing)]="qaaAll[i]"
+                (updateTesting)="onNotify($event)"
+              ></app-qaa-edit>
+              <br />
+              <app-qaa-delete
+                [(qaaAll)]="qaaAll"
+                [qaaAll]="qaaAll"
+                [qaa]="qaa"
+              ></app-qaa-delete>
             </div>
           </div>
         </li>
@@ -59,7 +73,6 @@
     <div class="col-md-3">
       <a (click)="scrollToTheStartOfPage()">Scroll to the top</a>
     </div>
-
   </div>
 </div>
 
