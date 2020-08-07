@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-qaa-delete',
@@ -10,7 +11,7 @@ export class QaaDeleteComponent implements OnInit {
   @Input() qaaAll: any;
   @Input() qaaShow: any;
   @Input() qaa = { id: '' };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private globalsService: GlobalsService) { }
 
   ngOnInit() {
   }
@@ -19,7 +20,7 @@ export class QaaDeleteComponent implements OnInit {
     let index = this.qaaAll.map(function(e) { return e.id; }).indexOf(id);
     let index2 = this.qaaShow.map(function(e) { return e.id; }).indexOf(id);
     console.log(this.qaaAll[index]);
-    this.http.delete('/api/qaa/' + this.qaaAll[index].create_date)
+    this.http.delete(this.globalsService.getServerURL() + '/api/qaa/' + this.qaaAll[index].create_date)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

@@ -27,7 +27,7 @@ export class TodoCreateComponent implements OnInit {
   addTodo() {
     const adminId = this.globalsService.getAdminId()
 
-    this.http.get('/api/todo-latest').subscribe(data => {
+    this.http.get(this.globalsService.getServerURL() + '/api/todo-latest').subscribe(data => {
       this.latest = data;
       let newTodo = this.todo;
       newTodo.state = 'inprogress';
@@ -35,8 +35,8 @@ export class TodoCreateComponent implements OnInit {
       newTodo.create_date = (new Date).toISOString();
       newTodo.adminId = adminId
       this.todo = { state: '', id: '', create_date: (new Date).toISOString(), adminId: '', title: '', description: '', type: '' };
-      this.todoAll.push(newTodo);
-      this.http.post('/api/todo', newTodo)
+      this.todoAll.unshift(newTodo);
+      this.http.post(this.globalsService.getServerURL() + '/api/todo', newTodo)
         .subscribe(res => {
         }, (err) => {
           console.log(err);

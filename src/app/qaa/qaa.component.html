@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-2 selector">
-      <select id="selector" (change)="select($event)">
+      <select id="selector" [(ngModel)]="selectedType" (change)="select($event)">
         <option value="all" selected="selected">all</option>
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-md-12">
-      <p>Number of QaA: {{ qaaShow.length }}</p>
+      <p>Number of QaA: {{ qaaAll.length }}</p>
     </div>
 
     <div class="col-md-3">
@@ -32,7 +32,7 @@
     </div>
     
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let qaa of qaaShow.reverse(); let
+      <div *ngFor="let qaa of qaaAll; let
       last = last; let i = index" [ngClass]="isLast(last)">
         <li (click)="dropFunction($event)" class="aboutDefault aboutDropbtn2">
           <div class="col-md-12 QaAPara">{{ qaa.title }}</div>
@@ -46,10 +46,10 @@
             <div class="pull-right col-md-4">
               <span class="badge">Posted {{ qaa.create_date }}</span>
               <br>
-              <app-qaa-edit [qaaAll]="qaaAll" [(testing)]="qaaShow[i]"
+              <app-qaa-edit [qaaAll]="qaaAll" [(testing)]="qaaAll[i]"
               (updateTesting)="onNotify($event)"></app-qaa-edit>
               <br>
-              <app-qaa-delete [(qaaShow)]="qaaShow" [qaaAll]="qaaAll" [qaa]="qaa"></app-qaa-delete>
+              <app-qaa-delete [(qaaAll)]="qaaAll" [qaaAll]="qaaAll" [qaa]="qaa"></app-qaa-delete>
             </div>
           </div>
         </li>

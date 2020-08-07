@@ -27,7 +27,7 @@ export class WordsCreateComponent implements OnInit {
   addWords() {
     const adminId = this.globalsService.getAdminId()
 
-    this.http.get('/api/words-latest').subscribe(data => {
+    this.http.get(this.globalsService.getServerURL() + '/api/words-latest').subscribe(data => {
       this.latest = data;
       console.log(data);
       let newWords = this.words;
@@ -35,8 +35,8 @@ export class WordsCreateComponent implements OnInit {
       newWords.create_date = (new Date).toISOString();
       newWords.adminId = adminId
       this.words = { id: '', create_date: (new Date).toISOString(), adminId: '', word: '', description: '', translation: '' };
-      this.wordsAll.push(newWords);
-      this.http.post('/api/words', newWords)
+      this.wordsAll.unshift(newWords);
+      this.http.post(this.globalsService.getServerURL() + '/api/words', newWords)
         .subscribe(res => {
         }, (err) => {
           console.log(err);

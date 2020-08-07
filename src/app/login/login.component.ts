@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     const admin = {email: this.email, password: this.password}
-    this.http.post<LoginResponse>('/api/admin/login', {admin})
+    this.http.post<LoginResponse>(this.globalsService.getServerURL() + '/api/admin/login', {admin})
       .subscribe(res => {
         console.log('res: ', res);
         if(res.status === 200) {

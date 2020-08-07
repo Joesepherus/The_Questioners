@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-turnip',
@@ -18,7 +19,7 @@ export class TurnipComponent implements OnInit {
     end: '',
   };
   inputReadonly: boolean = false;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globalsService: GlobalsService) {
   }
 
   ngOnInit() {
@@ -69,7 +70,7 @@ export class TurnipComponent implements OnInit {
   start() {
     let time = localStorage.getItem('myTime');
     if (time === '') {
-      this.http.get('/api/action-latest').subscribe(data => {
+      this.http.get(this.globalsService.getServerURL() + '/api/action-latest').subscribe(data => {
         this.latest = data;
         this.newAction.start = new Date();
         if (data == null) {
@@ -78,7 +79,7 @@ export class TurnipComponent implements OnInit {
         else {
           this.newAction.id = (++this.latest.id).toString();
         }
-        this.http.post('/api/action', this.newAction)
+        this.http.post(this.globalsService.getServerURL() + '/api/action', this.newAction)
           .subscribe(res => {
           }, (err) => {
             console.log(err);
@@ -95,9 +96,9 @@ export class TurnipComponent implements OnInit {
     }
     else {
       localStorage.setItem('myTime', '');
-      this.http.get('/api/action-latest').subscribe(data => {
+      this.http.get(this.globalsService.getServerURL() + '/api/action-latest').subscribe(data => {
         data["end"] = new Date();
-        this.http.put('/api/action/' + data["id"], data)
+        this.http.put(this.globalsService.getServerURL() + '/api/action/' + data["id"], data)
           .subscribe(res => {
           }, (err) => {
             console.log(err);

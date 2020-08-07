@@ -26,15 +26,15 @@ export class QaaCreateComponent implements OnInit {
   addQaA() {
     const adminId = this.globalsService.getAdminId()
 
-    this.http.get('/api/qaa-latest').subscribe(data => {
+    this.http.get(this.globalsService.getServerURL() + '/api/qaa-latest').subscribe(data => {
       this.latest = data;
       let newQaa = this.qaa;
       newQaa.id = (++this.latest.id).toString();
       newQaa.create_date = (new Date).toISOString();
       newQaa.adminId = adminId
       this.qaa = { id: '', create_date: (new Date).toISOString(), adminId: '', description: '', title: '', type: '' };
-      this.qaaAll.push(newQaa);
-      this.http.post('/api/qaa', newQaa)
+      this.qaaAll.unshift(newQaa);
+      this.http.post(this.globalsService.getServerURL() + '/api/qaa', newQaa)
         .subscribe(res => {
         }, (err) => {
           console.log(err);

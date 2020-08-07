@@ -6,9 +6,12 @@
       <h2>Tasks</h2>
     </div>
 
-
     <div class="col-md-2 selector">
-      <select id="selector" (change)="select($event)">
+      <select
+        id="selector"
+        [(ngModel)]="selectedType"
+        (change)="select($event)"
+      >
         <option value="all">all</option>
         <option value="inprogress">inprogress</option>
         <option value="completed">completed</option>
@@ -23,43 +26,50 @@
     </div>
 
     <div class="col-md-12">
-      <p ng-model="numberOfQaA">Number of todos: {{todoShow.length}}
-      </p>
+      <p ng-model="numberOfQaA">Number of todos: {{ todoAll.length }}</p>
     </div>
     <ul class="col-md-12" id="myUL">
-      <div *ngFor="let todo of todoShow.reverse(); let last = last; let i =
-      index" [ngClass]="isLast(last)">
+      <div
+        *ngFor="let todo of todoAll; let last = last; let i = index"
+        [ngClass]="isLast(last)"
+      >
         <li (click)="dropFunction($event)" class="default dropbtn2">
           <div>
-            <img class="checkImg" src="..\..\assets\img\check2.png">
-            <img class="checkImg" src="..\..\assets\img\disable.png">
-            <img class="checkImg" src="..\..\assets\img\clock.png">
-            <span>{{todo.title}}</span>
+            <img class="checkImg" src="..\..\assets\img\check2.png" />
+            <img class="checkImg" src="..\..\assets\img\disable.png" />
+            <img class="checkImg" src="..\..\assets\img\clock.png" />
+            <span>{{ todo.title }}</span>
           </div>
           <div class="dropdown-content" id="drop">
-            <p class="label label-default">Posted {{todo.create_date}}</p>
-            <p class="label label-default">{{todo.type}}</p>
-            <p class="label label-default">{{todo.state}}</p>
-            <p class="dropPara">{{todo.description}}</p>
+            <p class="label label-default">Posted {{ todo.create_date }}</p>
+            <p class="label label-default">{{ todo.type }}</p>
+            <p class="label label-default">{{ todo.state }}</p>
+            <p class="dropPara">{{ todo.description }}</p>
             <div class="modal-button">
-              <app-todo-edit [todoAll]="todoAll" [testing]="todoAll[i]"
-              (updateTesting)="onNotify($event)"></app-todo-edit>
+              <app-todo-edit
+                [todoAll]="todoAll"
+                [testing]="todoAll[i]"
+                (updateTesting)="onNotify($event)"
+              ></app-todo-edit>
 
-              <app-todo-delete [todoAll]="todoAll"
-              [todo]="todo"></app-todo-delete>
+              <app-todo-delete
+                [todoAll]="todoAll"
+                [todo]="todo"
+              ></app-todo-delete>
             </div>
           </div>
-          <span class="closeBtn" (click)="removeTask($event,
-          todo)">&#215;</span>
+          <span class="closeBtn" (click)="removeTask($event, todo)"
+            >&#215;</span
+          >
           <span class="check" (click)="checkTask($event, todo)">&#x2713;</span>
         </li>
       </div>
-
     </ul>
 
-    <app-todo-edit-modal [todo]="test" [todoAll]="todoAll"></app-todo-edit-modal>
-
-
+    <app-todo-edit-modal
+      [todo]="test"
+      [todoAll]="todoAll"
+    ></app-todo-edit-modal>
   </div>
 </div>
-<br>
+<br />

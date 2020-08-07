@@ -26,7 +26,7 @@ export class BlogCreateComponent implements OnInit {
   addBlog(date) {
     const adminId = this.globalsService.getAdminId()
 
-    this.http.get('/api/blog-latest').subscribe(data => {
+    this.http.get(this.globalsService.getServerURL() + '/api/blog-latest').subscribe(data => {
       this.latest = data;
       let newBlog = this.blog;
       if (this.latest == null) {
@@ -41,7 +41,7 @@ export class BlogCreateComponent implements OnInit {
       newBlog.adminId = adminId
       
       this.blogAll.push(newBlog);
-      this.http.post('/api/blog', newBlog)
+      this.http.post(this.globalsService.getServerURL() + '/api/blog', newBlog)
         .subscribe(res => {
         }, (err) => {
           console.log(err);

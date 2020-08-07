@@ -1,47 +1,49 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as $ from 'jquery';
-import { GlobalsService } from '../globals.service';
+import { Component, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import * as $ from "jquery";
+import { GlobalsService } from "../globals.service";
+
+interface SearchQuery {
+  type?: any;
+  title?: any;
+  state?: any;
+}
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.css"],
 })
 export class TodoComponent implements OnInit {
-  todoAll: any;
-  todo: any;
+  todoAll: any[];
+  todo: {};
   numberOfTodo: any;
   readonly numberOfLi = 8;
   test: any;
-  todoShow: any;
+  queryString = "";
+  selectedType = "all";
 
-  constructor(private http: HttpClient, private globalsService: GlobalsService) {
-    this.todoAll = [];
-    this.todoShow = [];
-  }
-
-  onNotify(val) {
-    console.log(val);
-    this.test = val;
-  }
+  constructor(
+    private http: HttpClient,
+    private globalsService: GlobalsService
+  ) {}
 
   ngOnInit() {
-    const adminId = this.globalsService.getAdminId()
-    this.http.get('/api/todo/admin/' + adminId).subscribe(data => {
-      this.todoAll = data;
-      this.todoShow = this.todoAll;
-    });
+    const adminId = this.globalsService.getAdminId();
+
+    this.getTodos();
 
     $(document).ready(function () {
-      $("#todolist").addClass('active');
+      $("#todolist").addClass("active");
       document.title = "To-do list";
     });
   }
 
   isLast = function (check) {
     if (check == true) {
-      var li = document.getElementsByTagName("LI") as HTMLCollectionOf<HTMLElement>;
+      var li = document.getElementsByTagName("LI") as HTMLCollectionOf<
+        HTMLElement
+      >;
       var i;
       this.numberOfTodo = li.length - this.numberOfLi;
       for (i = this.numberOfLi; i < li.length; i++) {
@@ -70,32 +72,39 @@ export class TodoComponent implements OnInit {
             li[i].classList.add("watchLater");
             li[i].children[1].classList.add("watchLater-content");
             let org_html = li[i].children[1].children[0].innerHTML;
-            let new_html = "<a href=" +
-              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + ">"
-              + this.todoAll[this.todoAll.length - i + this.numberOfLi - 1].description + "</a>";
+            let new_html =
+              "<a href=" +
+              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1]
+                .description +
+              ">" +
+              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1]
+                .description +
+              "</a>";
             li[i].children[1].children[3].innerHTML = new_html;
             break;
         }
 
         switch (li[i].children[1].children[2].innerHTML) {
           case "completed":
-            //li[i].classList.add("completed");  
-            (li[i].children[0].children[0] as HTMLElement).style.display = "inline";
+            //li[i].classList.add("completed");
+            (li[i].children[0].children[0] as HTMLElement).style.display =
+              "inline";
             break;
           case "removed":
             // li[i].classList.add("removed");
             // li[i].children[1].classList.add("removed-content");
-            (li[i].children[0].children[1] as HTMLElement).style.display = "inline";
+            (li[i].children[0].children[1] as HTMLElement).style.display =
+              "inline";
             break;
           case "inprogress":
-            (li[i].children[0].children[2] as HTMLElement).style.display = "inline";
+            (li[i].children[0].children[2] as HTMLElement).style.display =
+              "inline";
             break;
         }
 
         if (li[i].children[1].children[4].innerHTML == "") {
           li[i].children[1].children[4].innerHTML = "not completed";
         }
-
       }
     }
   };
@@ -109,8 +118,7 @@ export class TodoComponent implements OnInit {
       li.children[0].children[1].style.display = "inline";
       li.children[0].children[2].style.display = "none";
       li.children[0].children[0].style.display = "none";
-    }
-    else {
+    } else {
       li.children[1].children[2].innerHTML = "inprogress";
       li.children[0].children[1].style.display = "none";
       li.children[0].children[2].style.display = "inline";
@@ -118,22 +126,21 @@ export class TodoComponent implements OnInit {
     if (todo.state != "removed") {
       todo.state = "removed";
       todo.completed_date = new Date();
-      this.http.put('api/todo/removed/' + todo.id, todo)
-        .subscribe(res => {
-        }, (err) => {
+      this.http.put("api/todo/removed/" + todo.id, todo).subscribe(
+        (res) => {},
+        (err) => {
           console.log(err);
         }
-        );
-    }
-    else {
+      );
+    } else {
       todo.state = "inprogress";
       todo.completed_date = new Date();
-      this.http.put('api/todo/inprogress/' + todo.id, todo)
-        .subscribe(res => {
-        }, (err) => {
+      this.http.put("api/todo/inprogress/" + todo.id, todo).subscribe(
+        (res) => {},
+        (err) => {
           console.log(err);
         }
-        );
+      );
     }
   }
 
@@ -146,8 +153,7 @@ export class TodoComponent implements OnInit {
       li.children[0].children[0].style.display = "inline";
       li.children[0].children[1].style.display = "none";
       li.children[0].children[2].style.display = "none";
-    }
-    else {
+    } else {
       li.children[1].children[2].innerHTML = "inprogress";
       li.children[0].children[0].style.display = "none";
       li.children[0].children[2].style.display = "inline";
@@ -156,32 +162,65 @@ export class TodoComponent implements OnInit {
     if (todo.state != "completed") {
       todo.state = "completed";
       todo.completed_date = new Date();
-      this.http.put('/api/todo/completed/' + todo.id, todo)
-        .subscribe(res => {
-        }, (err) => {
-          console.log(err);
-        }
+      this.http
+        .put(
+          this.globalsService.getServerURL() + "/api/todo/completed/" + todo.id,
+          todo
+        )
+        .subscribe(
+          (res) => {},
+          (err) => {
+            console.log(err);
+          }
         );
-    }
-    else {
+    } else {
       todo.state = "inprogress";
       todo.completed_date = new Date();
-      this.http.put('/api/todo/inprogress/' + todo.id, todo)
-        .subscribe(res => {
-        }, (err) => {
-          console.log(err);
-        }
+      this.http
+        .put(
+          this.globalsService.getServerURL() +
+            "/api/todo/inprogress/" +
+            todo.id,
+          todo
+        )
+        .subscribe(
+          (res) => {},
+          (err) => {
+            console.log(err);
+          }
         );
     }
   }
 
-  // for pagination WIP
-  /*myApp.filter('startFrom', function () { return function (input, start) {
-    start = +start; //parse to int if (typeof input == "undefined") { return;
+  getTodos() {
+    const query: SearchQuery =
+      this.queryString !== ""
+        ? { title: { $regex: this.queryString, $options: "i" } }
+        : {};
+    console.log("this.selectedType: ", this.selectedType);
+    if (this.selectedType !== "all") {
+      if (
+        this.selectedType === "inprogress" ||
+        this.selectedType === "completed" ||
+        this.selectedType === "removed"
+      ) {
+        query.state = this.selectedType;
+      } else {
+        query.type = this.selectedType;
       }
-      return input.slice(start);
     }
-  });*/
+    const adminId = this.globalsService.getAdminId();
+
+    this.http
+      .post<Array<any>>(
+        this.globalsService.getServerURL() + "/api/todo/admin/" + adminId,
+        { query }
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.todoAll = data;
+      });
+  }
 
   dropFunction($event) {
     let elem = $event.target;
@@ -191,19 +230,17 @@ export class TodoComponent implements OnInit {
     elem.children[1].classList.toggle("show");
   }
 
-  select($event) {
-    let typeSelected = $event.target.value;
-    if (typeSelected === 'all') {
-      this.todoShow = this.todoAll;
-    } else {
-      this.todoShow = [];
-      for (let i = 0; i < this.todoAll.length; i++) {
-        if (this.todoAll[i].type === typeSelected ||
-          this.todoAll[i].state === typeSelected) {
-          this.todoShow.push(this.todoAll[i]);
-        }
-      }
-    }
+  onNotify(val) {
+    console.log(val);
+    this.test = val;
+  }
+
+  select() {
+    console.log("suck me");
+    this.getTodos();
+  }
+
+  searchChange() {
+    this.getTodos();
   }
 }
-

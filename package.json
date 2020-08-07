@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && nodemon ./bin/www",
+    "start": "ng serve --open",
     "dev": "nodemon ./bin/www",
     "build": "ng build --prod",
     "test": "ng test",
@@ -29,6 +29,7 @@
     "bluebird": "^3.7.2",
     "classlist.js": "^1.1.20150312",
     "core-js": "^2.6.11",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",

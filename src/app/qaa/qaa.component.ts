@@ -1,53 +1,41 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as $ from 'jquery';
-import { GlobalsService } from '../globals.service';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import * as $ from "jquery";
+import { GlobalsService } from "../globals.service";
+
+interface SearchQuery {
+  type?: any;
+  title?: any;
+}
 
 @Component({
-  selector: 'app-qaa',
-  templateUrl: './qaa.component.html',
-  styleUrls: ['./qaa.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-qaa",
+  templateUrl: "./qaa.component.html",
+  styleUrls: ["./qaa.component.css"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class QaaComponent implements OnInit {
-  qaaAll: any;
+  qaaAll = [];
   qaa = {};
-  qaas = {};
   numberOfQaA: any;
   test: any;
-  qaaShow: any;
-  queryString: any;
+  queryString = "";
+  selectedType = "all";
   readonly numberOfLi = 8;
-  constructor(private http: HttpClient, private globalsService: GlobalsService) {
-    this.qaaAll = [];
-    this.qaaShow = [];
-  }
-
-  onNotify(val) {
-    console.log(val);
-    this.test = val;
-  }
-
-
+  constructor(
+    private http: HttpClient,
+    private globalsService: GlobalsService
+  ) {}
 
   ngOnInit() {
-    function compare(a, b) {
-      return a.id - b.id;
-    }
-    const adminId = this.globalsService.getAdminId()
+    const adminId = this.globalsService.getAdminId();
 
-    this.http.get('/api/qaa/admin/' + adminId).subscribe(data => {
-      console.log(data);
-      this.qaaAll = data;
-      this.qaaAll.sort(compare);
-      this.qaaShow = this.qaaAll;
-    });
+    this.getTodos();
 
     $(document).ready(function () {
-      $("#QaA").addClass('active');
+      $("#QaA").addClass("active");
       document.title = "QaA - Questions and Answers";
     });
-
   }
 
   scrollToTheEndOfPage() {
@@ -81,25 +69,30 @@ export class QaaComponent implements OnInit {
             li[i].classList.add("DataStructures");
             li[i].children[2].classList.add("DataStructures-content");
         }
-
-        /*switch(li[i].children[1].children[0].innerHTML){
-          case "passed":
-            li[i].classList.add("passed");  
-            break;
-          case "failed":
-            li[i].classList.add("failed"); 
-            li[i].children[1].classList.add("failed-content");
-            break;
-        }*/
-
-        /*if(li[i].children[2].children[4].innerHTML == "") {
-          li[i].children[2].children[4].innerHTML = "not completed";
-        }*/
       }
     }
   }
 
-  // switching between selected values
+  getTodos() {
+    const query: SearchQuery =
+      this.queryString !== ""
+        ? { title: { $regex: this.queryString, $options: "i" } }
+        : {};
+    if (this.selectedType !== "all") {
+      query.type = this.selectedType;
+    }
+    const adminId = this.globalsService.getAdminId();
+
+    this.http
+      .post<Array<any>>(
+        this.globalsService.getServerURL() + "/api/qaa/admin/" + adminId,
+        { query }
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.qaaAll = data;
+      });
+  }
 
   dropFunction($event) {
     let elem = $event.target;
@@ -109,31 +102,16 @@ export class QaaComponent implements OnInit {
     elem.children[2].classList.toggle("show");
   }
 
-  select($event) {
-    let typeSelected = $event.target.value;
-    if (typeSelected === 'all') {
-      this.qaaShow = this.qaaAll;
-    } else {
-      this.qaaShow = [];
-      for (let i = 0; i < this.qaaAll.length; i++) {
-        if (this.qaaAll[i].type === typeSelected) {
-          this.qaaShow.push(this.qaaAll[i]);
-        }
-      }
-    }
+  onNotify(val) {
+    console.log(val);
+    this.test = val;
+  }
+
+  select() {
+    this.getTodos();
   }
 
   searchChange() {
-    if (this.queryString) {
-      let input = this.queryString.toLowerCase();
-      this.qaaShow = [];
-      this.qaaShow = this.qaaAll.filter(function (el: any) {
-        return el.title.toLowerCase().indexOf(input) > -1;
-      });
-    }
-    else {
-      this.qaaShow = this.qaaAll;
-    }
+    this.getTodos();
   }
-
 }

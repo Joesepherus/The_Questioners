@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-qaa-edit',
@@ -16,7 +17,7 @@ export class QaaEditComponent implements OnInit {
   elem: any;
   id: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private globalsService: GlobalsService) { }
 
   ngOnInit() {
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { GlobalsService } from '../globals.service';
 
 @Component({
   selector: 'app-blog-delete',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class BlogDeleteComponent implements OnInit {
   @Input() blogAll: any;
   @Input() blog = { id: '' };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private globalsService: GlobalsService) { }
 
   ngOnInit() {
   }
@@ -17,7 +18,7 @@ export class BlogDeleteComponent implements OnInit {
   deleteBlog(id) {
     let index = this.blogAll.map(function(e) { return e.id; }).indexOf(id);
     console.log(this.blogAll[index]);
-    this.http.delete('/api/blog/' + this.blogAll[index].create_date)
+    this.http.delete(this.globalsService.getServerURL() + '/api/blog/' + this.blogAll[index].create_date)
       .subscribe(res => {
       }, (err) => {
         console.log(err);

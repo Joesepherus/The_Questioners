@@ -10,6 +10,8 @@ var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 const dotenv = require('dotenv')
 dotenv.config()
+const cors = require('cors')
+app.use(cors());
 
 // DB SETUP
 MONGOLAB_URI = process.env.MONGOLAB_URI_THEQ;

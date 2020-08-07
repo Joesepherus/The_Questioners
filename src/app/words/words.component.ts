@@ -27,7 +27,7 @@ export class WordsComponent implements OnInit {
 
   ngOnInit() {
     const adminId = this.globalsService.getAdminId()
-    this.http.get('/api/words/admin/' + adminId).subscribe(data => {
+    this.http.get(this.globalsService.getServerURL() + '/api/words/admin/' + adminId).subscribe(data => {
       this.wordsAll = data;
     });
 
