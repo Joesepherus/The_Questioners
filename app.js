@@ -50,4 +50,6 @@ app.use(function (err, req, res, next) {
   //res.render('error');
 });
 
+console.log("Express server listening on port " + app.get('port'));
+
 module.exports = app;
