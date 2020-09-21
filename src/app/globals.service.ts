@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class GlobalsService {
   adminId = localStorage.getItem("adminId");
-  SERVER_URL = "https://the-questioners.herokuapp.com:80";
+  SERVER_URL = "";
   constructor() {}
 
   setAdminId(adminId) {
