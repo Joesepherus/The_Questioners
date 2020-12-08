@@ -22,7 +22,9 @@
     </div>
 
     <div class="col-md-12">
-      <p ng-model="numberOfQaA">Number of todos: {{ todoAll.length }}</p>
+      <p ng-model="numberOfQaA">
+        Number of todos: {{ todoAll && todoAll.length }}
+      </p>
     </div>
     <ul class="col-md-12" id="myUL">
       <div

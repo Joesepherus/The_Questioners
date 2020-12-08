@@ -41,11 +41,12 @@ export class TodoComponent implements OnInit {
 
   isLast = function (check) {
     if (check == true) {
-      var li = document.getElementsByTagName("LI") as HTMLCollectionOf<
-        HTMLElement
-      >;
+      var li = document.getElementsByTagName(
+        "LI"
+      ) as HTMLCollectionOf<HTMLElement>;
       var i;
       this.numberOfTodo = li.length - this.numberOfLi;
+      console.log("this.todoAll: ", this.todoAll);
       for (i = this.numberOfLi; i < li.length; i++) {
         switch (li[i].children[1].children[1].innerHTML) {
           case "work":
@@ -72,13 +73,12 @@ export class TodoComponent implements OnInit {
             li[i].classList.add("watchLater");
             li[i].children[1].classList.add("watchLater-content");
             let org_html = li[i].children[1].children[0].innerHTML;
+
             let new_html =
               "<a href=" +
-              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1]
-                .description +
+              this.todoAll[i - this.numberOfLi].description +
               ">" +
-              this.todoAll[this.todoAll.length - i + this.numberOfLi - 1]
-                .description +
+              this.todoAll[i - this.numberOfLi].description +
               "</a>";
             li[i].children[1].children[3].innerHTML = new_html;
             break;
@@ -128,18 +128,14 @@ export class TodoComponent implements OnInit {
       todo.completed_date = new Date();
       this.http.put("api/todo/removed/" + todo.id, todo).subscribe(
         (res) => {},
-        (err) => {
-          console.log(err);
-        }
+        (err) => {}
       );
     } else {
       todo.state = "inprogress";
       todo.completed_date = new Date();
       this.http.put("api/todo/inprogress/" + todo.id, todo).subscribe(
         (res) => {},
-        (err) => {
-          console.log(err);
-        }
+        (err) => {}
       );
     }
   }
@@ -169,9 +165,7 @@ export class TodoComponent implements OnInit {
         )
         .subscribe(
           (res) => {},
-          (err) => {
-            console.log(err);
-          }
+          (err) => {}
         );
     } else {
       todo.state = "inprogress";
@@ -185,9 +179,7 @@ export class TodoComponent implements OnInit {
         )
         .subscribe(
           (res) => {},
-          (err) => {
-            console.log(err);
-          }
+          (err) => {}
         );
     }
   }
@@ -197,7 +189,7 @@ export class TodoComponent implements OnInit {
       this.queryString !== ""
         ? { title: { $regex: this.queryString, $options: "i" } }
         : {};
-    console.log("this.selectedType: ", this.selectedType);
+
     if (this.selectedType !== "all") {
       if (
         this.selectedType === "inprogress" ||
@@ -217,7 +209,6 @@ export class TodoComponent implements OnInit {
         { query }
       )
       .subscribe((data) => {
-        console.log(data);
         this.todoAll = data;
       });
   }
@@ -231,12 +222,10 @@ export class TodoComponent implements OnInit {
   }
 
   onNotify(val) {
-    console.log(val);
     this.test = val;
   }
 
   select() {
-    console.log("suck me");
     this.getTodos();
   }
 
